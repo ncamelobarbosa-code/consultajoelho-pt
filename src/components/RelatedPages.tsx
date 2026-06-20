@@ -26,7 +26,7 @@ export default function RelatedPages({
                 <h3 className="font-semibold text-text-main group-hover:text-teal-main">
                   {p.label}
                 </h3>
-                <p className="mt-2 text-sm leading-relaxed text-grey-mid">
+                <p className="mt-2 text-sm leading-relaxed text-text-main/75">
                   {p.blurb}
                 </p>
                 <span className="mt-4 inline-block text-sm font-medium text-teal-main">

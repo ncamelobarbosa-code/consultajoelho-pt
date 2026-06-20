@@ -1,0 +1,132 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-06-18",
+  "title": "Design System: ConsultaJoelho.pt",
+  "extensions": {
+    "colorMeta": {
+      "teal-main": {
+        "role": "primary",
+        "displayName": "Teal Profundo",
+        "canonical": "#035772",
+        "tonalRamp": ["#011a23", "#022d3d", "#034459", "#035772", "#2a7088", "#5897ab", "#9cc1cf", "#d6e6ec"]
+      },
+      "sage": {
+        "role": "secondary",
+        "displayName": "Verde Sálvia",
+        "canonical": "#aacba8",
+        "tonalRamp": ["#1f3320", "#345736", "#4d7a4f", "#69986a", "#88b187", "#aacba8", "#c8dec7", "#e6f0e5"]
+      },
+      "bg": {
+        "role": "neutral",
+        "displayName": "Fundo",
+        "canonical": "#f6f9f5",
+        "tonalRamp": ["#0d120c", "#202a1f", "#3a473a", "#5c6a5b", "#8a9789", "#b9c4b8", "#dce4db", "#f6f9f5"]
+      },
+      "text-main": {
+        "role": "neutral",
+        "displayName": "Tinta",
+        "canonical": "#091405",
+        "tonalRamp": ["#091405", "#16240f", "#26381c", "#3c5230", "#5a7049", "#84976f", "#b3c2a3", "#e1e9d8"]
+      }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display", "purpose": "H1 de página e hero. Teto 3rem." },
+      "body": { "displayName": "Body", "purpose": "Corpo clínico, limitado a ~68ch." },
+      "label": { "displayName": "Label/Kicker", "purpose": "Eyebrow discreto, uso disciplinado." }
+    },
+    "shadows": [
+      { "name": "dropdown", "value": "0 10px 15px -3px rgba(3,87,114,0.10)", "purpose": "Única sombra real: separa o menu dropdown da navegação." }
+    ],
+    "motion": [
+      { "name": "ease-standard", "value": "cubic-bezier(0.22, 1, 0.36, 1)", "purpose": "Ease-out para transições de estado (hover, abrir/fechar)." },
+      { "name": "reduced-motion", "value": "@media (prefers-reduced-motion: reduce)", "purpose": "Toda a animação tem alternativa de crossfade/instantânea." }
+    ],
+    "breakpoints": [
+      { "name": "sm", "value": "640px" },
+      { "name": "md", "value": "768px" },
+      { "name": "lg", "value": "1024px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Botão primário de ação (Agendar). Teal profundo, cantos quase retos.",
+      "html": "<button class=\"ds-btn-primary\">Agendar Consulta</button>",
+      "css": ".ds-btn-primary { background: #035772; color: #fff; padding: 8px 16px; border: none; border-radius: 3px; font: 600 0.875rem 'Space Grotesk', sans-serif; cursor: pointer; transition: background 0.2s cubic-bezier(0.22,1,0.36,1); } .ds-btn-primary:hover { background: #034459; } .ds-btn-primary:focus-visible { outline: 2px solid #035772; outline-offset: 2px; }"
+    },
+    {
+      "name": "On-Teal Button",
+      "kind": "button",
+      "refersTo": "button-on-teal",
+      "description": "Botão inverso sobre fundos teal (hero, CTA). Branco com texto teal.",
+      "html": "<button class=\"ds-btn-on-teal\">Agendar Consulta</button>",
+      "css": ".ds-btn-on-teal { background: #fff; color: #035772; padding: 12px 28px; border: none; border-radius: 3px; font: 600 0.875rem 'Space Grotesk', sans-serif; cursor: pointer; transition: background 0.2s; } .ds-btn-on-teal:hover { background: #eaede9; }"
+    },
+    {
+      "name": "Content Card",
+      "kind": "card",
+      "refersTo": "card",
+      "description": "Cartão de conteúdo / subpatologia. Plano, borda que acende no hover.",
+      "html": "<a class=\"ds-card\" href=\"#\"><h3>Cartilagem</h3><p>Lesões da cartilagem articular: classificação e tratamento.</p><span>Saber mais →</span></a>",
+      "css": ".ds-card { display: block; background: #fff; border: 1px solid #eaede9; border-radius: 8px; padding: 20px; text-decoration: none; transition: border-color 0.2s; } .ds-card:hover { border-color: #7daab9; } .ds-card h3 { margin: 0; font: 600 1rem 'Space Grotesk', sans-serif; color: #035772; } .ds-card p { margin: 8px 0 12px; font: 400 0.875rem 'Space Grotesk', sans-serif; color: #091405; opacity: 0.85; line-height: 1.6; } .ds-card span { font: 500 0.875rem 'Space Grotesk', sans-serif; color: #035772; }"
+    },
+    {
+      "name": "Text Input",
+      "kind": "input",
+      "refersTo": "input",
+      "description": "Campo de formulário. Borda neutra que passa a teal no foco.",
+      "html": "<input class=\"ds-input\" type=\"text\" placeholder=\"O seu nome\" />",
+      "css": ".ds-input { width: 100%; background: #fff; color: #091405; border: 1px solid #eaede9; border-radius: 6px; padding: 12px 14px; font: 400 0.95rem 'Space Grotesk', sans-serif; transition: border-color 0.2s; } .ds-input:focus { outline: none; border-color: #035772; }"
+    },
+    {
+      "name": "Nav Link",
+      "kind": "nav",
+      "refersTo": "nav-link",
+      "description": "Link de navegação. Tinta que passa a teal no hover.",
+      "html": "<a class=\"ds-nav-link\" href=\"#\">Dr. Nuno Camelo</a>",
+      "css": ".ds-nav-link { font: 500 0.875rem 'Space Grotesk', sans-serif; color: #091405; text-decoration: none; padding: 8px 0; transition: color 0.2s; } .ds-nav-link:hover { color: #035772; }"
+    },
+    {
+      "name": "FAQ Accordion",
+      "kind": "custom",
+      "refersTo": "faq-accordion",
+      "description": "Pergunta frequente como <details> nativo, acessível, sem JS.",
+      "html": "<details class=\"ds-faq\"><summary>Posso escolher um hospital fora da lista do vale?<span>+</span></summary><div>Sim. A lista impressa no vale é apenas uma sugestão, sem carácter vinculativo.</div></details>",
+      "css": ".ds-faq { border: 1px solid #eaede9; border-radius: 8px; background: #fff; padding: 0 20px; } .ds-faq summary { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 16px 0; font: 500 1rem 'Space Grotesk', sans-serif; cursor: pointer; list-style: none; } .ds-faq summary span { color: #035772; font-size: 1.25rem; transition: transform 0.2s; } .ds-faq[open] summary span { transform: rotate(45deg); } .ds-faq div { padding-bottom: 20px; color: #091405; opacity: 0.85; line-height: 1.6; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "O Mapa Claro do Joelho",
+    "overview": "Quem chega ao consultajoelho.pt chega quase sempre preocupado. O sistema visual existe para ser o mapa claro que orienta a pessoa pela sua condição: primeiro explica, depois propõe agir. O teal profundo carrega o conhecimento e a autoridade serena; o sage humaniza; o fundo claro respira. O tom é próximo e acolhedor, sobre uma base de rigor e honestidade clínica.",
+    "keyCharacteristics": [
+      "Clareza orientadora antes de persuasão.",
+      "Calor humano sobre uma base de rigor.",
+      "Superfícies planas, profundidade por cor e bordas.",
+      "Leitura confortável: corpo limitado a ~68ch.",
+      "Honestidade clínica como traço de marca."
+    ],
+    "rules": [
+      { "name": "A Regra do Contraste Honesto", "body": "O cinza médio (#949593) sobre o fundo (#f6f9f5) não atinge 4,5:1 e é proibido para texto de corpo. Texto auxiliar usa a tinta a 90%.", "section": "colors" },
+      { "name": "A Regra da Cor Comprometida", "body": "O teal é a voz primária (30–60% da superfície); o sage é raro e pontual.", "section": "colors" },
+      { "name": "A Regra da Família Única", "body": "Uma só família (Space Grotesk) em múltiplos pesos. Nunca uma segunda sans geométrica.", "section": "typography" },
+      { "name": "A Regra do Kicker Contido", "body": "Eyebrow em maiúsculas só quando raro e nomeado. Em cada secção é gramática de AI — proibido.", "section": "typography" },
+      { "name": "A Regra do Plano-por-Omissão", "body": "Cartões e secções são planos. Separação por borda e fundo, não por sombra.", "section": "elevation" }
+    ],
+    "dos": [
+      "Do educar primeiro: a página responde à pergunta do doente antes de qualquer CTA.",
+      "Do manter superfícies planas com bordas de 1px e blocos de cor para profundidade.",
+      "Do limitar o corpo a ~68ch e usar a tinta (#091405) para texto legível.",
+      "Do usar o teal (#035772) como voz comprometida e o sage (#aacba8) como acento raro.",
+      "Do assumir a incerteza clínica com honestidade (aspas em «regenerativa»)."
+    ],
+    "donts": [
+      "Don't usar o cinza médio (#949593) para texto de corpo sobre o fundo — falha o contraste.",
+      "Don't usar barras laterais de cor (border-left > 1px) em títulos, cards ou callouts.",
+      "Don't colocar um eyebrow em maiúsculas acima de cada secção.",
+      "Don't cair na clínica de stock, no marketing agressivo, no look AI/SaaS ou no hospital frio.",
+      "Don't usar gradient text, glassmorphism decorativo ou sombras pesadas."
+    ]
+  }
+}

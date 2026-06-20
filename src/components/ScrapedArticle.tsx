@@ -137,7 +137,7 @@ export default function ScrapedPageView({ slug }: { slug: string }) {
               const inner = (
                 <>
                   <h3 className="font-semibold text-teal-main">{c.title}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-grey-mid">
+                  <p className="mt-2 text-sm leading-relaxed text-text-main/75">
                     {c.desc}
                   </p>
                   {to && (
@@ -223,7 +223,7 @@ export default function ScrapedPageView({ slug }: { slug: string }) {
         >
           <div className="grid sm:grid-cols-2">
             <div className="bg-grey-pale p-5">
-              <span className="text-xs font-semibold uppercase tracking-wide text-grey-mid">
+              <span className="text-xs font-semibold uppercase tracking-wide text-text-main/75">
                 Medo
               </span>
               <p className="mt-1 font-medium">{medo}</p>
@@ -280,7 +280,7 @@ export default function ScrapedPageView({ slug }: { slug: string }) {
           key={`h${key++}`}
           className={
             Tag === "h2"
-              ? "mt-12 border-l-2 border-sage pl-4 text-2xl font-semibold tracking-tight first:mt-0 md:text-3xl"
+              ? "mt-12 text-2xl font-semibold tracking-tight first:mt-0 md:text-3xl"
               : "mt-8 text-xl font-semibold tracking-tight"
           }
         >
@@ -306,7 +306,7 @@ export default function ScrapedPageView({ slug }: { slug: string }) {
     if (b.type === "text" && !leadUsed) {
       leadUsed = true;
       out.push(
-        <p key={`lead${key++}`} className="text-lg leading-relaxed text-grey-mid">
+        <p key={`lead${key++}`} className="text-lg leading-relaxed text-text-main/75">
           {b.text}
         </p>
       );

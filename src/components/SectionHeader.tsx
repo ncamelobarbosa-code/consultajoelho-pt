@@ -21,7 +21,7 @@ export default function SectionHeader({
         {title}
       </h2>
       {lead && (
-        <p className="mt-3 text-base leading-relaxed text-grey-mid">{lead}</p>
+        <p className="mt-3 text-base leading-relaxed text-text-main/75">{lead}</p>
       )}
     </div>
   );

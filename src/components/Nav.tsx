@@ -163,7 +163,7 @@ export default function Nav() {
                           <Link
                             href={href(it.slug)}
                             onClick={() => setOpen(false)}
-                            className="block py-2 pl-3 text-sm text-grey-mid transition-colors hover:text-teal-main"
+                            className="block py-2 pl-3 text-sm text-text-main/75 transition-colors hover:text-teal-main"
                           >
                             {it.label}
                           </Link>

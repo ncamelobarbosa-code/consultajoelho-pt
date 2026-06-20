@@ -76,7 +76,7 @@ export function FAQ({ items }: { items: { q: string; a: ReactNode }[] }) {
               +
             </span>
           </summary>
-          <div className="pb-5 leading-relaxed text-grey-mid">{it.a}</div>
+          <div className="pb-5 leading-relaxed text-text-main/75">{it.a}</div>
         </details>
       ))}
     </div>
@@ -102,7 +102,7 @@ export function Expandable({
           +
         </span>
       </summary>
-      <div className="space-y-3 px-5 pb-5 leading-relaxed text-grey-mid">
+      <div className="space-y-3 px-5 pb-5 leading-relaxed text-text-main/75">
         {children}
       </div>
     </details>
@@ -156,8 +156,8 @@ export function Callout({
   tone?: "note" | "info" | "dark";
 }) {
   const styles: Record<string, string> = {
-    note: "border-l-4 border-sage bg-sage/15 text-text-main",
-    info: "border-l-4 border-teal-light bg-grey-pale text-text-main",
+    note: "border border-sage/50 bg-sage/15 text-text-main",
+    info: "border border-teal-light bg-grey-pale text-text-main",
     dark: "border-t-4 border-sage bg-[#022d3d] text-white",
   };
   return (
