@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import "./site.css";
+import "./article.css";
 import { SiteHeader, SiteFooter } from "@/components/SiteChrome";
 import { site } from "@/lib/site";
 

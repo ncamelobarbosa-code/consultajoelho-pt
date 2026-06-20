@@ -1,0 +1,119 @@
+/* Layout de artigo no design novo — para páginas ainda sem HTML hand-crafted.
+   Namespace .pa- para não colidir com o CSS injetado das páginas portadas.
+   Usa os tokens do site.css (:root --teal, --sage, --bg, --text...). */
+
+.pa-hero {
+  background: var(--teal, #035772);
+  color: #fff;
+}
+.pa-hero-inner {
+  max-width: 820px;
+  margin: 0 auto;
+  padding: 72px 24px;
+}
+.pa-breadcrumb {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 16px;
+}
+.pa-breadcrumb a {
+  color: inherit;
+}
+.pa-breadcrumb a:hover {
+  color: #fff;
+}
+.pa-hero h1 {
+  font-size: clamp(1.9rem, 4vw, 2.8rem);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+.pa-lead {
+  margin-top: 16px;
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.85);
+  max-width: 640px;
+}
+.pa-author {
+  margin-top: 18px;
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.pa-body {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 56px 24px;
+}
+.pa-body h2 {
+  font-size: clamp(1.4rem, 2.6vw, 1.9rem);
+  font-weight: 700;
+  color: var(--teal, #035772);
+  margin: 44px 0 14px;
+}
+.pa-body h2:first-child {
+  margin-top: 0;
+}
+.pa-body h3 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin: 28px 0 10px;
+}
+.pa-body p {
+  color: var(--text, #091405);
+  line-height: 1.8;
+  margin-bottom: 16px;
+  max-width: 68ch;
+}
+.pa-body ul {
+  list-style: none;
+  margin: 0 0 18px;
+  padding: 0;
+}
+.pa-body li {
+  position: relative;
+  padding-left: 22px;
+  margin-bottom: 10px;
+  line-height: 1.7;
+  color: var(--text, #091405);
+}
+.pa-body li::before {
+  content: "";
+  position: absolute;
+  left: 4px;
+  top: 12px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--sage, #aacba8);
+}
+
+.pa-cta {
+  background: var(--teal-dark, #022d3d);
+  color: #fff;
+  text-align: center;
+  padding: 56px 24px;
+}
+.pa-cta h2 {
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+  color: #fff;
+}
+.pa-cta p {
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 24px;
+}
+.pa-cta a {
+  display: inline-block;
+  background: var(--sage, #aacba8);
+  color: var(--teal, #035772);
+  padding: 14px 32px;
+  border-radius: 8px;
+  font-weight: 700;
+  text-decoration: none;
+}
+.pa-cta a:hover {
+  opacity: 0.9;
+}

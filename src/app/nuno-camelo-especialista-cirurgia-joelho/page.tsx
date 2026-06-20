@@ -1,8 +1,8 @@
-import ScrapedPageView from "@/components/ScrapedArticle";
+import PortedArticle from "@/components/PortedArticle";
 import { scrapedMetadata } from "@/lib/content";
 
 export const metadata = scrapedMetadata("nuno-camelo-especialista-cirurgia-joelho");
 
 export default function Page() {
-  return <ScrapedPageView slug="nuno-camelo-especialista-cirurgia-joelho" />;
+  return <PortedArticle slug="nuno-camelo-especialista-cirurgia-joelho" />;
 }
