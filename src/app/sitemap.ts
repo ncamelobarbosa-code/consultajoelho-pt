@@ -1,22 +1,42 @@
 import type { MetadataRoute } from "next";
-import { site, allSlugs, href } from "@/lib/site";
+import { site } from "@/lib/site";
+
+// Rotas canónicas atuais (design portado + páginas antigas ainda sem equivalente).
+const routes = [
+  "", // homepage
+  // páginas novas (design portado)
+  "infiltracoes",
+  "cartilagem",
+  "lca",
+  "menisco",
+  "protese",
+  "artrose",
+  "quisto-baker",
+  "quistos-parameniscais",
+  "sindrome-banda-iliotibial",
+  "luxacao-rotula",
+  "quadriceps",
+  "medo-cirurgia",
+  "preparar-cirurgia",
+  "recuperar-cirurgia",
+  "sigic",
+  "avaliar",
+  // páginas antigas mantidas (ainda por portar)
+  "joelhodrnunocamelo",
+  "liquidojoelho-artrocentese-drnunocamelo",
+  "tendao-rotuliano-tendinite-drnunocamelo",
+  "entorsejoelho-drnunocamelo",
+  "kneesurgeryinportugalprices",
+  "nuno-camelo-especialista-cirurgia-joelho",
+  "actividadecientificajoelho",
+];
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
-
-  const home: MetadataRoute.Sitemap[number] = {
-    url: site.url,
+  return routes.map((r) => ({
+    url: r ? `${site.url}/${r}` : site.url,
     lastModified: now,
     changeFrequency: "monthly",
-    priority: 1,
-  };
-
-  const internal: MetadataRoute.Sitemap = allSlugs.map((slug) => ({
-    url: `${site.url}${href(slug)}`,
-    lastModified: now,
-    changeFrequency: "monthly",
-    priority: 0.8,
+    priority: r === "" ? 1 : 0.8,
   }));
-
-  return [home, ...internal];
 }

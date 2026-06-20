@@ -14,6 +14,24 @@ const securityHeaders = [
   },
 ];
 
+// Slugs antigos (scraped) -> novos (design portado). 301 permanentes para preservar SEO.
+const slugRedirects: Record<string, string> = {
+  ligamentocruzadoanterior: "lca",
+  cartilagemjoelhodrnunocamelo: "cartilagem",
+  meniscosnojoelho: "menisco",
+  protesejoelhodesportodrnunocamelo: "protese",
+  quistobakerjoelhodrnunocamelo: "quisto-baker",
+  quistosparameniscaisjoelho: "quistos-parameniscais",
+  sindromebandailiotibialjoelho: "sindrome-banda-iliotibial",
+  luxacaorotulajoelho: "luxacao-rotula",
+  quadricepsjoelho: "quadriceps",
+  medocirurgiajoelho: "medo-cirurgia",
+  recuperarcirurgiajoelho: "recuperar-cirurgia",
+  cirurgiadojoelhoeagora: "preparar-cirurgia",
+  avaliarjoelho: "avaliar",
+  infiltracaojoelho: "infiltracoes",
+};
+
 const nextConfig: NextConfig = {
   images: {
     remotePatterns: [
@@ -23,6 +41,13 @@ const nextConfig: NextConfig = {
         pathname: "/media/**",
       },
     ],
+  },
+  async redirects() {
+    return Object.entries(slugRedirects).map(([from, to]) => ({
+      source: `/${from}`,
+      destination: `/${to}`,
+      permanent: true,
+    }));
   },
   async headers() {
     return [
