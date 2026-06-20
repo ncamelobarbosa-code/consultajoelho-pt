@@ -78,33 +78,33 @@ function buildMetadata($) {
   return meta;
 }
 
-const pageTemplate = (meta, css, jsonld, body) => `import type { Metadata } from "next";
+const pageTemplate = (meta, css, jsonld, body, script, id) => `import type { Metadata } from "next";${script ? `\nimport Script from "next/script";` : ""}
 
 export const metadata: Metadata = ${JSON.stringify(meta, null, 2)};
 
 const css = ${JSON.stringify(css)};
-const html = ${JSON.stringify(body)};${jsonld ? `\nconst jsonLd = ${JSON.stringify(jsonld)};` : ""}
+const html = ${JSON.stringify(body)};${jsonld ? `\nconst jsonLd = ${JSON.stringify(jsonld)};` : ""}${script ? `\nconst pageScript = ${JSON.stringify(script)};` : ""}
 
 export default function Page() {
   return (
     <>
       <style dangerouslySetInnerHTML={{ __html: css }} />${jsonld ? `\n      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd }} />` : ""}
-      <div dangerouslySetInnerHTML={{ __html: html }} />
+      <div dangerouslySetInnerHTML={{ __html: html }} />${script ? `\n      <Script id="${id}-js" strategy="afterInteractive" dangerouslySetInnerHTML={{ __html: pageScript }} />` : ""}
     </>
   );
 }
 `;
 
-const homepageTemplate = (meta, jsonld, body) => `import type { Metadata } from "next";
+const homepageTemplate = (meta, jsonld, body, script, id) => `import type { Metadata } from "next";${script ? `\nimport Script from "next/script";` : ""}
 
 export const metadata: Metadata = ${JSON.stringify(meta, null, 2)};
 
-const html = ${JSON.stringify(body)};${jsonld ? `\nconst jsonLd = ${JSON.stringify(jsonld)};` : ""}
+const html = ${JSON.stringify(body)};${jsonld ? `\nconst jsonLd = ${JSON.stringify(jsonld)};` : ""}${script ? `\nconst pageScript = ${JSON.stringify(script)};` : ""}
 
 export default function Page() {
   return (
     <>${jsonld ? `\n      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd }} />` : ""}
-      <div dangerouslySetInnerHTML={{ __html: html }} />
+      <div dangerouslySetInnerHTML={{ __html: html }} />${script ? `\n      <Script id="${id}-js" strategy="afterInteractive" dangerouslySetInnerHTML={{ __html: pageScript }} />` : ""}
     </>
   );
 }
@@ -134,17 +134,27 @@ for (const [file, seg] of Object.entries(ROUTES)) {
   }
 
   // remover chrome e scripts do corpo
-  const hadScript = $("body script").not('[type="application/ld+json"]').length > 0;
-  if (hadScript) scriptPages.push(seg || "homepage");
   $("body > header, body > footer, body > nav").remove();
+  // capturar scripts inline do corpo (para reinjetar via next/script)
+  const inlineScript = $("body script")
+    .not('[type="application/ld+json"]')
+    .not("[src]")
+    .toArray()
+    .map((el) => $(el).html())
+    .filter(Boolean)
+    .join("\n");
+  if (inlineScript) scriptPages.push(seg || "homepage");
   $("body script, body style").remove();
 
   let body = rewriteLinks($("body").html() || "");
 
   const dir = seg ? `${APP}/${seg}` : APP;
   await mkdir(dir, { recursive: true });
+  const id = (seg || "home").replace(/[^a-z0-9]/g, "-");
   const content =
-    seg === "" ? homepageTemplate(meta, jsonld, body) : pageTemplate(meta, css, jsonld, body);
+    seg === ""
+      ? homepageTemplate(meta, jsonld, body, inlineScript, id)
+      : pageTemplate(meta, css, jsonld, body, inlineScript, id);
   await writeFile(`${dir}/page.tsx`, content, "utf8");
   report.push(`  ✓ ${(seg || "(homepage)").padEnd(26)} ${body.length} chars  css=${css.length}  ld=${jsonld ? "sim" : "não"}`);
 }
