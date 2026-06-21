@@ -24,6 +24,7 @@ const ROUTES = {
   "recuperar_cirurgia_joelho.html": "recuperar-cirurgia",
   "sigic_vale_cirurgia.html": "sigic",
   "avaliar_joelho.html": "avaliar",
+  "nuno_camelo_cv_curriculo.html": "nuno-camelo-especialista-cirurgia-joelho",
 };
 
 // Reescrita de links: slug antigo -> slug novo (onde há página nova)
