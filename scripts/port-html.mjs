@@ -25,6 +25,7 @@ const ROUTES = {
   "sigic_vale_cirurgia.html": "sigic",
   "avaliar_joelho.html": "avaliar",
   "nuno_camelo_cv_curriculo.html": "nuno-camelo-especialista-cirurgia-joelho",
+  "algoritmo_gonalgia_nuno_camelo.html": "joelhodrnunocamelo",
 };
 
 // Reescrita de links: slug antigo -> slug novo (onde há página nova)
