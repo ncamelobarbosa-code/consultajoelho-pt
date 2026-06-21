@@ -29,7 +29,7 @@ const routes = [
   "kneesurgeryinportugalprices",
   "nuno-camelo-especialista-cirurgia-joelho",
   "actividadecientificajoelho",
-  "agendamentonunocameloespecialistajoelho",
+  "contacto",
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {

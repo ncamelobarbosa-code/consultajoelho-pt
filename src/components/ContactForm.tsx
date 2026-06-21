@@ -23,7 +23,7 @@ export default function ContactForm() {
     <section className="contact-section" id="contacto">
       <div className="contact-container">
         <div className="contact-header">
-          <h2>Marcar Consulta</h2>
+          <h2>Marcar Consulta ou Pedir Orçamento</h2>
           <p>
             Preencha o formulário e entraremos em contacto para confirmar data e hora.
             Em alternativa, pode ligar para{' '}

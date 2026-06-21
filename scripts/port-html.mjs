@@ -46,6 +46,7 @@ const LINK_MAP = {
   "/medocirurgiajoelho": "/medo-cirurgia",
   "/avaliarjoelho": "/avaliar",
   "/infiltracaojoelho": "/infiltracoes",
+  "/agendamentonunocameloespecialistajoelho": "/contacto",
 };
 // Também converter links .html (caso existam)
 for (const [file, seg] of Object.entries(ROUTES)) {

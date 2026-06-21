@@ -30,6 +30,7 @@ const slugRedirects: Record<string, string> = {
   cirurgiadojoelhoeagora: "preparar-cirurgia",
   avaliarjoelho: "avaliar",
   infiltracaojoelho: "infiltracoes",
+  agendamentonunocameloespecialistajoelho: "contacto",
 };
 
 const nextConfig: NextConfig = {
