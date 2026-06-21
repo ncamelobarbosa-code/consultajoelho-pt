@@ -79,7 +79,7 @@ export default function ContactForm() {
 
           {/* Motivo */}
           <div className="form-group">
-            <label htmlFor="motivo">Motivo da consulta</label>
+            <label htmlFor="motivo">Motivo do contacto</label>
             <select
               id="motivo"
               name="motivo"
@@ -97,6 +97,7 @@ export default function ContactForm() {
               <option value="Instabilidade da rótula">Instabilidade da rótula</option>
               <option value="Artrose / Gonartrose">Artrose / Gonartrose</option>
               <option value="Segunda opinião">Segunda opinião</option>
+              <option value="Pedir orçamento">Pedir orçamento</option>
               <option value="Outro">Outro</option>
             </select>
             <ValidationError prefix="Motivo" field="motivo" errors={state.errors} className="field-error" />
