@@ -18,6 +18,9 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
 
+    /* Esconder contentores de ícone que ficaram vazios (emojis removidos) */
+    [class*="icon"]:empty { display: none !important; }
+
     body {
       font-family: 'Space Grotesk', -apple-system, sans-serif;
       background: var(--bg); color: var(--text);
