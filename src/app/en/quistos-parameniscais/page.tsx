@@ -5,7 +5,12 @@ export const metadata: Metadata = {
   "title": "Parameniscal Cysts of the Knee | Dr Nuno Camelo Porto",
   "description": "Parameniscal cysts arise next to the meniscus and are almost always associated with a horizontal tear. Dr Nuno Camelo explains the diagnosis and arthroscopic treatment.",
   "alternates": {
-    "canonical": "https://www.consultajoelho.pt/en/quistosparameniscaisjoelho"
+    "canonical": "https://www.consultajoelho.pt/en/quistosparameniscaisjoelho",
+    "languages": {
+      "pt-PT": "https://www.consultajoelho.pt/quistos-parameniscais",
+      "en-GB": "https://www.consultajoelho.pt/en/quistos-parameniscais",
+      "x-default": "https://www.consultajoelho.pt/quistos-parameniscais"
+    }
   },
   "openGraph": {
     "title": "Parameniscal Cysts of the Knee | Dr Nuno Camelo Porto",

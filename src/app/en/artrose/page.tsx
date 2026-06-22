@@ -5,7 +5,12 @@ export const metadata: Metadata = {
   "title": "Knee Osteoarthritis (Gonarthrosis) — Classification and Treatment | Dr. Nuno Camelo Porto",
   "description": "Knee osteoarthritis (gonarthrosis): Kellgren-Lawrence classification, conservative treatment, injections and when to operate. Dr. Nuno Camelo, orthopaedic specialist in Porto.",
   "alternates": {
-    "canonical": "https://www.consultajoelho.pt/en/artrose"
+    "canonical": "https://www.consultajoelho.pt/en/artrose",
+    "languages": {
+      "pt-PT": "https://www.consultajoelho.pt/artrose",
+      "en-GB": "https://www.consultajoelho.pt/en/artrose",
+      "x-default": "https://www.consultajoelho.pt/artrose"
+    }
   },
   "openGraph": {
     "title": "Knee Osteoarthritis (Gonarthrosis) — Classification and Treatment | Dr. Nuno Camelo Porto",

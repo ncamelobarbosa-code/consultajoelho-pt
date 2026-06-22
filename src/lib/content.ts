@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import scraped from "../../content/scraped-pages.json";
+import scrapedEn from "../../content/scraped-en.json";
 import { seo } from "./seo";
 import { navGroups, pages, type PageSlug, type PageMeta } from "./site";
 
@@ -22,9 +23,11 @@ export type ScrapedPage = {
 
 const list = scraped as unknown as ScrapedPage[];
 const bySlug = new Map(list.map((p) => [p.slug, p]));
+const listEn = scrapedEn as unknown as ScrapedPage[];
+const bySlugEn = new Map(listEn.map((p) => [p.slug, p]));
 
-export function getScraped(slug: string): ScrapedPage | undefined {
-  return bySlug.get(slug);
+export function getScraped(slug: string, lang: "pt" | "en" = "pt"): ScrapedPage | undefined {
+  return (lang === "en" ? bySlugEn : bySlug).get(slug);
 }
 
 // Remove o sufixo "| Dr. Nuno Camelo" do <title> para usar como H1.

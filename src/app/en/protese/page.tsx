@@ -5,7 +5,12 @@ export const metadata: Metadata = {
   "title": "Knee Replacement and Sport — What Can You Do? | Dr. Nuno Camelo Porto",
   "description": "Can you play sport after a knee replacement? Dr. Nuno Camelo explains which activities are recommended, which to avoid, and what to expect from the longevity of the implant.",
   "alternates": {
-    "canonical": "https://www.consultajoelho.pt/en/protesejoelhodesportodrnunocamelo"
+    "canonical": "https://www.consultajoelho.pt/en/protesejoelhodesportodrnunocamelo",
+    "languages": {
+      "pt-PT": "https://www.consultajoelho.pt/protese",
+      "en-GB": "https://www.consultajoelho.pt/en/protese",
+      "x-default": "https://www.consultajoelho.pt/protese"
+    }
   },
   "openGraph": {
     "title": "Knee Replacement and Sport — What Can You Do? | Dr. Nuno Camelo Porto",

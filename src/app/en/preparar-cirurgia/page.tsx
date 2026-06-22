@@ -5,7 +5,12 @@ export const metadata: Metadata = {
   "title": "Preparing for Knee Surgery — Complete Guide | Dr Nuno Camelo Porto",
   "description": "Complete guide to preparing for knee surgery: prehabilitation, medication, home setup and what to do before the operation. Dr Nuno Camelo, orthopaedic surgeon in Porto.",
   "alternates": {
-    "canonical": "https://www.consultajoelho.pt/en/prepararcirurgiajoelho"
+    "canonical": "https://www.consultajoelho.pt/en/prepararcirurgiajoelho",
+    "languages": {
+      "pt-PT": "https://www.consultajoelho.pt/preparar-cirurgia",
+      "en-GB": "https://www.consultajoelho.pt/en/preparar-cirurgia",
+      "x-default": "https://www.consultajoelho.pt/preparar-cirurgia"
+    }
   },
   "openGraph": {
     "title": "Preparing for Knee Surgery — Complete Guide | Dr Nuno Camelo Porto",

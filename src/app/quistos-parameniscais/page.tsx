@@ -5,7 +5,12 @@ export const metadata: Metadata = {
   "title": "Quistos Parameniscais do Joelho | Dr. Nuno Camelo Porto",
   "description": "Os quistos parameniscais surgem junto ao menisco e estão quase sempre associados a uma rotura horizontal. Dr. Nuno Camelo explica o diagnóstico e tratamento artroscópico.",
   "alternates": {
-    "canonical": "https://www.consultajoelho.pt/quistosparameniscaisjoelho"
+    "canonical": "https://www.consultajoelho.pt/quistosparameniscaisjoelho",
+    "languages": {
+      "pt-PT": "https://www.consultajoelho.pt/quistos-parameniscais",
+      "en-GB": "https://www.consultajoelho.pt/en/quistos-parameniscais",
+      "x-default": "https://www.consultajoelho.pt/quistos-parameniscais"
+    }
   },
   "openGraph": {
     "title": "Quistos Parameniscais do Joelho | Dr. Nuno Camelo Porto",

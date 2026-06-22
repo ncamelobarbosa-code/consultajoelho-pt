@@ -5,7 +5,12 @@ export const metadata: Metadata = {
   "title": "Medo da Cirurgia do Joelho — Medos Reais, Respostas Honestas | Dr. Nuno Camelo",
   "description": "É normal ter medo de ser operado ao joelho. Dr. Nuno Camelo responde honestamente às preocupações mais comuns — dor, anestesia, complicações, recuperação — com factos clínicos.",
   "alternates": {
-    "canonical": "https://www.consultajoelho.pt/medocirurgiajoelho"
+    "canonical": "https://www.consultajoelho.pt/medocirurgiajoelho",
+    "languages": {
+      "pt-PT": "https://www.consultajoelho.pt/medo-cirurgia",
+      "en-GB": "https://www.consultajoelho.pt/en/medo-cirurgia",
+      "x-default": "https://www.consultajoelho.pt/medo-cirurgia"
+    }
   },
   "openGraph": {
     "title": "Medo da Cirurgia do Joelho — Medos Reais, Respostas Honestas | Dr. Nuno Camelo",

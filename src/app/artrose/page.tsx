@@ -5,7 +5,12 @@ export const metadata: Metadata = {
   "title": "Artrose do Joelho (Gonartrose) — Classificação e Tratamento | Dr. Nuno Camelo Porto",
   "description": "Artrose do joelho (gonartrose): classificação Kellgren-Lawrence, tratamento conservador, injecções e quando operar. Dr. Nuno Camelo, ortopedista especialista no Porto.",
   "alternates": {
-    "canonical": "https://www.consultajoelho.pt/artrose"
+    "canonical": "https://www.consultajoelho.pt/artrose",
+    "languages": {
+      "pt-PT": "https://www.consultajoelho.pt/artrose",
+      "en-GB": "https://www.consultajoelho.pt/en/artrose",
+      "x-default": "https://www.consultajoelho.pt/artrose"
+    }
   },
   "openGraph": {
     "title": "Artrose do Joelho (Gonartrose) — Classificação e Tratamento | Dr. Nuno Camelo Porto",

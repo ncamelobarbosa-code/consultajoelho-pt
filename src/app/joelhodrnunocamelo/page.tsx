@@ -6,6 +6,13 @@ export const metadata: Metadata = {
   "openGraph": {
     "title": "Algoritmo de Orientação da Gonalgia | Dr. Nuno Camelo",
     "type": "article"
+  },
+  "alternates": {
+    "languages": {
+      "pt-PT": "https://www.consultajoelho.pt/joelhodrnunocamelo",
+      "en-GB": "https://www.consultajoelho.pt/en/joelhodrnunocamelo",
+      "x-default": "https://www.consultajoelho.pt/joelhodrnunocamelo"
+    }
   }
 };
 

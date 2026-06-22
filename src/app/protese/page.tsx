@@ -5,7 +5,12 @@ export const metadata: Metadata = {
   "title": "Prótese do Joelho e Desporto — O que pode fazer? | Dr. Nuno Camelo Porto",
   "description": "Pode praticar desporto após uma prótese do joelho? Dr. Nuno Camelo explica quais as actividades recomendadas, a evitar, e o que esperar da longevidade do implante.",
   "alternates": {
-    "canonical": "https://www.consultajoelho.pt/protesejoelhodesportodrnunocamelo"
+    "canonical": "https://www.consultajoelho.pt/protesejoelhodesportodrnunocamelo",
+    "languages": {
+      "pt-PT": "https://www.consultajoelho.pt/protese",
+      "en-GB": "https://www.consultajoelho.pt/en/protese",
+      "x-default": "https://www.consultajoelho.pt/protese"
+    }
   },
   "openGraph": {
     "title": "Prótese do Joelho e Desporto — O que pode fazer? | Dr. Nuno Camelo Porto",

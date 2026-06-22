@@ -5,7 +5,12 @@ export const metadata: Metadata = {
   "title": "Recuperar da Cirurgia do Joelho | Dr. Nuno Camelo — Ortopedia Joelho Porto",
   "description": "Guia completo de recuperação da cirurgia do joelho: fases, marcos clínicos, fisioterapia e nutrição. Dr. Nuno Camelo, cirurgião ortopédico especialista em joelho no Porto.",
   "alternates": {
-    "canonical": "https://www.consultajoelho.pt/recuperarcirurgiajoelho"
+    "canonical": "https://www.consultajoelho.pt/recuperarcirurgiajoelho",
+    "languages": {
+      "pt-PT": "https://www.consultajoelho.pt/recuperar-cirurgia",
+      "en-GB": "https://www.consultajoelho.pt/en/recuperar-cirurgia",
+      "x-default": "https://www.consultajoelho.pt/recuperar-cirurgia"
+    }
   },
   "openGraph": {
     "title": "Recuperar da Cirurgia do Joelho | Dr. Nuno Camelo Porto",

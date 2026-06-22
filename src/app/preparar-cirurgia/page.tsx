@@ -5,7 +5,12 @@ export const metadata: Metadata = {
   "title": "Preparar a Cirurgia do Joelho — Guia Completo | Dr. Nuno Camelo Porto",
   "description": "Guia completo de preparação para cirurgia ao joelho: prehabilitation, medicação, domicílio e o que fazer antes da operação. Dr. Nuno Camelo, cirurgião ortopédico no Porto.",
   "alternates": {
-    "canonical": "https://www.consultajoelho.pt/prepararcirurgiajoelho"
+    "canonical": "https://www.consultajoelho.pt/prepararcirurgiajoelho",
+    "languages": {
+      "pt-PT": "https://www.consultajoelho.pt/preparar-cirurgia",
+      "en-GB": "https://www.consultajoelho.pt/en/preparar-cirurgia",
+      "x-default": "https://www.consultajoelho.pt/preparar-cirurgia"
+    }
   },
   "openGraph": {
     "title": "Preparar a Cirurgia do Joelho — Guia Completo | Dr. Nuno Camelo Porto",

@@ -8,6 +8,13 @@ export const metadata: Metadata = {
     "title": "Knee Injections: \"Regenerative\" vs. Non-Regenerative | Dr. Nuno Camelo Porto",
     "description": "Complete clinical guide to knee injections: corticosteroids, hyaluronic acid and PRP. The distinction between so-called 'regenerative' and non-regenerative injections — and what the evidence really says. Dr. Nuno Camelo, Porto.",
     "type": "article"
+  },
+  "alternates": {
+    "languages": {
+      "pt-PT": "https://www.consultajoelho.pt/infiltracoes",
+      "en-GB": "https://www.consultajoelho.pt/en/infiltracoes",
+      "x-default": "https://www.consultajoelho.pt/infiltracoes"
+    }
   }
 };
 

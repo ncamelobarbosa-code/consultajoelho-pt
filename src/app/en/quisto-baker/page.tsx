@@ -5,7 +5,12 @@ export const metadata: Metadata = {
   "title": "Baker's Cyst (Popliteal Cyst) — Causes and Treatment | Dr. Nuno Camelo Porto",
   "description": "A Baker's cyst is a swelling at the back of the knee caused by excess joint fluid. Dr. Nuno Camelo explains the causes, symptoms and treatment of the underlying condition.",
   "alternates": {
-    "canonical": "https://www.consultajoelho.pt/en/quistobakerjoelhodrnunocamelo"
+    "canonical": "https://www.consultajoelho.pt/en/quistobakerjoelhodrnunocamelo",
+    "languages": {
+      "pt-PT": "https://www.consultajoelho.pt/quisto-baker",
+      "en-GB": "https://www.consultajoelho.pt/en/quisto-baker",
+      "x-default": "https://www.consultajoelho.pt/quisto-baker"
+    }
   },
   "openGraph": {
     "title": "Baker's Cyst (Popliteal Cyst) — Causes and Treatment | Dr. Nuno Camelo Porto",

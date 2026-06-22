@@ -4,7 +4,12 @@ export const metadata: Metadata = {
   "title": "Dr. Nuno Camelo Barbosa — Orthopaedic Surgeon, Knee Subspecialist | Porto",
   "description": "Dr. Nuno Camelo Barbosa — orthopaedic surgeon subspecialising in knee surgery. Fellowship at the Centre Orthopédique Santy (Lyon). Peer reviewer for AJSM, KSSTA, OJSM, JEO. Appointments in Porto, Vila do Conde and Paços de Ferreira.",
   "alternates": {
-    "canonical": "https://www.consultajoelho.pt/en/nuno-camelo-especialista-cirurgia-joelho"
+    "canonical": "https://www.consultajoelho.pt/en/nuno-camelo-especialista-cirurgia-joelho",
+    "languages": {
+      "pt-PT": "https://www.consultajoelho.pt/nuno-camelo-especialista-cirurgia-joelho",
+      "en-GB": "https://www.consultajoelho.pt/en/nuno-camelo-especialista-cirurgia-joelho",
+      "x-default": "https://www.consultajoelho.pt/nuno-camelo-especialista-cirurgia-joelho"
+    }
   },
   "openGraph": {
     "title": "Dr. Nuno Camelo Barbosa — Knee Surgery Specialist",

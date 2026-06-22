@@ -119,11 +119,33 @@ let footerHtml = "";
 const report = [];
 let scriptPages = [];
 
+// ── i18n: descobrir que segs têm versão EN (necessário p/ hreflang no loop PT) ──
+const enRaw = {};
+for (const [file, seg] of Object.entries(ROUTES)) {
+  try {
+    enRaw[seg] = await readFile(`${SRC}/${file.replace(/\.html$/, "_en.html")}`, "utf8");
+  } catch {}
+}
+const enSlugs = new Set(Object.keys(enRaw)); // segs com versão EN ("" = homepage)
+enSlugs.add("contacto"); // /en/contacto existe (página React, fora do pipeline HTML)
+enSlugs.add("tendao-rotuliano-tendinite-drnunocamelo"); // /en via PortedArticle (conteúdo EN scraped)
+
+// hreflang: URLs alternativos PT/EN/x-default para um seg ("" = homepage)
+const BASE = "https://www.consultajoelho.pt";
+function langAlternates(seg) {
+  const ptUrl = seg ? `${BASE}/${seg}` : BASE;
+  const enUrl = seg ? `${BASE}/en/${seg}` : `${BASE}/en`;
+  return { "pt-PT": ptUrl, "en-GB": enUrl, "x-default": ptUrl };
+}
+
 for (const [file, seg] of Object.entries(ROUTES)) {
   const raw = await readFile(`${SRC}/${file}`, "utf8");
   const $ = cheerio.load(raw, { decodeEntities: false });
 
   const meta = buildMetadata($);
+  if (enSlugs.has(seg)) {
+    meta.alternates = { ...(meta.alternates || {}), languages: langAlternates(seg) };
+  }
   const css = $("style").toArray().map((el) => $(el).html()).join("\n\n");
   const jsonld = $('script[type="application/ld+json"]').first().html() || "";
 
@@ -173,15 +195,7 @@ await writeFile(
   "utf8"
 );
 
-// ── EN (i18n): gera /en/<slug> a partir de <ptfile>_en.html ──
-const enRaw = {};
-for (const [file, seg] of Object.entries(ROUTES)) {
-  try {
-    enRaw[seg] = await readFile(`${SRC}/${file.replace(/\.html$/, "_en.html")}`, "utf8");
-  } catch {}
-}
-const enSlugs = new Set(Object.keys(enRaw)); // segs com versão EN ("" = homepage)
-enSlugs.add("contacto"); // /en/contacto existe (página React, fora do pipeline HTML)
+// ── EN (i18n): gera /en/<slug> a partir de <ptfile>_en.html (enRaw/enSlugs já acima) ──
 // reescreve links: PT->novos slugs, depois prefixa /en onde a tradução existe
 function rewriteLinksEn(html) {
   let out = rewriteLinks(html);
@@ -197,6 +211,7 @@ for (const [file, seg] of Object.entries(ROUTES)) {
   if (!raw) continue;
   const $e = cheerio.load(raw, { decodeEntities: false });
   const enMeta = buildMetadata($e);
+  enMeta.alternates = { ...(enMeta.alternates || {}), languages: langAlternates(seg) };
   const enJsonld = $e('script[type="application/ld+json"]').first().html() || "";
   if (seg === "") {
     const eh = $e("body > header").first();

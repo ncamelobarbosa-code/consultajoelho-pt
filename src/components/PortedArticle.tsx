@@ -35,13 +35,24 @@ function renderBlocks(blocks: Block[]): ReactNode[] {
   return out;
 }
 
-export default function PortedArticle({ slug }: { slug: string }) {
-  const data = getScraped(slug);
+export default function PortedArticle({
+  slug,
+  lang,
+  title: titleOverride,
+  description: descOverride,
+}: {
+  slug: string;
+  lang?: "pt" | "en";
+  title?: string;
+  description?: string;
+}) {
+  const meta = pages[slug as PageSlug] as PageMeta | undefined;
+  const isEn = lang === "en" || meta?.lang === "en";
+  const data = getScraped(slug, isEn ? "en" : "pt");
   if (!data) return null;
 
-  const meta = pages[slug as PageSlug] as PageMeta | undefined;
-  const isEn = meta?.lang === "en";
-  const title = cleanTitle(data.title);
+  const title = titleOverride || cleanTitle(data.title);
+  const description = descOverride ?? data.description;
 
   const t = isEn
     ? { home: "Home", author: "Knee Surgeon", cta: "Book your consultation", sub: "Reply within 24 hours.", btn: "Contact us" }
@@ -52,10 +63,10 @@ export default function PortedArticle({ slug }: { slug: string }) {
       <header className="pa-hero">
         <div className="pa-hero-inner">
           <nav className="pa-breadcrumb" aria-label="Breadcrumb">
-            <a href="/">{t.home}</a> / {title}
+            <a href={isEn ? "/en" : "/"}>{t.home}</a> / {title}
           </nav>
           <h1>{title}</h1>
-          {data.description && <p className="pa-lead">{data.description}</p>}
+          {description && <p className="pa-lead">{description}</p>}
           <p className="pa-author">
             {site.doctor} · {t.author}
           </p>
@@ -67,7 +78,7 @@ export default function PortedArticle({ slug }: { slug: string }) {
       <section className="pa-cta">
         <h2>{t.cta}</h2>
         <p>{t.sub}</p>
-        <a href={isEn ? site.phoneHref : "/avaliar"}>{t.btn}</a>
+        <a href={isEn ? "/en/contacto" : "/avaliar"}>{t.btn}</a>
       </section>
     </article>
   );

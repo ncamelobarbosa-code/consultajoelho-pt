@@ -5,7 +5,12 @@ export const metadata: Metadata = {
   "title": "Assess Your Knee — Lysholm-Tegner Score | Dr. Nuno Camelo Porto",
   "description": "Assess your knee function with the validated Lysholm-Tegner score. A clinical tool used in international orthopaedic research. Dr. Nuno Camelo, knee surgery specialist in Porto.",
   "alternates": {
-    "canonical": "https://www.consultajoelho.pt/en/avaliarjoelho"
+    "canonical": "https://www.consultajoelho.pt/en/avaliarjoelho",
+    "languages": {
+      "pt-PT": "https://www.consultajoelho.pt/avaliar",
+      "en-GB": "https://www.consultajoelho.pt/en/avaliar",
+      "x-default": "https://www.consultajoelho.pt/avaliar"
+    }
   },
   "openGraph": {
     "title": "Assess Your Knee — Lysholm Score | Dr. Nuno Camelo",

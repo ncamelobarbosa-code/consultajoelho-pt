@@ -5,7 +5,12 @@ export const metadata: Metadata = {
   "title": "ACL Tear — Surgery or Conservative Treatment? | Dr. Nuno Camelo Porto",
   "description": "Anterior cruciate ligament (ACL) tear: surgery or conservative treatment? Dr Nuno Camelo, knee specialist in Porto, explains how the decision is made and what to expect.",
   "alternates": {
-    "canonical": "https://www.consultajoelho.pt/en/lca"
+    "canonical": "https://www.consultajoelho.pt/en/lca",
+    "languages": {
+      "pt-PT": "https://www.consultajoelho.pt/lca",
+      "en-GB": "https://www.consultajoelho.pt/en/lca",
+      "x-default": "https://www.consultajoelho.pt/lca"
+    }
   },
   "openGraph": {
     "title": "ACL Tear — Surgery or Conservative? | Dr Nuno Camelo",

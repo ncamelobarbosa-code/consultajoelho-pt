@@ -5,7 +5,12 @@ export const metadata: Metadata = {
   "title": "Vale SIGIC — Cirurgia ao Joelho no Hospital Lusíadas Porto | Dr. Nuno Camelo",
   "description": "Tem um vale cirurgia SIGIC para o joelho? Pode escolher o Hospital Lusíadas Porto com o Dr. Nuno Camelo — mesmo que não conste na lista impressa do seu vale. Saiba como.",
   "alternates": {
-    "canonical": "https://www.consultajoelho.pt/sigic"
+    "canonical": "https://www.consultajoelho.pt/sigic",
+    "languages": {
+      "pt-PT": "https://www.consultajoelho.pt/sigic",
+      "en-GB": "https://www.consultajoelho.pt/en/sigic",
+      "x-default": "https://www.consultajoelho.pt/sigic"
+    }
   },
   "openGraph": {
     "title": "Vale SIGIC — Cirurgia ao Joelho no Hospital Lusíadas Porto | Dr. Nuno Camelo",

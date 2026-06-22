@@ -5,7 +5,12 @@ export const metadata: Metadata = {
   "title": "Luxação da Rótula — LMPF e Instabilidade Rotuliana | Dr. Nuno Camelo Porto",
   "description": "Luxação da rótula: causas, instabilidade recorrente e tratamento com reconstrução do LMPF. Dr. Nuno Camelo, especialista em joelho no Porto, explica o que fazer após a primeira luxação.",
   "alternates": {
-    "canonical": "https://www.consultajoelho.pt/luxacaorotulajoelho"
+    "canonical": "https://www.consultajoelho.pt/luxacaorotulajoelho",
+    "languages": {
+      "pt-PT": "https://www.consultajoelho.pt/luxacao-rotula",
+      "en-GB": "https://www.consultajoelho.pt/en/luxacao-rotula",
+      "x-default": "https://www.consultajoelho.pt/luxacao-rotula"
+    }
   },
   "openGraph": {
     "title": "Luxação da Rótula — LMPF e Instabilidade Rotuliana | Dr. Nuno Camelo Porto",

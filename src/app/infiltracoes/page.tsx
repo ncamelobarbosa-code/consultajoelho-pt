@@ -8,6 +8,13 @@ export const metadata: Metadata = {
     "title": "Infiltração do Joelho: \"Regenerativas\" vs. Não-Regenerativas | Dr. Nuno Camelo Porto",
     "description": "Guia clínico completo sobre infiltrações do joelho: corticosteroides, ácido hialurónico e PRP. A distinção entre infiltrações ditas 'regenerativas' e não-regenerativas — e o que a evidência realmente diz. Dr. Nuno Camelo, Porto.",
     "type": "article"
+  },
+  "alternates": {
+    "languages": {
+      "pt-PT": "https://www.consultajoelho.pt/infiltracoes",
+      "en-GB": "https://www.consultajoelho.pt/en/infiltracoes",
+      "x-default": "https://www.consultajoelho.pt/infiltracoes"
+    }
   }
 };
 

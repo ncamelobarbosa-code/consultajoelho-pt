@@ -5,7 +5,12 @@ export const metadata: Metadata = {
   "title": "SIGIC Voucher — Knee Surgery at Hospital Lusíadas Porto | Dr. Nuno Camelo",
   "description": "Do you have a SIGIC surgery voucher for your knee? You can choose Hospital Lusíadas Porto with Dr. Nuno Camelo — even if it is not on the printed list on your voucher. Find out how.",
   "alternates": {
-    "canonical": "https://www.consultajoelho.pt/en/sigic"
+    "canonical": "https://www.consultajoelho.pt/en/sigic",
+    "languages": {
+      "pt-PT": "https://www.consultajoelho.pt/sigic",
+      "en-GB": "https://www.consultajoelho.pt/en/sigic",
+      "x-default": "https://www.consultajoelho.pt/sigic"
+    }
   },
   "openGraph": {
     "title": "SIGIC Voucher — Knee Surgery at Hospital Lusíadas Porto | Dr. Nuno Camelo",

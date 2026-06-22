@@ -4,7 +4,12 @@ export const metadata: Metadata = {
   "title": "Consulta de Joelho Porto | Dr. Nuno Camelo – Cirurgião Ortopédico",
   "description": "Consulta especializada em patologia do joelho com o Dr. Nuno Camelo, cirurgião ortopédico. Atendimento no Porto, Paços de Ferreira e Vila do Conde. Agende já.",
   "alternates": {
-    "canonical": "https://www.consultajoelho.pt"
+    "canonical": "https://www.consultajoelho.pt",
+    "languages": {
+      "pt-PT": "https://www.consultajoelho.pt",
+      "en-GB": "https://www.consultajoelho.pt/en",
+      "x-default": "https://www.consultajoelho.pt"
+    }
   },
   "openGraph": {
     "title": "Consulta de Joelho Porto | Dr. Nuno Camelo – Cirurgião Ortopédico",
