@@ -111,6 +111,8 @@
 
     .nav-toggle { display: none; }
     .nav-burger { display: none; }
+    .nav-lang { font-size:.78rem;font-weight:700;color:var(--muted);border:1px solid var(--border);border-radius:6px;padding:6px 10px;flex-shrink:0; }
+    .nav-lang:hover { color:var(--teal);border-color:var(--teal);text-decoration:none; }
 
     /* ══ HERO ════════════════════════════════════════════ */
     .hero {

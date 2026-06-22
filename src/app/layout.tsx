@@ -3,6 +3,7 @@ import "./globals.css";
 import "./site.css";
 import "./article.css";
 import { SiteHeader, SiteFooter } from "@/components/SiteChrome";
+import LangSync from "@/components/LangSync";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -18,6 +19,7 @@ export default function RootLayout({
   return (
     <html lang="pt">
       <body>
+        <LangSync />
         <SiteHeader />
         {children}
         <SiteFooter />

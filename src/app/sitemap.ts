@@ -4,6 +4,8 @@ import { site } from "@/lib/site";
 // Rotas canónicas atuais (design portado + páginas antigas ainda sem equivalente).
 const routes = [
   "", // homepage
+  "en", // homepage EN
+
   // páginas novas (design portado)
   "infiltracoes",
   "cartilagem",
