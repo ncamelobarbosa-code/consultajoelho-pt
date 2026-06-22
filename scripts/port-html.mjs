@@ -128,7 +128,8 @@ for (const [file, seg] of Object.entries(ROUTES)) {
 }
 const enSlugs = new Set(Object.keys(enRaw)); // segs com versão EN ("" = homepage)
 enSlugs.add("contacto"); // /en/contacto existe (página React, fora do pipeline HTML)
-enSlugs.add("tendao-rotuliano-tendinite-drnunocamelo"); // /en via PortedArticle (conteúdo EN scraped)
+// /en via PortedArticle (conteúdo EN scraped/traduzido)
+for (const s of ["tendao-rotuliano-tendinite-drnunocamelo", "liquidojoelho-artrocentese-drnunocamelo", "entorsejoelho-drnunocamelo", "actividadecientificajoelho"]) enSlugs.add(s);
 
 // ── i18n RU: descobrir que segs têm versão RU (traduzida do EN) ──
 const ruRaw = {};
@@ -139,6 +140,8 @@ for (const [file, seg] of Object.entries(ROUTES)) {
 }
 const ruSlugs = new Set(Object.keys(ruRaw)); // segs com versão RU ("" = homepage)
 ruSlugs.add("contacto"); // /ru/contacto existe (página React, fora do pipeline HTML)
+// /ru via PortedArticle (conteúdo RU traduzido)
+for (const s of ["tendao-rotuliano-tendinite-drnunocamelo", "kneesurgeryinportugalprices", "liquidojoelho-artrocentese-drnunocamelo", "entorsejoelho-drnunocamelo", "actividadecientificajoelho"]) ruSlugs.add(s);
 
 // hreflang: URLs alternativos por seg ("" = homepage). Só lista locales que existem.
 const BASE = "https://www.consultajoelho.pt";

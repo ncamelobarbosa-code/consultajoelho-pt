@@ -394,30 +394,75 @@
   {
     "slug": "liquidojoelho-artrocentese-drnunocamelo",
     "url": "https://www.consultajoelho.pt/en/liquidojoelho-artrocentese-drnunocamelo",
-    "title": "Artrocentese do Joelho: Tirar Líquido do Joelho | Dr. Nuno Camelo",
+    "title": "Knee Arthrocentesis: Removing Fluid from the Knee | Dr. Nuno Camelo",
     "ogTitle": "Artrocentese do Joelho: Tirar Líquido do Joelho | Dr. Nuno Camelo",
-    "description": "A artrocentese do joelho é uma técnica para retirar líquido articular. Saiba quando é indicada e como decorre o procedimento com o Dr. Nuno Camelo, no Porto.",
+    "description": "Knee arthrocentesis is a technique for removing joint fluid. Learn when it is indicated and how the procedure is carried out with Dr. Nuno Camelo, in Porto.",
     "ogImage": "https://static.wixstatic.com/media/5a9db7_c4bca9a9d4f247d89367a6f566740132%7Emv2.jpg",
     "blocks": [
       {
         "type": "heading",
         "level": 5,
-        "text": "I Have Fluid in My Knee, Do I Need to Have It Drained?"
+        "text": "I Have Fluid on My Knee — Does It Need to Be Drained?"
+      },
+      {
+        "type": "text",
+        "level": null,
+        "text": "Knee arthrocentesis is a medical procedure that involves removing fluid from the knee."
+      },
+      {
+        "type": "text",
+        "level": null,
+        "text": "It plays a key role in relieving pain, diagnosing joint conditions and improving joint function."
+      },
+      {
+        "type": "text",
+        "level": null,
+        "text": "Understanding the importance of the procedure, the process itself and post-procedure care is essential for patients and healthcare professionals alike."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "The Importance of Arthrocentesis"
+      },
+      {
+        "type": "list",
+        "level": null,
+        "text": "Pain Relief: Arthrocentesis is often performed to relieve the pain associated with joint effusions (knee swelling), such as those caused by traumatic injuries, arthritis or other inflammatory conditions."
+      },
+      {
+        "type": "list",
+        "level": null,
+        "text": "Accurate Diagnosis: By removing a sample of synovial fluid from the joint, your knee surgeon can accurately diagnose the underlying cause of the effusion. This is important for guiding treatment."
+      },
+      {
+        "type": "list",
+        "level": null,
+        "text": "Improved Joint Function: Reducing excess synovial fluid can significantly improve the range of movement and joint function, contributing to rehabilitation."
       },
       {
         "type": "heading",
         "level": 1,
-        "text": "Knee arthrocentesis is a medical procedure that consists of removing fluid from the knee. It plays a fundamental role in pain relief, diagnosis of conditions..."
+        "text": "The Arthrocentesis Procedure"
       },
       {
-        "type": "heading",
-        "level": 1,
-        "text": "Arthrocentesis Procedure"
+        "type": "list",
+        "level": null,
+        "text": "Preparation: The patient is positioned comfortably and the knee is sterilised. A local anaesthetic is sometimes used to minimise discomfort during the procedure."
       },
       {
-        "type": "heading",
-        "level": 1,
-        "text": "Preparation: The patient is positioned comfortably, and the knee is sterilized. A local anesthetic is sometimes used to numb the area. The doctor uses a needle to drain the excess fluid from the joint."
+        "type": "list",
+        "level": null,
+        "text": "Inserting the Needle: A needle is carefully inserted into the knee joint to aspirate the synovial fluid. In some cases, ultrasound may be used to guide the insertion of the needle."
+      },
+      {
+        "type": "list",
+        "level": null,
+        "text": "Aspirating the Fluid: The synovial fluid is aspirated. The volume removed can vary depending on the amount of fluid present and the purpose of the procedure."
+      },
+      {
+        "type": "list",
+        "level": null,
+        "text": "Sending for Analysis: The synovial fluid sample is sent for laboratory analysis to determine the presence of cells, crystals, bacteria or other substances that may aid the diagnosis."
       },
       {
         "type": "heading",
@@ -425,9 +470,24 @@
         "text": "Post-Arthrocentesis Care"
       },
       {
-        "type": "heading",
-        "level": 1,
+        "type": "list",
+        "level": null,
         "text": "Rest and Elevation: After the procedure, it is advisable to rest and elevate the leg to help reduce any residual swelling."
+      },
+      {
+        "type": "list",
+        "level": null,
+        "text": "Monitoring the Arthrocentesis Site: The area where the needle was inserted should be monitored for signs of infection, such as redness, swelling or pain."
+      },
+      {
+        "type": "list",
+        "level": null,
+        "text": "Restricted Activity: Avoid strenuous physical activity involving the knee for a short period — 24 to 48 hours is common — to allow for proper recovery."
+      },
+      {
+        "type": "list",
+        "level": null,
+        "text": "Medical Follow-Up: The patient should follow the knee surgeon's post-procedure instructions and attend follow-up appointments to ensure proper recovery."
       },
       {
         "type": "heading",
@@ -435,9 +495,34 @@
         "text": "Conclusion"
       },
       {
-        "type": "heading",
-        "level": 1,
-        "text": "Knee arthrocentesis plays a crucial role in managing joint pain and inflammation, providing both diagnostic and therapeutic benefits."
+        "type": "text",
+        "level": null,
+        "text": "Knee arthrocentesis plays a crucial role in managing joint pain and accurately diagnosing joint conditions."
+      },
+      {
+        "type": "text",
+        "level": null,
+        "text": "This minimally invasive procedure offers immediate relief and valuable information to guide subsequent treatment."
+      },
+      {
+        "type": "text",
+        "level": null,
+        "text": "With appropriate post-arthrocentesis care, patients can expect an effective recovery and improved joint function."
+      },
+      {
+        "type": "text",
+        "level": null,
+        "text": "Ongoing dialogue between the patient and their knee surgeon is essential to optimise outcomes and ensure satisfaction."
+      },
+      {
+        "type": "text",
+        "level": null,
+        "text": "Text Reviewed in January 2026"
+      },
+      {
+        "type": "text",
+        "level": null,
+        "text": "Nuno Camelo Knee Surgery"
       }
     ],
     "images": [
@@ -904,20 +989,25 @@
   {
     "slug": "entorsejoelho-drnunocamelo",
     "url": "https://www.consultajoelho.pt/en/entorsejoelho-drnunocamelo",
-    "title": "Entorse do Joelho: O Que Fazer | Dr. Nuno Camelo – Porto",
+    "title": "Knee Sprain: What to Do | Dr. Nuno Camelo – Porto",
     "ogTitle": "Entorse do Joelho: O Que Fazer | Dr. Nuno Camelo – Porto",
-    "description": "Torci o joelho, e agora o joelho dói me ! Como resolver - leia o nosso artigo sobre entorses do joelho e fique a saber que passos deve tar após uma lesão do joelho. Se persistirem dúvidas ou queixas pode sempre agendar consulta de joelho no Porto , Paços de Ferreira ou Vila do Conde",
+    "description": "I twisted my knee and now it hurts! How to manage it – read our article on knee sprains and find out what steps you should take after a knee injury. If you still have questions or symptoms, you can always book a knee appointment in Porto, Paços de Ferreira or Vila do Conde.",
     "ogImage": "https://static.wixstatic.com/media/5a9db7_c4bca9a9d4f247d89367a6f566740132%7Emv2.jpg",
     "blocks": [
       {
         "type": "heading",
         "level": 2,
-        "text": "Knee Sprain. Do I need to stop playing?"
+        "text": "Knee Sprain. Do I Have to Stop Playing?"
       },
       {
         "type": "text",
         "level": null,
-        "text": "A knee sprain is a common injury that requires careful attention to ensure an effective recovery. After a sprain, following post-injury care guidelines is essential."
+        "text": "A knee sprain is a common injury that requires careful attention to ensure an effective recovery."
+      },
+      {
+        "type": "text",
+        "level": null,
+        "text": "After a sprain, following the post-injury care guidance is essential for a successful recovery. These are:"
       },
       {
         "type": "text",
@@ -927,12 +1017,92 @@
       {
         "type": "text",
         "level": null,
-        "text": "After a knee sprain, it is important to rest the affected joint. Avoid putting weight on the injured knee and, if necessary, use crutches to help with mobility and reduce the load the knee is normally subjected to."
+        "text": "After a knee sprain, it is important to rest the affected joint. Avoid putting weight on the injured knee and, if necessary, use crutches to aid mobility and reduce the load the knee is normally subjected to."
       },
       {
         "type": "text",
         "level": null,
-        "text": "Physiotherapy: If you already have a regular physiotherapist or therapist, contact them. Rehabilitation with a physiotherapist is frequently necessary to strengthen the muscles around the knee and restore range of motion."
+        "text": "Ice:"
+      },
+      {
+        "type": "text",
+        "level": null,
+        "text": "Applying ice to the injured area helps reduce swelling and inflammation. Use an ice pack wrapped in a cloth for periods of 15-20 minutes every few hours. Depending on the severity of the sprain, you may choose to hire cryotherapy systems with compression (grizo.pt), which provide symptomatic relief and speed up physical recovery."
+      },
+      {
+        "type": "text",
+        "level": null,
+        "text": "Elevation:"
+      },
+      {
+        "type": "text",
+        "level": null,
+        "text": "Raising the knee above the level of the heart whenever possible helps reduce swelling and discomfort."
+      },
+      {
+        "type": "text",
+        "level": null,
+        "text": "Medication and Knee Appointment:"
+      },
+      {
+        "type": "text",
+        "level": null,
+        "text": "Book a knee appointment, whether in person or by teleconsultation. Your knee surgeon may prescribe anti-inflammatory or pain-relief medication to ease the pain and swelling, and may also request imaging tests in order to reach a diagnosis quickly."
+      },
+      {
+        "type": "text",
+        "level": null,
+        "text": "Physiotherapy:"
+      },
+      {
+        "type": "text",
+        "level": null,
+        "text": "If you already have a regular physician or therapist, get in touch with them. Rehabilitation with a physiotherapist is often necessary to strengthen the muscles around the knee and restore range of motion. Follow the prescribed exercise plan to ensure a full recovery."
+      },
+      {
+        "type": "text",
+        "level": null,
+        "text": "Prevention:"
+      },
+      {
+        "type": "text",
+        "level": null,
+        "text": "As the knee improves, it is important to protect it from future injuries. Follow the guidance given at the knee appointment about when it is safe to resume your normal activities."
+      },
+      {
+        "type": "text",
+        "level": null,
+        "text": "Follow-up:"
+      },
+      {
+        "type": "text",
+        "level": null,
+        "text": "Be sure to attend the follow-up appointments to assess the progress of your recovery and to adjust the treatment plan as needed."
+      },
+      {
+        "type": "text",
+        "level": null,
+        "text": "Every knee sprain is unique, and treatment may vary based on the severity of the injury. To determine the knee injury, imaging tests such as X-ray, CT scan or MRI are required."
+      },
+      {
+        "type": "text",
+        "level": null,
+        "text": "Among the most common injuries are a Meniscal Tear and an Anterior Cruciate Ligament (ACL) injury."
+      },
+      {
+        "type": "text",
+        "level": null,
+        "text": "Therefore, it is essential to follow the guidance from the knee appointment to ensure a full and safe recovery. With the right care, many people can return to their normal activities after a knee sprain."
+      },
+      {
+        "type": "text",
+        "level": null,
+        "text": "Text Reviewed in January 2026"
+      },
+      {
+        "type": "text",
+        "level": null,
+        "text": "Nuno Camelo Knee Surgery"
       }
     ],
     "images": [
@@ -1794,20 +1964,120 @@
   {
     "slug": "actividadecientificajoelho",
     "url": "https://www.consultajoelho.pt/en/actividadecientificajoelho",
-    "title": "Publicações Científicas | Dr. Nuno Camelo Porto",
+    "title": "Scientific Publications | Dr Nuno Camelo Porto",
     "ogTitle": "Publicações Científicas | Dr. Nuno Camelo Porto",
-    "description": "Artigos publicados e actividade como revisor científico do Dr. Nuno Camelo, cirurgião ortopédico de joelho no Porto. Publicações em revistas internacionais indexadas.",
+    "description": "Published articles and scientific reviewer activity of Dr Nuno Camelo, orthopaedic knee surgeon in Porto. Publications in indexed international journals.",
     "ogImage": "https://static.wixstatic.com/media/5a9db7_c4bca9a9d4f247d89367a6f566740132%7Emv2.jpg",
     "blocks": [
       {
         "type": "heading",
         "level": 1,
-        "text": "Scientific Articles"
+        "text": "Scientific Activity"
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "Published Articles"
       },
       {
         "type": "text",
         "level": null,
-        "text": "Scientific production is an effective way to acquire and transmit knowledge, discoveries and theories. Science has a central role in modern medical and surgical practice."
+        "text": "A comprehensive scoping review of tibial cysts after anterior cruciate ligament reconstruction — Journal of Experimental Orthopaedics (2021). DOI: 10.1186/s40634-021-00356-9"
+      },
+      {
+        "type": "text",
+        "level": null,
+        "text": "Arthroscopic Identification and Management of Recurrent Iliopsoas Impingement After Total Hip Arthroplasty — Arthroscopy Techniques (2018). DOI: 10.1016/j.eats.2017.10.003"
+      },
+      {
+        "type": "text",
+        "level": null,
+        "text": "Reconstruction of chronic patellar tendon rupture with contralateral bone-tendon-bone autograft — Knee Surgery, Sports Traumatology, Arthroscopy (2017). DOI: 10.1007/s00167-015-3951-7"
+      },
+      {
+        "type": "text",
+        "level": null,
+        "text": "Clinical outcomes of extra-articular tenodesis/anterolateral reconstruction in the ACL injured knee — Knee Surgery, Sports Traumatology, Arthroscopy (2017). DOI: 10.1007/s00167-017-4596-5"
+      },
+      {
+        "type": "text",
+        "level": null,
+        "text": "Hamstring Graft Biological Preparation for Anterior Cruciate Ligament Reconstruction — Arthroscopy Techniques (2017). DOI: 10.1016/j.eats.2016.09.031"
+      },
+      {
+        "type": "text",
+        "level": null,
+        "text": "Surgical Management of Rectus Femoris Avulsion Among Professional Soccer Players — Orthopaedic Journal of Sports Medicine (2017). DOI: 10.1177/2325967116683940"
+      },
+      {
+        "type": "text",
+        "level": null,
+        "text": "Prevalence of knee stiffness after arthroscopic bone suture fixation of tibial spine avulsion fractures in adults — Orthopaedics & Traumatology: Surgery & Research (2016). DOI: 10.1016/j.otsr.2016.05.009"
+      },
+      {
+        "type": "text",
+        "level": null,
+        "text": "A Fluoroscopy-Free Technique for Percutaneous Screw Positioning During Arthroscopic Treatment of Depression Tibial Plateau Fractures — Arthroscopy Techniques (2016). DOI: 10.1016/j.eats.2016.02.012"
+      },
+      {
+        "type": "text",
+        "level": null,
+        "text": "Combined Anterior and Anterolateral Stabilization of the Knee With the Iliotibial Band — Arthroscopy Techniques (2016). DOI: 10.1016/j.eats.2015.12.004"
+      },
+      {
+        "type": "text",
+        "level": null,
+        "text": "Diaphyseal tibiofibular synostosis in professional athletes: Report of 2 cases — Orthopaedics & Traumatology: Surgery & Research (2016). DOI: 10.1016/j.otsr.2015.10.002"
+      },
+      {
+        "type": "text",
+        "level": null,
+        "text": "Minimally Invasive Anterolateral Ligament Reconstruction in the Setting of Anterior Cruciate Ligament Injury — Arthroscopy Techniques (2016). DOI: 10.1016/j.eats.2015.11.005"
+      },
+      {
+        "type": "text",
+        "level": null,
+        "text": "Biomechanical Analysis of Simulated Clinical Testing and Reconstruction of the ALL: Letter to the Editor — The American Journal of Sports Medicine (2015). DOI: 10.1177/0363546515605808"
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "Activity as a Scientific Reviewer"
+      },
+      {
+        "type": "text",
+        "level": null,
+        "text": "14 article reviews for 2 indexed scientific journals:"
+      },
+      {
+        "type": "text",
+        "level": null,
+        "text": "• BMJ Case Reports: 3 reviews"
+      },
+      {
+        "type": "text",
+        "level": null,
+        "text": "• Journal of Experimental Orthopaedics: 11 reviews"
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "Training and Affiliations"
+      },
+      {
+        "type": "text",
+        "level": null,
+        "text": "Current affiliation: Hospital Lusíadas Porto — Knee Surgery, Orthopaedics (since November 2024)"
+      },
+      {
+        "type": "text",
+        "level": null,
+        "text": "Education and Training: Hospital Pedro Hispano, Matosinhos — Orthopaedics (2011–present)"
+      },
+      {
+        "type": "text",
+        "level": null,
+        "text": "Full ORCID profile: https://orcid.org/0000-0002-7443-4085"
       },
       {
         "type": "text",
@@ -1817,12 +2087,12 @@
       {
         "type": "heading",
         "level": 2,
-        "text": "Project Name"
+        "text": "Project name"
       },
       {
         "type": "text",
         "level": null,
-        "text": "This is your project description. Write a summary so that visitors understand the context of your work. Click on edit text or double-click on the text box to get started."
+        "text": "This is the description of your project. Write a summary so that visitors understand the context of your work. Click edit text or double-click the text box to begin."
       },
       {
         "type": "text",
@@ -1833,11 +2103,6 @@
         "type": "text",
         "level": null,
         "text": "03"
-      },
-      {
-        "type": "text",
-        "level": null,
-        "text": "This is your project description. Write a summary so visitors understand the context of your work. Click on edit text or double-click the text box to begin."
       },
       {
         "type": "text",

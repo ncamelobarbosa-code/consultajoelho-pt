@@ -35,6 +35,12 @@ function renderBlocks(blocks: Block[]): ReactNode[] {
   return out;
 }
 
+const STRINGS = {
+  pt: { home: "Início", author: "", cta: "Marque a sua consulta", sub: "Resposta em menos de 24 horas.", btn: "Avaliar o meu joelho", contact: "/avaliar", root: "/" },
+  en: { home: "Home", author: "Knee Surgeon", cta: "Book your consultation", sub: "Reply within 24 hours.", btn: "Contact us", contact: "/en/contacto", root: "/en" },
+  ru: { home: "Главная", author: "Хирург коленного сустава", cta: "Запишитесь на приём", sub: "Ответ в течение 24 часов.", btn: "Связаться с нами", contact: "/ru/contacto", root: "/ru" },
+} as const;
+
 export default function PortedArticle({
   slug,
   lang,
@@ -42,33 +48,31 @@ export default function PortedArticle({
   description: descOverride,
 }: {
   slug: string;
-  lang?: "pt" | "en";
+  lang?: "pt" | "en" | "ru";
   title?: string;
   description?: string;
 }) {
   const meta = pages[slug as PageSlug] as PageMeta | undefined;
-  const isEn = lang === "en" || meta?.lang === "en";
-  const data = getScraped(slug, isEn ? "en" : "pt");
+  const locale: "pt" | "en" | "ru" = lang || (meta?.lang === "en" ? "en" : "pt");
+  const data = getScraped(slug, locale);
   if (!data) return null;
 
   const title = titleOverride || cleanTitle(data.title);
   const description = descOverride ?? data.description;
-
-  const t = isEn
-    ? { home: "Home", author: "Knee Surgeon", cta: "Book your consultation", sub: "Reply within 24 hours.", btn: "Contact us" }
-    : { home: "Início", author: site.role, cta: "Marque a sua consulta", sub: "Resposta em menos de 24 horas.", btn: "Avaliar o meu joelho" };
+  const t = STRINGS[locale];
+  const author = locale === "pt" ? site.role : t.author;
 
   return (
     <article>
       <header className="pa-hero">
         <div className="pa-hero-inner">
           <nav className="pa-breadcrumb" aria-label="Breadcrumb">
-            <a href={isEn ? "/en" : "/"}>{t.home}</a> / {title}
+            <a href={t.root}>{t.home}</a> / {title}
           </nav>
           <h1>{title}</h1>
           {description && <p className="pa-lead">{description}</p>}
           <p className="pa-author">
-            {site.doctor} · {t.author}
+            {site.doctor} · {author}
           </p>
         </div>
       </header>
@@ -78,7 +82,7 @@ export default function PortedArticle({
       <section className="pa-cta">
         <h2>{t.cta}</h2>
         <p>{t.sub}</p>
-        <a href={isEn ? "/en/contacto" : "/avaliar"}>{t.btn}</a>
+        <a href={t.contact}>{t.btn}</a>
       </section>
     </article>
   );

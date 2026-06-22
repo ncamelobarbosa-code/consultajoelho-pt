@@ -56,6 +56,9 @@ const enRoutes = [
   "en/joelhodrnunocamelo",
   "en/contacto",
   "en/tendao-rotuliano-tendinite-drnunocamelo",
+  "en/liquidojoelho-artrocentese-drnunocamelo",
+  "en/entorsejoelho-drnunocamelo",
+  "en/actividadecientificajoelho",
 ];
 
 // Rotas RU traduzidas (acrescentar à medida que se traduzem).
@@ -80,6 +83,11 @@ const ruRoutes = [
   "ru/nuno-camelo-especialista-cirurgia-joelho",
   "ru/joelhodrnunocamelo",
   "ru/contacto",
+  "ru/tendao-rotuliano-tendinite-drnunocamelo",
+  "ru/kneesurgeryinportugalprices",
+  "ru/liquidojoelho-artrocentese-drnunocamelo",
+  "ru/entorsejoelho-drnunocamelo",
+  "ru/actividadecientificajoelho",
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {
