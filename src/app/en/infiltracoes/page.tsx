@@ -13,7 +13,8 @@ export const metadata: Metadata = {
     "languages": {
       "pt-PT": "https://www.consultajoelho.pt/infiltracoes",
       "x-default": "https://www.consultajoelho.pt/infiltracoes",
-      "en-GB": "https://www.consultajoelho.pt/en/infiltracoes"
+      "en-GB": "https://www.consultajoelho.pt/en/infiltracoes",
+      "ru-RU": "https://www.consultajoelho.pt/ru/infiltracoes"
     }
   }
 };

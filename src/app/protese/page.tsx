@@ -9,7 +9,8 @@ export const metadata: Metadata = {
     "languages": {
       "pt-PT": "https://www.consultajoelho.pt/protese",
       "x-default": "https://www.consultajoelho.pt/protese",
-      "en-GB": "https://www.consultajoelho.pt/en/protese"
+      "en-GB": "https://www.consultajoelho.pt/en/protese",
+      "ru-RU": "https://www.consultajoelho.pt/ru/protese"
     }
   },
   "openGraph": {

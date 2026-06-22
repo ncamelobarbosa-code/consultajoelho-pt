@@ -61,6 +61,24 @@ const enRoutes = [
 // Rotas RU traduzidas (acrescentar à medida que se traduzem).
 const ruRoutes = [
   "ru",
+  "ru/infiltracoes",
+  "ru/cartilagem",
+  "ru/lca",
+  "ru/menisco",
+  "ru/protese",
+  "ru/artrose",
+  "ru/quisto-baker",
+  "ru/quistos-parameniscais",
+  "ru/sindrome-banda-iliotibial",
+  "ru/luxacao-rotula",
+  "ru/quadriceps",
+  "ru/medo-cirurgia",
+  "ru/preparar-cirurgia",
+  "ru/recuperar-cirurgia",
+  "ru/sigic",
+  "ru/avaliar",
+  "ru/nuno-camelo-especialista-cirurgia-joelho",
+  "ru/joelhodrnunocamelo",
   "ru/contacto",
 ];
 

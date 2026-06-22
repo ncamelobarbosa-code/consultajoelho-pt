@@ -11,7 +11,8 @@ export const metadata: Metadata = {
     "languages": {
       "pt-PT": "https://www.consultajoelho.pt/joelhodrnunocamelo",
       "x-default": "https://www.consultajoelho.pt/joelhodrnunocamelo",
-      "en-GB": "https://www.consultajoelho.pt/en/joelhodrnunocamelo"
+      "en-GB": "https://www.consultajoelho.pt/en/joelhodrnunocamelo",
+      "ru-RU": "https://www.consultajoelho.pt/ru/joelhodrnunocamelo"
     }
   }
 };

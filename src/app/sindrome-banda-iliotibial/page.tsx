@@ -9,7 +9,8 @@ export const metadata: Metadata = {
     "languages": {
       "pt-PT": "https://www.consultajoelho.pt/sindrome-banda-iliotibial",
       "x-default": "https://www.consultajoelho.pt/sindrome-banda-iliotibial",
-      "en-GB": "https://www.consultajoelho.pt/en/sindrome-banda-iliotibial"
+      "en-GB": "https://www.consultajoelho.pt/en/sindrome-banda-iliotibial",
+      "ru-RU": "https://www.consultajoelho.pt/ru/sindrome-banda-iliotibial"
     }
   },
   "openGraph": {

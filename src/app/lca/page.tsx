@@ -9,7 +9,8 @@ export const metadata: Metadata = {
     "languages": {
       "pt-PT": "https://www.consultajoelho.pt/lca",
       "x-default": "https://www.consultajoelho.pt/lca",
-      "en-GB": "https://www.consultajoelho.pt/en/lca"
+      "en-GB": "https://www.consultajoelho.pt/en/lca",
+      "ru-RU": "https://www.consultajoelho.pt/ru/lca"
     }
   },
   "openGraph": {

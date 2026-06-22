@@ -9,7 +9,8 @@ export const metadata: Metadata = {
     "languages": {
       "pt-PT": "https://www.consultajoelho.pt/sigic",
       "x-default": "https://www.consultajoelho.pt/sigic",
-      "en-GB": "https://www.consultajoelho.pt/en/sigic"
+      "en-GB": "https://www.consultajoelho.pt/en/sigic",
+      "ru-RU": "https://www.consultajoelho.pt/ru/sigic"
     }
   },
   "openGraph": {

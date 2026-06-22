@@ -9,7 +9,8 @@ export const metadata: Metadata = {
     "languages": {
       "pt-PT": "https://www.consultajoelho.pt/quistos-parameniscais",
       "x-default": "https://www.consultajoelho.pt/quistos-parameniscais",
-      "en-GB": "https://www.consultajoelho.pt/en/quistos-parameniscais"
+      "en-GB": "https://www.consultajoelho.pt/en/quistos-parameniscais",
+      "ru-RU": "https://www.consultajoelho.pt/ru/quistos-parameniscais"
     }
   },
   "openGraph": {
