@@ -3,18 +3,74 @@
 import { useState } from 'react';
 import { useForm, ValidationError } from '@formspree/react';
 
-export default function ContactForm() {
+const STRINGS = {
+  pt: {
+    successTitle: 'Mensagem recebida',
+    successBody: 'Entraremos em contacto em breve, habitualmente no próprio dia ou no dia útil seguinte.',
+    heading: 'Marcar Consulta ou Pedir Orçamento',
+    introBefore: 'Preencha o formulário e entraremos em contacto para confirmar data e hora. Em alternativa, pode ligar para',
+    nameLabel: 'Nome completo',
+    namePlaceholder: 'O seu nome',
+    emailLabel: 'Email',
+    emailPlaceholder: 'email@exemplo.pt',
+    phoneLabel: 'Telefone',
+    optional: '(opcional)',
+    reasonLabel: 'Motivo do contacto',
+    reasonPlaceholder: 'Seleccione o motivo',
+    reasons: ['Dor no joelho', 'Lesão ligamentar (LCA / LCP)', 'Lesão de menisco', 'Lesão de cartilagem', 'Instabilidade da rótula', 'Artrose / Gonartrose', 'Segunda opinião', 'Pedir orçamento', 'Outro'],
+    messageLabel: 'Mensagem',
+    messagePlaceholder: 'Descreva brevemente a sua situação, exames já realizados, ou qualquer informação relevante.',
+    gdprBefore: 'Concordo com o tratamento dos meus dados pessoais para efeitos de marcação de consulta, conforme a',
+    gdprLink: 'política de privacidade',
+    submit: 'Enviar pedido de consulta',
+    submitting: 'A enviar…',
+    errorGlobal: 'Ocorreu um erro. Verifique os campos e tente novamente.',
+    infoEmail: 'Email directo',
+    infoPhone: 'Telefone',
+    infoReplyLabel: 'Resposta habitual',
+    infoReplyValue: 'No próprio dia útil',
+    privacyHref: '/privacidade',
+  },
+  en: {
+    successTitle: 'Message received',
+    successBody: 'We will be in touch shortly, usually the same day or the next working day.',
+    heading: 'Book an Appointment or Request a Quote',
+    introBefore: 'Fill in the form and we will contact you to confirm a date and time. Alternatively, you can call',
+    nameLabel: 'Full name',
+    namePlaceholder: 'Your name',
+    emailLabel: 'Email',
+    emailPlaceholder: 'email@example.com',
+    phoneLabel: 'Phone',
+    optional: '(optional)',
+    reasonLabel: 'Reason for contact',
+    reasonPlaceholder: 'Select a reason',
+    reasons: ['Knee pain', 'Ligament injury (ACL / PCL)', 'Meniscal injury', 'Cartilage injury', 'Patellar instability', 'Knee osteoarthritis', 'Second opinion', 'Request a quote', 'Other'],
+    messageLabel: 'Message',
+    messagePlaceholder: 'Briefly describe your situation, any scans already done, or any relevant information.',
+    gdprBefore: 'I consent to the processing of my personal data for the purpose of booking an appointment, in accordance with the',
+    gdprLink: 'privacy policy',
+    submit: 'Send appointment request',
+    submitting: 'Sending…',
+    errorGlobal: 'An error occurred. Please check the fields and try again.',
+    infoEmail: 'Direct email',
+    infoPhone: 'Phone',
+    infoReplyLabel: 'Typical response',
+    infoReplyValue: 'Same working day',
+    privacyHref: '/privacidade',
+  },
+} as const;
+
+export default function ContactForm({ lang = 'pt' }: { lang?: 'pt' | 'en' }) {
   const [state, handleSubmit] = useForm('mpqganlp');
   const [motivo, setMotivo] = useState('');
+  const t = STRINGS[lang];
 
   if (state.succeeded) {
     return (
       <div className="contact-success">
         <div className="success-icon">✓</div>
-        <h3>Mensagem recebida</h3>
-        <p>
-          Entraremos em contacto em breve, habitualmente no próprio dia ou no dia útil seguinte.
-        </p>
+        <h3>{t.successTitle}</h3>
+        <p>{t.successBody}</p>
       </div>
     );
   }
@@ -23,10 +79,9 @@ export default function ContactForm() {
     <section className="contact-section" id="contacto">
       <div className="contact-container">
         <div className="contact-header">
-          <h2>Marcar Consulta ou Pedir Orçamento</h2>
+          <h2>{t.heading}</h2>
           <p>
-            Preencha o formulário e entraremos em contacto para confirmar data e hora.
-            Em alternativa, pode ligar para{' '}
+            {t.introBefore}{' '}
             <a href="tel:+351926850194" className="contact-phone">
               926 850 194
             </a>
@@ -37,12 +92,12 @@ export default function ContactForm() {
         <form onSubmit={handleSubmit} className="contact-form" noValidate>
           {/* Nome */}
           <div className="form-group">
-            <label htmlFor="nome">Nome completo</label>
+            <label htmlFor="nome">{t.nameLabel}</label>
             <input
               id="nome"
               type="text"
               name="nome"
-              placeholder="O seu nome"
+              placeholder={t.namePlaceholder}
               required
               autoComplete="name"
             />
@@ -51,12 +106,12 @@ export default function ContactForm() {
 
           {/* Email */}
           <div className="form-group">
-            <label htmlFor="email">Email</label>
+            <label htmlFor="email">{t.emailLabel}</label>
             <input
               id="email"
               type="email"
               name="email"
-              placeholder="email@exemplo.pt"
+              placeholder={t.emailPlaceholder}
               required
               autoComplete="email"
             />
@@ -66,7 +121,7 @@ export default function ContactForm() {
           {/* Telefone */}
           <div className="form-group">
             <label htmlFor="telefone">
-              Telefone <span className="optional">(opcional)</span>
+              {t.phoneLabel} <span className="optional">{t.optional}</span>
             </label>
             <input
               id="telefone"
@@ -79,7 +134,7 @@ export default function ContactForm() {
 
           {/* Motivo */}
           <div className="form-group">
-            <label htmlFor="motivo">Motivo do contacto</label>
+            <label htmlFor="motivo">{t.reasonLabel}</label>
             <select
               id="motivo"
               name="motivo"
@@ -88,17 +143,13 @@ export default function ContactForm() {
               required
             >
               <option value="" disabled>
-                Seleccione o motivo
+                {t.reasonPlaceholder}
               </option>
-              <option value="Dor no joelho">Dor no joelho</option>
-              <option value="Lesão ligamentar (LCA / LCP)">Lesão ligamentar (LCA / LCP)</option>
-              <option value="Lesão de menisco">Lesão de menisco</option>
-              <option value="Lesão de cartilagem">Lesão de cartilagem</option>
-              <option value="Instabilidade da rótula">Instabilidade da rótula</option>
-              <option value="Artrose / Gonartrose">Artrose / Gonartrose</option>
-              <option value="Segunda opinião">Segunda opinião</option>
-              <option value="Pedir orçamento">Pedir orçamento</option>
-              <option value="Outro">Outro</option>
+              {t.reasons.map((r) => (
+                <option key={r} value={r}>
+                  {r}
+                </option>
+              ))}
             </select>
             <ValidationError prefix="Motivo" field="motivo" errors={state.errors} className="field-error" />
           </div>
@@ -106,13 +157,13 @@ export default function ContactForm() {
           {/* Mensagem */}
           <div className="form-group">
             <label htmlFor="mensagem">
-              Mensagem <span className="optional">(opcional)</span>
+              {t.messageLabel} <span className="optional">{t.optional}</span>
             </label>
             <textarea
               id="mensagem"
               name="mensagem"
               rows={4}
-              placeholder="Descreva brevemente a sua situação, exames já realizados, ou qualquer informação relevante."
+              placeholder={t.messagePlaceholder}
             />
             <ValidationError prefix="Mensagem" field="mensagem" errors={state.errors} className="field-error" />
           </div>
@@ -122,10 +173,9 @@ export default function ContactForm() {
             <label className="checkbox-label">
               <input type="checkbox" name="gdpr" required />
               <span>
-                Concordo com o tratamento dos meus dados pessoais para efeitos de marcação de consulta,
-                conforme a{' '}
-                <a href="/privacidade" target="_blank" rel="noopener noreferrer">
-                  política de privacidade
+                {t.gdprBefore}{' '}
+                <a href={t.privacyHref} target="_blank" rel="noopener noreferrer">
+                  {t.gdprLink}
                 </a>
                 .
               </span>
@@ -138,13 +188,13 @@ export default function ContactForm() {
             disabled={state.submitting}
             className="submit-btn"
           >
-            {state.submitting ? 'A enviar…' : 'Enviar pedido de consulta'}
+            {state.submitting ? t.submitting : t.submit}
           </button>
 
           {/* Generic error */}
           {state.errors && (
             <p className="form-error-global">
-              Ocorreu um erro. Verifique os campos e tente novamente.
+              {t.errorGlobal}
             </p>
           )}
         </form>
@@ -152,16 +202,16 @@ export default function ContactForm() {
         {/* Contact info strip */}
         <div className="contact-info-strip">
           <div className="contact-info-item">
-            <span className="info-label">Email directo</span>
+            <span className="info-label">{t.infoEmail}</span>
             <a href="mailto:joelho@consultajoelho.pt">joelho@consultajoelho.pt</a>
           </div>
           <div className="contact-info-item">
-            <span className="info-label">Telefone</span>
+            <span className="info-label">{t.infoPhone}</span>
             <a href="tel:+351926850194">926 850 194</a>
           </div>
           <div className="contact-info-item">
-            <span className="info-label">Resposta habitual</span>
-            <span>No próprio dia útil</span>
+            <span className="info-label">{t.infoReplyLabel}</span>
+            <span>{t.infoReplyValue}</span>
           </div>
         </div>
       </div>

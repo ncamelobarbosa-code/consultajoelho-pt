@@ -181,6 +181,7 @@ for (const [file, seg] of Object.entries(ROUTES)) {
   } catch {}
 }
 const enSlugs = new Set(Object.keys(enRaw)); // segs com versão EN ("" = homepage)
+enSlugs.add("contacto"); // /en/contacto existe (página React, fora do pipeline HTML)
 // reescreve links: PT->novos slugs, depois prefixa /en onde a tradução existe
 function rewriteLinksEn(html) {
   let out = rewriteLinks(html);

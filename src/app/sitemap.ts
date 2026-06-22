@@ -54,6 +54,7 @@ const enRoutes = [
   "en/avaliar",
   "en/nuno-camelo-especialista-cirurgia-joelho",
   "en/joelhodrnunocamelo",
+  "en/contacto",
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {
