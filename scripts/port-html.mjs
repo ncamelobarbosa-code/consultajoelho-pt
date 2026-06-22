@@ -173,39 +173,54 @@ await writeFile(
   "utf8"
 );
 
-// ── EN: homepage (i18n) ──
-let enInfo = "sem homepage_en.html";
-try {
-  const enRaw = await readFile(`${SRC}/homepage_en.html`, "utf8");
-  const $e = cheerio.load(enRaw, { decodeEntities: false });
+// ── EN (i18n): gera /en/<slug> a partir de <ptfile>_en.html ──
+const enRaw = {};
+for (const [file, seg] of Object.entries(ROUTES)) {
+  try {
+    enRaw[seg] = await readFile(`${SRC}/${file.replace(/\.html$/, "_en.html")}`, "utf8");
+  } catch {}
+}
+const enSlugs = new Set(Object.keys(enRaw)); // segs com versão EN ("" = homepage)
+// reescreve links: PT->novos slugs, depois prefixa /en onde a tradução existe
+function rewriteLinksEn(html) {
+  let out = rewriteLinks(html);
+  out = out.replace(/href="\/([a-zA-Z0-9-]+)"/g, (m, slug) =>
+    enSlugs.has(slug) ? `href="/en/${slug}"` : m
+  );
+  if (enSlugs.has("")) out = out.replace(/href="\/"/g, 'href="/en"');
+  return out;
+}
+let enHeaderHtml = "", enFooterHtml = "", enCount = 0;
+for (const [file, seg] of Object.entries(ROUTES)) {
+  const raw = enRaw[seg];
+  if (!raw) continue;
+  const $e = cheerio.load(raw, { decodeEntities: false });
   const enMeta = buildMetadata($e);
   const enJsonld = $e('script[type="application/ld+json"]').first().html() || "";
-  const eh = $e("body > header").first();
-  const ef = $e("body > footer").first();
-  const enHeader = eh.length ? rewriteLinks($e.html(eh)) : "";
-  const enFooter = ef.length ? rewriteLinks($e.html(ef)) : "";
+  if (seg === "") {
+    const eh = $e("body > header").first();
+    const ef = $e("body > footer").first();
+    enHeaderHtml = eh.length ? rewriteLinksEn($e.html(eh)) : "";
+    enFooterHtml = ef.length ? rewriteLinksEn($e.html(ef)) : "";
+  }
+  const css = $e("style").toArray().map((el) => $e(el).html()).join("\n\n");
   $e("body > header, body > footer, body > nav").remove();
-  const enScript = $e("body script")
-    .not('[type="application/ld+json"]')
-    .not("[src]")
-    .toArray()
-    .map((el) => $e(el).html())
-    .filter(Boolean)
-    .join("\n");
+  const enScript = $e("body script").not('[type="application/ld+json"]').not("[src]").toArray().map((el) => $e(el).html()).filter(Boolean).join("\n");
   $e("body script, body style").remove();
-  const enBody = rewriteLinks($e("body").html() || "");
-  await mkdir(`${APP}/en`, { recursive: true });
-  await writeFile(`${APP}/en/page.tsx`, homepageTemplate(enMeta, enJsonld, enBody, enScript, "home-en"), "utf8");
-  await writeFile(
-    `${COMP}/chrome-en.ts`,
-    `export const enHeader = ${JSON.stringify(enHeader)};\nexport const enFooter = ${JSON.stringify(enFooter)};\n`,
-    "utf8"
-  );
-  enInfo = `EN homepage ${enBody.length} chars · chrome en header=${enHeader.length}`;
-} catch (e) {
-  enInfo = "sem homepage_en.html (" + e.message + ")";
+  const body = rewriteLinksEn($e("body").html() || "");
+  const dir = seg ? `${APP}/en/${seg}` : `${APP}/en`;
+  await mkdir(dir, { recursive: true });
+  const id = "en-" + (seg || "home").replace(/[^a-z0-9]/g, "-");
+  const content = seg === ""
+    ? homepageTemplate(enMeta, enJsonld, body, enScript, id)
+    : pageTemplate(enMeta, css, enJsonld, body, enScript, id);
+  await writeFile(`${dir}/page.tsx`, content, "utf8");
+  enCount++;
 }
-console.log("EN:", enInfo);
+if (enHeaderHtml) {
+  await writeFile(`${COMP}/chrome-en.ts`, `export const enHeader = ${JSON.stringify(enHeaderHtml)};\nexport const enFooter = ${JSON.stringify(enFooterHtml)};\n`, "utf8");
+}
+console.log(`EN: ${enCount} páginas geradas (${[...enSlugs].map((s)=>s||"home").join(", ")})`);
 
 console.log("=== Páginas geradas ===");
 console.log(report.join("\n"));
