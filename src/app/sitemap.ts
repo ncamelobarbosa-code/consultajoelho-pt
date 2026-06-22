@@ -4,7 +4,6 @@ import { site } from "@/lib/site";
 // Rotas canónicas atuais (design portado + páginas antigas ainda sem equivalente).
 const routes = [
   "", // homepage
-  "en", // homepage EN
 
   // páginas novas (design portado)
   "infiltracoes",
@@ -34,9 +33,21 @@ const routes = [
   "contacto",
 ];
 
+// Rotas EN traduzidas (acrescentar à medida que se traduzem).
+const enRoutes = [
+  "en",
+  "en/infiltracoes",
+  "en/cartilagem",
+  "en/lca",
+  "en/menisco",
+  "en/protese",
+  "en/nuno-camelo-especialista-cirurgia-joelho",
+  "en/joelhodrnunocamelo",
+];
+
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
-  return routes.map((r) => ({
+  return [...routes, ...enRoutes].map((r) => ({
     url: r ? `${site.url}/${r}` : site.url,
     lastModified: now,
     changeFrequency: "monthly",
