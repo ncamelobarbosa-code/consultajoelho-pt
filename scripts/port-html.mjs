@@ -203,6 +203,9 @@ for (const [file, seg] of Object.entries(ROUTES)) {
     const ef = $e("body > footer").first();
     enHeaderHtml = eh.length ? rewriteLinksEn($e.html(eh)) : "";
     enFooterHtml = ef.length ? rewriteLinksEn($e.html(ef)) : "";
+    // O seletor de idioma "PT" deve apontar para a home PT ("/"), não para /en.
+    // A reescrita /->/en apanhou-o por engano; repor.
+    enHeaderHtml = enHeaderHtml.replace(/href="\/en"(\s+class="nav-lang"\s+hreflang="pt")/g, 'href="/"$1');
   }
   const css = $e("style").toArray().map((el) => $e(el).html()).join("\n\n");
   $e("body > header, body > footer, body > nav").remove();
