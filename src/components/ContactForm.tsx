@@ -58,9 +58,36 @@ const STRINGS = {
     infoReplyValue: 'Same working day',
     privacyHref: '/privacidade',
   },
+  ru: {
+    successTitle: 'Сообщение получено',
+    successBody: 'Мы свяжемся с Вами в ближайшее время, обычно в тот же или на следующий рабочий день.',
+    heading: 'Записаться на приём или запросить смету',
+    introBefore: 'Заполните форму, и мы свяжемся с Вами, чтобы подтвердить дату и время. Также Вы можете позвонить по номеру',
+    nameLabel: 'Полное имя',
+    namePlaceholder: 'Ваше имя',
+    emailLabel: 'Электронная почта',
+    emailPlaceholder: 'email@example.com',
+    phoneLabel: 'Телефон',
+    optional: '(необязательно)',
+    reasonLabel: 'Причина обращения',
+    reasonPlaceholder: 'Выберите причину',
+    reasons: ['Боль в колене', 'Повреждение связки (ПКС / ЗКС)', 'Повреждение мениска', 'Повреждение хряща', 'Нестабильность надколенника', 'Остеоартроз коленного сустава', 'Второе мнение', 'Запросить смету', 'Другое'],
+    messageLabel: 'Сообщение',
+    messagePlaceholder: 'Кратко опишите Вашу ситуацию, уже проведённые обследования или любую другую важную информацию.',
+    gdprBefore: 'Я согласен(на) на обработку моих персональных данных для целей записи на приём в соответствии с',
+    gdprLink: 'политикой конфиденциальности',
+    submit: 'Отправить запрос на приём',
+    submitting: 'Отправка…',
+    errorGlobal: 'Произошла ошибка. Проверьте поля и попробуйте снова.',
+    infoEmail: 'Прямая электронная почта',
+    infoPhone: 'Телефон',
+    infoReplyLabel: 'Обычный срок ответа',
+    infoReplyValue: 'В тот же рабочий день',
+    privacyHref: '/privacidade',
+  },
 } as const;
 
-export default function ContactForm({ lang = 'pt' }: { lang?: 'pt' | 'en' }) {
+export default function ContactForm({ lang = 'pt' }: { lang?: 'pt' | 'en' | 'ru' }) {
   const [state, handleSubmit] = useForm('mpqganlp');
   const [motivo, setMotivo] = useState('');
   const t = STRINGS[lang];

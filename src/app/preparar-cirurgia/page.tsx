@@ -8,8 +8,8 @@ export const metadata: Metadata = {
     "canonical": "https://www.consultajoelho.pt/prepararcirurgiajoelho",
     "languages": {
       "pt-PT": "https://www.consultajoelho.pt/preparar-cirurgia",
-      "en-GB": "https://www.consultajoelho.pt/en/preparar-cirurgia",
-      "x-default": "https://www.consultajoelho.pt/preparar-cirurgia"
+      "x-default": "https://www.consultajoelho.pt/preparar-cirurgia",
+      "en-GB": "https://www.consultajoelho.pt/en/preparar-cirurgia"
     }
   },
   "openGraph": {

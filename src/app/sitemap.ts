@@ -58,9 +58,15 @@ const enRoutes = [
   "en/tendao-rotuliano-tendinite-drnunocamelo",
 ];
 
+// Rotas RU traduzidas (acrescentar à medida que se traduzem).
+const ruRoutes = [
+  "ru",
+  "ru/contacto",
+];
+
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
-  return [...routes, ...enRoutes].map((r) => ({
+  return [...routes, ...enRoutes, ...ruRoutes].map((r) => ({
     url: r ? `${site.url}/${r}` : site.url,
     lastModified: now,
     changeFrequency: "monthly",

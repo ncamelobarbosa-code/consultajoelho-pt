@@ -8,8 +8,8 @@ export const metadata: Metadata = {
     "canonical": "https://www.consultajoelho.pt/en/artrose",
     "languages": {
       "pt-PT": "https://www.consultajoelho.pt/artrose",
-      "en-GB": "https://www.consultajoelho.pt/en/artrose",
-      "x-default": "https://www.consultajoelho.pt/artrose"
+      "x-default": "https://www.consultajoelho.pt/artrose",
+      "en-GB": "https://www.consultajoelho.pt/en/artrose"
     }
   },
   "openGraph": {

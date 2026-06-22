@@ -8,8 +8,8 @@ export const metadata: Metadata = {
     "canonical": "https://www.consultajoelho.pt/luxacaorotulajoelho",
     "languages": {
       "pt-PT": "https://www.consultajoelho.pt/luxacao-rotula",
-      "en-GB": "https://www.consultajoelho.pt/en/luxacao-rotula",
-      "x-default": "https://www.consultajoelho.pt/luxacao-rotula"
+      "x-default": "https://www.consultajoelho.pt/luxacao-rotula",
+      "en-GB": "https://www.consultajoelho.pt/en/luxacao-rotula"
     }
   },
   "openGraph": {

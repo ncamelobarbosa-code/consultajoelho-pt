@@ -130,12 +130,36 @@ const enSlugs = new Set(Object.keys(enRaw)); // segs com versão EN ("" = homepa
 enSlugs.add("contacto"); // /en/contacto existe (página React, fora do pipeline HTML)
 enSlugs.add("tendao-rotuliano-tendinite-drnunocamelo"); // /en via PortedArticle (conteúdo EN scraped)
 
-// hreflang: URLs alternativos PT/EN/x-default para um seg ("" = homepage)
+// ── i18n RU: descobrir que segs têm versão RU (traduzida do EN) ──
+const ruRaw = {};
+for (const [file, seg] of Object.entries(ROUTES)) {
+  try {
+    ruRaw[seg] = await readFile(`${SRC}/${file.replace(/\.html$/, "_ru.html")}`, "utf8");
+  } catch {}
+}
+const ruSlugs = new Set(Object.keys(ruRaw)); // segs com versão RU ("" = homepage)
+ruSlugs.add("contacto"); // /ru/contacto existe (página React, fora do pipeline HTML)
+
+// hreflang: URLs alternativos por seg ("" = homepage). Só lista locales que existem.
 const BASE = "https://www.consultajoelho.pt";
 function langAlternates(seg) {
-  const ptUrl = seg ? `${BASE}/${seg}` : BASE;
-  const enUrl = seg ? `${BASE}/en/${seg}` : `${BASE}/en`;
-  return { "pt-PT": ptUrl, "en-GB": enUrl, "x-default": ptUrl };
+  const path = seg ? `/${seg}` : "";
+  const langs = { "pt-PT": `${BASE}${path}`, "x-default": `${BASE}${path}` };
+  if (enSlugs.has(seg)) langs["en-GB"] = `${BASE}/en${path}`;
+  if (ruSlugs.has(seg)) langs["ru-RU"] = `${BASE}/ru${path}`;
+  return langs;
+}
+const hasTranslation = (seg) => enSlugs.has(seg) || ruSlugs.has(seg);
+
+// Seletor de idioma de 3 línguas: cada locale mostra as outras duas (apontam para a home do locale).
+const SWITCHER = {
+  pt: '<a href="/en" class="nav-lang" hreflang="en" title="English">EN</a><a href="/ru" class="nav-lang" hreflang="ru" title="Русский">RU</a>',
+  en: '<a href="/" class="nav-lang" hreflang="pt" title="Português">PT</a><a href="/ru" class="nav-lang" hreflang="ru" title="Русский">RU</a>',
+  ru: '<a href="/" class="nav-lang" hreflang="pt" title="Português">PT</a><a href="/en" class="nav-lang" hreflang="en" title="English">EN</a>',
+};
+function injectSwitcher(html, locale) {
+  // substitui o(s) link(s) nav-lang existente(s) pelo conjunto correto do locale
+  return html.replace(/<a\b[^>]*class="nav-lang"[^>]*>[\s\S]*?<\/a>/, SWITCHER[locale]);
 }
 
 for (const [file, seg] of Object.entries(ROUTES)) {
@@ -143,7 +167,7 @@ for (const [file, seg] of Object.entries(ROUTES)) {
   const $ = cheerio.load(raw, { decodeEntities: false });
 
   const meta = buildMetadata($);
-  if (enSlugs.has(seg)) {
+  if (hasTranslation(seg)) {
     meta.alternates = { ...(meta.alternates || {}), languages: langAlternates(seg) };
   }
   const css = $("style").toArray().map((el) => $(el).html()).join("\n\n");
@@ -154,7 +178,7 @@ for (const [file, seg] of Object.entries(ROUTES)) {
     homepageCss = css;
     const h = $("body > header").first();
     const f = $("body > footer").first();
-    headerHtml = h.length ? rewriteLinks($.html(h)) : "";
+    headerHtml = h.length ? injectSwitcher(rewriteLinks($.html(h)), "pt") : "";
     footerHtml = f.length ? rewriteLinks($.html(f)) : "";
   }
 
@@ -216,11 +240,8 @@ for (const [file, seg] of Object.entries(ROUTES)) {
   if (seg === "") {
     const eh = $e("body > header").first();
     const ef = $e("body > footer").first();
-    enHeaderHtml = eh.length ? rewriteLinksEn($e.html(eh)) : "";
+    enHeaderHtml = eh.length ? injectSwitcher(rewriteLinksEn($e.html(eh)), "en") : "";
     enFooterHtml = ef.length ? rewriteLinksEn($e.html(ef)) : "";
-    // O seletor de idioma "PT" deve apontar para a home PT ("/"), não para /en.
-    // A reescrita /->/en apanhou-o por engano; repor.
-    enHeaderHtml = enHeaderHtml.replace(/href="\/en"(\s+class="nav-lang"\s+hreflang="pt")/g, 'href="/"$1');
   }
   const css = $e("style").toArray().map((el) => $e(el).html()).join("\n\n");
   $e("body > header, body > footer, body > nav").remove();
@@ -240,6 +261,48 @@ if (enHeaderHtml) {
   await writeFile(`${COMP}/chrome-en.ts`, `export const enHeader = ${JSON.stringify(enHeaderHtml)};\nexport const enFooter = ${JSON.stringify(enFooterHtml)};\n`, "utf8");
 }
 console.log(`EN: ${enCount} páginas geradas (${[...enSlugs].map((s)=>s||"home").join(", ")})`);
+
+// ── RU (i18n): gera /ru/<slug> a partir de <ptfile>_ru.html (traduzido do EN) ──
+function rewriteLinksRu(html) {
+  let out = rewriteLinks(html);
+  out = out.replace(/href="\/([a-zA-Z0-9-]+)"/g, (m, slug) =>
+    ruSlugs.has(slug) ? `href="/ru/${slug}"` : m
+  );
+  if (ruSlugs.has("")) out = out.replace(/href="\/"/g, 'href="/ru"');
+  return out;
+}
+let ruHeaderHtml = "", ruFooterHtml = "", ruCount = 0;
+for (const [file, seg] of Object.entries(ROUTES)) {
+  const raw = ruRaw[seg];
+  if (!raw) continue;
+  const $r = cheerio.load(raw, { decodeEntities: false });
+  const ruMeta = buildMetadata($r);
+  ruMeta.alternates = { ...(ruMeta.alternates || {}), languages: langAlternates(seg) };
+  const ruJsonld = $r('script[type="application/ld+json"]').first().html() || "";
+  if (seg === "") {
+    const rh = $r("body > header").first();
+    const rf = $r("body > footer").first();
+    ruHeaderHtml = rh.length ? injectSwitcher(rewriteLinksRu($r.html(rh)), "ru") : "";
+    ruFooterHtml = rf.length ? rewriteLinksRu($r.html(rf)) : "";
+  }
+  const css = $r("style").toArray().map((el) => $r(el).html()).join("\n\n");
+  $r("body > header, body > footer, body > nav").remove();
+  const ruScript = $r("body script").not('[type="application/ld+json"]').not("[src]").toArray().map((el) => $r(el).html()).filter(Boolean).join("\n");
+  $r("body script, body style").remove();
+  const body = rewriteLinksRu($r("body").html() || "");
+  const dir = seg ? `${APP}/ru/${seg}` : `${APP}/ru`;
+  await mkdir(dir, { recursive: true });
+  const id = "ru-" + (seg || "home").replace(/[^a-z0-9]/g, "-");
+  const content = seg === ""
+    ? homepageTemplate(ruMeta, ruJsonld, body, ruScript, id)
+    : pageTemplate(ruMeta, css, ruJsonld, body, ruScript, id);
+  await writeFile(`${dir}/page.tsx`, content, "utf8");
+  ruCount++;
+}
+if (ruHeaderHtml) {
+  await writeFile(`${COMP}/chrome-ru.ts`, `export const ruHeader = ${JSON.stringify(ruHeaderHtml)};\nexport const ruFooter = ${JSON.stringify(ruFooterHtml)};\n`, "utf8");
+}
+console.log(`RU: ${ruCount} páginas geradas (${[...ruSlugs].map((s)=>s||"home").join(", ")})`);
 
 console.log("=== Páginas geradas ===");
 console.log(report.join("\n"));

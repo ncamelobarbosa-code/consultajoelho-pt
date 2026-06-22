@@ -7,8 +7,14 @@ import { usePathname } from "next/navigation";
 export default function LangSync() {
   const p = usePathname();
   useEffect(() => {
-    const en = p === "/en" || (p?.startsWith("/en/") ?? false);
-    document.documentElement.lang = en ? "en" : "pt";
+    const path = p || "/";
+    const lang =
+      path === "/en" || path.startsWith("/en/")
+        ? "en"
+        : path === "/ru" || path.startsWith("/ru/")
+          ? "ru"
+          : "pt";
+    document.documentElement.lang = lang;
   }, [p]);
   return null;
 }

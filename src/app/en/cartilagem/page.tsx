@@ -8,8 +8,8 @@ export const metadata: Metadata = {
     "canonical": "https://www.consultajoelho.pt/en/cartilagemjoelhodrnunocamelo",
     "languages": {
       "pt-PT": "https://www.consultajoelho.pt/cartilagem",
-      "en-GB": "https://www.consultajoelho.pt/en/cartilagem",
-      "x-default": "https://www.consultajoelho.pt/cartilagem"
+      "x-default": "https://www.consultajoelho.pt/cartilagem",
+      "en-GB": "https://www.consultajoelho.pt/en/cartilagem"
     }
   },
   "openGraph": {

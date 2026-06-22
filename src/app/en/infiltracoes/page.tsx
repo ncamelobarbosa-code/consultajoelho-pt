@@ -12,8 +12,8 @@ export const metadata: Metadata = {
   "alternates": {
     "languages": {
       "pt-PT": "https://www.consultajoelho.pt/infiltracoes",
-      "en-GB": "https://www.consultajoelho.pt/en/infiltracoes",
-      "x-default": "https://www.consultajoelho.pt/infiltracoes"
+      "x-default": "https://www.consultajoelho.pt/infiltracoes",
+      "en-GB": "https://www.consultajoelho.pt/en/infiltracoes"
     }
   }
 };

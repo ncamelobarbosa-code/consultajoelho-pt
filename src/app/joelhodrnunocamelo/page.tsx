@@ -10,8 +10,8 @@ export const metadata: Metadata = {
   "alternates": {
     "languages": {
       "pt-PT": "https://www.consultajoelho.pt/joelhodrnunocamelo",
-      "en-GB": "https://www.consultajoelho.pt/en/joelhodrnunocamelo",
-      "x-default": "https://www.consultajoelho.pt/joelhodrnunocamelo"
+      "x-default": "https://www.consultajoelho.pt/joelhodrnunocamelo",
+      "en-GB": "https://www.consultajoelho.pt/en/joelhodrnunocamelo"
     }
   }
 };

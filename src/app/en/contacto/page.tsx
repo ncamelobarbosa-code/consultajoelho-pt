@@ -8,6 +8,7 @@ export const metadata = {
     languages: {
       'pt-PT': 'https://www.consultajoelho.pt/contacto',
       'en-GB': 'https://www.consultajoelho.pt/en/contacto',
+      'ru-RU': 'https://www.consultajoelho.pt/ru/contacto',
       'x-default': 'https://www.consultajoelho.pt/contacto',
     },
   },

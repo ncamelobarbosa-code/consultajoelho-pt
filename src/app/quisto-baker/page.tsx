@@ -8,8 +8,8 @@ export const metadata: Metadata = {
     "canonical": "https://www.consultajoelho.pt/quistobakerjoelhodrnunocamelo",
     "languages": {
       "pt-PT": "https://www.consultajoelho.pt/quisto-baker",
-      "en-GB": "https://www.consultajoelho.pt/en/quisto-baker",
-      "x-default": "https://www.consultajoelho.pt/quisto-baker"
+      "x-default": "https://www.consultajoelho.pt/quisto-baker",
+      "en-GB": "https://www.consultajoelho.pt/en/quisto-baker"
     }
   },
   "openGraph": {

@@ -7,8 +7,9 @@ export const metadata: Metadata = {
     "canonical": "https://www.consultajoelho.pt",
     "languages": {
       "pt-PT": "https://www.consultajoelho.pt",
+      "x-default": "https://www.consultajoelho.pt",
       "en-GB": "https://www.consultajoelho.pt/en",
-      "x-default": "https://www.consultajoelho.pt"
+      "ru-RU": "https://www.consultajoelho.pt/ru"
     }
   },
   "openGraph": {

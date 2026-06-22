@@ -8,8 +8,8 @@ export const metadata: Metadata = {
     "canonical": "https://www.consultajoelho.pt/ligamentocruzadoanterior",
     "languages": {
       "pt-PT": "https://www.consultajoelho.pt/lca",
-      "en-GB": "https://www.consultajoelho.pt/en/lca",
-      "x-default": "https://www.consultajoelho.pt/lca"
+      "x-default": "https://www.consultajoelho.pt/lca",
+      "en-GB": "https://www.consultajoelho.pt/en/lca"
     }
   },
   "openGraph": {

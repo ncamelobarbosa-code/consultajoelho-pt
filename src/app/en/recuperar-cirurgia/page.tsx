@@ -8,8 +8,8 @@ export const metadata: Metadata = {
     "canonical": "https://www.consultajoelho.pt/en/recuperarcirurgiajoelho",
     "languages": {
       "pt-PT": "https://www.consultajoelho.pt/recuperar-cirurgia",
-      "en-GB": "https://www.consultajoelho.pt/en/recuperar-cirurgia",
-      "x-default": "https://www.consultajoelho.pt/recuperar-cirurgia"
+      "x-default": "https://www.consultajoelho.pt/recuperar-cirurgia",
+      "en-GB": "https://www.consultajoelho.pt/en/recuperar-cirurgia"
     }
   },
   "openGraph": {

@@ -8,8 +8,8 @@ export const metadata: Metadata = {
     "canonical": "https://www.consultajoelho.pt/en/protesejoelhodesportodrnunocamelo",
     "languages": {
       "pt-PT": "https://www.consultajoelho.pt/protese",
-      "en-GB": "https://www.consultajoelho.pt/en/protese",
-      "x-default": "https://www.consultajoelho.pt/protese"
+      "x-default": "https://www.consultajoelho.pt/protese",
+      "en-GB": "https://www.consultajoelho.pt/en/protese"
     }
   },
   "openGraph": {

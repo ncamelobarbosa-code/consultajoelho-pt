@@ -8,8 +8,8 @@ export const metadata: Metadata = {
     "canonical": "https://www.consultajoelho.pt/rupturameniscosjoelho",
     "languages": {
       "pt-PT": "https://www.consultajoelho.pt/menisco",
-      "en-GB": "https://www.consultajoelho.pt/en/menisco",
-      "x-default": "https://www.consultajoelho.pt/menisco"
+      "x-default": "https://www.consultajoelho.pt/menisco",
+      "en-GB": "https://www.consultajoelho.pt/en/menisco"
     }
   },
   "openGraph": {
