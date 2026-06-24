@@ -37,17 +37,22 @@ h1, h2 { letter-spacing: -0.02em; }
   z-index: 0;
   pointer-events: none;
 }
-/* Truque "cover" para iframe 16:9: escala mantendo rácio, cobre o contentor */
-.vhero-bg iframe {
+/* Foto de fundo coberta + leve zoom (Ken Burns) para dar vida */
+.vhero-bg img {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 177.78vh;
-  height: 100vh;
-  min-width: 100vw;
-  min-height: 56.25vw;
-  border: 0;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 72% 18%;
+  animation: vhero-zoom 20s ease-in-out infinite alternate;
+}
+@keyframes vhero-zoom {
+  from { transform: scale(1); }
+  to { transform: scale(1.08); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .vhero-bg img { animation: none; }
 }
 .vhero-scrim {
   position: absolute;

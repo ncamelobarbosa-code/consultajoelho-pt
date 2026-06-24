@@ -35,23 +35,18 @@ const COPY: Record<Lang, {
   },
 };
 
+// Foto de fundo (Dr. Nuno Camelo) — fiável; trocar por <video> self-hosted quando houver MP4.
+const HERO_IMG =
+  "https://static.wixstatic.com/media/5a9db7_ed36d169621d439994f603e7c6be49c1~mv2.jpg/v1/crop/x_244,y_0,w_3702,h_4480/fill/w_1200,h_1400,al_c,q_85,enc_avif,quality_auto/2Z2A9956.jpg";
+
 export default function VideoHero({ lang = "pt" }: { lang?: Lang }) {
   const t = COPY[lang];
-  const src =
-    `https://www.youtube-nocookie.com/embed/${VIDEO_ID}` +
-    `?autoplay=1&mute=1&loop=1&playlist=${VIDEO_ID}&controls=0&modestbranding=1` +
-    `&rel=0&playsinline=1&disablekb=1&fs=0&iv_load_policy=3`;
 
   return (
     <section className="vhero" aria-label={`${t.titleA} ${t.titleB}`}>
       <div className="vhero-bg" aria-hidden="true">
-        <iframe
-          src={src}
-          title=""
-          tabIndex={-1}
-          allow="autoplay; encrypted-media; picture-in-picture"
-          referrerPolicy="strict-origin-when-cross-origin"
-        />
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src={HERO_IMG} alt="" />
       </div>
       <div className="vhero-scrim" aria-hidden="true" />
       <div className="vhero-content">
