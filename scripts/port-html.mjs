@@ -175,6 +175,18 @@ function injectSwitcher(html, locale) {
   return html.replace(/<a\b[^>]*class="nav-lang"[^>]*>[\s\S]*?<\/a>/, SWITCHER[locale]);
 }
 
+// Link "Vídeos" no menu (último nav-item), por locale.
+const VIDEOS_LINK = {
+  pt: { href: "/videos", label: "Vídeos" },
+  en: { href: "/en/videos", label: "Videos" },
+  ru: { href: "/ru/videos", label: "Видео" },
+};
+function injectVideosLink(html, locale) {
+  const { href, label } = VIDEOS_LINK[locale];
+  if (html.includes(`href="${href}"`)) return html; // já existe
+  return html.replace("</nav>", `<div class="nav-item"><a href="${href}">${label}</a></div></nav>`);
+}
+
 for (const [file, seg] of Object.entries(ROUTES)) {
   const raw = await readFile(`${SRC}/${file}`, "utf8");
   const $ = cheerio.load(raw, { decodeEntities: false });
@@ -191,7 +203,7 @@ for (const [file, seg] of Object.entries(ROUTES)) {
     homepageCss = css;
     const h = $("body > header").first();
     const f = $("body > footer").first();
-    headerHtml = h.length ? injectSwitcher(rewriteLinks($.html(h)), "pt") : "";
+    headerHtml = h.length ? injectVideosLink(injectSwitcher(rewriteLinks($.html(h)), "pt"), "pt") : "";
     footerHtml = f.length ? rewriteLinks($.html(f)) : "";
   }
 
@@ -253,7 +265,7 @@ for (const [file, seg] of Object.entries(ROUTES)) {
   if (seg === "") {
     const eh = $e("body > header").first();
     const ef = $e("body > footer").first();
-    enHeaderHtml = eh.length ? injectSwitcher(rewriteLinksEn($e.html(eh)), "en") : "";
+    enHeaderHtml = eh.length ? injectVideosLink(injectSwitcher(rewriteLinksEn($e.html(eh)), "en"), "en") : "";
     enFooterHtml = ef.length ? rewriteLinksEn($e.html(ef)) : "";
   }
   const css = $e("style").toArray().map((el) => $e(el).html()).join("\n\n");
@@ -295,7 +307,7 @@ for (const [file, seg] of Object.entries(ROUTES)) {
   if (seg === "") {
     const rh = $r("body > header").first();
     const rf = $r("body > footer").first();
-    ruHeaderHtml = rh.length ? injectSwitcher(rewriteLinksRu($r.html(rh)), "ru") : "";
+    ruHeaderHtml = rh.length ? injectVideosLink(injectSwitcher(rewriteLinksRu($r.html(rh)), "ru"), "ru") : "";
     ruFooterHtml = rf.length ? rewriteLinksRu($r.html(rf)) : "";
   }
   const css = $r("style").toArray().map((el) => $r(el).html()).join("\n\n");
