@@ -2,9 +2,8 @@
    Títulos em serif elegante (Spectral); corpo continua em Space Grotesk.
    Importada por ÚLTIMO no layout para refinar sem reescrever o CSS de cada página.
    Contraste serif + geométrica = hierarquia tipográfica (resolve single/overused-font).
-   Prova de conceito da elevação de design (ver memória cjpt-design-uplift). */
-
-@import url('https://fonts.googleapis.com/css2?family=Spectral:wght@500;600;700&display=swap');
+   Prova de conceito da elevação de design (ver memória cjpt-design-uplift).
+   A fonte Spectral é carregada no @import do site.css (topo do bundle). */
 
 :root {
   --display: 'Spectral', Georgia, 'Times New Roman', serif;

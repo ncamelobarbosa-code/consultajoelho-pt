@@ -234,7 +234,7 @@ for (const [file, seg] of Object.entries(ROUTES)) {
 }
 
 // site.css global (CSS da homepage = tokens + base + chrome + secções home)
-const fontImport = `@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');\n\n`;
+const fontImport = `@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Spectral:wght@500;600;700&display=swap');\n\n`;
 await writeFile(`${APP}/site.css`, fontImport + homepageCss, "utf8");
 
 // Chrome PT (dados; SiteChrome.tsx é escrito à mão e importa daqui)
