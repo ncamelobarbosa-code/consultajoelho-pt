@@ -1,27 +1,14 @@
 /* ── Camada de polimento "premium" ───────────────────────────────────────────
-   Títulos em serif elegante (Spectral); corpo continua em Space Grotesk.
-   Importada por ÚLTIMO no layout para refinar sem reescrever o CSS de cada página.
-   Contraste serif + geométrica = hierarquia tipográfica (resolve single/overused-font).
-   Prova de conceito da elevação de design (ver memória cjpt-design-uplift).
-   A fonte Spectral é carregada no @import do site.css (topo do bundle). */
+   Direção: sans confiante (Space Grotesk) + hero com vídeo de fundo (estilo
+   London Cartilage). Importada por ÚLTIMO no layout. Aditiva e reversível.
+   Ver memória cjpt-design-uplift. */
 
-:root {
-  --display: 'Spectral', Georgia, 'Times New Roman', serif;
-}
+/* Títulos: sans elevado — tracking apertado e confiante (não serif) */
+h1, h2 { letter-spacing: -0.02em; }
+.hero-h1 { letter-spacing: -0.03em; line-height: 1.05; }
 
-/* Títulos prominentes em serif */
-h1, h2, h3 {
-  font-family: var(--display) !important;
-  letter-spacing: -0.012em;
-}
-.hero-h1, .hero h1, .pa-hero h1 {
-  letter-spacing: -0.02em;
-  line-height: 1.08;
-}
-
-/* Eyebrows / rótulos de secção: maiúsculas espaçadas, em sans (não serif) */
+/* Eyebrows / rótulos de secção: maiúsculas espaçadas */
 .eyebrow, .hero-badge, .section-label {
-  font-family: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif !important;
   text-transform: uppercase;
   letter-spacing: 0.16em;
 }
@@ -33,4 +20,96 @@ h1, h2, h3 {
 .nav-cta:hover, .hero-cta:hover, .cta:hover, .cta-final a:hover, .submit-btn:hover, .pa-cta a:hover {
   transform: translateY(-2px);
   box-shadow: 0 10px 28px rgba(3, 87, 114, 0.18);
+}
+
+/* ── Hero com vídeo de fundo (YouTube, muted/loop, coberto) ─────────────────── */
+.vhero {
+  position: relative;
+  min-height: 90vh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  background: #011014;
+}
+.vhero-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+/* Truque "cover" para iframe 16:9: escala mantendo rácio, cobre o contentor */
+.vhero-bg iframe {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 177.78vh;
+  height: 100vh;
+  min-width: 100vw;
+  min-height: 56.25vw;
+  border: 0;
+}
+.vhero-scrim {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(90deg, rgba(1, 16, 20, 0.92) 0%, rgba(1, 16, 20, 0.72) 42%, rgba(1, 16, 20, 0.38) 100%);
+}
+.vhero-content {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 24px;
+  color: #fff;
+}
+.vhero-eyebrow {
+  display: inline-block;
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--sage);
+  margin-bottom: 18px;
+}
+.vhero-title {
+  font-weight: 700;
+  font-size: clamp(2.6rem, 6.5vw, 5rem);
+  line-height: 1.02;
+  letter-spacing: -0.03em;
+  margin: 0 0 16px;
+  max-width: 16ch;
+}
+.vhero-title span { color: var(--sage); }
+.vhero-tag {
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.7);
+  margin: 0 0 14px;
+}
+.vhero-sub {
+  font-size: 1.08rem;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.9);
+  max-width: 52ch;
+  margin: 0 0 32px;
+}
+.vhero-ctas { display: flex; gap: 14px; flex-wrap: wrap; }
+.vhero-cta {
+  font-weight: 700;
+  font-size: 0.98rem;
+  padding: 15px 30px;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, background-color 0.18s ease;
+}
+.vhero-cta--primary { background: var(--sage); color: #022d3d; }
+.vhero-cta--primary:hover { transform: translateY(-2px); box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35); }
+.vhero-cta--ghost { background: rgba(255, 255, 255, 0.08); color: #fff; border: 1.5px solid rgba(255, 255, 255, 0.55); }
+.vhero-cta--ghost:hover { background: rgba(255, 255, 255, 0.16); transform: translateY(-2px); }
+@media (max-width: 640px) {
+  .vhero { min-height: 84vh; }
+  .vhero-scrim { background: linear-gradient(180deg, rgba(1, 16, 20, 0.62) 0%, rgba(1, 16, 20, 0.86) 100%); }
 }

@@ -105,6 +105,7 @@ export default function Page() {
 };
 
 const homepageTemplate = (meta, jsonld, body, script, id, locale = "pt") => `import type { Metadata } from "next";${script ? `\nimport Script from "next/script";` : ""}
+import VideoHero from "@/components/VideoHero";
 import PageVideos from "@/components/PageVideos";
 import GoogleReviews from "@/components/GoogleReviews";
 
@@ -115,6 +116,7 @@ const html = ${JSON.stringify(body)};${jsonld ? `\nconst jsonLd = ${JSON.stringi
 export default function Page() {
   return (
     <>${jsonld ? `\n      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd }} />` : ""}
+      <VideoHero lang="${locale}" />
       <div dangerouslySetInnerHTML={{ __html: html }} />
       <PageVideos slug="" lang="${locale}" />
       <GoogleReviews lang="${locale}" />${script ? `\n      <Script id="${id}-js" strategy="afterInteractive" dangerouslySetInnerHTML={{ __html: pageScript }} />` : ""}
@@ -205,6 +207,7 @@ for (const [file, seg] of Object.entries(ROUTES)) {
     const f = $("body > footer").first();
     headerHtml = h.length ? injectVideosLink(injectSwitcher(rewriteLinks($.html(h)), "pt"), "pt") : "";
     footerHtml = f.length ? rewriteLinks($.html(f)) : "";
+    $("section.hero").first().remove(); // hero antigo -> substituído por <VideoHero/>
   }
 
   // remover chrome e scripts do corpo
@@ -234,7 +237,7 @@ for (const [file, seg] of Object.entries(ROUTES)) {
 }
 
 // site.css global (CSS da homepage = tokens + base + chrome + secções home)
-const fontImport = `@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Spectral:wght@500;600;700&display=swap');\n\n`;
+const fontImport = `@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');\n\n`;
 await writeFile(`${APP}/site.css`, fontImport + homepageCss, "utf8");
 
 // Chrome PT (dados; SiteChrome.tsx é escrito à mão e importa daqui)
@@ -267,6 +270,7 @@ for (const [file, seg] of Object.entries(ROUTES)) {
     const ef = $e("body > footer").first();
     enHeaderHtml = eh.length ? injectVideosLink(injectSwitcher(rewriteLinksEn($e.html(eh)), "en"), "en") : "";
     enFooterHtml = ef.length ? rewriteLinksEn($e.html(ef)) : "";
+    $e("section.hero").first().remove(); // hero antigo -> <VideoHero/>
   }
   const css = $e("style").toArray().map((el) => $e(el).html()).join("\n\n");
   $e("body > header, body > footer, body > nav").remove();
@@ -309,6 +313,7 @@ for (const [file, seg] of Object.entries(ROUTES)) {
     const rf = $r("body > footer").first();
     ruHeaderHtml = rh.length ? injectVideosLink(injectSwitcher(rewriteLinksRu($r.html(rh)), "ru"), "ru") : "";
     ruFooterHtml = rf.length ? rewriteLinksRu($r.html(rf)) : "";
+    $r("section.hero").first().remove(); // hero antigo -> <VideoHero/>
   }
   const css = $r("style").toArray().map((el) => $r(el).html()).join("\n\n");
   $r("body > header, body > footer, body > nav").remove();

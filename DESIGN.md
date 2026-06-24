@@ -15,19 +15,19 @@ colors:
   white: "#ffffff"
 typography:
   display:
-    fontFamily: "Spectral, Georgia, 'Times New Roman', serif"
+    fontFamily: "Space Grotesk, ui-sans-serif, system-ui, sans-serif"
     fontSize: "clamp(2.25rem, 5vw, 3rem)"
     fontWeight: 600
     lineHeight: 1.1
     letterSpacing: "-0.02em"
   headline:
-    fontFamily: "Spectral, Georgia, 'Times New Roman', serif"
+    fontFamily: "Space Grotesk, ui-sans-serif, system-ui, sans-serif"
     fontSize: "clamp(1.5rem, 3vw, 1.875rem)"
     fontWeight: 600
     lineHeight: 1.2
     letterSpacing: "-0.01em"
   title:
-    fontFamily: "Spectral, Georgia, 'Times New Roman', serif"
+    fontFamily: "Space Grotesk, ui-sans-serif, system-ui, sans-serif"
     fontSize: "1.25rem"
     fontWeight: 600
     lineHeight: 1.3
