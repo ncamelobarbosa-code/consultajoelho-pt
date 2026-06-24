@@ -98,7 +98,8 @@ export default function Page() {
 }
 `;
 
-const homepageTemplate = (meta, jsonld, body, script, id) => `import type { Metadata } from "next";${script ? `\nimport Script from "next/script";` : ""}
+const homepageTemplate = (meta, jsonld, body, script, id, locale = "pt") => `import type { Metadata } from "next";${script ? `\nimport Script from "next/script";` : ""}
+import GoogleReviews from "@/components/GoogleReviews";
 
 export const metadata: Metadata = ${JSON.stringify(meta, null, 2)};
 
@@ -107,7 +108,8 @@ const html = ${JSON.stringify(body)};${jsonld ? `\nconst jsonLd = ${JSON.stringi
 export default function Page() {
   return (
     <>${jsonld ? `\n      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd }} />` : ""}
-      <div dangerouslySetInnerHTML={{ __html: html }} />${script ? `\n      <Script id="${id}-js" strategy="afterInteractive" dangerouslySetInnerHTML={{ __html: pageScript }} />` : ""}
+      <div dangerouslySetInnerHTML={{ __html: html }} />
+      <GoogleReviews lang="${locale}" />${script ? `\n      <Script id="${id}-js" strategy="afterInteractive" dangerouslySetInnerHTML={{ __html: pageScript }} />` : ""}
     </>
   );
 }
@@ -205,7 +207,7 @@ for (const [file, seg] of Object.entries(ROUTES)) {
   const id = (seg || "home").replace(/[^a-z0-9]/g, "-");
   const content =
     seg === ""
-      ? homepageTemplate(meta, jsonld, body, inlineScript, id)
+      ? homepageTemplate(meta, jsonld, body, inlineScript, id, "pt")
       : pageTemplate(meta, css, jsonld, body, inlineScript, id);
   await writeFile(`${dir}/page.tsx`, content, "utf8");
   report.push(`  ✓ ${(seg || "(homepage)").padEnd(26)} ${body.length} chars  css=${css.length}  ld=${jsonld ? "sim" : "não"}`);
@@ -255,7 +257,7 @@ for (const [file, seg] of Object.entries(ROUTES)) {
   await mkdir(dir, { recursive: true });
   const id = "en-" + (seg || "home").replace(/[^a-z0-9]/g, "-");
   const content = seg === ""
-    ? homepageTemplate(enMeta, enJsonld, body, enScript, id)
+    ? homepageTemplate(enMeta, enJsonld, body, enScript, id, "en")
     : pageTemplate(enMeta, css, enJsonld, body, enScript, id);
   await writeFile(`${dir}/page.tsx`, content, "utf8");
   enCount++;
@@ -297,7 +299,7 @@ for (const [file, seg] of Object.entries(ROUTES)) {
   await mkdir(dir, { recursive: true });
   const id = "ru-" + (seg || "home").replace(/[^a-z0-9]/g, "-");
   const content = seg === ""
-    ? homepageTemplate(ruMeta, ruJsonld, body, ruScript, id)
+    ? homepageTemplate(ruMeta, ruJsonld, body, ruScript, id, "ru")
     : pageTemplate(ruMeta, css, ruJsonld, body, ruScript, id);
   await writeFile(`${dir}/page.tsx`, content, "utf8");
   ruCount++;

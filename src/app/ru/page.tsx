@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import GoogleReviews from "@/components/GoogleReviews";
 
 export const metadata: Metadata = {
   "title": "Клиника коленного сустава Порту | Dr. Nuno Camelo — ортопедический хирург",
@@ -31,6 +32,7 @@ export default function Page() {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd }} />
       <div dangerouslySetInnerHTML={{ __html: html }} />
+      <GoogleReviews lang="ru" />
     </>
   );
 }
