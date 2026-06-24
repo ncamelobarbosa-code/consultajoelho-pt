@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import "./site.css";
 import "./article.css";
+import "./polish.css";
 import { SiteHeader, SiteFooter } from "@/components/SiteChrome";
 import LangSync from "@/components/LangSync";
 import { site } from "@/lib/site";
