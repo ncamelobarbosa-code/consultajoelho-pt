@@ -31,6 +31,7 @@ const routes = [
   "nuno-camelo-especialista-cirurgia-joelho",
   "actividadecientificajoelho",
   "contacto",
+  "videos",
 ];
 
 // Rotas EN traduzidas (acrescentar à medida que se traduzem).
@@ -59,6 +60,7 @@ const enRoutes = [
   "en/liquidojoelho-artrocentese-drnunocamelo",
   "en/entorsejoelho-drnunocamelo",
   "en/actividadecientificajoelho",
+  "en/videos",
 ];
 
 // Rotas RU traduzidas (acrescentar à medida que se traduzem).
@@ -88,6 +90,7 @@ const ruRoutes = [
   "ru/liquidojoelho-artrocentese-drnunocamelo",
   "ru/entorsejoelho-drnunocamelo",
   "ru/actividadecientificajoelho",
+  "ru/videos",
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import PageVideos from "@/components/PageVideos";
 import GoogleReviews from "@/components/GoogleReviews";
 
 export const metadata: Metadata = {
@@ -32,6 +33,7 @@ export default function Page() {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd }} />
       <div dangerouslySetInnerHTML={{ __html: html }} />
+      <PageVideos slug="" lang="pt" />
       <GoogleReviews lang="pt" />
     </>
   );

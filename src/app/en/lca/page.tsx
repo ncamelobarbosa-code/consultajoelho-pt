@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Script from "next/script";
+import PageVideos from "@/components/PageVideos";
 
 export const metadata: Metadata = {
   "title": "ACL Tear — Surgery or Conservative Treatment? | Dr. Nuno Camelo Porto",
@@ -31,6 +32,7 @@ export default function Page() {
       <style dangerouslySetInnerHTML={{ __html: css }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd }} />
       <div dangerouslySetInnerHTML={{ __html: html }} />
+      <PageVideos slug="lca" lang="en" />
       <Script id="en-lca-js" strategy="afterInteractive" dangerouslySetInnerHTML={{ __html: pageScript }} />
     </>
   );

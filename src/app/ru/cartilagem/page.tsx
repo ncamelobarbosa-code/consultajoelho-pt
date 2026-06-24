@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Script from "next/script";
+import PageVideos from "@/components/PageVideos";
 
 export const metadata: Metadata = {
   "title": "Повреждения хряща коленного сустава — лечение и варианты | Доктор Nuno Camelo, Порту",
@@ -29,6 +30,7 @@ export default function Page() {
     <>
       <style dangerouslySetInnerHTML={{ __html: css }} />
       <div dangerouslySetInnerHTML={{ __html: html }} />
+      <PageVideos slug="cartilagem" lang="ru" />
       <Script id="ru-cartilagem-js" strategy="afterInteractive" dangerouslySetInnerHTML={{ __html: pageScript }} />
     </>
   );

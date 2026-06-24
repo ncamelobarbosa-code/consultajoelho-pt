@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import PageVideos from "@/components/PageVideos";
 
 export const metadata: Metadata = {
   "title": "Четырёхглавая мышца бедра и хирургия колена — AMI и реабилитация | Dr. Nuno Camelo Порту",
@@ -29,6 +30,7 @@ export default function Page() {
       <style dangerouslySetInnerHTML={{ __html: css }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd }} />
       <div dangerouslySetInnerHTML={{ __html: html }} />
+      <PageVideos slug="quadriceps" lang="ru" />
     </>
   );
 }

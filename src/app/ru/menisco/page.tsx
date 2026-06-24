@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Script from "next/script";
+import PageVideos from "@/components/PageVideos";
 
 export const metadata: Metadata = {
   "title": "Разрыв мениска — восстановить или удалить? | Доктор Нуну Камелу, Порту",
@@ -31,6 +32,7 @@ export default function Page() {
       <style dangerouslySetInnerHTML={{ __html: css }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd }} />
       <div dangerouslySetInnerHTML={{ __html: html }} />
+      <PageVideos slug="menisco" lang="ru" />
       <Script id="ru-menisco-js" strategy="afterInteractive" dangerouslySetInnerHTML={{ __html: pageScript }} />
     </>
   );

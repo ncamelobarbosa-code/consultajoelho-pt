@@ -81,7 +81,12 @@ function buildMetadata($) {
   return meta;
 }
 
-const pageTemplate = (meta, css, jsonld, body, script, id) => `import type { Metadata } from "next";${script ? `\nimport Script from "next/script";` : ""}
+// slugs (página PT) que têm secção de vídeo (ver src/lib/videos.ts PAGE_VIDEOS)
+const VIDEO_PAGE_SLUGS = new Set(["lca", "menisco", "cartilagem", "quadriceps"]);
+
+const pageTemplate = (meta, css, jsonld, body, script, id, slug = "", locale = "pt") => {
+  const hasVideos = VIDEO_PAGE_SLUGS.has(slug);
+  return `import type { Metadata } from "next";${script ? `\nimport Script from "next/script";` : ""}${hasVideos ? `\nimport PageVideos from "@/components/PageVideos";` : ""}
 
 export const metadata: Metadata = ${JSON.stringify(meta, null, 2)};
 
@@ -92,13 +97,15 @@ export default function Page() {
   return (
     <>
       <style dangerouslySetInnerHTML={{ __html: css }} />${jsonld ? `\n      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd }} />` : ""}
-      <div dangerouslySetInnerHTML={{ __html: html }} />${script ? `\n      <Script id="${id}-js" strategy="afterInteractive" dangerouslySetInnerHTML={{ __html: pageScript }} />` : ""}
+      <div dangerouslySetInnerHTML={{ __html: html }} />${hasVideos ? `\n      <PageVideos slug="${slug}" lang="${locale}" />` : ""}${script ? `\n      <Script id="${id}-js" strategy="afterInteractive" dangerouslySetInnerHTML={{ __html: pageScript }} />` : ""}
     </>
   );
 }
 `;
+};
 
 const homepageTemplate = (meta, jsonld, body, script, id, locale = "pt") => `import type { Metadata } from "next";${script ? `\nimport Script from "next/script";` : ""}
+import PageVideos from "@/components/PageVideos";
 import GoogleReviews from "@/components/GoogleReviews";
 
 export const metadata: Metadata = ${JSON.stringify(meta, null, 2)};
@@ -109,6 +116,7 @@ export default function Page() {
   return (
     <>${jsonld ? `\n      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd }} />` : ""}
       <div dangerouslySetInnerHTML={{ __html: html }} />
+      <PageVideos slug="" lang="${locale}" />
       <GoogleReviews lang="${locale}" />${script ? `\n      <Script id="${id}-js" strategy="afterInteractive" dangerouslySetInnerHTML={{ __html: pageScript }} />` : ""}
     </>
   );
@@ -208,7 +216,7 @@ for (const [file, seg] of Object.entries(ROUTES)) {
   const content =
     seg === ""
       ? homepageTemplate(meta, jsonld, body, inlineScript, id, "pt")
-      : pageTemplate(meta, css, jsonld, body, inlineScript, id);
+      : pageTemplate(meta, css, jsonld, body, inlineScript, id, seg, "pt");
   await writeFile(`${dir}/page.tsx`, content, "utf8");
   report.push(`  ✓ ${(seg || "(homepage)").padEnd(26)} ${body.length} chars  css=${css.length}  ld=${jsonld ? "sim" : "não"}`);
 }
@@ -258,7 +266,7 @@ for (const [file, seg] of Object.entries(ROUTES)) {
   const id = "en-" + (seg || "home").replace(/[^a-z0-9]/g, "-");
   const content = seg === ""
     ? homepageTemplate(enMeta, enJsonld, body, enScript, id, "en")
-    : pageTemplate(enMeta, css, enJsonld, body, enScript, id);
+    : pageTemplate(enMeta, css, enJsonld, body, enScript, id, seg, "en");
   await writeFile(`${dir}/page.tsx`, content, "utf8");
   enCount++;
 }
@@ -300,7 +308,7 @@ for (const [file, seg] of Object.entries(ROUTES)) {
   const id = "ru-" + (seg || "home").replace(/[^a-z0-9]/g, "-");
   const content = seg === ""
     ? homepageTemplate(ruMeta, ruJsonld, body, ruScript, id, "ru")
-    : pageTemplate(ruMeta, css, ruJsonld, body, ruScript, id);
+    : pageTemplate(ruMeta, css, ruJsonld, body, ruScript, id, seg, "ru");
   await writeFile(`${dir}/page.tsx`, content, "utf8");
   ruCount++;
 }

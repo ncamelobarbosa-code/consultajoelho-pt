@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Script from "next/script";
+import PageVideos from "@/components/PageVideos";
 
 export const metadata: Metadata = {
   "title": "Knee Cartilage Injuries — Treatment and Options | Dr. Nuno Camelo Porto",
@@ -29,6 +30,7 @@ export default function Page() {
     <>
       <style dangerouslySetInnerHTML={{ __html: css }} />
       <div dangerouslySetInnerHTML={{ __html: html }} />
+      <PageVideos slug="cartilagem" lang="en" />
       <Script id="en-cartilagem-js" strategy="afterInteractive" dangerouslySetInnerHTML={{ __html: pageScript }} />
     </>
   );
