@@ -1,83 +1,139 @@
-import { getGoogleReviews } from "@/lib/reviews";
+// Secção de avaliações Google — dados estáticos (a ficha é "área de serviço" e
+// não é exposta pela Places API). Fácil de expandir: acrescentar a REVIEWS.
+// As reviews ficam no original (PT); só o texto da interface é traduzido por `lang`.
+// Cores/raio via tokens do design system (var(--teal), var(--r)…) definidos em site.css.
+
+const MAPS_URL = "https://maps.app.goo.gl/ZF5XwJS5Y9avryMu7";
+
+export type Review = {
+  author: string;
+  rating: number;
+  text: string;
+  weeksAgo: number;
+};
+
+const REVIEWS: Review[] = [
+  {
+    author: "Marlene Teixeira",
+    rating: 5,
+    text: "A minha mãe fez prótese do joelho com o Dr. Nuno Camelo. Excelente profissional.",
+    weeksAgo: 7,
+  },
+  {
+    author: "Joana Marques",
+    rating: 5,
+    text: "Recomendo vivamente!",
+    weeksAgo: 25,
+  },
+];
 
 type Lang = "pt" | "en" | "ru";
 
 const STRINGS = {
-  pt: { heading: "O que dizem os doentes", ratingLabel: (r: string, n: number) => `${r} em 5 · ${n} avaliações no Google`, see: "Ver no Google" },
-  en: { heading: "What patients say", ratingLabel: (r: string, n: number) => `${r} out of 5 · ${n} Google reviews`, see: "See on Google" },
-  ru: { heading: "Что говорят пациенты", ratingLabel: (r: string, n: number) => `${r} из 5 · ${n} отзывов в Google`, see: "Смотреть в Google" },
+  pt: {
+    heading: "O que dizem os pacientes",
+    count: (n: number) => `${n} avaliações no Google`,
+    see: "Ver avaliações no Google",
+    leave: "Deixar avaliação",
+    ago: (w: number) => `Há ${w} semanas`,
+  },
+  en: {
+    heading: "What patients say",
+    count: (n: number) => `${n} Google reviews`,
+    see: "See reviews on Google",
+    leave: "Leave a review",
+    ago: (w: number) => `${w} weeks ago`,
+  },
+  ru: {
+    heading: "Что говорят пациенты",
+    count: (n: number) => `${n} отзыва в Google`,
+    see: "Смотреть отзывы в Google",
+    leave: "Оставить отзыв",
+    ago: (w: number) => `${w} недель назад`,
+  },
 } as const;
+
+// Tokens do design system (site.css :root)
+const TEAL = "var(--teal)";
+const SAGE = "var(--sage)";
+const BG = "var(--bg)";
+const TEXT = "var(--text)";
+const MUTED = "var(--muted)";
+const BORDER = "var(--border)";
+const R = "var(--r)";
+const GOLD = "#f5a623"; // convenção das estrelas Google (não é token do sistema)
+const FONT = "'Space Grotesk', sans-serif";
 
 function Stars({ rating }: { rating: number }) {
   const full = Math.round(rating);
   return (
-    <span aria-hidden style={{ color: "#f5a623", letterSpacing: "1px" }}>
-      {"★".repeat(full)}
-      <span style={{ color: "#d9d9d9" }}>{"★".repeat(Math.max(0, 5 - full))}</span>
+    <span aria-hidden style={{ letterSpacing: "1px", fontSize: "1rem" }}>
+      <span style={{ color: GOLD }}>{"★".repeat(full)}</span>
+      <span style={{ color: BORDER }}>{"★".repeat(Math.max(0, 5 - full))}</span>
     </span>
   );
 }
 
-export default async function GoogleReviews({ lang = "pt" }: { lang?: Lang }) {
-  const data = await getGoogleReviews(lang);
-  if (!data || data.reviews.length === 0) return null;
+export default function GoogleReviews({
+  lang = "pt",
+  reviews = REVIEWS,
+  rating = 5.0,
+}: {
+  lang?: Lang;
+  reviews?: Review[];
+  rating?: number;
+}) {
+  if (!reviews.length) return null;
   const t = STRINGS[lang];
-  const ratingStr = data.rating.toFixed(1);
+  const total = reviews.length;
 
   return (
-    <section
-      aria-label={t.heading}
-      style={{ background: "#fff", padding: "4rem 1.5rem", borderTop: "1px solid #dde8dd" }}
-    >
-      <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
+    <section aria-label={t.heading} style={{ background: "#fff", padding: "4rem 1.5rem", borderTop: `1px solid ${BORDER}` }}>
+      <div style={{ maxWidth: "1000px", margin: "0 auto" }}>
+        {/* Cabeçalho + resumo */}
         <div style={{ textAlign: "center", marginBottom: "2.5rem" }}>
-          <h2 style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: "clamp(1.6rem, 4vw, 2.25rem)", fontWeight: 700, color: "#035772", margin: "0 0 0.75rem" }}>
+          <h2 style={{ fontFamily: FONT, fontSize: "clamp(1.6rem, 4vw, 2.25rem)", fontWeight: 700, color: TEAL, margin: "0 0 0.75rem" }}>
             {t.heading}
           </h2>
-          <p style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: "1.05rem", color: "#4a5e4a", margin: 0 }}>
-            <Stars rating={data.rating} />{" "}
-            <strong style={{ color: "#091405" }}>{ratingStr}</strong> {t.ratingLabel("", data.total).replace(" · ", " · ")}
+          <p style={{ fontFamily: FONT, fontSize: "1.05rem", color: TEXT, margin: 0, display: "inline-flex", alignItems: "center", gap: "0.6rem", flexWrap: "wrap", justifyContent: "center" }}>
+            <strong style={{ fontSize: "1.25rem" }}>{rating.toFixed(1)}</strong>
+            <Stars rating={rating} />
+            <span style={{ color: MUTED }}>· {t.count(total)}</span>
           </p>
         </div>
 
+        {/* Cards */}
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "1.25rem" }}>
-          {data.reviews.map((r, i) => (
-            <article
-              key={i}
-              style={{ background: "#F6F9F5", border: "1px solid #dde8dd", borderRadius: "12px", padding: "1.5rem", display: "flex", flexDirection: "column", gap: "0.75rem" }}
-            >
+          {reviews.map((r, i) => (
+            <article key={i} style={{ background: BG, border: `1px solid ${BORDER}`, borderRadius: R, padding: "1.5rem", display: "flex", flexDirection: "column", gap: "0.85rem" }}>
               <div style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
-                {r.photo ? (
-                  // eslint-disable-next-line @next/next/no-img-element
-                  <img src={r.photo} alt={r.author} width={40} height={40} style={{ borderRadius: "50%", objectFit: "cover" }} referrerPolicy="no-referrer" />
-                ) : (
-                  <div style={{ width: 40, height: 40, borderRadius: "50%", background: "#AACBA8", display: "flex", alignItems: "center", justifyContent: "center", color: "#022d3d", fontWeight: 700, fontFamily: "'Space Grotesk', sans-serif" }}>
-                    {r.author.charAt(0).toUpperCase()}
-                  </div>
-                )}
+                <div aria-hidden style={{ width: 42, height: 42, borderRadius: "50%", background: SAGE, color: TEAL, display: "flex", alignItems: "center", justifyContent: "center", fontFamily: FONT, fontWeight: 700, fontSize: "1.1rem", flexShrink: 0 }}>
+                  {r.author.charAt(0).toUpperCase()}
+                </div>
                 <div style={{ minWidth: 0 }}>
-                  <div style={{ fontFamily: "'Space Grotesk', sans-serif", fontWeight: 600, color: "#091405", fontSize: "0.95rem" }}>{r.author}</div>
-                  <div style={{ fontSize: "0.8rem", color: "#7a8a7a" }}>{r.time}</div>
+                  <div style={{ fontFamily: FONT, fontWeight: 600, color: TEXT, fontSize: "0.95rem" }}>{r.author}</div>
+                  <div style={{ fontSize: "0.8rem", color: MUTED }}>{t.ago(r.weeksAgo)}</div>
                 </div>
               </div>
-              <div style={{ fontSize: "0.95rem" }}><Stars rating={r.rating} /></div>
-              <p style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: "0.95rem", color: "#091405", lineHeight: 1.6, margin: 0 }}>{r.text}</p>
+              <Stars rating={r.rating} />
+              <p style={{ fontFamily: FONT, fontSize: "0.95rem", color: TEXT, lineHeight: 1.6, margin: 0 }}>
+                &ldquo;{r.text}&rdquo;
+              </p>
             </article>
           ))}
         </div>
 
-        {data.mapsUri && (
-          <div style={{ textAlign: "center", marginTop: "2rem" }}>
-            <a
-              href={data.mapsUri}
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{ fontFamily: "'Space Grotesk', sans-serif", fontWeight: 600, color: "#035772", textDecoration: "none", borderBottom: "2px solid #AACBA8", paddingBottom: "2px" }}
-            >
-              {t.see} ↗
-            </a>
-          </div>
-        )}
+        {/* CTAs */}
+        <div style={{ display: "flex", gap: "0.85rem", justifyContent: "center", marginTop: "2.25rem", flexWrap: "wrap" }}>
+          <a href={MAPS_URL} target="_blank" rel="noopener noreferrer"
+            style={{ fontFamily: FONT, fontWeight: 600, fontSize: "0.95rem", color: "#fff", background: TEAL, padding: "0.7rem 1.4rem", borderRadius: R, textDecoration: "none" }}>
+            {t.see}
+          </a>
+          <a href={MAPS_URL} target="_blank" rel="noopener noreferrer"
+            style={{ fontFamily: FONT, fontWeight: 600, fontSize: "0.95rem", color: TEAL, background: "transparent", padding: "0.7rem 1.4rem", borderRadius: R, textDecoration: "none", border: `1.5px solid ${SAGE}` }}>
+            {t.leave}
+          </a>
+        </div>
       </div>
     </section>
   );
