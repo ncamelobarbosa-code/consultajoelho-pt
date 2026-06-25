@@ -1,7 +1,11 @@
-// Hero com vídeo de fundo (vídeo de apresentação no YouTube, muted/loop/coberto).
+"use client";
+
+// Hero com vídeo de fundo (vídeo de apresentação self-hosted, muted/loop/coberto, abrandado).
 // Estilo "London Cartilage": vídeo + gradiente escuro + título sans bold + 2 CTAs.
 
-const VIDEO_ID = "Vh1wpwR0XTM";
+import { useEffect, useRef } from "react";
+
+const PLAYBACK_RATE = 0.5; // abranda o vídeo para um fundo mais calmo/ambiente
 
 type Lang = "pt" | "en" | "ru";
 
@@ -41,11 +45,22 @@ const HERO_POSTER =
 
 export default function VideoHero({ lang = "pt" }: { lang?: Lang }) {
   const t = COPY[lang];
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    const v = videoRef.current;
+    if (!v) return;
+    const apply = () => { v.playbackRate = PLAYBACK_RATE; };
+    apply();
+    v.addEventListener("loadedmetadata", apply);
+    return () => v.removeEventListener("loadedmetadata", apply);
+  }, []);
 
   return (
     <section className="vhero" aria-label={`${t.titleA} ${t.titleB}`}>
       <div className="vhero-bg" aria-hidden="true">
         <video
+          ref={videoRef}
           autoPlay
           muted
           loop
