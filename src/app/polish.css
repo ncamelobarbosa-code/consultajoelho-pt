@@ -85,6 +85,8 @@ h1, h2 { letter-spacing: -0.02em; }
 
 /* Mobile ainda mais compacto */
 @media (max-width: 640px) {
+  /* Esconder a secção "O Especialista" no mobile (a pedido) */
+  .doctor { display: none !important; }
   .pato-photo { height: 180px !important; }
   .patologias, .tools, .doctor, .locais, .cta-final {
     padding-top: 44px !important;

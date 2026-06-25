@@ -15,7 +15,7 @@
   - Rota `agendamentonunocameloespecialistajoelho` **não existe** mas está em `site.ts` e em vários CTAs → apontar para `/contacto`.
   - `joelhodrnunocamelo` tem `href="https://consultajoelho.pt"` (sem `www`) → link relativo `/`.
 
-- [ ] **P0-3 · Tendinopatia rotuliana — ressalva clínica** *(🔴 risco clínico ALTO — validar com o Dr.)*
+- [x] **P0-3 · Tendinopatia rotuliana — ressalva clínica** *(🔴 risco clínico ALTO — validar com o Dr.)*
   - Página `tendao-rotuliano-...`: corticoide listado sem aviso. Acrescentar que o corticoide **intratendinoso é desaconselhado (risco de rotura)** e destacar **exercício excêntrico/de carga** como 1ª linha. Rever/remover "transferência de tendão" como opção cirúrgica.
 
 - [ ] **P0-4 · Ligar a fonte (next/font)** *(🟠 alto — conserta design + LCP)*

@@ -249,7 +249,7 @@ function injectHospitalLogos($x) {
     const card = $x(el);
     const name = card.find(".local-name").text();
     let logo = null;
-    if (/Lus[ií]adas/i.test(name)) logo = "/img/logos/lusiadas.webp";
+    if (/Lus[ií]adas/i.test(name)) logo = "/img/logos/lusiadas.png";
     else if (/Miseric[oó]rdia/i.test(name)) logo = "/img/logos/hmvc.webp";
     if (!logo) return;
     card.find(".local-map").remove();
