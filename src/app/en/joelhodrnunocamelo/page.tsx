@@ -3,9 +3,11 @@ import Script from "next/script";
 
 export const metadata: Metadata = {
   "title": "Knee Pain Triage Algorithm | Dr. Nuno Camelo",
+  "description": "Interactive knee pain (gonalgia) triage algorithm: answer a few simple questions to understand the likely cause and when to see a knee specialist. Dr. Nuno Camelo.",
   "openGraph": {
     "title": "Knee Pain Triage Algorithm | Dr. Nuno Camelo",
-    "type": "article"
+    "type": "article",
+    "description": "Interactive knee pain (gonalgia) triage algorithm: answer a few simple questions to understand the likely cause and when to see a knee specialist. Dr. Nuno Camelo."
   },
   "alternates": {
     "canonical": "https://www.consultajoelho.pt/en/joelhodrnunocamelo",

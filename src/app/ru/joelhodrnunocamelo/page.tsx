@@ -3,9 +3,11 @@ import Script from "next/script";
 
 export const metadata: Metadata = {
   "title": "Алгоритм сортировки при боли в колене | Dr. Nuno Camelo",
+  "description": "Интерактивный алгоритм оценки боли в колене: ответьте на простые вопросы, чтобы понять вероятную причину и когда обратиться к специалисту. Dr. Nuno Camelo.",
   "openGraph": {
     "title": "Алгоритм сортировки при боли в колене | Dr. Nuno Camelo",
-    "type": "article"
+    "type": "article",
+    "description": "Интерактивный алгоритм оценки боли в колене: ответьте на простые вопросы, чтобы понять вероятную причину и когда обратиться к специалисту. Dr. Nuno Camelo."
   },
   "alternates": {
     "canonical": "https://www.consultajoelho.pt/ru/joelhodrnunocamelo",

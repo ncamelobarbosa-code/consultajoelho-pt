@@ -11,7 +11,7 @@
   - `src/app/ru/avaliar/page.tsx`: canonical tem locale duplicado `/ru/en/avaliarjoelho` → `/ru/avaliar`.
   - **Regra:** cada página auto-referencia o seu próprio URL (canonical + hreflang).
 
-- [ ] **P0-2 · Links/CTAs partidos** *(🟠 alto)*
+- [x] **P0-2 · Links/CTAs partidos** *(🟠 alto)* ✅ FEITO 2026-06-25 (agendamento→/contacto em todos os locales via rewriteLinks; bookingSlug→contacto; sans-www→www)
   - Rota `agendamentonunocameloespecialistajoelho` **não existe** mas está em `site.ts` e em vários CTAs → apontar para `/contacto`.
   - `joelhodrnunocamelo` tem `href="https://consultajoelho.pt"` (sem `www`) → link relativo `/`.
 

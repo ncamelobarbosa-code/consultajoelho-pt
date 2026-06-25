@@ -198,6 +198,21 @@ function injectVideosLink(html, locale) {
 
 // Foto profissional no hero de páginas de patologia (slug -> imagem em /public).
 // Sobrepõe um gradiente escuro para o texto branco ler bem.
+// P0-5: descrições específicas por slug (quando o HTML não traz meta description).
+const META_DESC = {
+  joelhodrnunocamelo: {
+    pt: "Algoritmo interativo de orientação da dor no joelho (gonalgia): responda a perguntas simples e perceba a provável causa e quando procurar o especialista. Dr. Nuno Camelo.",
+    en: "Interactive knee pain (gonalgia) triage algorithm: answer a few simple questions to understand the likely cause and when to see a knee specialist. Dr. Nuno Camelo.",
+    ru: "Интерактивный алгоритм оценки боли в колене: ответьте на простые вопросы, чтобы понять вероятную причину и когда обратиться к специалисту. Dr. Nuno Camelo.",
+  },
+};
+function applyMetaDesc(meta, seg, locale) {
+  const d = META_DESC[seg] && META_DESC[seg][locale];
+  if (!d) return;
+  if (!meta.description) meta.description = d;
+  meta.openGraph = { ...(meta.openGraph || {}), description: (meta.openGraph && meta.openGraph.description) || d };
+}
+
 const HERO_IMAGES = {
   lca: "/img/hero/lca.jpg",
   protese: "/img/hero/protese.jpg",
@@ -247,6 +262,7 @@ for (const [file, seg] of Object.entries(ROUTES)) {
   const $ = cheerio.load(raw, { decodeEntities: false });
 
   const meta = buildMetadata($);
+  applyMetaDesc(meta, seg, "pt");
   // Canonical auto-referente ao slug NOVO (os HTML traziam slugs Wix 404).
   meta.alternates = {
     ...(meta.alternates || {}),
@@ -321,6 +337,7 @@ for (const [file, seg] of Object.entries(ROUTES)) {
   if (!raw) continue;
   const $e = cheerio.load(raw, { decodeEntities: false });
   const enMeta = buildMetadata($e);
+  applyMetaDesc(enMeta, seg, "en");
   enMeta.alternates = { ...(enMeta.alternates || {}), canonical: seg ? `${BASE}/en/${seg}` : `${BASE}/en`, languages: langAlternates(seg) };
   const enJsonld = $e('script[type="application/ld+json"]').first().html() || "";
   if (seg === "") {
@@ -366,6 +383,7 @@ for (const [file, seg] of Object.entries(ROUTES)) {
   if (!raw) continue;
   const $r = cheerio.load(raw, { decodeEntities: false });
   const ruMeta = buildMetadata($r);
+  applyMetaDesc(ruMeta, seg, "ru");
   ruMeta.alternates = { ...(ruMeta.alternates || {}), canonical: seg ? `${BASE}/ru/${seg}` : `${BASE}/ru`, languages: langAlternates(seg) };
   const ruJsonld = $r('script[type="application/ld+json"]').first().html() || "";
   if (seg === "") {

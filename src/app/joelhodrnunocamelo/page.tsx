@@ -3,9 +3,11 @@ import Script from "next/script";
 
 export const metadata: Metadata = {
   "title": "Algoritmo de Orientação da Gonalgia | Dr. Nuno Camelo",
+  "description": "Algoritmo interativo de orientação da dor no joelho (gonalgia): responda a perguntas simples e perceba a provável causa e quando procurar o especialista. Dr. Nuno Camelo.",
   "openGraph": {
     "title": "Algoritmo de Orientação da Gonalgia | Dr. Nuno Camelo",
-    "type": "article"
+    "type": "article",
+    "description": "Algoritmo interativo de orientação da dor no joelho (gonalgia): responda a perguntas simples e perceba a provável causa e quando procurar o especialista. Dr. Nuno Camelo."
   },
   "alternates": {
     "canonical": "https://www.consultajoelho.pt/joelhodrnunocamelo",
