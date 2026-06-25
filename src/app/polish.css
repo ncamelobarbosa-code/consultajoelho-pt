@@ -90,6 +90,13 @@ h1, h2 { letter-spacing: -0.02em; }
     padding-top: 44px !important;
     padding-bottom: 44px !important;
   }
+
+  /* Legibilidade (impeccable: tiny-text) — subir o texto minúsculo no mobile */
+  .eyebrow, .section-label, .vhero-eyebrow, .vhero-tag,
+  .pato-category-label { font-size: 0.8rem !important; }
+  .cred, .cred-tag, .local-badge { font-size: 0.82rem !important; }
+  .pato-category-tagline, .footer-tagline { font-size: 0.9rem !important; }
+  .footer h4 { font-size: 0.95rem !important; }
 }
 
 /* "O que tratamos": fotos maiores + leve zoom no hover do cartão */
