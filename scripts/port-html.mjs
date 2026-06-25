@@ -212,7 +212,7 @@ const HERO_IMAGES = {
 function injectHeroImage($x, seg) {
   const img = HERO_IMAGES[seg];
   if (!img) return;
-  const hero = $x("section.hero").first();
+  const hero = $x("section.hero, .page-hero").first();
   if (!hero.length) return;
   const prev = (hero.attr("style") || "").replace(/;?\s*$/, "");
   hero.attr(
