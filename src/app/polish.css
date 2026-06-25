@@ -22,6 +22,21 @@ h1, h2 { letter-spacing: -0.02em; }
   box-shadow: 0 10px 28px rgba(3, 87, 114, 0.18);
 }
 
+/* Entrada subtil das secções (fade-up). Estado escondido só com .reveal-on (JS presente). */
+.reveal-on .reveal-item {
+  opacity: 0;
+  transform: translateY(26px);
+  transition: opacity 0.7s cubic-bezier(0.22, 0.61, 0.36, 1), transform 0.7s cubic-bezier(0.22, 0.61, 0.36, 1);
+  will-change: opacity, transform;
+}
+.reveal-on .reveal-item.revealed {
+  opacity: 1;
+  transform: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .reveal-on .reveal-item { opacity: 1 !important; transform: none !important; }
+}
+
 /* Cartões: sombra suave + elevação no hover (premium, menos "flat") */
 .pato-card, .local-card {
   transition: transform 0.2s ease, box-shadow 0.2s ease;

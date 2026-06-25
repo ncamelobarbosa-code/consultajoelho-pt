@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import VideoHero from "@/components/VideoHero";
 import PageVideos from "@/components/PageVideos";
 import GoogleReviews from "@/components/GoogleReviews";
+import ScrollReveal from "@/components/ScrollReveal";
 
 export const metadata: Metadata = {
   "title": "Клиника коленного сустава Порту | Dr. Nuno Camelo — ортопедический хирург",
@@ -37,6 +38,7 @@ export default function Page() {
       <div dangerouslySetInnerHTML={{ __html: html }} />
       <PageVideos slug="" lang="ru" />
       <GoogleReviews lang="ru" />
+      <ScrollReveal />
     </>
   );
 }
