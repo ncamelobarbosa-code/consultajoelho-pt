@@ -232,5 +232,5 @@ export const navGroups: NavGroup[] = [
 
 export const primaryNav = {
   doctorSlug: "nuno-camelo-especialista-cirurgia-joelho" as PageSlug,
-  bookingSlug: "agendamentonunocameloespecialistajoelho" as PageSlug,
+  bookingSlug: "contacto" as PageSlug,
 };

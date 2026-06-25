@@ -58,8 +58,15 @@ function rewriteLinks(html) {
   for (const [from, to] of Object.entries(LINK_MAP)) {
     out = out.split(`href="${from}"`).join(`href="${to}"`);
   }
+  // P0-2: qualquer link (relativo ou absoluto) para a rota inexistente "agendamento..." -> /contacto
+  out = out.replace(/href="[^"]*agendamentonunocameloespecialistajoelho[^"]*"/g, 'href="/contacto"');
+  // P0-2: links à raiz por URL absoluto (com/sem www) -> relativo "/"
+  out = out.replace(/href="https:\/\/(?:www\.)?consultajoelho\.pt\/?"/g, 'href="/"');
   return out;
 }
+
+// P0-2: normaliza URLs sem-www -> www (sobretudo dentro de <script> interativos)
+const fixWww = (s) => (s || "").replace(/https:\/\/consultajoelho\.pt(["'\/ ])/g, "https://www.consultajoelho.pt$1");
 
 function buildMetadata($) {
   const get = (sel, attr = "content") => $(sel).attr(attr) || undefined;
@@ -263,13 +270,13 @@ for (const [file, seg] of Object.entries(ROUTES)) {
   // remover chrome e scripts do corpo
   $("body > header, body > footer, body > nav").remove();
   // capturar scripts inline do corpo (para reinjetar via next/script)
-  const inlineScript = $("body script")
+  const inlineScript = fixWww($("body script")
     .not('[type="application/ld+json"]')
     .not("[src]")
     .toArray()
     .map((el) => $(el).html())
     .filter(Boolean)
-    .join("\n");
+    .join("\n"));
   if (inlineScript) scriptPages.push(seg || "homepage");
   $("body script, body style").remove();
 
@@ -326,7 +333,7 @@ for (const [file, seg] of Object.entries(ROUTES)) {
   }
   const css = $e("style").toArray().map((el) => $e(el).html()).join("\n\n");
   $e("body > header, body > footer, body > nav").remove();
-  const enScript = $e("body script").not('[type="application/ld+json"]').not("[src]").toArray().map((el) => $e(el).html()).filter(Boolean).join("\n");
+  const enScript = fixWww($e("body script").not('[type="application/ld+json"]').not("[src]").toArray().map((el) => $e(el).html()).filter(Boolean).join("\n"));
   $e("body script, body style").remove();
   injectHeroImage($e, seg);
   const body = rewriteLinksEn($e("body").html() || "");
@@ -371,7 +378,7 @@ for (const [file, seg] of Object.entries(ROUTES)) {
   }
   const css = $r("style").toArray().map((el) => $r(el).html()).join("\n\n");
   $r("body > header, body > footer, body > nav").remove();
-  const ruScript = $r("body script").not('[type="application/ld+json"]').not("[src]").toArray().map((el) => $r(el).html()).filter(Boolean).join("\n");
+  const ruScript = fixWww($r("body script").not('[type="application/ld+json"]').not("[src]").toArray().map((el) => $r(el).html()).filter(Boolean).join("\n"));
   $r("body script, body style").remove();
   injectHeroImage($r, seg);
   const body = rewriteLinksRu($r("body").html() || "");

@@ -5,7 +5,7 @@
 
 ## Checklist
 
-- [ ] **P0-1 · Canonicais/hreflang EN/RU** *(🔴 crítico — desbloqueia indexação internacional)*
+- [x] **P0-1 · Canonicais/hreflang EN/RU** *(🔴 crítico — desbloqueia indexação internacional)* ✅ FEITO 2026-06-25 (canonicals auto-referentes para todas as páginas portadas PT/EN/RU; verificado em produção)
   - Homepage EN (`src/app/en/page.tsx`): `canonical` está `https://www.consultajoelho.pt` → deve ser `.../en`.
   - ~12 rotas `/en/*` e ~12 `/ru/*` têm `canonical` para slugs antigos 404 (ex.: `/en/cartilagem` → canonical `/en/cartilagemjoelhodrnunocamelo`; `/en/menisco` → `/en/rupturameniscosjoelho`; idem `protese`, `quadriceps`, `avaliar`, `preparar-cirurgia`, `recuperar-cirurgia`, `luxacao-rotula`, `quistos-parameniscais`, `sindrome-banda-iliotibial`, `quisto-baker`, `medo-cirurgia`).
   - `src/app/ru/avaliar/page.tsx`: canonical tem locale duplicado `/ru/en/avaliarjoelho` → `/ru/avaliar`.
