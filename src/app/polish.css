@@ -83,6 +83,15 @@ h1, h2 { letter-spacing: -0.02em; }
   padding-bottom: 60px !important;
 }
 
+/* Mobile ainda mais compacto */
+@media (max-width: 640px) {
+  .pato-photo { height: 180px; }
+  .patologias, .tools, .doctor, .locais, .cta-final {
+    padding-top: 44px !important;
+    padding-bottom: 44px !important;
+  }
+}
+
 /* "O que tratamos": fotos maiores + leve zoom no hover do cartão */
 .pato-photo { height: 280px; }
 .pato-photo img { transition: transform 0.5s ease; }

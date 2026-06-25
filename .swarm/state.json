@@ -1,0 +1,41 @@
+{
+  "swarmId": "swarm-mqtzq7tw",
+  "objective": "Auditar e melhorar o website consultajoelho.pt em 6 frentes coordenadas: (1) design/UI premium, (2) revisao de conteudo medico, (3) estrategia de marketing, (4) SEO PT/EN/RU, (5) otimizacao de equipa, (6) estrategia de negocio. Produzir relatorio acionavel por frente.",
+  "strategy": "development",
+  "status": "initialized",
+  "agents": 8,
+  "agentPlan": [
+    {
+      "role": "Coordinator",
+      "type": "coordinator",
+      "count": 1,
+      "purpose": "Orchestrate workflow"
+    },
+    {
+      "role": "Architect",
+      "type": "architect",
+      "count": 1,
+      "purpose": "System design"
+    },
+    {
+      "role": "Coder",
+      "type": "coder",
+      "count": 3,
+      "purpose": "Implementation"
+    },
+    {
+      "role": "Tester",
+      "type": "tester",
+      "count": 2,
+      "purpose": "Quality assurance"
+    },
+    {
+      "role": "Reviewer",
+      "type": "reviewer",
+      "count": 1,
+      "purpose": "Code review"
+    }
+  ],
+  "startedAt": "2026-06-25T21:04:39.717Z",
+  "parallel": true
+}

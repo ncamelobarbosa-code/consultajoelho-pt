@@ -1,0 +1,95 @@
+{
+  "agents": {
+    "agent-1782421362000-mkx9as": {
+      "agentId": "agent-1782421362000-mkx9as",
+      "agentType": "architect",
+      "status": "idle",
+      "health": 1,
+      "taskCount": 0,
+      "config": {
+        "provider": "anthropic",
+        "task": "Redesenhar o website consultajoelho.pt elevando o estilo para nivel premium/luxo (ref. London Cartilage): manter cores e conteudo, refinar tipografia, espacamento, layout e hierarquia visual"
+      },
+      "createdAt": "2026-06-25T21:02:44.943Z",
+      "model": "opus",
+      "modelRoutedBy": "router",
+      "provider": "anthropic"
+    },
+    "agent-1782421367685-dc4ah6": {
+      "agentId": "agent-1782421367685-dc4ah6",
+      "agentType": "reviewer",
+      "status": "idle",
+      "health": 1,
+      "taskCount": 0,
+      "config": {
+        "provider": "anthropic",
+        "task": "Rever o conteudo medico do website para rigor clinico, atualidade cientifica e clareza para pacientes; sinalizar afirmacoes a corrigir ou referenciar"
+      },
+      "createdAt": "2026-06-25T21:02:47.797Z",
+      "model": "opus",
+      "modelRoutedBy": "router",
+      "provider": "anthropic"
+    },
+    "agent-1782421368696-tyb911": {
+      "agentId": "agent-1782421368696-tyb911",
+      "agentType": "analyst",
+      "status": "idle",
+      "health": 1,
+      "taskCount": 0,
+      "config": {
+        "provider": "anthropic",
+        "task": "Definir estrategias de marketing digital para clinica de ortopedia/cirurgia do joelho: canais, posicionamento, captacao de pacientes"
+      },
+      "createdAt": "2026-06-25T21:02:48.794Z",
+      "model": "sonnet",
+      "modelRoutedBy": "router",
+      "provider": "anthropic"
+    },
+    "agent-1782421369671-6a02k6": {
+      "agentId": "agent-1782421369671-6a02k6",
+      "agentType": "researcher",
+      "status": "idle",
+      "health": 1,
+      "taskCount": 0,
+      "config": {
+        "provider": "anthropic",
+        "task": "Auditar e otimizar SEO do consultajoelho.pt (PT/EN/RU): keywords, meta tags, hreflang, estrutura de conteudo, intencao de pesquisa"
+      },
+      "createdAt": "2026-06-25T21:02:49.771Z",
+      "model": "opus",
+      "modelRoutedBy": "router",
+      "provider": "anthropic"
+    },
+    "agent-1782421370669-m6zht2": {
+      "agentId": "agent-1782421370669-m6zht2",
+      "agentType": "optimizer",
+      "status": "idle",
+      "health": 1,
+      "taskCount": 0,
+      "config": {
+        "provider": "anthropic",
+        "task": "Propor otimizacao de equipa e fluxos de trabalho da pratica clinica: papeis, processos, eficiencia"
+      },
+      "createdAt": "2026-06-25T21:02:50.768Z",
+      "model": "haiku",
+      "modelRoutedBy": "router",
+      "provider": "anthropic"
+    },
+    "agent-1782421371664-vxh1lo": {
+      "agentId": "agent-1782421371664-vxh1lo",
+      "agentType": "coordinator",
+      "status": "idle",
+      "health": 1,
+      "taskCount": 0,
+      "config": {
+        "provider": "anthropic",
+        "task": "Desenvolver estrategia de negocio para a pratica clinica de ortopedia: crescimento, diferenciacao, modelo de receita"
+      },
+      "createdAt": "2026-06-25T21:02:51.763Z",
+      "model": "sonnet",
+      "modelRoutedBy": "router",
+      "provider": "anthropic"
+    }
+  },
+  "version": "3.0.0"
+}
