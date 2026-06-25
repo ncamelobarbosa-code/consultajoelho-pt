@@ -32,7 +32,7 @@ typography:
     fontWeight: 600
     lineHeight: 1.3
   body:
-    fontFamily: "Space Grotesk, ui-sans-serif, system-ui, sans-serif"
+    fontFamily: "Source Sans 3, ui-sans-serif, system-ui, sans-serif"
     fontSize: "1rem"
     fontWeight: 400
     lineHeight: 1.7

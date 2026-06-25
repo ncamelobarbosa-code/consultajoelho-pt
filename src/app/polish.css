@@ -3,6 +3,20 @@
    London Cartilage). Importada por ÚLTIMO no layout. Aditiva e reversível.
    Ver memória cjpt-design-uplift. */
 
+/* ── Conforto de leitura (estilo Chahla): corpo em sans humanista (Source Sans 3),
+   títulos e UI continuam em Space Grotesk. !important p/ vencer o CSS embutido das páginas. ── */
+body {
+  font-family: "Source Sans 3", ui-sans-serif, system-ui, sans-serif !important;
+}
+h1, h2, h3, h4, h5, h6,
+.vhero-title, .hero-h1, .section-title, .h2, .local-name,
+.nav-logo, .nav-links, .nav-cta, .hero-cta, .cta, .cta-final a,
+button, .btn, .submit-btn,
+.eyebrow, .hero-badge, .section-label, .vhero-eyebrow, .vhero-tag,
+.dstat, .pato-category-label, .local-badge, .cred-tag {
+  font-family: "Space Grotesk", ui-sans-serif, system-ui, sans-serif !important;
+}
+
 /* Títulos: sans elevado — tracking apertado e confiante (não serif) */
 h1, h2 { letter-spacing: -0.02em; }
 .hero-h1 { letter-spacing: -0.03em; line-height: 1.05; }
