@@ -108,7 +108,6 @@ const homepageTemplate = (meta, jsonld, body, script, id, locale = "pt") => `imp
 import VideoHero from "@/components/VideoHero";
 import PageVideos from "@/components/PageVideos";
 import GoogleReviews from "@/components/GoogleReviews";
-import ScrollReveal from "@/components/ScrollReveal";
 
 export const metadata: Metadata = ${JSON.stringify(meta, null, 2)};
 
@@ -120,8 +119,7 @@ export default function Page() {
       <VideoHero lang="${locale}" />
       <div dangerouslySetInnerHTML={{ __html: html }} />
       <PageVideos slug="" lang="${locale}" />
-      <GoogleReviews lang="${locale}" />
-      <ScrollReveal />${script ? `\n      <Script id="${id}-js" strategy="afterInteractive" dangerouslySetInnerHTML={{ __html: pageScript }} />` : ""}
+      <GoogleReviews lang="${locale}" />${script ? `\n      <Script id="${id}-js" strategy="afterInteractive" dangerouslySetInnerHTML={{ __html: pageScript }} />` : ""}
     </>
   );
 }

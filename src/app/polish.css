@@ -47,6 +47,16 @@ h1, h2 { letter-spacing: -0.02em; }
   box-shadow: 0 16px 40px rgba(2, 45, 61, 0.14);
 }
 
+/* "O que tratamos": fotos maiores + leve zoom no hover do cartão */
+.pato-photo { height: 280px; }
+.pato-photo img { transition: transform 0.5s ease; }
+.pato-card:hover .pato-photo img { transform: scale(1.06); }
+
+/* Scroll suave (exceto reduced-motion) */
+@media (prefers-reduced-motion: no-preference) {
+  html { scroll-behavior: smooth; }
+}
+
 /* ── Hero com vídeo de fundo (self-hosted, muted/loop, coberto) ─────────────── */
 .vhero {
   position: relative;

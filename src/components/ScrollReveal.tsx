@@ -12,7 +12,7 @@ export default function ScrollReveal() {
     if (reduce) return;
 
     const els = Array.from(
-      document.querySelectorAll<HTMLElement>("section:not(.vhero)")
+      document.querySelectorAll<HTMLElement>("section:not(.vhero):not(.hero)")
     );
     if (!els.length) return;
 
