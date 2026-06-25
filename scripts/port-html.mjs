@@ -221,6 +221,20 @@ function injectHeroImage($x, seg) {
   );
 }
 
+// Homepage: logos dos hospitais nos cartões de locais (substitui os mapas -> mais compacto).
+function injectHospitalLogos($x) {
+  $x(".local-card").each((i, el) => {
+    const card = $x(el);
+    const name = card.find(".local-name").text();
+    let logo = null;
+    if (/Lus[ií]adas/i.test(name)) logo = "/img/logos/lusiadas.webp";
+    else if (/Miseric[oó]rdia/i.test(name)) logo = "/img/logos/hmvc.webp";
+    if (!logo) return;
+    card.find(".local-map").remove();
+    card.prepend(`<div class="local-logo"><img src="${logo}" alt="" loading="lazy" /></div>`);
+  });
+}
+
 for (const [file, seg] of Object.entries(ROUTES)) {
   const raw = await readFile(`${SRC}/${file}`, "utf8");
   const $ = cheerio.load(raw, { decodeEntities: false });
@@ -240,6 +254,7 @@ for (const [file, seg] of Object.entries(ROUTES)) {
     headerHtml = h.length ? injectVideosLink(injectSwitcher(rewriteLinks($.html(h)), "pt"), "pt") : "";
     footerHtml = f.length ? rewriteLinks($.html(f)) : "";
     $("section.hero").first().remove(); // hero antigo -> substituído por <VideoHero/>
+    injectHospitalLogos($);
   }
 
   // remover chrome e scripts do corpo
@@ -304,6 +319,7 @@ for (const [file, seg] of Object.entries(ROUTES)) {
     enHeaderHtml = eh.length ? injectVideosLink(injectSwitcher(rewriteLinksEn($e.html(eh)), "en"), "en") : "";
     enFooterHtml = ef.length ? rewriteLinksEn($e.html(ef)) : "";
     $e("section.hero").first().remove(); // hero antigo -> <VideoHero/>
+    injectHospitalLogos($e);
   }
   const css = $e("style").toArray().map((el) => $e(el).html()).join("\n\n");
   $e("body > header, body > footer, body > nav").remove();
@@ -348,6 +364,7 @@ for (const [file, seg] of Object.entries(ROUTES)) {
     ruHeaderHtml = rh.length ? injectVideosLink(injectSwitcher(rewriteLinksRu($r.html(rh)), "ru"), "ru") : "";
     ruFooterHtml = rf.length ? rewriteLinksRu($r.html(rf)) : "";
     $r("section.hero").first().remove(); // hero antigo -> <VideoHero/>
+    injectHospitalLogos($r);
   }
   const css = $r("style").toArray().map((el) => $r(el).html()).join("\n\n");
   $r("body > header, body > footer, body > nav").remove();
