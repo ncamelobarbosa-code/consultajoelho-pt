@@ -189,6 +189,25 @@ function injectVideosLink(html, locale) {
   return html.replace("</nav>", `<div class="nav-item"><a href="${href}">${label}</a></div></nav>`);
 }
 
+// Foto profissional no hero de páginas de patologia (slug -> imagem em /public).
+// Sobrepõe um gradiente escuro para o texto branco ler bem.
+const HERO_IMAGES = {
+  lca: "/img/hero/lca.jpg",
+  protese: "/img/hero/protese.jpg",
+  "recuperar-cirurgia": "/img/hero/recuperar.jpg",
+};
+function injectHeroImage($x, seg) {
+  const img = HERO_IMAGES[seg];
+  if (!img) return;
+  const hero = $x("section.hero").first();
+  if (!hero.length) return;
+  const prev = (hero.attr("style") || "").replace(/;?\s*$/, "");
+  hero.attr(
+    "style",
+    `${prev ? prev + ";" : ""}background:linear-gradient(118deg, rgba(2,29,40,.9) 0%, rgba(2,45,61,.62) 58%, rgba(2,45,61,.42) 100%), url('${img}') center/cover;`
+  );
+}
+
 for (const [file, seg] of Object.entries(ROUTES)) {
   const raw = await readFile(`${SRC}/${file}`, "utf8");
   const $ = cheerio.load(raw, { decodeEntities: false });
@@ -223,6 +242,7 @@ for (const [file, seg] of Object.entries(ROUTES)) {
   if (inlineScript) scriptPages.push(seg || "homepage");
   $("body script, body style").remove();
 
+  injectHeroImage($, seg);
   let body = rewriteLinks($("body").html() || "");
 
   const dir = seg ? `${APP}/${seg}` : APP;
@@ -276,6 +296,7 @@ for (const [file, seg] of Object.entries(ROUTES)) {
   $e("body > header, body > footer, body > nav").remove();
   const enScript = $e("body script").not('[type="application/ld+json"]').not("[src]").toArray().map((el) => $e(el).html()).filter(Boolean).join("\n");
   $e("body script, body style").remove();
+  injectHeroImage($e, seg);
   const body = rewriteLinksEn($e("body").html() || "");
   const dir = seg ? `${APP}/en/${seg}` : `${APP}/en`;
   await mkdir(dir, { recursive: true });
@@ -319,6 +340,7 @@ for (const [file, seg] of Object.entries(ROUTES)) {
   $r("body > header, body > footer, body > nav").remove();
   const ruScript = $r("body script").not('[type="application/ld+json"]').not("[src]").toArray().map((el) => $r(el).html()).filter(Boolean).join("\n");
   $r("body script, body style").remove();
+  injectHeroImage($r, seg);
   const body = rewriteLinksRu($r("body").html() || "");
   const dir = seg ? `${APP}/ru/${seg}` : `${APP}/ru`;
   await mkdir(dir, { recursive: true });
