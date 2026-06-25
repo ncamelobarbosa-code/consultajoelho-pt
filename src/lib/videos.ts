@@ -55,7 +55,7 @@ export const SECTION_HEADINGS = {
 
 // slug da página ("" = homepage) -> secção de vídeo
 export const PAGE_VIDEOS: Record<string, { heading: keyof typeof SECTION_HEADINGS; videos: string[] }> = {
-  "": { heading: "presentation", videos: ["apresentacao"] },
+  // homepage ("") sem secção de vídeo: o vídeo de apresentação é agora o fundo do hero.
   lca: { heading: "surgical", videos: ["samba"] },
   menisco: { heading: "surgical", videos: ["rampaRotura", "rampaSutura"] },
   cartilagem: { heading: "surgical", videos: ["corpoLivre"] },

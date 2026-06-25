@@ -22,7 +22,17 @@ h1, h2 { letter-spacing: -0.02em; }
   box-shadow: 0 10px 28px rgba(3, 87, 114, 0.18);
 }
 
-/* ── Hero com vídeo de fundo (YouTube, muted/loop, coberto) ─────────────────── */
+/* Cartões: sombra suave + elevação no hover (premium, menos "flat") */
+.pato-card, .local-card {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 4px 18px rgba(2, 45, 61, 0.06);
+}
+.pato-card:hover, .local-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 40px rgba(2, 45, 61, 0.14);
+}
+
+/* ── Hero com vídeo de fundo (self-hosted, muted/loop, coberto) ─────────────── */
 .vhero {
   position: relative;
   min-height: 90vh;
