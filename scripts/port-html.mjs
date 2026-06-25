@@ -240,9 +240,12 @@ for (const [file, seg] of Object.entries(ROUTES)) {
   const $ = cheerio.load(raw, { decodeEntities: false });
 
   const meta = buildMetadata($);
-  if (hasTranslation(seg)) {
-    meta.alternates = { ...(meta.alternates || {}), languages: langAlternates(seg) };
-  }
+  // Canonical auto-referente ao slug NOVO (os HTML traziam slugs Wix 404).
+  meta.alternates = {
+    ...(meta.alternates || {}),
+    canonical: seg ? `${BASE}/${seg}` : BASE,
+    ...(hasTranslation(seg) ? { languages: langAlternates(seg) } : {}),
+  };
   const css = $("style").toArray().map((el) => $(el).html()).join("\n\n");
   const jsonld = $('script[type="application/ld+json"]').first().html() || "";
 
@@ -311,7 +314,7 @@ for (const [file, seg] of Object.entries(ROUTES)) {
   if (!raw) continue;
   const $e = cheerio.load(raw, { decodeEntities: false });
   const enMeta = buildMetadata($e);
-  enMeta.alternates = { ...(enMeta.alternates || {}), languages: langAlternates(seg) };
+  enMeta.alternates = { ...(enMeta.alternates || {}), canonical: seg ? `${BASE}/en/${seg}` : `${BASE}/en`, languages: langAlternates(seg) };
   const enJsonld = $e('script[type="application/ld+json"]').first().html() || "";
   if (seg === "") {
     const eh = $e("body > header").first();
@@ -356,7 +359,7 @@ for (const [file, seg] of Object.entries(ROUTES)) {
   if (!raw) continue;
   const $r = cheerio.load(raw, { decodeEntities: false });
   const ruMeta = buildMetadata($r);
-  ruMeta.alternates = { ...(ruMeta.alternates || {}), languages: langAlternates(seg) };
+  ruMeta.alternates = { ...(ruMeta.alternates || {}), canonical: seg ? `${BASE}/ru/${seg}` : `${BASE}/ru`, languages: langAlternates(seg) };
   const ruJsonld = $r('script[type="application/ld+json"]').first().html() || "";
   if (seg === "") {
     const rh = $r("body > header").first();

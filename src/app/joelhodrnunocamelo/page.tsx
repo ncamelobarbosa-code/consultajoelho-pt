@@ -8,6 +8,7 @@ export const metadata: Metadata = {
     "type": "article"
   },
   "alternates": {
+    "canonical": "https://www.consultajoelho.pt/joelhodrnunocamelo",
     "languages": {
       "pt-PT": "https://www.consultajoelho.pt/joelhodrnunocamelo",
       "x-default": "https://www.consultajoelho.pt/joelhodrnunocamelo",

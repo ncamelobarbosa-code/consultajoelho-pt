@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   "title": "the Knee Clinic Porto | Dr. Nuno Camelo – Cirurgião Ortopédico",
   "description": "Consulta especializada em patologia do joelho com o Dr. Nuno Camelo, cirurgião ortopédico. Atendimento no Porto, Paços de Ferreira e Vila do Conde. Agende já.",
   "alternates": {
-    "canonical": "https://www.consultajoelho.pt",
+    "canonical": "https://www.consultajoelho.pt/en",
     "languages": {
       "pt-PT": "https://www.consultajoelho.pt",
       "x-default": "https://www.consultajoelho.pt",

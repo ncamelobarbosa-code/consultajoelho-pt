@@ -5,7 +5,7 @@ export const metadata: Metadata = {
   "title": "Эндопротезирование коленного сустава и спорт — что можно делать? | Dr. Nuno Camelo Порту",
   "description": "Можно ли заниматься спортом после эндопротезирования коленного сустава? Dr. Nuno Camelo объясняет, какие виды активности рекомендованы, каких следует избегать и чего ожидать от срока службы имплантата.",
   "alternates": {
-    "canonical": "https://www.consultajoelho.pt/ru/protesejoelhodesportodrnunocamelo",
+    "canonical": "https://www.consultajoelho.pt/ru/protese",
     "languages": {
       "pt-PT": "https://www.consultajoelho.pt/protese",
       "x-default": "https://www.consultajoelho.pt/protese",

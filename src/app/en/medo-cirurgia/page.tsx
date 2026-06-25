@@ -5,7 +5,7 @@ export const metadata: Metadata = {
   "title": "Fear of Knee Surgery — Real Fears, Honest Answers | Dr. Nuno Camelo",
   "description": "It is normal to be afraid of having knee surgery. Dr. Nuno Camelo answers the most common concerns honestly — pain, anaesthesia, complications, recovery — with clinical facts.",
   "alternates": {
-    "canonical": "https://www.consultajoelho.pt/en/medocirurgiajoelho",
+    "canonical": "https://www.consultajoelho.pt/en/medo-cirurgia",
     "languages": {
       "pt-PT": "https://www.consultajoelho.pt/medo-cirurgia",
       "x-default": "https://www.consultajoelho.pt/medo-cirurgia",

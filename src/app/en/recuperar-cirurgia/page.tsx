@@ -5,7 +5,7 @@ export const metadata: Metadata = {
   "title": "Recovering from Knee Surgery | Dr. Nuno Camelo — Knee Orthopaedics Porto",
   "description": "A complete guide to recovery after knee surgery: phases, clinical milestones, physiotherapy and nutrition. Dr. Nuno Camelo, orthopaedic surgeon specialising in the knee in Porto.",
   "alternates": {
-    "canonical": "https://www.consultajoelho.pt/en/recuperarcirurgiajoelho",
+    "canonical": "https://www.consultajoelho.pt/en/recuperar-cirurgia",
     "languages": {
       "pt-PT": "https://www.consultajoelho.pt/recuperar-cirurgia",
       "x-default": "https://www.consultajoelho.pt/recuperar-cirurgia",

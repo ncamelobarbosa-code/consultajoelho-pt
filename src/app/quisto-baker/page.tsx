@@ -5,7 +5,7 @@ export const metadata: Metadata = {
   "title": "Quisto de Baker (Cisto Poplíteo) — Causas e Tratamento | Dr. Nuno Camelo Porto",
   "description": "O quisto de Baker é um inchaço na parte de trás do joelho causado por excesso de líquido articular. Dr. Nuno Camelo explica causas, sintomas e tratamento da patologia subjacente.",
   "alternates": {
-    "canonical": "https://www.consultajoelho.pt/quistobakerjoelhodrnunocamelo",
+    "canonical": "https://www.consultajoelho.pt/quisto-baker",
     "languages": {
       "pt-PT": "https://www.consultajoelho.pt/quisto-baker",
       "x-default": "https://www.consultajoelho.pt/quisto-baker",

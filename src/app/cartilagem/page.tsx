@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   "title": "Lesões da Cartilagem do Joelho — Tratamento e Opções | Dr. Nuno Camelo Porto",
   "description": "Lesões da cartilagem do joelho: classificação ICRS, condromalácia, tratamentos (microfractura, OATS, ACI, MACI) e injecções. Dr. Nuno Camelo, especialista em Porto.",
   "alternates": {
-    "canonical": "https://www.consultajoelho.pt/cartilagemjoelhodrnunocamelo",
+    "canonical": "https://www.consultajoelho.pt/cartilagem",
     "languages": {
       "pt-PT": "https://www.consultajoelho.pt/cartilagem",
       "x-default": "https://www.consultajoelho.pt/cartilagem",

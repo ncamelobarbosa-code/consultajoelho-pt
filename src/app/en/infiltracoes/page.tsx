@@ -10,6 +10,7 @@ export const metadata: Metadata = {
     "type": "article"
   },
   "alternates": {
+    "canonical": "https://www.consultajoelho.pt/en/infiltracoes",
     "languages": {
       "pt-PT": "https://www.consultajoelho.pt/infiltracoes",
       "x-default": "https://www.consultajoelho.pt/infiltracoes",

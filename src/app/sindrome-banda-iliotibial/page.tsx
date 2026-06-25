@@ -5,7 +5,7 @@ export const metadata: Metadata = {
   "title": "Síndrome da Banda Iliotibial (SBI) — Dor Lateral do Joelho em Corredores | Dr. Nuno Camelo",
   "description": "A síndrome da banda iliotibial causa dor na face lateral do joelho, especialmente em corredores. Dr. Nuno Camelo explica causas, tratamento e prevenção.",
   "alternates": {
-    "canonical": "https://www.consultajoelho.pt/sindromebandailiotibialjoelho",
+    "canonical": "https://www.consultajoelho.pt/sindrome-banda-iliotibial",
     "languages": {
       "pt-PT": "https://www.consultajoelho.pt/sindrome-banda-iliotibial",
       "x-default": "https://www.consultajoelho.pt/sindrome-banda-iliotibial",

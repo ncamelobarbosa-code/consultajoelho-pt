@@ -5,7 +5,7 @@ export const metadata: Metadata = {
   "title": "Восстановление после операции на колене | Д-р Нуну Камелу — ортопедия коленного сустава, Порту",
   "description": "Полное руководство по восстановлению после операции на колене: этапы, клинические рубежи, физиотерапия и питание. Д-р Нуну Камелу, ортопедический хирург с узкой специализацией по коленному суставу в Порту.",
   "alternates": {
-    "canonical": "https://www.consultajoelho.pt/ru/recuperarcirurgiajoelho",
+    "canonical": "https://www.consultajoelho.pt/ru/recuperar-cirurgia",
     "languages": {
       "pt-PT": "https://www.consultajoelho.pt/recuperar-cirurgia",
       "x-default": "https://www.consultajoelho.pt/recuperar-cirurgia",

@@ -5,7 +5,7 @@ export const metadata: Metadata = {
   "title": "Страх перед операцией на колене — реальные страхи, честные ответы | Dr. Nuno Camelo",
   "description": "Бояться операции на коленном суставе — это нормально. Dr. Nuno Camelo честно отвечает на самые частые опасения — боль, анестезия, осложнения, восстановление — с опорой на клинические факты.",
   "alternates": {
-    "canonical": "https://www.consultajoelho.pt/ru/medocirurgiajoelho",
+    "canonical": "https://www.consultajoelho.pt/ru/medo-cirurgia",
     "languages": {
       "pt-PT": "https://www.consultajoelho.pt/medo-cirurgia",
       "x-default": "https://www.consultajoelho.pt/medo-cirurgia",

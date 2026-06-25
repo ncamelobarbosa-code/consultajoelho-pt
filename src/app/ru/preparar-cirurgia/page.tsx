@@ -5,7 +5,7 @@ export const metadata: Metadata = {
   "title": "Подготовка к операции на колене — полное руководство | Д-р Нуну Камелу, Порту",
   "description": "Полное руководство по подготовке к операции на коленном суставе: преабилитация, лекарства, обустройство дома и что сделать перед операцией. Д-р Нуну Камелу, ортопедический хирург в Порту.",
   "alternates": {
-    "canonical": "https://www.consultajoelho.pt/ru/prepararcirurgiajoelho",
+    "canonical": "https://www.consultajoelho.pt/ru/preparar-cirurgia",
     "languages": {
       "pt-PT": "https://www.consultajoelho.pt/preparar-cirurgia",
       "x-default": "https://www.consultajoelho.pt/preparar-cirurgia",

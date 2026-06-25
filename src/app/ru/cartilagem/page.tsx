@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   "title": "Повреждения хряща коленного сустава — лечение и варианты | Доктор Nuno Camelo, Порту",
   "description": "Повреждения хряща коленного сустава: классификация ICRS, хондромаляция, методы лечения (микрофрактурирование, OATS, ACI, MACI) и инъекции. Доктор Nuno Camelo, специалист по коленному суставу в Порту.",
   "alternates": {
-    "canonical": "https://www.consultajoelho.pt/ru/cartilagemjoelhodrnunocamelo",
+    "canonical": "https://www.consultajoelho.pt/ru/cartilagem",
     "languages": {
       "pt-PT": "https://www.consultajoelho.pt/cartilagem",
       "x-default": "https://www.consultajoelho.pt/cartilagem",

@@ -5,7 +5,7 @@ export const metadata: Metadata = {
   "title": "Вывих надколенника — MPFL и нестабильность надколенника | Dr. Nuno Camelo Порту",
   "description": "Вывих надколенника: причины, рецидивирующая нестабильность и лечение с реконструкцией MPFL. Dr. Nuno Camelo, специалист по коленному суставу в Порту, объясняет, что делать после первого вывиха.",
   "alternates": {
-    "canonical": "https://www.consultajoelho.pt/ru/luxacaorotulajoelho",
+    "canonical": "https://www.consultajoelho.pt/ru/luxacao-rotula",
     "languages": {
       "pt-PT": "https://www.consultajoelho.pt/luxacao-rotula",
       "x-default": "https://www.consultajoelho.pt/luxacao-rotula",

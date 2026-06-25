@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   "title": "Rotura do Menisco — Reparar ou Remover? | Dr. Nuno Camelo Porto",
   "description": "Rotura do menisco: nem sempre é necessário operar. Dr. Nuno Camelo explica os tipos de rotura, quando se repara vs. remove, e o que esperar da recuperação.",
   "alternates": {
-    "canonical": "https://www.consultajoelho.pt/rupturameniscosjoelho",
+    "canonical": "https://www.consultajoelho.pt/menisco",
     "languages": {
       "pt-PT": "https://www.consultajoelho.pt/menisco",
       "x-default": "https://www.consultajoelho.pt/menisco",

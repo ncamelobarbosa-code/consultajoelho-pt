@@ -5,7 +5,7 @@ export const metadata: Metadata = {
   "title": "Синдром илиотибиального тракта (СИТ) — боль по наружной стороне колена у бегунов | Dr. Nuno Camelo",
   "description": "Синдром илиотибиального тракта вызывает боль по наружной стороне колена, особенно у бегунов. Dr. Nuno Camelo объясняет причины, лечение и профилактику.",
   "alternates": {
-    "canonical": "https://www.consultajoelho.pt/ru/sindromebandailiotibialjoelho",
+    "canonical": "https://www.consultajoelho.pt/ru/sindrome-banda-iliotibial",
     "languages": {
       "pt-PT": "https://www.consultajoelho.pt/sindrome-banda-iliotibial",
       "x-default": "https://www.consultajoelho.pt/sindrome-banda-iliotibial",

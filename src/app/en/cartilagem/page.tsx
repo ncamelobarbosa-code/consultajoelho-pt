@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   "title": "Knee Cartilage Injuries — Treatment and Options | Dr. Nuno Camelo Porto",
   "description": "Knee cartilage injuries: ICRS classification, chondromalacia, treatments (microfracture, OATS, ACI, MACI) and injections. Dr. Nuno Camelo, knee specialist in Porto.",
   "alternates": {
-    "canonical": "https://www.consultajoelho.pt/en/cartilagemjoelhodrnunocamelo",
+    "canonical": "https://www.consultajoelho.pt/en/cartilagem",
     "languages": {
       "pt-PT": "https://www.consultajoelho.pt/cartilagem",
       "x-default": "https://www.consultajoelho.pt/cartilagem",

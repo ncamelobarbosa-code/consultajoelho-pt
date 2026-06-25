@@ -5,7 +5,7 @@ export const metadata: Metadata = {
   "title": "Четырёхглавая мышца бедра и хирургия колена — AMI и реабилитация | Dr. Nuno Camelo Порту",
   "description": "Четырёхглавая мышца бедра (квадрицепс) — самая важная мышца в хирургии коленного сустава. Dr. Nuno Camelo объясняет артрогенное мышечное торможение (AMI), классификацию SANTI по Sonnery-Cottet и протоколы реактивации.",
   "alternates": {
-    "canonical": "https://www.consultajoelho.pt/ru/quadricepsjoelho",
+    "canonical": "https://www.consultajoelho.pt/ru/quadriceps",
     "languages": {
       "pt-PT": "https://www.consultajoelho.pt/quadriceps",
       "x-default": "https://www.consultajoelho.pt/quadriceps",

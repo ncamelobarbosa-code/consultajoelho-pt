@@ -5,7 +5,7 @@ export const metadata: Metadata = {
   "title": "Avaliar o Seu Joelho — Score de Lysholm-Tegner | Dr. Nuno Camelo Porto",
   "description": "Avalie a função do seu joelho com o score de Lysholm-Tegner validado. Ferramenta clínica utilizada em investigação ortopédica internacional. Dr. Nuno Camelo, especialista em cirurgia do joelho no Porto.",
   "alternates": {
-    "canonical": "https://www.consultajoelho.pt/avaliarjoelho",
+    "canonical": "https://www.consultajoelho.pt/avaliar",
     "languages": {
       "pt-PT": "https://www.consultajoelho.pt/avaliar",
       "x-default": "https://www.consultajoelho.pt/avaliar",

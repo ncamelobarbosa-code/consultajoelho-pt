@@ -5,7 +5,7 @@ export const metadata: Metadata = {
   "title": "Patellar Dislocation — MPFL and Patellar Instability | Dr. Nuno Camelo Porto",
   "description": "Patellar dislocation: causes, recurrent instability and treatment with MPFL reconstruction. Dr. Nuno Camelo, knee specialist in Porto, explains what to do after a first dislocation.",
   "alternates": {
-    "canonical": "https://www.consultajoelho.pt/en/luxacaorotulajoelho",
+    "canonical": "https://www.consultajoelho.pt/en/luxacao-rotula",
     "languages": {
       "pt-PT": "https://www.consultajoelho.pt/luxacao-rotula",
       "x-default": "https://www.consultajoelho.pt/luxacao-rotula",

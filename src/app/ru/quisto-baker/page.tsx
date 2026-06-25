@@ -5,7 +5,7 @@ export const metadata: Metadata = {
   "title": "Киста Бейкера (подколенная киста) — причины и лечение | Доктор Nuno Camelo Порту",
   "description": "Киста Бейкера — это припухлость в подколенной области, вызванная избытком суставной жидкости. Доктор Nuno Camelo объясняет причины, симптомы и лечение основного заболевания.",
   "alternates": {
-    "canonical": "https://www.consultajoelho.pt/ru/quistobakerjoelhodrnunocamelo",
+    "canonical": "https://www.consultajoelho.pt/ru/quisto-baker",
     "languages": {
       "pt-PT": "https://www.consultajoelho.pt/quisto-baker",
       "x-default": "https://www.consultajoelho.pt/quisto-baker",

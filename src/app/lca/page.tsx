@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   "title": "Rotura do LCA — Cirurgia ou Tratamento Conservador? | Dr. Nuno Camelo Porto",
   "description": "Rotura do ligamento cruzado anterior (LCA): cirurgia ou tratamento conservador? Dr. Nuno Camelo, especialista em joelho no Porto, explica como se decide e o que esperar.",
   "alternates": {
-    "canonical": "https://www.consultajoelho.pt/ligamentocruzadoanterior",
+    "canonical": "https://www.consultajoelho.pt/lca",
     "languages": {
       "pt-PT": "https://www.consultajoelho.pt/lca",
       "x-default": "https://www.consultajoelho.pt/lca",

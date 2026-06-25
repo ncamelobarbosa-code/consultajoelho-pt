@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   "title": "Разрыв мениска — восстановить или удалить? | Доктор Нуну Камелу, Порту",
   "description": "Разрыв мениска: операция нужна не всегда. Доктор Нуну Камелу объясняет типы разрывов, когда восстанавливать, а когда удалять, и чего ждать от восстановления.",
   "alternates": {
-    "canonical": "https://www.consultajoelho.pt/ru/rupturameniscosjoelho",
+    "canonical": "https://www.consultajoelho.pt/ru/menisco",
     "languages": {
       "pt-PT": "https://www.consultajoelho.pt/menisco",
       "x-default": "https://www.consultajoelho.pt/menisco",

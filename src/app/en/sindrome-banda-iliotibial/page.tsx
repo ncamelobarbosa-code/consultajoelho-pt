@@ -5,7 +5,7 @@ export const metadata: Metadata = {
   "title": "Iliotibial Band Syndrome (ITBS) — Lateral Knee Pain in Runners | Dr. Nuno Camelo",
   "description": "Iliotibial band syndrome causes pain on the lateral side of the knee, especially in runners. Dr. Nuno Camelo explains the causes, treatment and prevention.",
   "alternates": {
-    "canonical": "https://www.consultajoelho.pt/en/sindromebandailiotibialjoelho",
+    "canonical": "https://www.consultajoelho.pt/en/sindrome-banda-iliotibial",
     "languages": {
       "pt-PT": "https://www.consultajoelho.pt/sindrome-banda-iliotibial",
       "x-default": "https://www.consultajoelho.pt/sindrome-banda-iliotibial",

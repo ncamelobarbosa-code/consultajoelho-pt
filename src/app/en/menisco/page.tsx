@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   "title": "Meniscal Tear — Repair or Remove? | Dr. Nuno Camelo Porto",
   "description": "Meniscal tear: surgery is not always necessary. Dr. Nuno Camelo explains the types of tear, when to repair vs. remove, and what to expect from recovery.",
   "alternates": {
-    "canonical": "https://www.consultajoelho.pt/en/rupturameniscosjoelho",
+    "canonical": "https://www.consultajoelho.pt/en/menisco",
     "languages": {
       "pt-PT": "https://www.consultajoelho.pt/menisco",
       "x-default": "https://www.consultajoelho.pt/menisco",

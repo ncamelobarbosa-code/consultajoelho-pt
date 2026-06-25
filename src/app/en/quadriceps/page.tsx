@@ -5,7 +5,7 @@ export const metadata: Metadata = {
   "title": "Quadriceps and Knee Surgery — AMI and Rehabilitation | Dr. Nuno Camelo Porto",
   "description": "The quadriceps is the most critical muscle in knee surgery. Dr. Nuno Camelo explains arthrogenic muscle inhibition (AMI), the SANTI classification by Sonnery-Cottet and the reactivation protocols.",
   "alternates": {
-    "canonical": "https://www.consultajoelho.pt/en/quadricepsjoelho",
+    "canonical": "https://www.consultajoelho.pt/en/quadriceps",
     "languages": {
       "pt-PT": "https://www.consultajoelho.pt/quadriceps",
       "x-default": "https://www.consultajoelho.pt/quadriceps",

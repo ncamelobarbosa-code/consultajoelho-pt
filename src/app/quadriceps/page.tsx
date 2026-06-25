@@ -5,7 +5,7 @@ export const metadata: Metadata = {
   "title": "Quadricípite e Cirurgia do Joelho — AMI e Reabilitação | Dr. Nuno Camelo Porto",
   "description": "O quadricípite é o músculo mais crítico na cirurgia do joelho. Dr. Nuno Camelo explica a inibição artrogénica (AMI), a classificação SANTI de Sonnery-Cottet e os protocolos de reactivação.",
   "alternates": {
-    "canonical": "https://www.consultajoelho.pt/quadricepsjoelho",
+    "canonical": "https://www.consultajoelho.pt/quadriceps",
     "languages": {
       "pt-PT": "https://www.consultajoelho.pt/quadriceps",
       "x-default": "https://www.consultajoelho.pt/quadriceps",

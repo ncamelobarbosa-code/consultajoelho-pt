@@ -5,7 +5,7 @@ export const metadata: Metadata = {
   "title": "Оцените состояние колена — шкала Лисхольма-Тегнера | Dr. Nuno Camelo Porto",
   "description": "Оцените функцию коленного сустава с помощью валидированной шкалы Лисхольма-Тегнера. Клинический инструмент, применяемый в международных ортопедических исследованиях. Dr. Nuno Camelo, специалист по хирургии коленного сустава в Порту.",
   "alternates": {
-    "canonical": "https://www.consultajoelho.pt/ru/en/avaliarjoelho",
+    "canonical": "https://www.consultajoelho.pt/ru/avaliar",
     "languages": {
       "pt-PT": "https://www.consultajoelho.pt/avaliar",
       "x-default": "https://www.consultajoelho.pt/avaliar",

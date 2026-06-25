@@ -5,7 +5,7 @@ export const metadata: Metadata = {
   "title": "Параменисковые кисты коленного сустава | Dr Nuno Camelo Porto",
   "description": "Параменисковые кисты возникают рядом с мениском и почти всегда связаны с горизонтальным разрывом. Dr Nuno Camelo объясняет диагностику и артроскопическое лечение.",
   "alternates": {
-    "canonical": "https://www.consultajoelho.pt/ru/quistosparameniscaisjoelho",
+    "canonical": "https://www.consultajoelho.pt/ru/quistos-parameniscais",
     "languages": {
       "pt-PT": "https://www.consultajoelho.pt/quistos-parameniscais",
       "x-default": "https://www.consultajoelho.pt/quistos-parameniscais",
