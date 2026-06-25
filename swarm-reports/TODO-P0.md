@@ -21,7 +21,7 @@
 - [ ] **P0-4 · Ligar a fonte (next/font)** *(🟠 alto — conserta design + LCP)*
   - `globals.css` referencia `--font-space-grotesk` mas `layout.tsx` nunca importa `next/font`. Carregar Space Grotesk (e Source Sans 3, se mantida) via `next/font/google`, expor a var no `<body>`, e **remover `@import url(google fonts)` do `site.css`**.
 
-- [ ] **P0-5 · Meta description nas páginas-âncora** *(🟠 alto)*
+- [x] **P0-5 · Meta description nas páginas-âncora** *(🟠 alto)*
   - Em falta no Algoritmo de Gonalgia (`joelhodrnunocamelo`) e em: `actividadecientificajoelho`, `entorsejoelho-...`, `liquidojoelho-artrocentese-...`, `tendao-rotuliano-...`, `kneesurgeryinportugalprices`, e equivalentes EN/RU de `joelhodrnunocamelo`. Escrever `title`/`description` (140–160 car.).
 
 - [ ] **P0-6 · Repor dados estruturados** *(🟠 alto)*

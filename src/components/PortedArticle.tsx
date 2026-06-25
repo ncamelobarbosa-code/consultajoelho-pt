@@ -46,11 +46,13 @@ export default function PortedArticle({
   lang,
   title: titleOverride,
   description: descOverride,
+  notice,
 }: {
   slug: string;
   lang?: "pt" | "en" | "ru";
   title?: string;
   description?: string;
+  notice?: { title: string; body: string };
 }) {
   const meta = pages[slug as PageSlug] as PageMeta | undefined;
   const locale: "pt" | "en" | "ru" = lang || (meta?.lang === "en" ? "en" : "pt");
@@ -76,6 +78,25 @@ export default function PortedArticle({
           </p>
         </div>
       </header>
+
+      {notice && (
+        <div
+          role="note"
+          style={{
+            maxWidth: "760px",
+            margin: "1.75rem auto 0",
+            padding: "1.25rem 1.5rem",
+            background: "#fff8e1",
+            border: "1px solid #f0c040",
+            borderRadius: "var(--r)",
+          }}
+        >
+          <strong style={{ display: "block", color: "#7a5000", marginBottom: "0.4rem", fontFamily: "'Space Grotesk', sans-serif" }}>
+            {notice.title}
+          </strong>
+          <p style={{ margin: 0, color: "#6a4800", lineHeight: 1.6 }}>{notice.body}</p>
+        </div>
+      )}
 
       <div className="pa-body">{renderBlocks(data.blocks)}</div>
 

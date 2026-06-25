@@ -17,8 +17,13 @@ export const metadata = {
   },
 };
 
+const NOTICE = {
+  title: "Важное замечание о лечении",
+  body: "При тендинопатии надколенника первая линия — прогрессивные нагрузочные упражнения (эксцентрические/изометрические) под контролем специалиста. Внутрисухожильная инъекция кортикостероида не рекомендуется — она связана с риском разрыва сухожилия. Околосухожильное введение кортикостероида, если рассматривается, является исключением и оценивается индивидуально.",
+};
+
 export default function Page() {
   return (
-    <PortedArticle slug="tendao-rotuliano-tendinite-drnunocamelo" lang="ru" title={"Тендинопатия надколенника: тендинит коленного сустава"} description={DESCRIPTION} />
+    <PortedArticle slug="tendao-rotuliano-tendinite-drnunocamelo" lang="ru" title={"Тендинопатия надколенника: тендинит коленного сустава"} description={DESCRIPTION} notice={NOTICE} />
   );
 }

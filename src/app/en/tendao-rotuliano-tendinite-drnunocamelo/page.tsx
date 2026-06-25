@@ -18,6 +18,11 @@ export const metadata = {
   },
 };
 
+const NOTICE = {
+  title: "Important note on treatment",
+  body: "For patellar tendinopathy, the first line is progressive loading exercise (eccentric/isometric) under guidance. Intratendinous corticosteroid injection is discouraged — it carries a risk of tendon rupture. Peritendinous corticosteroid, if considered, is an exception weighed case by case.",
+};
+
 export default function Page() {
   return (
     <PortedArticle
@@ -25,6 +30,7 @@ export default function Page() {
       lang="en"
       title={TITLE}
       description={DESCRIPTION}
+      notice={NOTICE}
     />
   );
 }
