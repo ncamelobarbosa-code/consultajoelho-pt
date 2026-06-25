@@ -37,22 +37,14 @@ h1, h2 { letter-spacing: -0.02em; }
   z-index: 0;
   pointer-events: none;
 }
-/* Foto de fundo coberta + leve zoom (Ken Burns) para dar vida */
-.vhero-bg img {
+/* Vídeo (ou poster) de fundo coberto */
+.vhero-bg video {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: 72% 18%;
-  animation: vhero-zoom 20s ease-in-out infinite alternate;
-}
-@keyframes vhero-zoom {
-  from { transform: scale(1); }
-  to { transform: scale(1.08); }
-}
-@media (prefers-reduced-motion: reduce) {
-  .vhero-bg img { animation: none; }
+  object-position: center 20%;
 }
 .vhero-scrim {
   position: absolute;
