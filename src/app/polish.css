@@ -66,6 +66,23 @@ h1, h2 { letter-spacing: -0.02em; }
 .locais-acc summary { list-style: none; }
 .locais-acc details[open] .locais-chev { transform: rotate(180deg); }
 
+/* Especialidades: cartões colapsáveis (foto+título visível; corpo abre ao clicar) */
+.pato-acc { cursor: pointer; }
+.pato-acc > .pato-summary { list-style: none; display: block; position: relative; }
+.pato-acc > .pato-summary::-webkit-details-marker { display: none; }
+.pato-chev {
+  position: absolute; top: 12px; right: 14px; z-index: 3;
+  width: 30px; height: 30px; border-radius: 50%;
+  background: rgba(255, 255, 255, 0.92); color: var(--teal);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1rem; line-height: 1; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
+  transition: transform 0.2s ease;
+}
+.pato-acc[open] .pato-chev { transform: rotate(180deg); }
+/* corpo desliza suavemente ao abrir */
+.pato-acc[open] .pato-body { animation: patoReveal 0.28s ease; }
+@keyframes patoReveal { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: none; } }
+
 /* Menus: mais espaçamento + dropdown também por foco/toque */
 .nav-links { gap: 6px !important; }
 .nav-item { padding: 10px 12px !important; }

@@ -279,6 +279,21 @@ function injectToolsGraphic($x) {
   photo.prepend(`<div class="tools-ai">${AI_SVG}</div>`);
 }
 
+// Especialidades: cada cartão passa a <details> — colapsado mostra só foto+título,
+// o corpo (lista de links) abre ao carregar. Native details/summary, sem JS.
+function makePatologiasCollapsible($x) {
+  $x(".pato-card").each((i, el) => {
+    const card = $x(el);
+    el.tagName = "details";
+    el.name = "details";
+    card.addClass("pato-acc");
+    const photo = card.children(".pato-photo").first();
+    if (!photo.length) return;
+    photo.wrap('<summary class="pato-summary"></summary>');
+    photo.after('<span class="pato-chev" aria-hidden="true">▾</span>');
+  });
+}
+
 // Homepage: logos dos hospitais nos cartões de locais (substitui os mapas -> mais compacto).
 function injectHospitalLogos($x) {
   $x(".local-card").each((i, el) => {
@@ -318,6 +333,7 @@ for (const [file, seg] of Object.entries(ROUTES)) {
     $("section.hero").first().remove(); // hero antigo -> substituído por <VideoHero/>
     $("section.locais").remove();
     injectToolsGraphic($);
+    makePatologiasCollapsible($);
   }
 
   // remover chrome e scripts do corpo
@@ -385,6 +401,7 @@ for (const [file, seg] of Object.entries(ROUTES)) {
     $e("section.hero").first().remove(); // hero antigo -> <VideoHero/>
     $e("section.locais").remove();
     injectToolsGraphic($e);
+    makePatologiasCollapsible($e);
   }
   const css = $e("style").toArray().map((el) => $e(el).html()).join("\n\n");
   $e("body > header, body > footer, body > nav").remove();
@@ -432,6 +449,7 @@ for (const [file, seg] of Object.entries(ROUTES)) {
     $r("section.hero").first().remove(); // hero antigo -> <VideoHero/>
     $r("section.locais").remove();
     injectToolsGraphic($r);
+    makePatologiasCollapsible($r);
   }
   const css = $r("style").toArray().map((el) => $r(el).html()).join("\n\n");
   $r("body > header, body > footer, body > nav").remove();
