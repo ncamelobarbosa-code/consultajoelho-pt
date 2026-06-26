@@ -68,6 +68,16 @@ function rewriteLinks(html) {
 // P0-2: normaliza URLs sem-www -> www (sobretudo dentro de <script> interativos)
 const fixWww = (s) => (s || "").replace(/https:\/\/consultajoelho\.pt(["'\/ ])/g, "https://www.consultajoelho.pt$1");
 
+// Rodapé mais curto: remove links secundários (mantém os principais).
+const FOOTER_DROP = ["artrose", "sindrome-banda-iliotibial", "luxacao-rotula", "quadriceps", "medo-cirurgia"];
+function trimFooter(html) {
+  let out = html;
+  for (const s of FOOTER_DROP) {
+    out = out.replace(new RegExp(`\\s*<a [^>]*href="(?:/en|/ru)?/${s}"[^>]*>[^<]*</a>`, "g"), "");
+  }
+  return out;
+}
+
 function buildMetadata($) {
   const get = (sel, attr = "content") => $(sel).attr(attr) || undefined;
   const title = $("title").first().text().trim() || undefined;
@@ -302,7 +312,7 @@ for (const [file, seg] of Object.entries(ROUTES)) {
     const h = $("body > header").first();
     const f = $("body > footer").first();
     headerHtml = h.length ? injectVideosLink(injectSwitcher(rewriteLinks($.html(h)), "pt"), "pt") : "";
-    footerHtml = f.length ? rewriteLinks($.html(f)) : "";
+    footerHtml = f.length ? trimFooter(rewriteLinks($.html(f))) : "";
     $("section.hero").first().remove(); // hero antigo -> substituído por <VideoHero/>
     injectHospitalLogos($);
     injectToolsGraphic($);
@@ -369,7 +379,7 @@ for (const [file, seg] of Object.entries(ROUTES)) {
     const eh = $e("body > header").first();
     const ef = $e("body > footer").first();
     enHeaderHtml = eh.length ? injectVideosLink(injectSwitcher(rewriteLinksEn($e.html(eh)), "en"), "en") : "";
-    enFooterHtml = ef.length ? rewriteLinksEn($e.html(ef)) : "";
+    enFooterHtml = ef.length ? trimFooter(rewriteLinksEn($e.html(ef))) : "";
     $e("section.hero").first().remove(); // hero antigo -> <VideoHero/>
     injectHospitalLogos($e);
     injectToolsGraphic($e);
@@ -416,7 +426,7 @@ for (const [file, seg] of Object.entries(ROUTES)) {
     const rh = $r("body > header").first();
     const rf = $r("body > footer").first();
     ruHeaderHtml = rh.length ? injectVideosLink(injectSwitcher(rewriteLinksRu($r.html(rh)), "ru"), "ru") : "";
-    ruFooterHtml = rf.length ? rewriteLinksRu($r.html(rf)) : "";
+    ruFooterHtml = rf.length ? trimFooter(rewriteLinksRu($r.html(rf))) : "";
     $r("section.hero").first().remove(); // hero antigo -> <VideoHero/>
     injectHospitalLogos($r);
     injectToolsGraphic($r);

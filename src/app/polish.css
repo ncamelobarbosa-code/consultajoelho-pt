@@ -61,6 +61,23 @@ h1, h2 { letter-spacing: -0.02em; }
   box-shadow: 0 16px 40px rgba(2, 45, 61, 0.14);
 }
 
+/* Menus: mais espaçamento + dropdown também por foco/toque */
+.nav-links { gap: 6px !important; }
+.nav-item { padding: 10px 12px !important; }
+.nav-dropdown { gap: 4px !important; padding: 10px !important; }
+.nav-dropdown a { padding: 8px 14px !important; }
+.nav-item:focus-within > .nav-dropdown { display: flex; }
+/* Mobile: submenus expandidos (touch) quando o menu hamburger abre */
+@media (max-width: 640px) {
+  .nav-dropdown {
+    display: flex !important;
+    position: static !important;
+    box-shadow: none !important;
+    background: transparent !important;
+    padding: 4px 0 8px 16px !important;
+  }
+}
+
 /* Ferramentas Clínicas: grafismo de IA (árvore de decisão / algoritmo) no lugar da foto */
 .tools-ai {
   width: 100%;
