@@ -123,6 +123,7 @@ export default function Page() {
 
 const homepageTemplate = (meta, jsonld, body, script, id, locale = "pt") => `import type { Metadata } from "next";${script ? `\nimport Script from "next/script";` : ""}
 import VideoHero from "@/components/VideoHero";
+import Locais from "@/components/Locais";
 import PageVideos from "@/components/PageVideos";
 import GoogleReviews from "@/components/GoogleReviews";
 
@@ -135,6 +136,7 @@ export default function Page() {
     <>${jsonld ? `\n      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd }} />` : ""}
       <VideoHero lang="${locale}" />
       <div dangerouslySetInnerHTML={{ __html: html }} />
+      <Locais lang="${locale}" />
       <PageVideos slug="" lang="${locale}" />
       <GoogleReviews lang="${locale}" />${script ? `\n      <Script id="${id}-js" strategy="afterInteractive" dangerouslySetInnerHTML={{ __html: pageScript }} />` : ""}
     </>
@@ -314,7 +316,7 @@ for (const [file, seg] of Object.entries(ROUTES)) {
     headerHtml = h.length ? injectVideosLink(injectSwitcher(rewriteLinks($.html(h)), "pt"), "pt") : "";
     footerHtml = f.length ? trimFooter(rewriteLinks($.html(f))) : "";
     $("section.hero").first().remove(); // hero antigo -> substituído por <VideoHero/>
-    injectHospitalLogos($);
+    $("section.locais").remove();
     injectToolsGraphic($);
   }
 
@@ -381,7 +383,7 @@ for (const [file, seg] of Object.entries(ROUTES)) {
     enHeaderHtml = eh.length ? injectVideosLink(injectSwitcher(rewriteLinksEn($e.html(eh)), "en"), "en") : "";
     enFooterHtml = ef.length ? trimFooter(rewriteLinksEn($e.html(ef))) : "";
     $e("section.hero").first().remove(); // hero antigo -> <VideoHero/>
-    injectHospitalLogos($e);
+    $e("section.locais").remove();
     injectToolsGraphic($e);
   }
   const css = $e("style").toArray().map((el) => $e(el).html()).join("\n\n");
@@ -428,7 +430,7 @@ for (const [file, seg] of Object.entries(ROUTES)) {
     ruHeaderHtml = rh.length ? injectVideosLink(injectSwitcher(rewriteLinksRu($r.html(rh)), "ru"), "ru") : "";
     ruFooterHtml = rf.length ? trimFooter(rewriteLinksRu($r.html(rf))) : "";
     $r("section.hero").first().remove(); // hero antigo -> <VideoHero/>
-    injectHospitalLogos($r);
+    $r("section.locais").remove();
     injectToolsGraphic($r);
   }
   const css = $r("style").toArray().map((el) => $r(el).html()).join("\n\n");

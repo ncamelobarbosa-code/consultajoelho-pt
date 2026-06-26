@@ -61,6 +61,11 @@ h1, h2 { letter-spacing: -0.02em; }
   box-shadow: 0 16px 40px rgba(2, 45, 61, 0.14);
 }
 
+/* Acordeão de locais: esconder marcador nativo + rodar chevron ao abrir */
+.locais-acc summary::-webkit-details-marker { display: none; }
+.locais-acc summary { list-style: none; }
+.locais-acc details[open] .locais-chev { transform: rotate(180deg); }
+
 /* Menus: mais espaçamento + dropdown também por foco/toque */
 .nav-links { gap: 6px !important; }
 .nav-item { padding: 10px 12px !important; }
