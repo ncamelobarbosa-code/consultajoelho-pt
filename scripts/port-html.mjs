@@ -243,6 +243,30 @@ function injectHeroImage($x, seg) {
   );
 }
 
+// Homepage: substitui a foto das "Ferramentas Clínicas" por um grafismo de IA
+// (árvore de decisão / algoritmo), aludindo a "descobre o teu problema pelo algoritmo".
+const AI_SVG = `<svg viewBox="0 0 320 230" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Algoritmo de orientação">
+  <g stroke="rgba(170,203,168,.55)" stroke-width="2.5" fill="none">
+    <path d="M160 42 L88 108"/><path d="M160 42 L232 108"/>
+    <path d="M88 108 L50 180"/><path d="M88 108 L126 180"/>
+    <path d="M232 108 L194 180"/><path d="M232 108 L270 180"/>
+  </g>
+  <circle cx="50" cy="180" r="9" fill="rgba(255,255,255,.65)"/>
+  <circle cx="126" cy="180" r="9" fill="rgba(255,255,255,.65)"/>
+  <circle cx="194" cy="180" r="9" fill="rgba(255,255,255,.65)"/>
+  <circle cx="270" cy="180" r="9" fill="rgba(255,255,255,.65)"/>
+  <circle cx="88" cy="108" r="13" fill="#ffffff"/>
+  <circle cx="232" cy="108" r="13" fill="#ffffff"/>
+  <circle cx="160" cy="42" r="20" fill="#AACBA8"/>
+  <text x="160" y="49" text-anchor="middle" fill="#022d3d" font-family="'Space Grotesk',sans-serif" font-size="20" font-weight="700">?</text>
+</svg>`;
+function injectToolsGraphic($x) {
+  const photo = $x(".tools-photo").first();
+  if (!photo.length) return;
+  photo.find("img").remove();
+  photo.prepend(`<div class="tools-ai">${AI_SVG}</div>`);
+}
+
 // Homepage: logos dos hospitais nos cartões de locais (substitui os mapas -> mais compacto).
 function injectHospitalLogos($x) {
   $x(".local-card").each((i, el) => {
@@ -281,6 +305,7 @@ for (const [file, seg] of Object.entries(ROUTES)) {
     footerHtml = f.length ? rewriteLinks($.html(f)) : "";
     $("section.hero").first().remove(); // hero antigo -> substituído por <VideoHero/>
     injectHospitalLogos($);
+    injectToolsGraphic($);
   }
 
   // remover chrome e scripts do corpo
@@ -347,6 +372,7 @@ for (const [file, seg] of Object.entries(ROUTES)) {
     enFooterHtml = ef.length ? rewriteLinksEn($e.html(ef)) : "";
     $e("section.hero").first().remove(); // hero antigo -> <VideoHero/>
     injectHospitalLogos($e);
+    injectToolsGraphic($e);
   }
   const css = $e("style").toArray().map((el) => $e(el).html()).join("\n\n");
   $e("body > header, body > footer, body > nav").remove();
@@ -393,6 +419,7 @@ for (const [file, seg] of Object.entries(ROUTES)) {
     ruFooterHtml = rf.length ? rewriteLinksRu($r.html(rf)) : "";
     $r("section.hero").first().remove(); // hero antigo -> <VideoHero/>
     injectHospitalLogos($r);
+    injectToolsGraphic($r);
   }
   const css = $r("style").toArray().map((el) => $r(el).html()).join("\n\n");
   $r("body > header, body > footer, body > nav").remove();
