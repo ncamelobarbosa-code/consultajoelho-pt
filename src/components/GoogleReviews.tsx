@@ -14,6 +14,12 @@ export type Review = {
 
 const REVIEWS: Review[] = [
   {
+    author: "Maria Pedro",
+    rating: 5,
+    text: "Recibí una excelente atención del doctor Nuno Camelo. Muy buen diagnóstico y trato amable. O meu marido ficou muito satisfeito com a atenção e o diagnóstico do doutor.",
+    weeksAgo: 0,
+  },
+  {
     author: "Marlene Teixeira",
     rating: 5,
     text: "A minha mãe fez prótese do joelho com o Dr. Nuno Camelo. Excelente profissional.",
@@ -35,21 +41,21 @@ const STRINGS = {
     count: (n: number) => `${n} avaliações no Google`,
     see: "Ver avaliações no Google",
     leave: "Deixar avaliação",
-    ago: (w: number) => `Há ${w} semanas`,
+    ago: (w: number) => (w <= 0 ? "Esta semana" : `Há ${w} semanas`),
   },
   en: {
     heading: "What patients say",
     count: (n: number) => `${n} Google reviews`,
     see: "See reviews on Google",
     leave: "Leave a review",
-    ago: (w: number) => `${w} weeks ago`,
+    ago: (w: number) => (w <= 0 ? "This week" : `${w} weeks ago`),
   },
   ru: {
     heading: "Что говорят пациенты",
     count: (n: number) => `${n} отзыва в Google`,
     see: "Смотреть отзывы в Google",
     leave: "Оставить отзыв",
-    ago: (w: number) => `${w} недель назад`,
+    ago: (w: number) => (w <= 0 ? "На этой неделе" : `${w} недель назад`),
   },
 } as const;
 
