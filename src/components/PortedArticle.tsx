@@ -47,12 +47,18 @@ export default function PortedArticle({
   title: titleOverride,
   description: descOverride,
   notice,
+  heroImage,
+  eyebrow,
+  extra,
 }: {
   slug: string;
   lang?: "pt" | "en" | "ru";
   title?: string;
   description?: string;
   notice?: { title: string; body: string };
+  heroImage?: string;
+  eyebrow?: string;
+  extra?: ReactNode;
 }) {
   const meta = pages[slug as PageSlug] as PageMeta | undefined;
   const locale: "pt" | "en" | "ru" = lang || (meta?.lang === "en" ? "en" : "pt");
@@ -66,11 +72,15 @@ export default function PortedArticle({
 
   return (
     <article>
-      <header className="pa-hero">
+      <header
+        className={heroImage ? "pa-hero pa-hero--image" : "pa-hero"}
+        style={heroImage ? { backgroundImage: `linear-gradient(90deg, rgba(2,45,61,0.92) 0%, rgba(2,45,61,0.72) 55%, rgba(2,45,61,0.42) 100%), url(${heroImage})` } : undefined}
+      >
         <div className="pa-hero-inner">
           <nav className="pa-breadcrumb" aria-label="Breadcrumb">
             <a href={t.root}>{t.home}</a> / {title}
           </nav>
+          {eyebrow && <p className="pa-eyebrow">{eyebrow}</p>}
           <h1>{title}</h1>
           {description && <p className="pa-lead">{description}</p>}
           <p className="pa-author">
@@ -98,7 +108,10 @@ export default function PortedArticle({
         </div>
       )}
 
-      <div className="pa-body">{renderBlocks(data.blocks)}</div>
+      <div className="pa-body">
+        {renderBlocks(data.blocks)}
+        {extra}
+      </div>
 
       <section className="pa-cta">
         <h2>{t.cta}</h2>

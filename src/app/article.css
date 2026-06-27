@@ -117,3 +117,28 @@
 .pa-cta a:hover {
   opacity: 0.9;
 }
+
+/* ── Variante de hero com foto (artigos portados premium) ─────────────────────── */
+.pa-hero--image { background-size: cover; background-position: center; }
+.pa-eyebrow {
+  font-family: 'Space Grotesk', sans-serif;
+  text-transform: uppercase; letter-spacing: 0.16em;
+  font-size: 0.78rem; font-weight: 700; color: var(--sage, #aacba8);
+  margin-bottom: 10px;
+}
+/* Caixa de destaque dentro do corpo do artigo */
+.pa-keybox {
+  background: var(--teal-light, #e8f4f8);
+  border-left: 4px solid var(--teal, #035772);
+  border-radius: 0 8px 8px 0;
+  padding: 16px 20px;
+  margin: 28px 0;
+  color: var(--text, #091405);
+  line-height: 1.7;
+  max-width: 68ch;
+}
+.pa-keybox strong {
+  display: block; margin-bottom: 4px;
+  color: var(--teal, #035772);
+  font-family: 'Space Grotesk', sans-serif;
+}

@@ -319,7 +319,8 @@ const RX_ARTROSE = {
   en: { h: "Bilateral Osteoarthritis — Medial Predominance", cap: "Weight-bearing X-ray: medial compartment narrowing in both knees." },
   ru: { h: "Двусторонний остеоартроз — медиальное преобладание", cap: "Рентген с нагрузкой: сужение медиального отдела в обоих коленях." },
 };
-function replaceAnatomyXray($x, locale) {
+function replaceAnatomyXray($x, seg, locale) {
+  if (seg !== "artrose") return; // a RX bilateral só faz sentido na página da artrose
   const card = $x(".anatomy-card");
   const c = RX_ARTROSE[locale];
   if (!card.length || !c) return;
@@ -460,7 +461,7 @@ for (const [file, seg] of Object.entries(ROUTES)) {
   injectHeroImage($, seg);
   makeTablesResponsive($);
   injectProseSport($, "pt");
-  replaceAnatomyXray($, "pt");
+  replaceAnatomyXray($, seg, "pt");
   removeAnatomySvg($);
   injectAmiLink($, "pt");
   setCredChips($, seg, "pt");
@@ -524,7 +525,7 @@ for (const [file, seg] of Object.entries(ROUTES)) {
   injectHeroImage($e, seg);
   makeTablesResponsive($e);
   injectProseSport($e, "en");
-  replaceAnatomyXray($e, "en");
+  replaceAnatomyXray($e, seg, "en");
   removeAnatomySvg($e);
   injectAmiLink($e, "en");
   setCredChips($e, seg, "en");
@@ -578,7 +579,7 @@ for (const [file, seg] of Object.entries(ROUTES)) {
   injectHeroImage($r, seg);
   makeTablesResponsive($r);
   injectProseSport($r, "ru");
-  replaceAnatomyXray($r, "ru");
+  replaceAnatomyXray($r, seg, "ru");
   removeAnatomySvg($r);
   injectAmiLink($r, "ru");
   setCredChips($r, seg, "ru");

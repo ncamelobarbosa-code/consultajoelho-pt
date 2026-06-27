@@ -20,8 +20,29 @@ export const metadata = {
 
 const NOTICE = {
   title: "Important note on treatment",
-  body: "For patellar tendinopathy, the first line is progressive loading exercise (eccentric/isometric) under guidance. Intratendinous corticosteroid injection is discouraged — it carries a risk of tendon rupture. Peritendinous corticosteroid, if considered, is an exception weighed case by case.",
+  body: "For patellar tendinopathy, the first line is progressive loading exercise (eccentric/isometric) under guidance. Intratendinous corticosteroid injection is discouraged — it carries a risk of tendon rupture.",
 };
+
+const PRP = (
+  <>
+    <h2>What about PRP (platelet-rich plasma)?</h2>
+    <p>
+      PRP — platelet-rich plasma obtained from the patient&rsquo;s own blood — has gained a meaningful role in
+      patellar tendinopathy that does not respond to conservative care. By concentrating growth factors, it aims
+      to create a biological environment more favourable to tendon repair.
+    </p>
+    <p>
+      Current evidence positions it as a second-line option: when progressive loading exercise, properly carried
+      out over several months, has not resolved symptoms — and never as a replacement for rehabilitation. The best
+      results come from ultrasound-guided PRP while keeping the exercise programme going.
+    </p>
+    <div className="pa-keybox">
+      <strong>Why it differs from a corticosteroid</strong>
+      Unlike a corticosteroid injection, PRP does not weaken the tendon: it is a regenerative approach (it
+      stimulates repair) rather than merely anti-inflammatory.
+    </div>
+  </>
+);
 
 export default function Page() {
   return (
@@ -31,6 +52,9 @@ export default function Page() {
       title={TITLE}
       description={DESCRIPTION}
       notice={NOTICE}
+      heroImage="/img/hero/tendao-atleta.jpg"
+      eyebrow="Tendinopathy · Jumper's knee"
+      extra={PRP}
     />
   );
 }
