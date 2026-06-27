@@ -281,6 +281,19 @@ function injectToolsGraphic($x) {
   photo.prepend(`<div class="tools-ai">${AI_SVG}</div>`);
 }
 
+// Homepage: simplificar a secção de ferramentas — só o grafismo (com link p/ o algoritmo)
+// + os 2 botões (Algoritmo de Gonalgia / Score de Lysholm). Remove todo o texto/cartões.
+function simplifyTools($x) {
+  const sec = $x("section.tools");
+  if (!sec.length) return;
+  sec.find(".tools-photo-badge").remove();
+  sec.find(".tools-text .eyebrow, .tools-text .h2, .tools-text .tools-desc, .tools-text .tools-cards").remove();
+  const photo = sec.find(".tools-photo").first();
+  if (photo.length && !photo.parent().is("a")) {
+    photo.wrap('<a href="/joelhodrnunocamelo" aria-label="Algoritmo de Gonalgia" style="display:block"></a>');
+  }
+}
+
 // Tabela SANTI (quadricípite): adiciona data-label a cada td (rótulo da coluna)
 // para o layout em cartões no mobile. Funciona nos 3 idiomas (lê os <th> da própria página).
 // Torna QUALQUER tabela com cabeçalho responsiva no mobile: marca a tabela com
@@ -476,6 +489,7 @@ for (const [file, seg] of Object.entries(ROUTES)) {
     $("section.hero").first().remove(); // hero antigo -> substituído por <VideoHero/>
     $("section.locais").remove();
     injectToolsGraphic($);
+    simplifyTools($);
     makePatologiasCollapsible($);
     $("section.doctor, .trust, section.cta-final, section.patologias .section-header").remove();
   }
@@ -552,6 +566,7 @@ for (const [file, seg] of Object.entries(ROUTES)) {
     $e("section.hero").first().remove(); // hero antigo -> <VideoHero/>
     $e("section.locais").remove();
     injectToolsGraphic($e);
+    simplifyTools($e);
     makePatologiasCollapsible($e);
     $e("section.doctor, .trust, section.cta-final, section.patologias .section-header").remove();
   }
@@ -608,6 +623,7 @@ for (const [file, seg] of Object.entries(ROUTES)) {
     $r("section.hero").first().remove(); // hero antigo -> <VideoHero/>
     $r("section.locais").remove();
     injectToolsGraphic($r);
+    simplifyTools($r);
     makePatologiasCollapsible($r);
     $r("section.doctor, .trust, section.cta-final, section.patologias .section-header").remove();
   }
