@@ -240,7 +240,7 @@ const HERO_IMAGES = {
   "quistos-parameniscais": "/img/hero/quistos-parameniscais.jpg",
   quadriceps: "/img/hero/quadriceps.jpg",
   "medo-cirurgia": "/img/hero/medo-cirurgia.jpg",
-  "preparar-cirurgia": "/img/hero/preparar-cirurgia.jpg",
+  "preparar-cirurgia": "/img/hero/consulta.jpg",
   sigic: "/img/hero/sigic.jpg",
 };
 function injectHeroImage($x, seg) {
@@ -313,19 +313,34 @@ const PROSE_SPORT = {
     p: "Эндопротез коленного сустава — не конец активной жизни; напротив, цель операции — вернуть безболезненную подвижность. Большинство пациентов возвращаются к нагрузкам низкой и средней интенсивности: ходьба, плавание, аквааэробика, велосипед, гольф, пешие походы, парный теннис и любительские лыжи. Рекомендуется избегать лишь высокоинтенсивных ударных нагрузок (бег на длинные дистанции, прыжки и контактные виды спорта), которые ускоряют износ имплантата.",
   },
 };
-// Artrose: substitui o desenho dos compartimentos pela radiografia real (RX em carga).
-const RX_ARTROSE = {
-  pt: { h: "Artrose Bilateral — Predomínio Interno", cap: "Radiografia em carga: pinçamento do compartimento interno em ambos os joelhos." },
-  en: { h: "Bilateral Osteoarthritis — Medial Predominance", cap: "Weight-bearing X-ray: medial compartment narrowing in both knees." },
-  ru: { h: "Двусторонний остеоартроз — медиальное преобладание", cap: "Рентген с нагрузкой: сужение медиального отдела в обоих коленях." },
+// Cartão de anatomia (.anatomy-card): por slug, substitui o desenho por imagem real
+// (artrose→RX, quisto-baker→RMN) ou remove-o (quistos-parameniscais, banda iliotibial).
+const ANATOMY_IMG = {
+  artrose: {
+    img: "/img/rx-artrose-bilateral.png",
+    h: { pt: "Artrose Bilateral — Predomínio Interno", en: "Bilateral Osteoarthritis — Medial Predominance", ru: "Двусторонний остеоартроз — медиальное преобладание" },
+    cap: { pt: "Radiografia em carga: pinçamento do compartimento interno em ambos os joelhos.", en: "Weight-bearing X-ray: medial compartment narrowing in both knees.", ru: "Рентген с нагрузкой: сужение медиального отдела в обоих коленях." },
+  },
+  "quisto-baker": {
+    img: "/img/rmn-baker.jpg",
+    h: { pt: "Quisto de Baker — RMN", en: "Baker's Cyst — MRI", ru: "Киста Бейкера — МРТ" },
+    cap: { pt: "RMN axial do joelho: quisto de Baker (estrutura de sinal líquido na região poplítea).", en: "Axial knee MRI: Baker's cyst (fluid-signal structure in the popliteal region).", ru: "Аксиальная МРТ колена: киста Бейкера (структура с жидкостным сигналом в подколенной области)." },
+  },
 };
-function replaceAnatomyXray($x, seg, locale) {
-  if (seg !== "artrose") return; // a RX bilateral só faz sentido na página da artrose
+const ANATOMY_REMOVE = new Set(["quistos-parameniscais", "sindrome-banda-iliotibial"]);
+function handleAnatomyCard($x, seg, locale) {
   const card = $x(".anatomy-card");
-  const c = RX_ARTROSE[locale];
-  if (!card.length || !c) return;
+  if (!card.length) return;
+  if (ANATOMY_REMOVE.has(seg)) {
+    const grid = card.parent();
+    card.remove();
+    grid.css({ "grid-template-columns": "1fr", "max-width": "760px" });
+    return;
+  }
+  const cfg = ANATOMY_IMG[seg];
+  if (!cfg) return; // outras páginas com .anatomy-card ficam inalteradas
   card.html(
-    `<h3>${c.h}</h3><img src="/img/rx-artrose-bilateral.png" alt="${c.h}" loading="lazy" style="width:100%;border-radius:10px;display:block;" /><p style="font-size:.78rem;color:#5a6a7a;margin-top:10px;line-height:1.45;text-align:left;">${c.cap}</p>`
+    `<h3>${cfg.h[locale]}</h3><img src="${cfg.img}" alt="${cfg.h[locale]}" loading="lazy" style="width:100%;border-radius:10px;display:block;" /><p style="font-size:.78rem;color:#5a6a7a;margin-top:10px;line-height:1.45;text-align:left;">${cfg.cap[locale]}</p>`
   );
 }
 
@@ -377,6 +392,23 @@ function injectAmiLink($x, locale) {
   box.append(
     `<a href="/quadriceps" style="display:inline-block;margin-top:20px;color:var(--sage);font-weight:700;text-decoration:none;border-bottom:2px solid var(--sage);padding-bottom:2px;">${t} →</a>`
   );
+}
+
+// FAQs: não nomear o médico — substituir "Dr. Nuno Camelo" por termo impessoal.
+function depersonalizeFaqs($x, locale) {
+  const lc = locale === "en" ? "the specialist" : locale === "ru" ? "специалист" : "o especialista";
+  const cap = locale === "en" ? "The specialist" : locale === "ru" ? "Специалист" : "O especialista";
+  $x(".faq-a").each((i, el) => {
+    const node = $x(el);
+    let h = node.html();
+    if (!h || !/Nuno Camelo/.test(h)) return;
+    h = h.replace(/\bO Dr\. Nuno Camelo(?: Barbosa)?/g, cap);
+    h = h.replace(/\bo Dr\. Nuno Camelo(?: Barbosa)?/g, lc);
+    h = h.replace(/(^|[>.]\s+)Dr\. Nuno Camelo(?: Barbosa)?/g, (m, p1) => p1 + cap);
+    h = h.replace(/\bдр\.\s*Nuno Camelo(?: Barbosa)?/g, lc);
+    h = h.replace(/\bDr\. Nuno Camelo(?: Barbosa)?/g, lc);
+    node.html(h);
+  });
 }
 
 function injectProseSport($x, locale) {
@@ -461,7 +493,8 @@ for (const [file, seg] of Object.entries(ROUTES)) {
   injectHeroImage($, seg);
   makeTablesResponsive($);
   injectProseSport($, "pt");
-  replaceAnatomyXray($, seg, "pt");
+  handleAnatomyCard($, seg, "pt");
+  depersonalizeFaqs($, "pt");
   removeAnatomySvg($);
   injectAmiLink($, "pt");
   setCredChips($, seg, "pt");
@@ -525,7 +558,8 @@ for (const [file, seg] of Object.entries(ROUTES)) {
   injectHeroImage($e, seg);
   makeTablesResponsive($e);
   injectProseSport($e, "en");
-  replaceAnatomyXray($e, seg, "en");
+  handleAnatomyCard($e, seg, "en");
+  depersonalizeFaqs($e, "en");
   removeAnatomySvg($e);
   injectAmiLink($e, "en");
   setCredChips($e, seg, "en");
@@ -579,7 +613,8 @@ for (const [file, seg] of Object.entries(ROUTES)) {
   injectHeroImage($r, seg);
   makeTablesResponsive($r);
   injectProseSport($r, "ru");
-  replaceAnatomyXray($r, seg, "ru");
+  handleAnatomyCard($r, seg, "ru");
+  depersonalizeFaqs($r, "ru");
   removeAnatomySvg($r);
   injectAmiLink($r, "ru");
   setCredChips($r, seg, "ru");
