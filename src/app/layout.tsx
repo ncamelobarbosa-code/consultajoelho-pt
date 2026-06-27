@@ -7,6 +7,7 @@ import { SiteHeader, SiteFooter } from "@/components/SiteChrome";
 import LangSync from "@/components/LangSync";
 import ScrollReveal from "@/components/ScrollReveal";
 import GoogleAnalytics from "@/components/GoogleAnalytics";
+import { Analytics } from "@vercel/analytics/next";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -28,6 +29,7 @@ export default function RootLayout({
         <SiteHeader />
         {children}
         <SiteFooter />
+        <Analytics />
       </body>
     </html>
   );
