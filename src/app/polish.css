@@ -247,6 +247,23 @@ h1, h2 { letter-spacing: -0.02em; }
 .vhero-cta--ghost { background: rgba(255, 255, 255, 0.08); color: #fff; border: 1.5px solid rgba(255, 255, 255, 0.55); }
 .vhero-cta--ghost:hover { background: rgba(255, 255, 255, 0.16); transform: translateY(-2px); }
 @media (max-width: 640px) {
-  .vhero { min-height: 84vh; }
+  /* Hero mais baixo no mobile → o vídeo (16:9) não precisa de esticar tanto em altura,
+     logo fica com MENOS zoom e enquadramento mais próximo do desktop. */
+  .vhero { min-height: 60vh; }
+  .vhero-bg video { object-position: center 28%; }
   .vhero-scrim { background: linear-gradient(180deg, rgba(1, 16, 20, 0.62) 0%, rgba(1, 16, 20, 0.86) 100%); }
+  /* Título um pouco menor para caber na altura reduzida */
+  .vhero-title { font-size: clamp(2.1rem, 8vw, 3rem); }
+  .vhero-sub { font-size: 1rem; margin-bottom: 24px; }
+}
+
+/* ── Rodapé no mobile: 2 colunas (em vez de uma lista comprida) ──────────────── */
+@media (max-width: 640px) {
+  .footer-inner {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 26px 22px !important;
+  }
+  .footer-brand { grid-column: 1 / -1; }   /* marca ocupa a largura toda */
+  .footer-col h4 { margin-bottom: 10px; }
+  .footer-col nav { gap: 7px; }
 }
