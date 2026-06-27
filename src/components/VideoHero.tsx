@@ -50,10 +50,29 @@ export default function VideoHero({ lang = "pt" }: { lang?: Lang }) {
   useEffect(() => {
     const v = videoRef.current;
     if (!v) return;
-    const apply = () => { v.playbackRate = PLAYBACK_RATE; };
-    apply();
-    v.addEventListener("loadedmetadata", apply);
-    return () => v.removeEventListener("loadedmetadata", apply);
+    // iOS/Android: o autoplay só é permitido com muted real no DOM (o atributo do React
+    // nem sempre é refletido) + playsInline. Forçamos e pedimos play() explicitamente.
+    v.muted = true;
+    v.defaultMuted = true;
+    v.setAttribute("muted", "");
+    const setRate = () => { try { v.playbackRate = PLAYBACK_RATE; } catch {} };
+    const tryPlay = () => {
+      const p = v.play();
+      if (p && typeof p.catch === "function") p.catch(() => {});
+    };
+    setRate();
+    tryPlay();
+    const onReady = () => { setRate(); tryPlay(); };
+    v.addEventListener("loadeddata", onReady);
+    v.addEventListener("canplay", tryPlay);
+    // Alguns browsers móveis pausam ao voltar à tab/scroll — retomar quando visível.
+    const onVisible = () => { if (document.visibilityState === "visible") tryPlay(); };
+    document.addEventListener("visibilitychange", onVisible);
+    return () => {
+      v.removeEventListener("loadeddata", onReady);
+      v.removeEventListener("canplay", tryPlay);
+      document.removeEventListener("visibilitychange", onVisible);
+    };
   }, []);
 
   return (
