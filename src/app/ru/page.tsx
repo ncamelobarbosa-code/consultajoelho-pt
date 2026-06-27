@@ -37,9 +37,9 @@ export default function Page() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd }} />
       <VideoHero lang="ru" />
       <div dangerouslySetInnerHTML={{ __html: html }} />
-      <Locais lang="ru" />
       <PageVideos slug="" lang="ru" />
       <GoogleReviews lang="ru" />
+      <Locais lang="ru" />
       <Contacts />
     </>
   );

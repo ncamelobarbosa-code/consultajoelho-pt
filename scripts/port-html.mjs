@@ -137,9 +137,9 @@ export default function Page() {
     <>${jsonld ? `\n      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd }} />` : ""}
       <VideoHero lang="${locale}" />
       <div dangerouslySetInnerHTML={{ __html: html }} />
-      <Locais lang="${locale}" />
       <PageVideos slug="" lang="${locale}" />
       <GoogleReviews lang="${locale}" />
+      <Locais lang="${locale}" />
       <Contacts />${script ? `\n      <Script id="${id}-js" strategy="afterInteractive" dangerouslySetInnerHTML={{ __html: pageScript }} />` : ""}
     </>
   );

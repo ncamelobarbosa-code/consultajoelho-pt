@@ -43,21 +43,16 @@ export default function Locais({ lang = "pt" }: { lang?: Lang }) {
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "1rem" }}>
           {LOCAIS.map((l) => (
             <details key={l.city} style={{ border: "1px solid var(--border)", borderRadius: "var(--r)", background: "var(--bg)", overflow: "hidden" }}>
-              <summary style={{ listStyle: "none", cursor: "pointer", display: "flex", alignItems: "center", gap: "0.85rem", padding: "1rem 1.1rem" }}>
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={l.logo} alt="" style={{ height: "34px", maxWidth: "120px", objectFit: "contain" }} />
-                <span style={{ flex: 1 }}>
-                  <span style={{ display: "block", fontFamily: FONT, fontWeight: 700, color: "var(--text)" }}>{l.city}</span>
-                  <span style={{ display: "block", fontFamily: FONT, fontSize: "0.78rem", color: "var(--muted)" }}>{t.hint}</span>
-                </span>
+              <summary style={{ listStyle: "none", cursor: "pointer", display: "flex", alignItems: "center", gap: "0.85rem", padding: "1.1rem 1.2rem" }}>
+                <span style={{ flex: 1, fontFamily: FONT, fontWeight: 700, fontSize: "1.05rem", color: "var(--text)" }}>{l.city}</span>
                 <span aria-hidden style={{ color: TEAL, fontSize: "1.1rem", transition: "transform .2s" }} className="locais-chev">▾</span>
               </summary>
 
-              <div style={{ padding: "0 1.1rem 1.1rem" }}>
-                <span style={{ display: "inline-block", background: TEAL, color: "#fff", fontFamily: FONT, fontSize: "0.7rem", fontWeight: 700, padding: "3px 10px", borderRadius: "999px", marginBottom: "0.6rem" }}>{l.badge[lang]}</span>
-                <p style={{ fontFamily: FONT, fontWeight: 600, color: "var(--text)", margin: "0 0 0.3rem" }}>{l.hospital}</p>
-                <a href={`tel:+351${l.tel.replace(/\s/g, "")}`} style={{ fontFamily: FONT, fontWeight: 600, color: TEAL, textDecoration: "none" }}>{l.tel}</a>
-                <div style={{ margin: "0.85rem 0", borderRadius: "8px", overflow: "hidden", border: "1px solid var(--border)" }}>
+              <div style={{ padding: "0 1.2rem 1.2rem" }}>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={l.logo} alt={l.hospital} style={{ height: "40px", maxWidth: "150px", objectFit: "contain", display: "block", marginBottom: "0.6rem" }} />
+                <p style={{ fontFamily: FONT, fontWeight: 600, color: "var(--text)", margin: "0 0 0.6rem" }}>{l.hospital}</p>
+                <div style={{ margin: "0 0 0.85rem", borderRadius: "8px", overflow: "hidden", border: "1px solid var(--border)" }}>
                   <iframe
                     src={`https://www.google.com/maps?q=${encodeURIComponent(l.mapQuery)}&output=embed`}
                     title={l.hospital}
