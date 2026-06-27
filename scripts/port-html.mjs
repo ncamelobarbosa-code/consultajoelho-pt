@@ -279,6 +279,22 @@ function injectToolsGraphic($x) {
   photo.prepend(`<div class="tools-ai">${AI_SVG}</div>`);
 }
 
+// Tabela SANTI (quadricípite): adiciona data-label a cada td (rótulo da coluna)
+// para o layout em cartões no mobile. Funciona nos 3 idiomas (lê os <th> da própria página).
+function makeTablesResponsive($x) {
+  $x("table.santi-table").each((ti, tbl) => {
+    const table = $x(tbl);
+    const labels = table.find("thead th").map((i, th) => $x(th).text().trim()).get();
+    if (!labels.length) return;
+    table.addClass("santi-resp");
+    table.find("tbody tr").each((ri, tr) => {
+      $x(tr).find("td").each((ci, td) => {
+        if (labels[ci]) $x(td).attr("data-label", labels[ci]);
+      });
+    });
+  });
+}
+
 // Especialidades: cada cartão passa a <details> — colapsado mostra só foto+título,
 // o corpo (lista de links) abre ao carregar. Native details/summary, sem JS.
 function makePatologiasCollapsible($x) {
@@ -350,6 +366,7 @@ for (const [file, seg] of Object.entries(ROUTES)) {
   $("body script, body style").remove();
 
   injectHeroImage($, seg);
+  makeTablesResponsive($);
   let body = rewriteLinks($("body").html() || "");
 
   const dir = seg ? `${APP}/${seg}` : APP;
@@ -408,6 +425,7 @@ for (const [file, seg] of Object.entries(ROUTES)) {
   const enScript = fixWww($e("body script").not('[type="application/ld+json"]').not("[src]").toArray().map((el) => $e(el).html()).filter(Boolean).join("\n"));
   $e("body script, body style").remove();
   injectHeroImage($e, seg);
+  makeTablesResponsive($e);
   const body = rewriteLinksEn($e("body").html() || "");
   const dir = seg ? `${APP}/en/${seg}` : `${APP}/en`;
   await mkdir(dir, { recursive: true });
@@ -456,6 +474,7 @@ for (const [file, seg] of Object.entries(ROUTES)) {
   const ruScript = fixWww($r("body script").not('[type="application/ld+json"]').not("[src]").toArray().map((el) => $r(el).html()).filter(Boolean).join("\n"));
   $r("body script, body style").remove();
   injectHeroImage($r, seg);
+  makeTablesResponsive($r);
   const body = rewriteLinksRu($r("body").html() || "");
   const dir = seg ? `${APP}/ru/${seg}` : `${APP}/ru`;
   await mkdir(dir, { recursive: true });
