@@ -21,13 +21,13 @@ const LOCAIS: Loc[] = [
 const BOOK: Record<Lang, string> = { pt: "Marcar consulta", en: "Book appointment", ru: "Записаться" };
 
 export default function Locais({ lang = "pt" }: { lang?: Lang }) {
-  const [active, setActive] = useState(0);
-  const l = LOCAIS[active];
+  const [active, setActive] = useState<number | null>(null);
+  const l = active === null ? null : LOCAIS[active];
   return (
     <section aria-label="Locais" style={{ background: "var(--white, #fff)", borderTop: "1px solid var(--border)", borderBottom: "1px solid var(--border)", padding: "56px 1.5rem" }}>
       <div style={{ maxWidth: "760px", margin: "0 auto" }}>
         {/* Nomes em linha, com separadores */}
-        <div style={{ display: "flex", flexWrap: "wrap", alignItems: "center", justifyContent: "center", gap: "0.4rem 0.9rem", marginBottom: "2rem" }}>
+        <div style={{ display: "flex", flexWrap: "wrap", alignItems: "center", justifyContent: "center", gap: "0.4rem 0.9rem", marginBottom: l ? "2rem" : 0 }}>
           {LOCAIS.map((loc, i) => (
             <span key={loc.city} style={{ display: "inline-flex", alignItems: "center", gap: "0.4rem 0.9rem" }}>
               {i > 0 && <span aria-hidden style={{ color: "var(--border)", fontWeight: 300 }}>—</span>}
@@ -49,7 +49,8 @@ export default function Locais({ lang = "pt" }: { lang?: Lang }) {
           ))}
         </div>
 
-        {/* Painel da unidade selecionada */}
+        {/* Painel da unidade selecionada (só após clicar) */}
+        {l && (
         <div style={{ textAlign: "center" }}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src={l.logo} alt={l.hospital} style={{ height: "44px", maxWidth: "170px", objectFit: "contain", margin: "0 auto 0.6rem" }} />
@@ -70,6 +71,7 @@ export default function Locais({ lang = "pt" }: { lang?: Lang }) {
             {BOOK[lang]} →
           </a>
         </div>
+        )}
       </div>
     </section>
   );
