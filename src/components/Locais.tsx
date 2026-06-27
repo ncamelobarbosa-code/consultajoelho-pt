@@ -27,17 +27,17 @@ export default function Locais({ lang = "pt" }: { lang?: Lang }) {
     <section aria-label="Locais" style={{ background: "var(--white, #fff)", borderTop: "1px solid var(--border)", borderBottom: "1px solid var(--border)", padding: "56px 1.5rem" }}>
       <div style={{ maxWidth: "760px", margin: "0 auto" }}>
         {/* Nomes em linha, com separadores */}
-        <div style={{ display: "flex", flexWrap: "wrap", alignItems: "center", justifyContent: "center", gap: "0.4rem 0.9rem", marginBottom: l ? "2rem" : 0 }}>
+        <div style={{ display: "flex", flexWrap: "wrap", alignItems: "center", justifyContent: "center", gap: "0.3rem 0.55rem", marginBottom: l ? "2rem" : 0 }}>
           {LOCAIS.map((loc, i) => (
-            <span key={loc.city} style={{ display: "inline-flex", alignItems: "center", gap: "0.4rem 0.9rem" }}>
+            <span key={loc.city} style={{ display: "inline-flex", alignItems: "center", gap: "0.3rem 0.55rem" }}>
               {i > 0 && <span aria-hidden style={{ color: "var(--border)", fontWeight: 300 }}>—</span>}
               <button
                 onClick={() => setActive(i)}
                 aria-pressed={active === i}
                 style={{
                   background: "none", border: "none", cursor: "pointer", padding: "4px 2px",
-                  fontFamily: FONT, fontSize: "clamp(1.05rem, 2.5vw, 1.5rem)", fontWeight: 700,
-                  letterSpacing: "-0.01em",
+                  fontFamily: FONT, fontSize: "clamp(0.82rem, 3vw, 1.5rem)", fontWeight: 700,
+                  letterSpacing: "-0.01em", whiteSpace: "nowrap",
                   color: active === i ? TEAL : "var(--muted)",
                   borderBottom: active === i ? `2px solid var(--sage)` : "2px solid transparent",
                   transition: "color .18s ease, border-color .18s ease",
