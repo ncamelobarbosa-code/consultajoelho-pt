@@ -93,8 +93,7 @@ export default function VideoHero({ lang = "pt" }: { lang?: Lang }) {
         {t.tagline && <p className="vhero-tag">{t.tagline}</p>}
         {t.sub && <p className="vhero-sub">{t.sub}</p>}
         <div className="vhero-ctas">
-          <a className="vhero-cta vhero-cta--primary" href={t.cta1href}>{t.cta1}</a>
-          <a className="vhero-cta vhero-cta--ghost" href={t.cta2href}>{t.cta2} →</a>
+          <a className="vhero-cta vhero-cta--primary" href={t.cta2href}>{t.cta2} →</a>
         </div>
       </div>
     </section>

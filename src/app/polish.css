@@ -295,3 +295,9 @@ h1, h2 { letter-spacing: -0.02em; }
     font-weight: 700; opacity: 0.6; margin-bottom: 3px;
   }
 }
+
+/* Homepage hero: no desktop, conteúdo alinhado ao fundo-esquerda do vídeo */
+@media (min-width: 641px) {
+  .vhero { align-items: flex-end; }
+  .vhero-content { padding-bottom: 60px; }
+}

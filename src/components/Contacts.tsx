@@ -12,6 +12,11 @@ const LINKS = [
 export default function Contacts() {
   return (
     <section aria-label="Contactos" style={{ background: "#fff", borderTop: "1px solid var(--border)", padding: "3rem 1.5rem" }}>
+      <a href="/" aria-label="ConsultaJoelho.pt" style={{ display: "block", textAlign: "center", textDecoration: "none", fontFamily: "'Space Grotesk', sans-serif", fontWeight: 700, fontSize: "1.5rem", letterSpacing: "-0.02em", marginBottom: "1.6rem" }}>
+        <span style={{ color: "var(--text)" }}>Consulta</span>
+        <span style={{ color: TEAL }}>Joelho</span>
+        <span style={{ color: "var(--sage)" }}>.pt</span>
+      </a>
       <div style={{ display: "flex", gap: "1.1rem", justifyContent: "center", flexWrap: "wrap" }}>
         {LINKS.map((l) => (
           <a

@@ -477,7 +477,7 @@ for (const [file, seg] of Object.entries(ROUTES)) {
     $("section.locais").remove();
     injectToolsGraphic($);
     makePatologiasCollapsible($);
-    $("section.doctor, .trust, section.cta-final").remove();
+    $("section.doctor, .trust, section.cta-final, section.patologias .section-header").remove();
   }
 
   // remover chrome e scripts do corpo
@@ -553,7 +553,7 @@ for (const [file, seg] of Object.entries(ROUTES)) {
     $e("section.locais").remove();
     injectToolsGraphic($e);
     makePatologiasCollapsible($e);
-    $e("section.doctor, .trust, section.cta-final").remove();
+    $e("section.doctor, .trust, section.cta-final, section.patologias .section-header").remove();
   }
   const css = $e("style").toArray().map((el) => $e(el).html()).join("\n\n");
   $e("body > header, body > footer, body > nav").remove();
@@ -609,7 +609,7 @@ for (const [file, seg] of Object.entries(ROUTES)) {
     $r("section.locais").remove();
     injectToolsGraphic($r);
     makePatologiasCollapsible($r);
-    $r("section.doctor, .trust, section.cta-final").remove();
+    $r("section.doctor, .trust, section.cta-final, section.patologias .section-header").remove();
   }
   const css = $r("style").toArray().map((el) => $r(el).html()).join("\n\n");
   $r("body > header, body > footer, body > nav").remove();

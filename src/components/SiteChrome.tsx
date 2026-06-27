@@ -21,6 +21,9 @@ export function SiteHeader() {
 }
 
 export function SiteFooter() {
-  const html = footers[localeOf(usePathname())];
+  const pathname = usePathname();
+  // Na homepage o rodapé é substituído pela secção de Contactos (logo + ícones).
+  if (pathname === "/" || pathname === "/en" || pathname === "/ru") return null;
+  const html = footers[localeOf(pathname)];
   return <div dangerouslySetInnerHTML={{ __html: html }} />;
 }
