@@ -40,10 +40,6 @@ export default function Locais({ lang = "pt" }: { lang?: Lang }) {
   return (
     <section className="locais-acc" aria-label={t.heading} style={{ background: "var(--white, #fff)", borderTop: "1px solid var(--border)", borderBottom: "1px solid var(--border)", padding: "60px 1.5rem" }}>
       <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
-        <span style={{ display: "block", fontFamily: FONT, fontSize: "0.8rem", fontWeight: 600, letterSpacing: "0.16em", textTransform: "uppercase", color: TEAL, marginBottom: "0.5rem" }}>{t.eyebrow}</span>
-        <h2 style={{ fontFamily: FONT, fontSize: "clamp(1.6rem, 4vw, 2.25rem)", fontWeight: 700, color: "var(--text)", margin: "0 0 0.5rem" }}>{t.heading}</h2>
-        <p style={{ fontFamily: FONT, color: "var(--muted)", margin: "0 0 1.75rem" }}>{t.sub}</p>
-
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "1rem" }}>
           {LOCAIS.map((l) => (
             <details key={l.city} style={{ border: "1px solid var(--border)", borderRadius: "var(--r)", background: "var(--bg)", overflow: "hidden" }}>

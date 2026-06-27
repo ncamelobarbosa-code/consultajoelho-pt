@@ -14,26 +14,20 @@ const COPY: Record<Lang, {
   cta1: string; cta1href: string; cta2: string; cta2href: string;
 }> = {
   pt: {
-    eyebrow: "Subespecialista Exclusivo de Joelho · Porto",
-    titleA: "Bem-vindo à", titleB: "Consulta de Joelho",
-    tagline: "Experiência · Ciência · Excelência",
-    sub: "Diagnóstico preciso. Tratamento personalizado. Do conservador à cirurgia minimamente invasiva. Porto, Paços de Ferreira e Vila do Conde.",
+    eyebrow: "", titleA: "Consulta de", titleB: "Joelho",
+    tagline: "", sub: "",
     cta1: "Agendar Consulta", cta1href: "/contacto",
     cta2: "Avaliar o Meu Joelho", cta2href: "/avaliar",
   },
   en: {
-    eyebrow: "Exclusive Knee Subspecialist · Porto",
-    titleA: "Welcome to", titleB: "the Knee Clinic",
-    tagline: "Experience · Science · Excellence",
-    sub: "Accurate diagnosis. Personalised treatment. From conservative care to minimally invasive surgery. Porto, Paços de Ferreira and Vila do Conde.",
+    eyebrow: "", titleA: "Knee", titleB: "Clinic",
+    tagline: "", sub: "",
     cta1: "Book Appointment", cta1href: "/en/contacto",
     cta2: "Assess My Knee", cta2href: "/en/avaliar",
   },
   ru: {
-    eyebrow: "Узкая специализация только по колену · Порту",
-    titleA: "Добро пожаловать в", titleB: "Клинику коленного сустава",
-    tagline: "Опыт · Наука · Совершенство",
-    sub: "Точная диагностика. Индивидуальное лечение. От консервативной помощи до малоинвазивной хирургии. Порту, Paços de Ferreira и Vila do Conde.",
+    eyebrow: "", titleA: "Клиника", titleB: "колена",
+    tagline: "", sub: "",
     cta1: "Записаться на приём", cta1href: "/ru/contacto",
     cta2: "Оценить моё колено", cta2href: "/ru/avaliar",
   },
@@ -92,12 +86,12 @@ export default function VideoHero({ lang = "pt" }: { lang?: Lang }) {
       </div>
       <div className="vhero-scrim" aria-hidden="true" />
       <div className="vhero-content">
-        <span className="vhero-eyebrow">{t.eyebrow}</span>
+        {t.eyebrow && <span className="vhero-eyebrow">{t.eyebrow}</span>}
         <h1 className="vhero-title">
           {t.titleA} <span>{t.titleB}</span>
         </h1>
-        <p className="vhero-tag">{t.tagline}</p>
-        <p className="vhero-sub">{t.sub}</p>
+        {t.tagline && <p className="vhero-tag">{t.tagline}</p>}
+        {t.sub && <p className="vhero-sub">{t.sub}</p>}
         <div className="vhero-ctas">
           <a className="vhero-cta vhero-cta--primary" href={t.cta1href}>{t.cta1}</a>
           <a className="vhero-cta vhero-cta--ghost" href={t.cta2href}>{t.cta2} →</a>

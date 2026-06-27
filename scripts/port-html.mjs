@@ -126,6 +126,7 @@ import VideoHero from "@/components/VideoHero";
 import Locais from "@/components/Locais";
 import PageVideos from "@/components/PageVideos";
 import GoogleReviews from "@/components/GoogleReviews";
+import Contacts from "@/components/Contacts";
 
 export const metadata: Metadata = ${JSON.stringify(meta, null, 2)};
 
@@ -138,7 +139,8 @@ export default function Page() {
       <div dangerouslySetInnerHTML={{ __html: html }} />
       <Locais lang="${locale}" />
       <PageVideos slug="" lang="${locale}" />
-      <GoogleReviews lang="${locale}" />${script ? `\n      <Script id="${id}-js" strategy="afterInteractive" dangerouslySetInnerHTML={{ __html: pageScript }} />` : ""}
+      <GoogleReviews lang="${locale}" />
+      <Contacts />${script ? `\n      <Script id="${id}-js" strategy="afterInteractive" dangerouslySetInnerHTML={{ __html: pageScript }} />` : ""}
     </>
   );
 }
@@ -475,6 +477,7 @@ for (const [file, seg] of Object.entries(ROUTES)) {
     $("section.locais").remove();
     injectToolsGraphic($);
     makePatologiasCollapsible($);
+    $("section.doctor, .trust, section.cta-final").remove();
   }
 
   // remover chrome e scripts do corpo
@@ -550,6 +553,7 @@ for (const [file, seg] of Object.entries(ROUTES)) {
     $e("section.locais").remove();
     injectToolsGraphic($e);
     makePatologiasCollapsible($e);
+    $e("section.doctor, .trust, section.cta-final").remove();
   }
   const css = $e("style").toArray().map((el) => $e(el).html()).join("\n\n");
   $e("body > header, body > footer, body > nav").remove();
@@ -605,6 +609,7 @@ for (const [file, seg] of Object.entries(ROUTES)) {
     $r("section.locais").remove();
     injectToolsGraphic($r);
     makePatologiasCollapsible($r);
+    $r("section.doctor, .trust, section.cta-final").remove();
   }
   const css = $r("style").toArray().map((el) => $r(el).html()).join("\n\n");
   $r("body > header, body > footer, body > nav").remove();
