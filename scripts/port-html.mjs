@@ -285,10 +285,15 @@ function simplifyTools($x) {
   const sec = $x("section.tools");
   if (!sec.length) return;
   sec.find(".tools-photo-badge").remove();
-  sec.find(".tools-text .eyebrow, .tools-text .h2, .tools-text .tools-desc, .tools-text .tools-cards").remove();
+  // texto do botão (localizado) a partir do 1º botão de ações
+  const algoLabel = (sec.find(".tools-actions a").first().text() || "Algoritmo de Gonalgia").trim();
+  // remover TODO o texto da secção (eyebrow, título, descrição, cartões e os 2 botões)
+  sec.find(".tools-text").remove();
+  // grafismo a ocupar a largura toda + botão do algoritmo sobreposto dentro da imagem
+  sec.find(".tools-inner").css({ "grid-template-columns": "1fr", "max-width": "680px" });
   const photo = sec.find(".tools-photo").first();
-  if (photo.length && !photo.parent().is("a")) {
-    photo.wrap('<a href="/joelhodrnunocamelo" aria-label="Algoritmo de Gonalgia" style="display:block"></a>');
+  if (photo.length) {
+    photo.append(`<a href="/joelhodrnunocamelo" class="tools-ai-btn">${algoLabel}</a>`);
   }
 }
 
