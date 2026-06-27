@@ -1,72 +1,74 @@
-// Locais de atendimento em acordeão: cada cidade colapsa para o nome+logo;
-// ao tocar abre hospital, telefone e mapa (mapa só carrega quando aberto — lazy).
+"use client";
+
+// Moradas: nomes das cidades em linha (Porto — Vila do Conde — Paços de Ferreira).
+// Ao clicar num nome aparece a unidade (logo + hospital) e o mapa.
+
+import { useState } from "react";
 
 type Lang = "pt" | "en" | "ru";
 
 const TEAL = "var(--teal)";
 const FONT = "'Space Grotesk', sans-serif";
 
-const STRINGS = {
-  pt: { eyebrow: "Onde Consultar", heading: "Locais de Atendimento", sub: "Em todas as unidades: SIGIC, subsistemas de saúde e particular.", book: "Marcar consulta", hint: "Toque para morada e mapa" },
-  en: { eyebrow: "Where to Consult", heading: "Locations", sub: "All units: SIGIC, health insurance and private.", book: "Book appointment", hint: "Tap for address and map" },
-  ru: { eyebrow: "Где принимаю", heading: "Места приёма", sub: "Во всех отделениях: SIGIC, страхование и платно.", book: "Записаться", hint: "Нажмите для адреса и карты" },
-} as const;
-
-type Loc = { city: string; hospital: string; logo: string; tel: string; mapQuery: string; badge: Record<Lang, string>; bookHref: Record<Lang, string> };
+type Loc = { city: string; hospital: string; logo: string; mapQuery: string; bookHref: Record<Lang, string> };
 
 const LOCAIS: Loc[] = [
-  {
-    city: "Porto", hospital: "Hospital Lusíadas Porto", logo: "/img/logos/lusiadas.png",
-    tel: "926 850 194", mapQuery: "Hospital Lusíadas Porto",
-    badge: { pt: "SIGIC · Cirurgia", en: "SIGIC · Surgery", ru: "SIGIC · Хирургия" },
-    bookHref: { pt: "/contacto", en: "/en/contacto", ru: "/ru/contacto" },
-  },
-  {
-    city: "Vila do Conde", hospital: "Hospital Misericórdia de Vila do Conde", logo: "/img/logos/hmvc.webp",
-    tel: "252 249 100", mapQuery: "Hospital Misericórdia Vila do Conde",
-    badge: { pt: "Consultas", en: "Consultations", ru: "Консультации" },
-    bookHref: { pt: "/contacto", en: "/en/contacto", ru: "/ru/contacto" },
-  },
-  {
-    city: "Paços de Ferreira", hospital: "Hospital Lusíadas Paços de Ferreira", logo: "/img/logos/lusiadas.png",
-    tel: "926 850 194", mapQuery: "Hospital Lusíadas Paços de Ferreira",
-    badge: { pt: "Consultas · Coordenação de Ortopedia", en: "Consultations · Head of Orthopaedics", ru: "Консультации · заведующий ортопедией" },
-    bookHref: { pt: "/contacto", en: "/en/contacto", ru: "/ru/contacto" },
-  },
+  { city: "Porto", hospital: "Hospital Lusíadas Porto", logo: "/img/logos/lusiadas.png", mapQuery: "Hospital Lusíadas Porto", bookHref: { pt: "/contacto", en: "/en/contacto", ru: "/ru/contacto" } },
+  { city: "Vila do Conde", hospital: "Hospital Misericórdia de Vila do Conde", logo: "/img/logos/hmvc.webp", mapQuery: "Hospital Misericórdia Vila do Conde", bookHref: { pt: "/contacto", en: "/en/contacto", ru: "/ru/contacto" } },
+  { city: "Paços de Ferreira", hospital: "Hospital Lusíadas Paços de Ferreira", logo: "/img/logos/lusiadas.png", mapQuery: "Hospital Lusíadas Paços de Ferreira", bookHref: { pt: "/contacto", en: "/en/contacto", ru: "/ru/contacto" } },
 ];
 
-export default function Locais({ lang = "pt" }: { lang?: Lang }) {
-  const t = STRINGS[lang];
-  return (
-    <section className="locais-acc" aria-label={t.heading} style={{ background: "var(--white, #fff)", borderTop: "1px solid var(--border)", borderBottom: "1px solid var(--border)", padding: "60px 1.5rem" }}>
-      <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "1rem" }}>
-          {LOCAIS.map((l) => (
-            <details key={l.city} style={{ border: "1px solid var(--border)", borderRadius: "var(--r)", background: "var(--bg)", overflow: "hidden" }}>
-              <summary style={{ listStyle: "none", cursor: "pointer", display: "flex", alignItems: "center", gap: "0.85rem", padding: "1.1rem 1.2rem" }}>
-                <span style={{ flex: 1, fontFamily: FONT, fontWeight: 700, fontSize: "1.05rem", color: "var(--text)" }}>{l.city}</span>
-                <span aria-hidden style={{ color: TEAL, fontSize: "1.1rem", transition: "transform .2s" }} className="locais-chev">▾</span>
-              </summary>
+const BOOK: Record<Lang, string> = { pt: "Marcar consulta", en: "Book appointment", ru: "Записаться" };
 
-              <div style={{ padding: "0 1.2rem 1.2rem" }}>
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={l.logo} alt={l.hospital} style={{ height: "40px", maxWidth: "150px", objectFit: "contain", display: "block", marginBottom: "0.6rem" }} />
-                <p style={{ fontFamily: FONT, fontWeight: 600, color: "var(--text)", margin: "0 0 0.6rem" }}>{l.hospital}</p>
-                <div style={{ margin: "0 0 0.85rem", borderRadius: "8px", overflow: "hidden", border: "1px solid var(--border)" }}>
-                  <iframe
-                    src={`https://www.google.com/maps?q=${encodeURIComponent(l.mapQuery)}&output=embed`}
-                    title={l.hospital}
-                    loading="lazy"
-                    width="100%"
-                    height="180"
-                    style={{ border: 0, display: "block" }}
-                    referrerPolicy="no-referrer-when-downgrade"
-                  />
-                </div>
-                <a href={l.bookHref[lang]} style={{ fontFamily: FONT, fontWeight: 600, color: TEAL, textDecoration: "none", borderBottom: "2px solid var(--sage)" }}>{t.book} →</a>
-              </div>
-            </details>
+export default function Locais({ lang = "pt" }: { lang?: Lang }) {
+  const [active, setActive] = useState(0);
+  const l = LOCAIS[active];
+  return (
+    <section aria-label="Locais" style={{ background: "var(--white, #fff)", borderTop: "1px solid var(--border)", borderBottom: "1px solid var(--border)", padding: "56px 1.5rem" }}>
+      <div style={{ maxWidth: "760px", margin: "0 auto" }}>
+        {/* Nomes em linha, com separadores */}
+        <div style={{ display: "flex", flexWrap: "wrap", alignItems: "center", justifyContent: "center", gap: "0.4rem 0.9rem", marginBottom: "2rem" }}>
+          {LOCAIS.map((loc, i) => (
+            <span key={loc.city} style={{ display: "inline-flex", alignItems: "center", gap: "0.4rem 0.9rem" }}>
+              {i > 0 && <span aria-hidden style={{ color: "var(--border)", fontWeight: 300 }}>—</span>}
+              <button
+                onClick={() => setActive(i)}
+                aria-pressed={active === i}
+                style={{
+                  background: "none", border: "none", cursor: "pointer", padding: "4px 2px",
+                  fontFamily: FONT, fontSize: "clamp(1.05rem, 2.5vw, 1.5rem)", fontWeight: 700,
+                  letterSpacing: "-0.01em",
+                  color: active === i ? TEAL : "var(--muted)",
+                  borderBottom: active === i ? `2px solid var(--sage)` : "2px solid transparent",
+                  transition: "color .18s ease, border-color .18s ease",
+                }}
+              >
+                {loc.city}
+              </button>
+            </span>
           ))}
+        </div>
+
+        {/* Painel da unidade selecionada */}
+        <div style={{ textAlign: "center" }}>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src={l.logo} alt={l.hospital} style={{ height: "44px", maxWidth: "170px", objectFit: "contain", margin: "0 auto 0.6rem" }} />
+          <p style={{ fontFamily: FONT, fontWeight: 600, color: "var(--text)", margin: "0 0 1rem" }}>{l.hospital}</p>
+          <div style={{ borderRadius: "var(--r)", overflow: "hidden", border: "1px solid var(--border)", marginBottom: "1rem" }}>
+            <iframe
+              key={l.mapQuery}
+              src={`https://www.google.com/maps?q=${encodeURIComponent(l.mapQuery)}&output=embed`}
+              title={l.hospital}
+              loading="lazy"
+              width="100%"
+              height="300"
+              style={{ border: 0, display: "block" }}
+              referrerPolicy="no-referrer-when-downgrade"
+            />
+          </div>
+          <a href={l.bookHref[lang]} style={{ fontFamily: FONT, fontWeight: 600, color: TEAL, textDecoration: "none", borderBottom: "2px solid var(--sage)" }}>
+            {BOOK[lang]} →
+          </a>
         </div>
       </div>
     </section>
