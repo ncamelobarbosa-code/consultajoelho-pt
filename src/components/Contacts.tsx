@@ -1,4 +1,9 @@
-// Secção final da homepage: apenas contactos em ícones (com link). Minimalista.
+"use client";
+
+// Rodapé global: logo ConsultaJoelho.pt + ícones de contacto (com link).
+// Em páginas que não são a homepage mostra também o botão "Marcar consulta".
+import { usePathname } from "next/navigation";
+
 const TEAL = "var(--teal)";
 
 const LINKS = [
@@ -9,14 +14,37 @@ const LINKS = [
   { label: "ORCID", href: "https://orcid.org/0000-0002-7443-4085", icon: "M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20ZM8.06 6.56a.86.86 0 1 1 0 1.72.86.86 0 0 1 0-1.72ZM7.3 9.4h1.5v7.2H7.3V9.4Zm3 0h2.9c2.77 0 3.99 1.98 3.99 3.6 0 1.76-1.38 3.6-3.97 3.6h-2.92V9.4Zm1.5 1.36v4.48h1.31c1.87 0 2.3-1.42 2.3-2.24 0-1.33-.85-2.24-2.34-2.24h-1.27Z" },
 ];
 
+const BOOK: Record<string, string> = { pt: "Marcar consulta", en: "Book appointment", ru: "Записаться" };
+
+function localeOf(p: string): "pt" | "en" | "ru" {
+  if (p === "/en" || p.startsWith("/en/")) return "en";
+  if (p === "/ru" || p.startsWith("/ru/")) return "ru";
+  return "pt";
+}
+
 export default function Contacts() {
+  const pathname = usePathname() || "/";
+  const locale = localeOf(pathname);
+  const isHome = pathname === "/" || pathname === "/en" || pathname === "/ru";
+  const home = locale === "en" ? "/en" : locale === "ru" ? "/ru" : "/";
+  const bookHref = locale === "en" ? "/en/contacto" : locale === "ru" ? "/ru/contacto" : "/contacto";
+
   return (
-    <section aria-label="Contactos" style={{ background: "#fff", borderTop: "1px solid var(--border)", padding: "3rem 1.5rem" }}>
-      <a href="/" aria-label="ConsultaJoelho.pt" style={{ display: "block", textAlign: "center", textDecoration: "none", fontFamily: "'Space Grotesk', sans-serif", fontWeight: 700, fontSize: "1.5rem", letterSpacing: "-0.02em", marginBottom: "1.6rem" }}>
+    <footer aria-label="Contactos" style={{ background: "#fff", borderTop: "1px solid var(--border)", padding: "3rem 1.5rem" }}>
+      <a href={home} aria-label="ConsultaJoelho.pt" style={{ display: "block", textAlign: "center", textDecoration: "none", fontFamily: "'Space Grotesk', sans-serif", fontWeight: 700, fontSize: "1.5rem", letterSpacing: "-0.02em", marginBottom: "1.5rem" }}>
         <span style={{ color: "var(--text)" }}>Consulta</span>
         <span style={{ color: TEAL }}>Joelho</span>
         <span style={{ color: "var(--sage)" }}>.pt</span>
       </a>
+
+      {!isHome && (
+        <div style={{ textAlign: "center", marginBottom: "1.5rem" }}>
+          <a href={bookHref} style={{ display: "inline-block", fontFamily: "'Space Grotesk', sans-serif", fontWeight: 700, fontSize: "0.95rem", color: "#fff", background: TEAL, padding: "0.8rem 1.8rem", borderRadius: "var(--r)", textDecoration: "none" }}>
+            {BOOK[locale]}
+          </a>
+        </div>
+      )}
+
       <div style={{ display: "flex", gap: "1.1rem", justifyContent: "center", flexWrap: "wrap" }}>
         {LINKS.map((l) => (
           <a
@@ -30,7 +58,6 @@ export default function Contacts() {
               width: 52, height: 52, borderRadius: "50%",
               border: "1.5px solid var(--border)", color: TEAL,
               display: "inline-flex", alignItems: "center", justifyContent: "center",
-              transition: "background-color .18s ease, color .18s ease, transform .18s ease",
             }}
           >
             <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
@@ -39,6 +66,6 @@ export default function Contacts() {
           </a>
         ))}
       </div>
-    </section>
+    </footer>
   );
 }

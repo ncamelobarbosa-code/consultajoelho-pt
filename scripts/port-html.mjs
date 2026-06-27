@@ -126,7 +126,6 @@ import VideoHero from "@/components/VideoHero";
 import Locais from "@/components/Locais";
 import PageVideos from "@/components/PageVideos";
 import GoogleReviews from "@/components/GoogleReviews";
-import Contacts from "@/components/Contacts";
 
 export const metadata: Metadata = ${JSON.stringify(meta, null, 2)};
 
@@ -139,8 +138,7 @@ export default function Page() {
       <div dangerouslySetInnerHTML={{ __html: html }} />
       <PageVideos slug="" lang="${locale}" />
       <GoogleReviews lang="${locale}" />
-      <Locais lang="${locale}" />
-      <Contacts />${script ? `\n      <Script id="${id}-js" strategy="afterInteractive" dangerouslySetInnerHTML={{ __html: pageScript }} />` : ""}
+      <Locais lang="${locale}" />${script ? `\n      <Script id="${id}-js" strategy="afterInteractive" dangerouslySetInnerHTML={{ __html: pageScript }} />` : ""}
     </>
   );
 }

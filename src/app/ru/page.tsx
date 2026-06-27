@@ -3,7 +3,6 @@ import VideoHero from "@/components/VideoHero";
 import Locais from "@/components/Locais";
 import PageVideos from "@/components/PageVideos";
 import GoogleReviews from "@/components/GoogleReviews";
-import Contacts from "@/components/Contacts";
 
 export const metadata: Metadata = {
   "title": "Клиника коленного сустава Порту | Dr. Nuno Camelo — ортопедический хирург",
@@ -40,7 +39,6 @@ export default function Page() {
       <PageVideos slug="" lang="ru" />
       <GoogleReviews lang="ru" />
       <Locais lang="ru" />
-      <Contacts />
     </>
   );
 }

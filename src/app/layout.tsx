@@ -3,10 +3,11 @@ import "./globals.css";
 import "./site.css";
 import "./article.css";
 import "./polish.css";
-import { SiteHeader, SiteFooter } from "@/components/SiteChrome";
+import { SiteHeader } from "@/components/SiteChrome";
 import LangSync from "@/components/LangSync";
 import ScrollReveal from "@/components/ScrollReveal";
 import GoogleAnalytics from "@/components/GoogleAnalytics";
+import Contacts from "@/components/Contacts";
 import { Analytics } from "@vercel/analytics/next";
 import { site } from "@/lib/site";
 
@@ -28,7 +29,7 @@ export default function RootLayout({
         <ScrollReveal />
         <SiteHeader />
         {children}
-        <SiteFooter />
+        <Contacts />
         <Analytics />
       </body>
     </html>

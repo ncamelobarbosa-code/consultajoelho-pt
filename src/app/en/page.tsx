@@ -3,7 +3,6 @@ import VideoHero from "@/components/VideoHero";
 import Locais from "@/components/Locais";
 import PageVideos from "@/components/PageVideos";
 import GoogleReviews from "@/components/GoogleReviews";
-import Contacts from "@/components/Contacts";
 
 export const metadata: Metadata = {
   "title": "the Knee Clinic Porto | Dr. Nuno Camelo – Cirurgião Ortopédico",
@@ -40,7 +39,6 @@ export default function Page() {
       <PageVideos slug="" lang="en" />
       <GoogleReviews lang="en" />
       <Locais lang="en" />
-      <Contacts />
     </>
   );
 }
