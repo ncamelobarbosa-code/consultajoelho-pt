@@ -6,6 +6,7 @@ import "./polish.css";
 import { SiteHeader, SiteFooter } from "@/components/SiteChrome";
 import LangSync from "@/components/LangSync";
 import ScrollReveal from "@/components/ScrollReveal";
+import GoogleAnalytics from "@/components/GoogleAnalytics";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -21,6 +22,7 @@ export default function RootLayout({
   return (
     <html lang="pt">
       <body>
+        <GoogleAnalytics />
         <LangSync />
         <ScrollReveal />
         <SiteHeader />
