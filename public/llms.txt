@@ -1,0 +1,45 @@
+# ConsultaJoelho.pt — Dr. Nuno Camelo Barbosa
+
+> Knee-only orthopaedic surgery and consultation in Portugal (Porto, Vila do Conde and Paços de Ferreira). Dr. Nuno Camelo Barbosa is an orthopaedic surgeon subspecialised exclusively in the knee, with international fellowship training and an active role as a peer reviewer for orthopaedic journals (AJSM, KSSTA, OJSM, JEO). ORCID: 0000-0002-7443-4085. The site covers knee pathologies, surgery, recovery and patient self-assessment tools, in Portuguese (default), English (/en) and Russian (/ru).
+
+## About the surgeon
+- Orthopaedic surgeon, exclusive knee subspecialty; international fellowship training (Centre Orthopédique Santy, Lyon).
+- Head of Orthopaedics at Hospital Lusíadas Paços de Ferreira; operates at Hospital Lusíadas Porto and Hospital Misericórdia de Vila do Conde.
+- Accepts SIGIC, health insurance (subsistemas) and private, at all units.
+- Identity / sameAs: ORCID https://orcid.org/0000-0002-7443-4085 · LinkedIn https://linkedin.com/in/nuno-camelo-barbosa-07b37277 · Facebook https://www.facebook.com/npccb
+- Profile / CV: https://www.consultajoelho.pt/nuno-camelo-especialista-cirurgia-joelho
+
+## Knee pathologies
+- [Gonalgia / knee pain algorithm](https://www.consultajoelho.pt/joelhodrnunocamelo): differential-diagnosis algorithm for knee pain, for patients and family doctors.
+- [Osteoarthritis (gonartrose)](https://www.consultajoelho.pt/artrose): Kellgren-Lawrence staging, conservative care, when to operate, sport after a knee replacement.
+- [Cartilage lesions](https://www.consultajoelho.pt/cartilagem): ICRS classification, cartilage restoration (OATS, ACI/MACI), arthroscopy.
+- [ACL rupture](https://www.consultajoelho.pt/lca): diagnosis, reconstruction, extra-articular tenodesis (Lemaire / anterolateral, refined by Sonnery-Cottet), SANTI protocol, rehabilitation.
+- [Meniscus tear](https://www.consultajoelho.pt/menisco): meniscal repair vs resection, ramp lesions, arthroscopy.
+- [Patellar tendinopathy (jumper's knee)](https://www.consultajoelho.pt/tendao-rotuliano-tendinite-drnunocamelo): progressive loading exercise first line; role of PRP; intratendinous corticosteroid is discouraged.
+- [Patellar dislocation / instability](https://www.consultajoelho.pt/luxacao-rotula): patellar instability, MPFL reconstruction.
+- [Iliotibial band syndrome](https://www.consultajoelho.pt/sindrome-banda-iliotibial): lateral knee pain, runners.
+- [Quadriceps & AMI](https://www.consultajoelho.pt/quadriceps): arthrogenic muscle inhibition (AMI), SANTI classification, neuromuscular rehabilitation.
+- [Baker's cyst](https://www.consultajoelho.pt/quisto-baker): popliteal cyst, diagnosis and treatment.
+- [Parameniscal cysts](https://www.consultajoelho.pt/quistos-parameniscais): cysts associated with meniscal tears.
+- [Knee replacement & sport](https://www.consultajoelho.pt/protese): total and unicompartmental arthroplasty; return to sport.
+
+## Surgery & process
+- [Preparing for surgery](https://www.consultajoelho.pt/preparar-cirurgia)
+- [Recovering after surgery](https://www.consultajoelho.pt/recuperar-cirurgia)
+- [Fear of surgery — honest answers](https://www.consultajoelho.pt/medo-cirurgia)
+- [Joint injections](https://www.consultajoelho.pt/infiltracoes): corticosteroid, hyaluronic acid, PRP.
+- [SIGIC surgery voucher](https://www.consultajoelho.pt/sigic)
+
+## Tools
+- [Knee pain algorithm (gonalgia)](https://www.consultajoelho.pt/joelhodrnunocamelo): primary clinical triage tool for knee pain.
+- [Lysholm-Tegner score](https://www.consultajoelho.pt/avaliar): self-assessment of knee function, 0–100, used in international orthopaedic research.
+
+## Contact & locations
+- Phone: +351 926 850 194 · Email: joelho@consultajoelho.pt
+- [Book a consultation](https://www.consultajoelho.pt/contacto)
+- Locations: Hospital Lusíadas Porto · Hospital Misericórdia de Vila do Conde · Hospital Lusíadas Paços de Ferreira
+
+## Languages
+- Portuguese (default): https://www.consultajoelho.pt
+- English: https://www.consultajoelho.pt/en
+- Russian: https://www.consultajoelho.pt/ru
