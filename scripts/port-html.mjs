@@ -240,7 +240,7 @@ const HERO_IMAGES = {
   "quistos-parameniscais": "/img/hero/quistos-parameniscais.jpg",
   quadriceps: "/img/hero/quadriceps.jpg",
   "medo-cirurgia": "/img/hero/medo-cirurgia.jpg",
-  "preparar-cirurgia": "/img/hero/consulta.jpg",
+  "preparar-cirurgia": "/img/hero/preparar-cirurgia.jpg",
   sigic: "/img/hero/sigic.jpg",
 };
 function injectHeroImage($x, seg) {
