@@ -267,3 +267,31 @@ h1, h2 { letter-spacing: -0.02em; }
   .footer-col h4 { margin-bottom: 10px; }
   .footer-col nav { gap: 7px; }
 }
+
+/* ── Tabelas responsivas no mobile ────────────────────────────────────────────
+   Qualquer tabela marcada com [data-resp] (pelo pipeline) vira cartões empilhados:
+   cabeçalho escondido, cada célula com o rótulo da coluna por cima. Tema-agnóstico
+   (herda a cor do texto da própria tabela → funciona em fundos claros e escuros). */
+@media (max-width: 640px) {
+  table[data-resp] { display: block; width: 100%; border: 0; }
+  table[data-resp] thead { display: none; }
+  table[data-resp] tbody { display: block; width: 100%; }
+  table[data-resp] tr {
+    display: block; width: 100%;
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(128, 128, 128, 0.28);
+  }
+  table[data-resp] tr:last-child { border-bottom: 0; }
+  table[data-resp] td {
+    display: block; width: 100%;
+    padding: 5px 0 !important;
+    border: 0 !important;
+    background: transparent !important;
+  }
+  table[data-resp] td[data-label]::before {
+    content: attr(data-label);
+    display: block;
+    font-size: 0.64rem; text-transform: uppercase; letter-spacing: 0.05em;
+    font-weight: 700; opacity: 0.6; margin-bottom: 3px;
+  }
+}

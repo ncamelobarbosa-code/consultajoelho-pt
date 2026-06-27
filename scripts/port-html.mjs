@@ -281,18 +281,45 @@ function injectToolsGraphic($x) {
 
 // Tabela SANTI (quadricípite): adiciona data-label a cada td (rótulo da coluna)
 // para o layout em cartões no mobile. Funciona nos 3 idiomas (lê os <th> da própria página).
+// Torna QUALQUER tabela com cabeçalho responsiva no mobile: marca a tabela com
+// data-resp e cada célula com data-label (= título da coluna). O CSS global em
+// polish.css (selector [data-resp]) transforma-a em cartões empilhados, tema-agnóstico.
 function makeTablesResponsive($x) {
-  $x("table.santi-table").each((ti, tbl) => {
+  $x("table").each((ti, tbl) => {
     const table = $x(tbl);
     const labels = table.find("thead th").map((i, th) => $x(th).text().trim()).get();
     if (!labels.length) return;
-    table.addClass("santi-resp");
+    table.attr("data-resp", "");
     table.find("tbody tr").each((ri, tr) => {
       $x(tr).find("td").each((ci, td) => {
         if (labels[ci]) $x(td).attr("data-label", labels[ci]);
       });
     });
   });
+}
+
+// Artrose: parágrafo "é possível fazer desporto com prótese" no fim da escada terapêutica.
+const PROSE_SPORT = {
+  pt: {
+    t: "Desporto depois da prótese? Sim.",
+    p: "Uma prótese do joelho não é o fim da vida activa — pelo contrário, o objectivo da cirurgia é devolver mobilidade sem dor. A maioria dos doentes regressa a actividades de baixo e médio impacto: caminhada, natação, hidroginástica, bicicleta, golfe, hiking, ténis de pares e esqui recreativo. Aconselha-se apenas evitar o impacto repetitivo de alta intensidade (corrida de longa distância, saltos e desportos de contacto), que acelera o desgaste do implante.",
+  },
+  en: {
+    t: "Sport after a knee replacement? Yes.",
+    p: "A knee replacement is not the end of an active life — on the contrary, the goal of surgery is to restore pain-free mobility. Most patients return to low- and medium-impact activities: walking, swimming, water aerobics, cycling, golf, hiking, doubles tennis and recreational skiing. It is only advisable to avoid high-intensity repetitive impact (long-distance running, jumping and contact sports), which accelerates implant wear.",
+  },
+  ru: {
+    t: "Спорт после эндопротезирования? Да.",
+    p: "Эндопротез коленного сустава — не конец активной жизни; напротив, цель операции — вернуть безболезненную подвижность. Большинство пациентов возвращаются к нагрузкам низкой и средней интенсивности: ходьба, плавание, аквааэробика, велосипед, гольф, пешие походы, парный теннис и любительские лыжи. Рекомендуется избегать лишь высокоинтенсивных ударных нагрузок (бег на длинные дистанции, прыжки и контактные виды спорта), которые ускоряют износ имплантата.",
+  },
+};
+function injectProseSport($x, locale) {
+  const c = PROSE_SPORT[locale];
+  const inner = $x(".ladder-inner");
+  if (!c || !inner.length) return;
+  inner.append(
+    `<div style="margin-top:28px;background:rgba(255,255,255,0.1);border-left:4px solid var(--sage);border-radius:0 8px 8px 0;padding:18px 22px;"><p style="margin:0;color:#fff;font-weight:500;font-size:.95rem;line-height:1.65;"><strong style="color:var(--sage);font-weight:700;">${c.t}</strong> ${c.p}</p></div>`
+  );
 }
 
 // Especialidades: cada cartão passa a <details> — colapsado mostra só foto+título,
@@ -367,6 +394,7 @@ for (const [file, seg] of Object.entries(ROUTES)) {
 
   injectHeroImage($, seg);
   makeTablesResponsive($);
+  injectProseSport($, "pt");
   let body = rewriteLinks($("body").html() || "");
 
   const dir = seg ? `${APP}/${seg}` : APP;
@@ -426,6 +454,7 @@ for (const [file, seg] of Object.entries(ROUTES)) {
   $e("body script, body style").remove();
   injectHeroImage($e, seg);
   makeTablesResponsive($e);
+  injectProseSport($e, "en");
   const body = rewriteLinksEn($e("body").html() || "");
   const dir = seg ? `${APP}/en/${seg}` : `${APP}/en`;
   await mkdir(dir, { recursive: true });
@@ -475,6 +504,7 @@ for (const [file, seg] of Object.entries(ROUTES)) {
   $r("body script, body style").remove();
   injectHeroImage($r, seg);
   makeTablesResponsive($r);
+  injectProseSport($r, "ru");
   const body = rewriteLinksRu($r("body").html() || "");
   const dir = seg ? `${APP}/ru/${seg}` : `${APP}/ru`;
   await mkdir(dir, { recursive: true });
