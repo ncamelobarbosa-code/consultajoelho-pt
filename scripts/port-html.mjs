@@ -313,6 +313,71 @@ const PROSE_SPORT = {
     p: "Эндопротез коленного сустава — не конец активной жизни; напротив, цель операции — вернуть безболезненную подвижность. Большинство пациентов возвращаются к нагрузкам низкой и средней интенсивности: ходьба, плавание, аквааэробика, велосипед, гольф, пешие походы, парный теннис и любительские лыжи. Рекомендуется избегать лишь высокоинтенсивных ударных нагрузок (бег на длинные дистанции, прыжки и контактные виды спорта), которые ускоряют износ имплантата.",
   },
 };
+// Artrose: substitui o desenho dos compartimentos pela radiografia real (RX em carga).
+const RX_ARTROSE = {
+  pt: { h: "Artrose Bilateral — Predomínio Interno", cap: "Radiografia em carga: pinçamento do compartimento interno em ambos os joelhos." },
+  en: { h: "Bilateral Osteoarthritis — Medial Predominance", cap: "Weight-bearing X-ray: medial compartment narrowing in both knees." },
+  ru: { h: "Двусторонний остеоартроз — медиальное преобладание", cap: "Рентген с нагрузкой: сужение медиального отдела в обоих коленях." },
+};
+function replaceAnatomyXray($x, locale) {
+  const card = $x(".anatomy-card");
+  const c = RX_ARTROSE[locale];
+  if (!card.length || !c) return;
+  card.html(
+    `<h3>${c.h}</h3><img src="/img/rx-artrose-bilateral.png" alt="${c.h}" loading="lazy" style="width:100%;border-radius:10px;display:block;" /><p style="font-size:.78rem;color:#5a6a7a;margin-top:10px;line-height:1.45;text-align:left;">${c.cap}</p>`
+  );
+}
+
+// Chips de credenciais por página: palavras-chave do tema (em vez de nomes/protocolos
+// repetidos). Substitui todo o conteúdo de .credentials. Traduzido PT/EN/RU.
+const CRED_CHIPS = {
+  lca: { pt: ["LCA", "Extra-articular", "Estabilidade ligamentar"], en: ["ACL", "Extra-articular", "Ligament stability"], ru: ["ПКС", "Внесуставная", "Стабильность связок"] },
+  menisco: { pt: ["Menisco", "Sutura meniscal", "Artroscopia"], en: ["Meniscus", "Meniscal repair", "Arthroscopy"], ru: ["Мениск", "Шов мениска", "Артроскопия"] },
+  cartilagem: { pt: ["Cartilagem", "Restauração cartilaginosa", "Artroscopia"], en: ["Cartilage", "Cartilage restoration", "Arthroscopy"], ru: ["Хрящ", "Восстановление хряща", "Артроскопия"] },
+  artrose: { pt: ["Artrose", "Prótese do joelho", "Preservação articular"], en: ["Osteoarthritis", "Knee replacement", "Joint preservation"], ru: ["Остеоартроз", "Эндопротез", "Сохранение сустава"] },
+  protese: { pt: ["Prótese do joelho", "Artroplastia", "Desporto pós-prótese"], en: ["Knee replacement", "Arthroplasty", "Sport after surgery"], ru: ["Эндопротез", "Артропластика", "Спорт после операции"] },
+  quadriceps: { pt: ["Quadricípite", "AMI", "Reabilitação neuromotora"], en: ["Quadriceps", "AMI", "Neuromuscular rehab"], ru: ["Квадрицепс", "AMI", "Нейромышечная реабилитация"] },
+  "quisto-baker": { pt: ["Quisto de Baker", "Quisto poplíteo", "Artroscopia"], en: ["Baker's cyst", "Popliteal cyst", "Arthroscopy"], ru: ["Киста Бейкера", "Подколенная киста", "Артроскопия"] },
+  "quistos-parameniscais": { pt: ["Quistos parameniscais", "Menisco", "Artroscopia"], en: ["Parameniscal cysts", "Meniscus", "Arthroscopy"], ru: ["Параменисковые кисты", "Мениск", "Артроскопия"] },
+  "sindrome-banda-iliotibial": { pt: ["Banda iliotibial", "Dor lateral do joelho", "Corredores"], en: ["Iliotibial band", "Lateral knee pain", "Runners"], ru: ["Илиотибиальный тракт", "Боль снаружи колена", "Бегуны"] },
+  "luxacao-rotula": { pt: ["Luxação da rótula", "Instabilidade rotuliana", "LMPF"], en: ["Patellar dislocation", "Patellar instability", "MPFL"], ru: ["Вывих надколенника", "Нестабильность надколенника", "MPFL"] },
+  "medo-cirurgia": { pt: ["Cirurgia do joelho", "Protocolo ERAS", "Recuperação"], en: ["Knee surgery", "ERAS protocol", "Recovery"], ru: ["Хирургия колена", "Протокол ERAS", "Восстановление"] },
+  "preparar-cirurgia": { pt: ["Preparação cirúrgica", "Protocolo ERAS", "Pré-operatório"], en: ["Surgery preparation", "ERAS protocol", "Pre-op"], ru: ["Подготовка к операции", "Протокол ERAS", "Предоперационный"] },
+  "recuperar-cirurgia": { pt: ["Recuperação", "Reabilitação", "Pós-operatório"], en: ["Recovery", "Rehabilitation", "Post-op"], ru: ["Восстановление", "Реабилитация", "Послеоперационный"] },
+  avaliar: { pt: ["Avaliar o joelho", "Diagnóstico", "Algoritmo de gonalgia"], en: ["Knee assessment", "Diagnosis", "Knee pain algorithm"], ru: ["Оценка колена", "Диагностика", "Алгоритм боли"] },
+};
+function setCredChips($x, seg, locale) {
+  const set = CRED_CHIPS[seg];
+  const box = $x(".credentials");
+  if (!set || !box.length) return;
+  const chips = (set[locale] || set.pt).map((c) => `<span class="cred-tag">${c}</span>`).join("");
+  box.html(chips);
+}
+
+// LCA: remover o desenho de anatomia (.anatomy-svg) e colapsar o grid para 1 coluna.
+function removeAnatomySvg($x) {
+  const svg = $x(".anatomy-svg");
+  if (!svg.length) return;
+  const grid = svg.parent();
+  svg.remove();
+  grid.css({ "grid-template-columns": "1fr", "max-width": "760px" });
+}
+
+// LCA: link "saber mais sobre a AMI" na caixa do protocolo SANTI -> página do quadricípite.
+const AMI_LINK = {
+  pt: "Saber mais sobre a AMI (inibição do quadricípite)",
+  en: "Learn more about AMI (quadriceps inhibition)",
+  ru: "Подробнее об AMI (торможение квадрицепса)",
+};
+function injectAmiLink($x, locale) {
+  const box = $x(".santi-box");
+  const t = AMI_LINK[locale];
+  if (!box.length || !t) return;
+  box.append(
+    `<a href="/quadriceps" style="display:inline-block;margin-top:20px;color:var(--sage);font-weight:700;text-decoration:none;border-bottom:2px solid var(--sage);padding-bottom:2px;">${t} →</a>`
+  );
+}
+
 function injectProseSport($x, locale) {
   const c = PROSE_SPORT[locale];
   const inner = $x(".ladder-inner");
@@ -395,6 +460,10 @@ for (const [file, seg] of Object.entries(ROUTES)) {
   injectHeroImage($, seg);
   makeTablesResponsive($);
   injectProseSport($, "pt");
+  replaceAnatomyXray($, "pt");
+  removeAnatomySvg($);
+  injectAmiLink($, "pt");
+  setCredChips($, seg, "pt");
   let body = rewriteLinks($("body").html() || "");
 
   const dir = seg ? `${APP}/${seg}` : APP;
@@ -455,6 +524,10 @@ for (const [file, seg] of Object.entries(ROUTES)) {
   injectHeroImage($e, seg);
   makeTablesResponsive($e);
   injectProseSport($e, "en");
+  replaceAnatomyXray($e, "en");
+  removeAnatomySvg($e);
+  injectAmiLink($e, "en");
+  setCredChips($e, seg, "en");
   const body = rewriteLinksEn($e("body").html() || "");
   const dir = seg ? `${APP}/en/${seg}` : `${APP}/en`;
   await mkdir(dir, { recursive: true });
@@ -505,6 +578,10 @@ for (const [file, seg] of Object.entries(ROUTES)) {
   injectHeroImage($r, seg);
   makeTablesResponsive($r);
   injectProseSport($r, "ru");
+  replaceAnatomyXray($r, "ru");
+  removeAnatomySvg($r);
+  injectAmiLink($r, "ru");
+  setCredChips($r, seg, "ru");
   const body = rewriteLinksRu($r("body").html() || "");
   const dir = seg ? `${APP}/ru/${seg}` : `${APP}/ru`;
   await mkdir(dir, { recursive: true });

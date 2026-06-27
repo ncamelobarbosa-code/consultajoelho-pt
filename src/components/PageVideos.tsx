@@ -18,9 +18,20 @@ export default function PageVideos({ slug, lang = "pt" }: { slug: string; lang?:
           {heading}
         </h2>
         <div style={{ display: "flex", flexWrap: "wrap", gap: "1.5rem", justifyContent: "center", alignItems: "flex-start" }}>
-          {vids.map((v) => (
-            <figure key={v.id} style={{ margin: 0, width: "100%", maxWidth: v.short ? "360px" : "720px" }}>
-              <YouTubeEmbed id={v.id} short={v.short} title={v.title[lang]} />
+          {vids.map((v, i) => (
+            <figure key={v.id || v.src || i} style={{ margin: 0, width: "100%", maxWidth: v.short ? "360px" : "720px" }}>
+              {v.src ? (
+                <video
+                  controls
+                  playsInline
+                  preload="metadata"
+                  style={{ width: "100%", borderRadius: "var(--r)", background: "#000", display: "block" }}
+                >
+                  <source src={v.src} type="video/mp4" />
+                </video>
+              ) : (
+                <YouTubeEmbed id={v.id!} short={v.short} title={v.title[lang]} />
+              )}
               <figcaption style={{ fontFamily: FONT, fontSize: "0.9rem", color: "var(--muted)", textAlign: "center", marginTop: "0.65rem" }}>
                 {v.title[lang]}
               </figcaption>

@@ -4,7 +4,8 @@
 export type Lang = "pt" | "en" | "ru";
 
 export type Video = {
-  id: string;
+  id?: string; // ID do YouTube (se for vídeo do YouTube)
+  src?: string; // URL de vídeo self-hosted (mp4 em /public) — alternativa ao YouTube
   short?: boolean; // Short vertical (9:16) vs vídeo normal (16:9)
   title: Record<Lang, string>;
 };
@@ -24,6 +25,11 @@ export const VIDEOS: Record<string, Video> = {
     id: "TZMlA4qxrlA",
     short: true,
     title: { pt: "Sutura da rampa meniscal", en: "Meniscal ramp repair", ru: "Шов рампы мениска" },
+  },
+  mmShort: {
+    src: "/video/mm-short.mp4",
+    short: true,
+    title: { pt: "Menisco medial — artroscopia", en: "Medial meniscus — arthroscopy", ru: "Медиальный мениск — артроскопия" },
   },
   corpoLivre: {
     id: "R15thX-jAys",
@@ -57,7 +63,7 @@ export const SECTION_HEADINGS = {
 export const PAGE_VIDEOS: Record<string, { heading: keyof typeof SECTION_HEADINGS; videos: string[] }> = {
   // homepage ("") sem secção de vídeo: o vídeo de apresentação é agora o fundo do hero.
   lca: { heading: "surgical", videos: ["samba"] },
-  menisco: { heading: "surgical", videos: ["rampaRotura", "rampaSutura"] },
+  menisco: { heading: "surgical", videos: ["rampaRotura", "rampaSutura", "mmShort"] },
   cartilagem: { heading: "surgical", videos: ["corpoLivre"] },
   quadriceps: { heading: "consult", videos: ["quad"] },
 };

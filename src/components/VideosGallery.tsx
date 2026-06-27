@@ -26,9 +26,15 @@ export default function VideosGallery({ lang = "pt" }: { lang?: Lang }) {
                 {cat.label[lang]}
               </h2>
               <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))", gap: "1.5rem", alignItems: "start", justifyItems: "center" }}>
-                {vids.map((v) => (
-                  <figure key={v.id} style={{ margin: 0, width: "100%", maxWidth: v.short ? "300px" : "100%" }}>
-                    <YouTubeEmbed id={v.id} short={v.short} title={v.title[lang]} />
+                {vids.map((v, i) => (
+                  <figure key={v.id || v.src || i} style={{ margin: 0, width: "100%", maxWidth: v.short ? "300px" : "100%" }}>
+                    {v.src ? (
+                      <video controls playsInline preload="metadata" style={{ width: "100%", borderRadius: "var(--r)", background: "#000", display: "block" }}>
+                        <source src={v.src} type="video/mp4" />
+                      </video>
+                    ) : (
+                      <YouTubeEmbed id={v.id!} short={v.short} title={v.title[lang]} />
+                    )}
                     <figcaption style={{ fontFamily: FONT, fontSize: "0.9rem", color: "var(--muted)", textAlign: "center", marginTop: "0.65rem" }}>
                       {v.title[lang]}
                     </figcaption>
