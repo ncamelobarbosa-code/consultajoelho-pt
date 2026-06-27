@@ -84,14 +84,16 @@ export default function GoogleReviews({
   lang = "pt",
   reviews = REVIEWS,
   rating = 5.0,
+  total = 14,
 }: {
   lang?: Lang;
   reviews?: Review[];
   rating?: number;
+  total?: number; // total real de avaliações no Google (mostramos só as 3 mais recentes)
 }) {
   if (!reviews.length) return null;
   const t = STRINGS[lang];
-  const total = reviews.length;
+  const shown = reviews.slice(0, 3);
 
   return (
     <section aria-label={t.heading} style={{ background: "#fff", padding: "4rem 1.5rem", borderTop: `1px solid ${BORDER}` }}>
@@ -110,7 +112,7 @@ export default function GoogleReviews({
 
         {/* Cards */}
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "1.25rem" }}>
-          {reviews.map((r, i) => (
+          {shown.map((r, i) => (
             <article key={i} style={{ background: BG, border: `1px solid ${BORDER}`, borderRadius: R, padding: "1.5rem", display: "flex", flexDirection: "column", gap: "0.85rem" }}>
               <div style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
                 <div aria-hidden style={{ width: 42, height: 42, borderRadius: "50%", background: SAGE, color: TEAL, display: "flex", alignItems: "center", justifyContent: "center", fontFamily: FONT, fontWeight: 700, fontSize: "1.1rem", flexShrink: 0 }}>
