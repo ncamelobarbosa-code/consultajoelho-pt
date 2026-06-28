@@ -14,24 +14,21 @@ const COPY: Record<Lang, {
   cta1: string; cta1href: string; cta2: string; cta2href: string;
 }> = {
   pt: {
-    eyebrow: "", titleA: "O seu joelho", titleB: "dói?",
-    tagline: "",
-    sub: "Descubra a causa — e o que fazer — com o nosso algoritmo de gonalgia.",
-    cta1: "Experimentar o algoritmo", cta1href: "/joelhodrnunocamelo",
+    eyebrow: "", titleA: "Consulta de", titleB: "Joelho",
+    tagline: "", sub: "",
+    cta1: "", cta1href: "/contacto",
     cta2: "Avaliar o meu joelho", cta2href: "/avaliar",
   },
   en: {
-    eyebrow: "", titleA: "Does your knee", titleB: "hurt?",
-    tagline: "",
-    sub: "Find out the cause — and what to do — with our knee-pain algorithm.",
-    cta1: "Try the algorithm", cta1href: "/en/joelhodrnunocamelo",
+    eyebrow: "", titleA: "Knee", titleB: "Clinic",
+    tagline: "", sub: "",
+    cta1: "", cta1href: "/en/contacto",
     cta2: "Assess my knee", cta2href: "/en/avaliar",
   },
   ru: {
-    eyebrow: "", titleA: "Болит", titleB: "колено?",
-    tagline: "",
-    sub: "Узнайте причину — и что делать — с нашим алгоритмом боли в колене.",
-    cta1: "Попробовать алгоритм", cta1href: "/ru/joelhodrnunocamelo",
+    eyebrow: "", titleA: "Клиника", titleB: "колена",
+    tagline: "", sub: "",
+    cta1: "", cta1href: "/ru/contacto",
     cta2: "Оценить моё колено", cta2href: "/ru/avaliar",
   },
 };
@@ -91,8 +88,7 @@ export default function VideoHero({ lang = "pt" }: { lang?: Lang }) {
         {t.tagline && <p className="vhero-tag">{t.tagline}</p>}
         {t.sub && <p className="vhero-sub">{t.sub}</p>}
         <div className="vhero-ctas">
-          <a className="vhero-cta vhero-cta--primary" href={t.cta1href}>{t.cta1} →</a>
-          <a className="vhero-cta vhero-cta--ghost" href={t.cta2href}>{t.cta2}</a>
+          <a className="vhero-cta vhero-cta--primary" href={t.cta2href}>{t.cta2} →</a>
         </div>
       </div>
     </section>
