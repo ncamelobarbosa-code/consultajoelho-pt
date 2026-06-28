@@ -7,6 +7,7 @@ import { SiteHeader } from "@/components/SiteChrome";
 import LangSync from "@/components/LangSync";
 import ScrollReveal from "@/components/ScrollReveal";
 import ConsentGate from "@/components/ConsentGate";
+import LeadTracking from "@/components/LeadTracking";
 import Contacts from "@/components/Contacts";
 import { Analytics } from "@vercel/analytics/next";
 import { site } from "@/lib/site";
@@ -28,6 +29,7 @@ export default function RootLayout({
     <html lang="pt">
       <body>
         <ConsentGate gaId={process.env.NEXT_PUBLIC_GA_ID ?? "G-RZ37G397BW"} />
+        <LeadTracking />
         <LangSync />
         <ScrollReveal />
         <SiteHeader />

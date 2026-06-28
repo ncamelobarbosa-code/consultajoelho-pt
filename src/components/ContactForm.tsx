@@ -1,7 +1,8 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useForm, ValidationError } from '@formspree/react';
+import { event } from '@/lib/gtag';
 
 const STRINGS = {
   pt: {
@@ -91,6 +92,11 @@ export default function ContactForm({ lang = 'pt' }: { lang?: 'pt' | 'en' | 'ru'
   const [state, handleSubmit] = useForm('mpqganlp');
   const [motivo, setMotivo] = useState('');
   const t = STRINGS[lang];
+
+  // Conversão: submissão de formulário bem-sucedida
+  useEffect(() => {
+    if (state.succeeded) event('generate_lead', { method: 'form' });
+  }, [state.succeeded]);
 
   if (state.succeeded) {
     return (
