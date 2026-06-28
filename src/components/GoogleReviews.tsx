@@ -96,7 +96,7 @@ export default function GoogleReviews({
   const shown = reviews.slice(0, 3);
 
   return (
-    <section aria-label={t.heading} style={{ background: "#fff", padding: "3cm 1.5rem", borderTop: `1px solid ${BORDER}` }}>
+    <section aria-label={t.heading} className="home-band" style={{ background: "#fff", padding: "3cm 1.5rem", borderTop: `1px solid ${BORDER}` }}>
       <div style={{ maxWidth: "1000px", margin: "0 auto" }}>
         {/* Cabeçalho + resumo */}
         <div style={{ textAlign: "center", marginBottom: "2.5rem" }}>
