@@ -123,6 +123,7 @@ export default function Page() {
 
 const homepageTemplate = (meta, jsonld, body, script, id, locale = "pt") => `import type { Metadata } from "next";${script ? `\nimport Script from "next/script";` : ""}
 import VideoHero from "@/components/VideoHero";
+import HomeIntro from "@/components/HomeIntro";
 import Locais from "@/components/Locais";
 import PageVideos from "@/components/PageVideos";
 import GoogleReviews from "@/components/GoogleReviews";
@@ -135,6 +136,7 @@ export default function Page() {
   return (
     <>${jsonld ? `\n      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd }} />` : ""}
       <VideoHero lang="${locale}" />
+      <HomeIntro lang="${locale}" />
       <div dangerouslySetInnerHTML={{ __html: html }} />
       <PageVideos slug="" lang="${locale}" />
       <GoogleReviews lang="${locale}" />

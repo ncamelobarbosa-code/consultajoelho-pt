@@ -330,3 +330,10 @@ h1, h2 { letter-spacing: -0.02em; }
 
 /* Pequena margem branca entre o menu (sticky) e o vídeo do hero */
 .vhero { margin-top: 0.5cm; }
+
+/* Bloco de introdução (Consulta de Joelho / Experiência·Ciência·Excelência) com 5cm acima */
+.home-intro { text-align: center; background: #fff; padding: 5cm 1.5rem 2cm; }
+@media (max-width: 640px) { .home-intro { padding-top: 3cm; } }
+
+/* Espaçamento generoso (>=3cm de intervalo) entre as secções da homepage */
+.patologias, .tools { padding-top: 2cm !important; padding-bottom: 2cm !important; }

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import VideoHero from "@/components/VideoHero";
+import HomeIntro from "@/components/HomeIntro";
 import Locais from "@/components/Locais";
 import PageVideos from "@/components/PageVideos";
 import GoogleReviews from "@/components/GoogleReviews";
@@ -35,6 +36,7 @@ export default function Page() {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd }} />
       <VideoHero lang="pt" />
+      <HomeIntro lang="pt" />
       <div dangerouslySetInnerHTML={{ __html: html }} />
       <PageVideos slug="" lang="pt" />
       <GoogleReviews lang="pt" />
