@@ -349,7 +349,7 @@ const ANATOMY_IMG = {
     cap: { pt: "RMN axial do joelho: quisto de Baker (estrutura de sinal líquido na região poplítea).", en: "Axial knee MRI: Baker's cyst (fluid-signal structure in the popliteal region).", ru: "Аксиальная МРТ колена: киста Бейкера (структура с жидкостным сигналом в подколенной области)." },
   },
 };
-const ANATOMY_REMOVE = new Set(["quistos-parameniscais", "sindrome-banda-iliotibial"]);
+const ANATOMY_REMOVE = new Set(["quistos-parameniscais", "sindrome-banda-iliotibial", "luxacao-rotula"]);
 function handleAnatomyCard($x, seg, locale) {
   const card = $x(".anatomy-card");
   if (!card.length) return;
