@@ -5,7 +5,7 @@
 
 import { useEffect, useRef } from "react";
 
-const PLAYBACK_RATE = 0.5; // abranda o vídeo para um fundo mais calmo/ambiente
+const PLAYBACK_RATE = 1.0; // velocidade normal
 
 type Lang = "pt" | "en" | "ru";
 
@@ -14,28 +14,27 @@ const COPY: Record<Lang, {
   cta1: string; cta1href: string; cta2: string; cta2href: string;
 }> = {
   pt: {
-    eyebrow: "", titleA: "Consulta de", titleB: "Joelho",
-    tagline: "", sub: "",
-    cta1: "Agendar Consulta", cta1href: "/contacto",
-    cta2: "Avaliar o Meu Joelho", cta2href: "/avaliar",
+    eyebrow: "", titleA: "O seu joelho", titleB: "dói?",
+    tagline: "",
+    sub: "Descubra a causa — e o que fazer — com o nosso algoritmo de gonalgia.",
+    cta1: "Experimentar o algoritmo", cta1href: "/joelhodrnunocamelo",
+    cta2: "Avaliar o meu joelho", cta2href: "/avaliar",
   },
   en: {
-    eyebrow: "", titleA: "Knee", titleB: "Clinic",
-    tagline: "", sub: "",
-    cta1: "Book Appointment", cta1href: "/en/contacto",
-    cta2: "Assess My Knee", cta2href: "/en/avaliar",
+    eyebrow: "", titleA: "Does your knee", titleB: "hurt?",
+    tagline: "",
+    sub: "Find out the cause — and what to do — with our knee-pain algorithm.",
+    cta1: "Try the algorithm", cta1href: "/en/joelhodrnunocamelo",
+    cta2: "Assess my knee", cta2href: "/en/avaliar",
   },
   ru: {
-    eyebrow: "", titleA: "Клиника", titleB: "колена",
-    tagline: "", sub: "",
-    cta1: "Записаться на приём", cta1href: "/ru/contacto",
+    eyebrow: "", titleA: "Болит", titleB: "колено?",
+    tagline: "",
+    sub: "Узнайте причину — и что делать — с нашим алгоритмом боли в колене.",
+    cta1: "Попробовать алгоритм", cta1href: "/ru/joelhodrnunocamelo",
     cta2: "Оценить моё колено", cta2href: "/ru/avaliar",
   },
 };
-
-// Vídeo de apresentação self-hosted (muted/loop) com a foto do Dr. como poster/fallback.
-const HERO_POSTER =
-  "https://static.wixstatic.com/media/5a9db7_ed36d169621d439994f603e7c6be49c1~mv2.jpg/v1/crop/x_244,y_0,w_3702,h_4480/fill/w_1200,h_1400,al_c,q_85,enc_avif,quality_auto/2Z2A9956.jpg";
 
 export default function VideoHero({ lang = "pt" }: { lang?: Lang }) {
   const t = COPY[lang];
@@ -79,7 +78,6 @@ export default function VideoHero({ lang = "pt" }: { lang?: Lang }) {
           loop
           playsInline
           preload="auto"
-          poster={HERO_POSTER}
         >
           <source src="/video/presentation.mp4" type="video/mp4" />
         </video>
@@ -93,7 +91,8 @@ export default function VideoHero({ lang = "pt" }: { lang?: Lang }) {
         {t.tagline && <p className="vhero-tag">{t.tagline}</p>}
         {t.sub && <p className="vhero-sub">{t.sub}</p>}
         <div className="vhero-ctas">
-          <a className="vhero-cta vhero-cta--primary" href={t.cta2href}>{t.cta2} →</a>
+          <a className="vhero-cta vhero-cta--primary" href={t.cta1href}>{t.cta1} →</a>
+          <a className="vhero-cta vhero-cta--ghost" href={t.cta2href}>{t.cta2}</a>
         </div>
       </div>
     </section>

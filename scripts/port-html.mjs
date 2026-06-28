@@ -285,14 +285,16 @@ function simplifyTools($x) {
   const sec = $x("section.tools");
   if (!sec.length) return;
   sec.find(".tools-photo-badge").remove();
-  // texto do botão (localizado) a partir do 1º botão de ações
+  // título (curiosidade) e texto do botão — localizados, a partir do conteúdo da secção
+  const title = (sec.find(".tools-text .h2").text() || "O que fazer se o joelho dói?").trim();
   const algoLabel = (sec.find(".tools-actions a").first().text() || "Algoritmo de Gonalgia").trim();
   // remover TODO o texto da secção (eyebrow, título, descrição, cartões e os 2 botões)
   sec.find(".tools-text").remove();
-  // grafismo a ocupar a largura toda + botão do algoritmo sobreposto dentro da imagem
+  // grafismo a ocupar a largura toda + título + botão sobrepostos dentro da imagem
   sec.find(".tools-inner").css({ "grid-template-columns": "1fr", "max-width": "680px" });
   const photo = sec.find(".tools-photo").first();
   if (photo.length) {
+    photo.prepend(`<div class="tools-ai-title">${title}</div>`);
     photo.append(`<a href="/joelhodrnunocamelo" class="tools-ai-btn">${algoLabel}</a>`);
   }
 }
