@@ -16,20 +16,20 @@ const COPY: Record<Lang, {
   pt: {
     eyebrow: "", titleA: "Consulta de", titleB: "Joelho",
     tagline: "", sub: "",
-    cta1: "", cta1href: "/contacto",
-    cta2: "Avaliar o meu joelho", cta2href: "/avaliar",
+    cta1: "", cta1href: "/avaliar",
+    cta2: "Agendar", cta2href: "/contacto",
   },
   en: {
     eyebrow: "", titleA: "Knee", titleB: "Clinic",
     tagline: "", sub: "",
-    cta1: "", cta1href: "/en/contacto",
-    cta2: "Assess my knee", cta2href: "/en/avaliar",
+    cta1: "", cta1href: "/en/avaliar",
+    cta2: "Book", cta2href: "/en/contacto",
   },
   ru: {
     eyebrow: "", titleA: "Клиника", titleB: "колена",
     tagline: "", sub: "",
-    cta1: "", cta1href: "/ru/contacto",
-    cta2: "Оценить моё колено", cta2href: "/ru/avaliar",
+    cta1: "", cta1href: "/ru/avaliar",
+    cta2: "Записаться", cta2href: "/ru/contacto",
   },
 };
 

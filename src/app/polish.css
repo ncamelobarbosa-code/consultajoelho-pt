@@ -327,3 +327,6 @@ h1, h2 { letter-spacing: -0.02em; }
   font-size: clamp(1.15rem, 2.8vw, 1.6rem); line-height: 1.2;
   padding: 26px 22px 0;
 }
+
+/* Pequena margem branca entre o menu (sticky) e o vídeo do hero */
+.vhero { margin-top: 0.5cm; }
