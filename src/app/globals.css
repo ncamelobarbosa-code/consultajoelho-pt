@@ -17,7 +17,28 @@
   --color-grey-pale: #eaede9;
   --color-white: #ffffff;
 
-  --font-sans: var(--font-space-grotesk), ui-sans-serif, system-ui, sans-serif;
+  /* ── Homepage redesign tokens (slate-blue/teal hybrid + sky accent) ──
+     Additive only — não alteram as utilities teal-* usadas no resto do site. */
+  --color-brand: #173b4d;
+  --color-brand-deep: #102c3a;
+  --color-brand-deeper: #08171f;
+  --color-brand-mid: #3e6678;
+  --color-accent: #9dc4d6;
+  --color-accent-deep: #4f8499;
+  --color-ink: #0c1a26;
+  --color-muted: #5e6b72;
+  --color-surface: #ffffff;
+  --color-line: #e4e9ec;
+
+  /* Profundidade e raio consistentes para cards/botões da homepage */
+  --radius-btn: 8px;
+  --radius-card: 14px;
+  --shadow-card: 0 1px 2px rgba(12, 26, 38, 0.04), 0 14px 30px -18px rgba(15, 42, 55, 0.3);
+  --shadow-card-hover: 0 2px 4px rgba(12, 26, 38, 0.05), 0 22px 42px -20px rgba(15, 42, 55, 0.4);
+
+  /* Tipografia: Instrument Serif (display) + Inter (corpo) */
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-instrument), ui-serif, Georgia, "Times New Roman", serif;
 }
 
 html {
@@ -41,4 +62,16 @@ body {
 /* Largura de leitura confortável no corpo das páginas clínicas */
 .clinic-copy p {
   max-width: 68ch;
+}
+
+/* Hero da homepage: imagem de fundo + gradiente de leitura numa só camada.
+   Sem /hero.jpg, mostra o gradiente sobre bg-brand-deeper (fallback elegante).
+   Substituir por uma fotografia real em /public/hero.jpg. */
+.hero-bg {
+  background-image:
+    linear-gradient(104deg, #08171feb 0%, #08171fbd 48%, #173b4d7a 100%),
+    url("/hero.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }

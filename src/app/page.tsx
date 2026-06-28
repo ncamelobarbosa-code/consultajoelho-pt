@@ -76,7 +76,7 @@ function PathologyIcon() {
     <svg
       viewBox="0 0 24 24"
       fill="none"
-      className="h-7 w-7 text-sage"
+      className="h-7 w-7 text-accent"
       aria-hidden="true"
     >
       <path
@@ -99,36 +99,36 @@ export default function Home() {
   return (
     <>
       {/* 1. HERO */}
-      <section className="bg-teal-main text-white">
-        <div className="mx-auto max-w-7xl px-5 py-20 md:py-28">
+      <section className="hero-bg relative isolate flex min-h-[88vh] items-center bg-brand-deeper text-white">
+        <div className="mx-auto w-full max-w-7xl px-6 py-24 md:px-8 md:py-32">
           <div className="max-w-3xl">
-            <span className="text-xs font-semibold uppercase tracking-[0.14em] text-sage">
+            <span className="text-xs font-semibold uppercase tracking-[0.18em] text-accent">
               Especialista Exclusivo em Joelho · Porto
             </span>
-            <h1 className="mt-4 text-4xl font-semibold leading-[1.1] tracking-tight md:text-5xl">
+            <h1 className="mt-5 font-serif text-5xl font-normal leading-[1.04] tracking-tight md:text-7xl">
               O seu joelho merece uma opinião especializada.
             </h1>
-            <p className="mt-6 max-w-2xl text-lg leading-relaxed text-white/85">
+            <p className="mt-6 max-w-2xl text-lg leading-relaxed text-white/85 md:text-xl">
               Diagnóstico rigoroso. Tratamento baseado em evidência. Cirurgia só
               quando necessária.
             </p>
-            <div className="mt-9 flex flex-wrap gap-4">
+            <div className="mt-10 flex flex-wrap gap-4">
               <Link
                 href={bookingHref}
-                className="rounded-[3px] bg-white px-6 py-3 text-sm font-semibold text-teal-main transition-colors hover:bg-grey-pale"
+                className="rounded-btn bg-white px-7 py-3.5 text-sm font-semibold text-brand shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:bg-grey-pale hover:shadow-md"
               >
                 Agendar Consulta
               </Link>
               <Link
                 href={doctorHref}
-                className="rounded-[3px] border border-white/50 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-white/10"
+                className="rounded-btn border border-white/40 px-7 py-3.5 text-sm font-semibold text-white backdrop-blur-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-white/70 hover:bg-white/10"
               >
                 Conhecer o Dr. Camelo
               </Link>
             </div>
 
             {/* Trust strip */}
-            <div className="mt-12 flex flex-wrap gap-x-10 gap-y-3 border-t border-white/15 pt-6 text-sm text-white/75">
+            <div className="mt-14 flex flex-wrap gap-x-10 gap-y-3 border-t border-white/15 pt-7 text-sm text-white/75">
               <span>
                 <strong className="font-semibold text-white">+15</strong> Anos
               </span>
@@ -142,49 +142,57 @@ export default function Home() {
       </section>
 
       {/* 2. FRAMEWORK CLÍNICA */}
-      <section className="mx-auto max-w-7xl px-5 py-20">
+      <section className="mx-auto max-w-7xl px-6 py-28 md:px-8 md:py-36 [&_h2]:font-serif [&_h2]:text-[2rem] [&_h2]:font-normal [&_h2]:leading-[1.1] [&_h2]:tracking-tight [&_h2]:md:text-[2.75rem]">
         <SectionHeader
           eyebrow="Método"
           title="Como avaliamos e tratamos o seu joelho"
           lead="Uma sequência clara, sem atalhos. Cada passo informa o seguinte."
         />
-        <div className="mt-10 grid gap-5 sm:grid-cols-2">
+        <div className="mt-12 grid gap-6 sm:grid-cols-2 md:gap-8">
           {framework.map((f) => (
-            <div key={f.n} className="rounded-md bg-grey-pale p-7">
-              <div className="text-4xl font-bold text-teal-main">{f.n}</div>
-              <h3 className="mt-3 text-lg font-semibold">{f.t}</h3>
-              <p className="mt-2 text-grey-mid">{f.d}</p>
+            <div
+              key={f.n}
+              className="rounded-card border border-line bg-surface p-8 shadow-card transition-all duration-300 hover:-translate-y-1 hover:shadow-card-hover md:p-10"
+            >
+              <div className="font-serif text-5xl font-normal text-brand">
+                {f.n}
+              </div>
+              <h3 className="mt-4 text-lg font-semibold text-ink">{f.t}</h3>
+              <p className="mt-2 leading-relaxed text-muted">{f.d}</p>
             </div>
           ))}
         </div>
       </section>
 
       {/* 3. SOBRE O DR. NUNO CAMELO */}
-      <section className="border-y border-grey-pale bg-white">
-        <div className="mx-auto grid max-w-7xl gap-12 px-5 py-20 lg:grid-cols-2 lg:items-center">
+      <section className="border-y border-line bg-surface">
+        <div className="mx-auto grid max-w-7xl gap-12 px-6 py-28 md:px-8 md:py-36 lg:grid-cols-2 lg:items-center lg:gap-16">
           <ImagePlaceholder
             label="Dr. Nuno Camelo"
             aspect="aspect-[4/5]"
             className="max-w-md"
           />
           <div>
-            <span className="text-xs font-semibold uppercase tracking-[0.14em] text-teal-mid">
+            <span className="text-xs font-semibold uppercase tracking-[0.18em] text-brand-mid">
               Quem o trata
             </span>
-            <h2 className="mt-2 text-3xl font-semibold tracking-tight">
+            <h2 className="mt-3 font-serif text-[2rem] font-normal leading-[1.1] tracking-tight md:text-[2.75rem]">
               {site.doctor}
             </h2>
-            <p className="mt-1 text-teal-main">Cirurgião de Joelho</p>
-            <p className="mt-5 leading-relaxed text-grey-mid">
+            <p className="mt-2 text-brand">Cirurgião de Joelho</p>
+            <p className="mt-6 text-lg leading-relaxed text-muted">
               Prática exclusivamente dedicada ao joelho. Fellowship no Centre
               Orthopédique Santy, em Lyon, com Dr. Sonnery-Cottet — referência
               mundial em cirurgia do ligamento cruzado. Revisor científico em
               AJSM, JEO e OJSM.
             </p>
-            <ul className="mt-6 space-y-3">
+            <ul className="mt-7 space-y-3.5">
               {credenciais.map((c) => (
-                <li key={c} className="flex gap-3 text-sm leading-relaxed">
-                  <span className="mt-1 text-teal-main" aria-hidden="true">
+                <li
+                  key={c}
+                  className="flex gap-3 text-sm leading-relaxed text-ink"
+                >
+                  <span className="mt-1 text-accent-deep" aria-hidden="true">
                     —
                   </span>
                   <span>{c}</span>
@@ -193,7 +201,7 @@ export default function Home() {
             </ul>
             <Link
               href={doctorHref}
-              className="mt-7 inline-block text-sm font-semibold text-teal-main hover:text-teal-dark"
+              className="mt-8 inline-block text-sm font-semibold text-brand transition-colors hover:text-brand-deep"
             >
               Ver curriculum completo →
             </Link>
@@ -202,25 +210,25 @@ export default function Home() {
       </section>
 
       {/* 4. PATOLOGIAS */}
-      <section className="mx-auto max-w-7xl px-5 py-20">
+      <section className="mx-auto max-w-7xl px-6 py-28 md:px-8 md:py-36 [&_h2]:font-serif [&_h2]:text-[2rem] [&_h2]:font-normal [&_h2]:leading-[1.1] [&_h2]:tracking-tight [&_h2]:md:text-[2.75rem]">
         <SectionHeader
           eyebrow="O que tratamos"
           title="Patologias do joelho"
           lead="Cada problema tem um caminho de diagnóstico e tratamento próprio."
         />
-        <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-12 grid gap-6 sm:grid-cols-2 md:gap-8 lg:grid-cols-3">
           {patologias.map((p) => (
             <Link
               key={p.slug}
               href={href(p.slug)}
-              className="group block rounded-md bg-teal-main p-7 text-white transition-colors hover:bg-teal-dark"
+              className="group block rounded-card bg-brand p-8 text-white shadow-card transition-all duration-300 hover:-translate-y-1 hover:bg-brand-deep hover:shadow-card-hover md:p-9"
             >
               <PathologyIcon />
-              <h3 className="mt-4 text-lg font-semibold">{p.title}</h3>
+              <h3 className="mt-5 text-lg font-semibold">{p.title}</h3>
               <p className="mt-2 text-sm leading-relaxed text-white/80">
                 {p.line}
               </p>
-              <span className="mt-4 inline-block text-sm font-medium text-sage">
+              <span className="mt-5 inline-flex items-center text-sm font-medium text-accent transition-transform duration-200 group-hover:translate-x-1">
                 Saber mais →
               </span>
             </Link>
@@ -229,14 +237,14 @@ export default function Home() {
       </section>
 
       {/* 5. SIGIC BANNER */}
-      <section className="bg-sage">
-        <div className="mx-auto flex max-w-7xl flex-col items-start gap-6 px-5 py-12 md:flex-row md:items-center md:justify-between">
-          <p className="max-w-2xl text-lg font-medium text-teal-deeper">
+      <section className="bg-accent">
+        <div className="mx-auto flex max-w-7xl flex-col items-start gap-6 px-6 py-14 md:flex-row md:items-center md:justify-between md:px-8">
+          <p className="max-w-2xl text-lg font-medium text-brand-deeper md:text-xl">
             Convencionado com o SIGIC — cirurgia ao joelho pelo SNS sem esperar.
           </p>
           <Link
             href={href("sigic")}
-            className="shrink-0 rounded-[3px] bg-white px-6 py-3 text-sm font-semibold text-teal-main transition-colors hover:bg-bg"
+            className="shrink-0 rounded-btn bg-white px-7 py-3.5 text-sm font-semibold text-brand shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md"
           >
             Como funciona →
           </Link>
@@ -244,23 +252,23 @@ export default function Home() {
       </section>
 
       {/* 6. LOCAIS */}
-      <section className="mx-auto max-w-7xl px-5 py-20">
+      <section className="mx-auto max-w-7xl px-6 py-28 md:px-8 md:py-36 [&_h2]:font-serif [&_h2]:text-[2rem] [&_h2]:font-normal [&_h2]:leading-[1.1] [&_h2]:tracking-tight [&_h2]:md:text-[2.75rem]">
         <SectionHeader
           eyebrow="Onde consulta"
           title="Três locais no Norte de Portugal"
         />
-        <div className="mt-10 grid gap-5 md:grid-cols-3">
+        <div className="mt-12 grid gap-6 md:grid-cols-3 md:gap-8">
           {locations.map((l) => (
             <div
               key={l.name}
-              className="border-b-2 border-grey-pale bg-white p-7 transition-colors hover:border-teal-main"
+              className="rounded-card border border-line bg-surface p-8 shadow-card transition-all duration-300 hover:-translate-y-1 hover:border-brand/30 hover:shadow-card-hover"
             >
-              <h3 className="font-semibold">{l.name}</h3>
-              <p className="mt-2 text-sm text-grey-mid">{l.address}</p>
+              <h3 className="font-semibold text-ink">{l.name}</h3>
+              <p className="mt-2 text-sm text-muted">{l.address}</p>
               {l.contact && (
                 <a
                   href={site.phoneHref}
-                  className="mt-3 inline-block text-sm text-teal-main hover:text-teal-dark"
+                  className="mt-3 inline-block text-sm text-brand transition-colors hover:text-brand-deep"
                 >
                   {l.contact}
                 </a>
@@ -271,21 +279,21 @@ export default function Home() {
       </section>
 
       {/* 7. PACIENTES INTERNACIONAIS */}
-      <section className="bg-teal-dark text-white">
-        <div className="mx-auto max-w-4xl px-5 py-20 text-center">
-          <h2 className="text-3xl font-semibold tracking-tight">
+      <section className="bg-brand-deep text-white">
+        <div className="mx-auto max-w-4xl px-6 py-28 text-center md:px-8 md:py-36">
+          <h2 className="font-serif text-[2rem] font-normal leading-[1.1] tracking-tight md:text-[2.75rem]">
             Cirurgia ao joelho no Porto
           </h2>
-          <p className="mx-auto mt-4 max-w-xl text-lg text-white/85">
+          <p className="mx-auto mt-5 max-w-xl text-lg text-white/85">
             Cuidados de referência a uma fracção do custo do Reino Unido ou
             Irlanda.
           </p>
-          <div className="mt-6 text-3xl" aria-hidden="true">
+          <div className="mt-7 text-3xl" aria-hidden="true">
             🇬🇧 🇮🇪 🇸🇪
           </div>
           <Link
             href={href("kneesurgeryinportugalprices")}
-            className="mt-8 inline-block rounded-[3px] bg-white px-7 py-3 text-sm font-semibold text-teal-main transition-colors hover:bg-grey-pale"
+            className="mt-9 inline-block rounded-btn bg-white px-7 py-3.5 text-sm font-semibold text-brand shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:bg-grey-pale hover:shadow-md"
           >
             Preços e informação →
           </Link>
@@ -293,27 +301,33 @@ export default function Home() {
       </section>
 
       {/* 8. CTA FINAL */}
-      <section className="bg-teal-main text-white">
-        <div className="mx-auto max-w-4xl px-5 py-20 text-center">
-          <h2 className="text-3xl font-semibold tracking-tight md:text-4xl">
+      <section className="bg-brand text-white">
+        <div className="mx-auto max-w-4xl px-6 py-28 text-center md:px-8 md:py-36">
+          <h2 className="font-serif text-4xl font-normal leading-[1.05] tracking-tight md:text-6xl">
             Comece hoje.
           </h2>
-          <p className="mx-auto mt-4 max-w-xl text-white/85">
+          <p className="mx-auto mt-5 max-w-xl text-lg text-white/85">
             Consulta especializada em joelho no Porto. Resposta em menos de 24
             horas.
           </p>
           <Link
             href={bookingHref}
-            className="mt-8 inline-block rounded-[3px] bg-white px-7 py-3 text-sm font-semibold text-teal-main transition-colors hover:bg-grey-pale"
+            className="mt-9 inline-block rounded-btn bg-white px-8 py-3.5 text-sm font-semibold text-brand shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:bg-grey-pale hover:shadow-md"
           >
             Agendar Consulta
           </Link>
-          <p className="mt-6 text-sm text-white/75">
-            <a href={site.phoneHref} className="hover:text-white">
+          <p className="mt-7 text-sm text-white/75">
+            <a
+              href={site.phoneHref}
+              className="transition-colors hover:text-white"
+            >
               {site.phone}
             </a>{" "}
             ·{" "}
-            <a href={site.emailHref} className="hover:text-white">
+            <a
+              href={site.emailHref}
+              className="transition-colors hover:text-white"
+            >
               {site.email}
             </a>
           </p>

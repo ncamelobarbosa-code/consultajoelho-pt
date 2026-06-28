@@ -13,11 +13,11 @@ export default function ImagePlaceholder({
 }) {
   return (
     <div
-      className={`relative flex items-center justify-center overflow-hidden rounded-md bg-teal-main ${aspect} ${className}`}
+      className={`relative flex items-center justify-center overflow-hidden rounded-card bg-brand shadow-card ${aspect} ${className}`}
       role="img"
       aria-label={label}
     >
-      <div className="absolute inset-0 bg-gradient-to-br from-teal-main to-teal-dark" />
+      <div className="absolute inset-0 bg-gradient-to-br from-brand to-brand-deeper" />
       <svg
         viewBox="0 0 24 24"
         fill="none"
