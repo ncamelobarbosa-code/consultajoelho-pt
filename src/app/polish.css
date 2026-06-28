@@ -331,9 +331,11 @@ h1, h2 { letter-spacing: -0.02em; }
 /* Pequena margem branca entre o menu (sticky) e o vídeo do hero */
 .vhero { margin-top: 0.5cm; }
 
-/* Bloco de introdução (Consulta de Joelho / Experiência·Ciência·Excelência) com 5cm acima */
-.home-intro { text-align: center; background: #fff; padding: 5cm 1.5rem 2cm; }
-@media (max-width: 640px) { .home-intro { padding-top: 3cm; } }
+/* Bloco de introdução com bastante espaço acima (vídeo -> capítulos) */
+.home-intro { text-align: center; background: #fff; padding: 8cm 1.5rem 3cm; }
+@media (max-width: 640px) { .home-intro { padding-top: 4cm; } }
 
-/* Espaçamento generoso (>=3cm de intervalo) entre as secções da homepage */
-.patologias, .tools { padding-top: 2cm !important; padding-bottom: 2cm !important; }
+/* Espaçamento generoso entre as secções da homepage */
+.patologias, .tools { padding-top: 3cm !important; padding-bottom: 3cm !important; }
+/* Centrar o grafismo das Ferramentas */
+.tools .tools-inner { margin: 0 auto; }

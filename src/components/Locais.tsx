@@ -24,7 +24,7 @@ export default function Locais({ lang = "pt" }: { lang?: Lang }) {
   const [active, setActive] = useState<number | null>(null);
   const l = active === null ? null : LOCAIS[active];
   return (
-    <section aria-label="Locais" style={{ background: "var(--white, #fff)", borderTop: "1px solid var(--border)", borderBottom: "1px solid var(--border)", padding: "2cm 1.5rem" }}>
+    <section aria-label="Locais" style={{ background: "var(--white, #fff)", borderTop: "1px solid var(--border)", borderBottom: "1px solid var(--border)", padding: "3cm 1.5rem" }}>
       <div style={{ maxWidth: "760px", margin: "0 auto" }}>
         {/* Nomes em linha, com separadores */}
         <div style={{ display: "flex", flexWrap: "wrap", alignItems: "center", justifyContent: "center", gap: "0.3rem 0.55rem", marginBottom: l ? "2rem" : 0 }}>
