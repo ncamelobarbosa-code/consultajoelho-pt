@@ -449,6 +449,7 @@ function makePatologiasCollapsible($x) {
     const card = $x(el);
     el.tagName = "details";
     el.name = "details";
+    card.attr("open", ""); // abertos por omissão (mostram logo o conteúdo)
     card.addClass("pato-acc");
     const photo = card.children(".pato-photo").first();
     if (!photo.length) return;

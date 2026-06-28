@@ -332,8 +332,8 @@ h1, h2 { letter-spacing: -0.02em; }
 .vhero { margin-top: 0.5cm; }
 
 /* Bloco de introdução com bastante espaço acima (vídeo -> capítulos) */
-.home-intro { text-align: center; background: #fff; padding: 8cm 1.5rem 3cm; }
-@media (max-width: 640px) { .home-intro { padding-top: 4cm; } }
+.home-intro { text-align: center; background: #fff; padding: 6cm 1.5rem; }
+@media (max-width: 640px) { .home-intro { padding: 3.5cm 1.5rem; } }
 
 /* Espaçamento generoso entre as secções da homepage */
 .patologias, .tools { padding-top: 3cm !important; padding-bottom: 3cm !important; }
