@@ -74,7 +74,7 @@ export default function VideoHero({ lang = "pt" }: { lang?: Lang }) {
           muted
           loop
           playsInline
-          preload="auto"
+          preload="metadata"
         >
           <source src="/video/presentation.mp4" type="video/mp4" />
         </video>
