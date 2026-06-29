@@ -93,9 +93,12 @@ export default function ContactForm({ lang = 'pt' }: { lang?: 'pt' | 'en' | 'ru'
   const [motivo, setMotivo] = useState('');
   const t = STRINGS[lang];
 
-  // Conversão: submissão de formulário bem-sucedida
+  // Conversão: submissão de formulário bem-sucedida (GA4 + Google Ads)
   useEffect(() => {
-    if (state.succeeded) event('generate_lead', { method: 'form' });
+    if (state.succeeded) {
+      event('generate_lead', { method: 'form' });
+      event('conversion', { send_to: 'AW-859136288/jNYHCPHO28ccEKDC1ZkD' });
+    }
   }, [state.succeeded]);
 
   if (state.succeeded) {

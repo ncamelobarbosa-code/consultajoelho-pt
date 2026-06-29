@@ -1,10 +1,13 @@
 "use client";
 
-// Consentimento de cookies (RGPD): o Google Analytics só carrega APÓS "Aceitar".
+// Consentimento de cookies (RGPD): GA4 + Google Ads só carregam APÓS "Aceitar".
+// Uma única tag gtag.js configura ambos os ids (G-... e AW-...).
 // O Vercel Analytics (sem cookies) fica sempre ativo no layout, fora deste gate.
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
-import { GoogleAnalytics } from "@next/third-parties/google";
+import Script from "next/script";
+
+const ADS_ID = "AW-859136288"; // Google Ads
 
 type Lang = "pt" | "en" | "ru";
 
@@ -58,7 +61,18 @@ export default function ConsentGate({ gaId }: { gaId: string }) {
 
   return (
     <>
-      {consent === "granted" && <GoogleAnalytics gaId={gaId} />}
+      {consent === "granted" && (
+        <>
+          <Script src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`} strategy="afterInteractive" />
+          <Script id="gtag-init" strategy="afterInteractive">
+            {`window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', '${gaId}');
+gtag('config', '${ADS_ID}');`}
+          </Script>
+        </>
+      )}
 
       {consent === "ask" && (
         <div
