@@ -28,6 +28,9 @@ const slugRedirects: Record<string, string> = {
   medocirurgiajoelho: "medo-cirurgia",
   recuperarcirurgiajoelho: "recuperar-cirurgia",
   cirurgiadojoelhoeagora: "preparar-cirurgia",
+  prepararcirurgiajoelho: "preparar-cirurgia",
+  rupturameniscosjoelho: "menisco",
+  dornojoelho: "joelhodrnunocamelo",
   avaliarjoelho: "avaliar",
   infiltracaojoelho: "infiltracoes",
   agendamentonunocameloespecialistajoelho: "contacto",
@@ -44,11 +47,16 @@ const nextConfig: NextConfig = {
     ],
   },
   async redirects() {
-    return Object.entries(slugRedirects).map(([from, to]) => ({
-      source: `/${from}`,
-      destination: `/${to}`,
-      permanent: true,
-    }));
+    const out: { source: string; destination: string; permanent: boolean }[] = [];
+    // Slugs antigos do Wix -> novos, em PT, EN e RU (preserva SEO dos URLs indexados)
+    for (const [from, to] of Object.entries(slugRedirects)) {
+      out.push({ source: `/${from}`, destination: `/${to}`, permanent: true });
+      out.push({ source: `/en/${from}`, destination: `/en/${to}`, permanent: true });
+      out.push({ source: `/ru/${from}`, destination: `/ru/${to}`, permanent: true });
+    }
+    // Páginas de serviço do Wix (marcação) -> contacto
+    out.push({ source: "/service-page/:rest*", destination: "/contacto", permanent: true });
+    return out;
   },
   async headers() {
     return [
