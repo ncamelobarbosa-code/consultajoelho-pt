@@ -35,7 +35,6 @@ const slugRedirects: Record<string, string> = {
   infiltracaojoelho: "infiltracoes",
   agendamentonunocameloespecialistajoelho: "contacto",
   agendar: "contacto",
-  "nuno-camelo-cirurgia-joelho": "nuno-camelo-especialista-cirurgia-joelho",
 };
 
 const nextConfig: NextConfig = {
