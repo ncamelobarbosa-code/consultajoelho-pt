@@ -34,6 +34,7 @@ const slugRedirects: Record<string, string> = {
   avaliarjoelho: "avaliar",
   infiltracaojoelho: "infiltracoes",
   agendamentonunocameloespecialistajoelho: "contacto",
+  agendar: "contacto",
 };
 
 const nextConfig: NextConfig = {
