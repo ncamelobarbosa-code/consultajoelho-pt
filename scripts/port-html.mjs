@@ -28,6 +28,67 @@ const ROUTES = {
   "algoritmo_gonalgia_nuno_camelo.html": "joelhodrnunocamelo",
 };
 
+// ── Revisão médica (E-E-A-T / GEO): "última revisão médica" visível + schema ──
+// Data de revisão real das páginas (atualizar quando houver nova revisão de conteúdo).
+const REVIEW_ISO = "2026-07-24";
+const REVIEW_HUMAN = { pt: "24 de julho de 2026", en: "24 July 2026", ru: "24 июля 2026 г." };
+const REVIEW_LABEL = { pt: "Última revisão médica", en: "Last medically reviewed", ru: "Последняя медицинская проверка" };
+const DOCTOR_NAME = "Dr. Nuno Camelo Barbosa";
+const DOCTOR_URL = "https://www.consultajoelho.pt/nuno-camelo-especialista-cirurgia-joelho";
+
+// Páginas médicas (patologia + cirurgia). Excluir homepage, ferramenta "avaliar" e o CV.
+const MEDICAL_SEGS = new Set(
+  Object.values(ROUTES).filter((s) => s && s !== "avaliar" && s !== "nuno-camelo-especialista-cirurgia-joelho"),
+);
+
+function injectReviewDate($x, locale) {
+  const docHref = `${locale === "pt" ? "" : "/" + locale}/nuno-camelo-especialista-cirurgia-joelho`;
+  const box =
+    `<div class="med-review" style="max-width:900px;margin:2.5rem auto 0;padding:1.1rem 1.5rem 0;` +
+    `border-top:1px solid var(--border,#e2ece1);font-family:'Space Grotesk',sans-serif;font-size:.85rem;` +
+    `color:var(--muted,#6b7280);text-align:center;">` +
+    `${REVIEW_LABEL[locale]}: <strong style="color:var(--teal,#035772);font-weight:600;">${REVIEW_HUMAN[locale]}</strong>` +
+    ` · <a href="${docHref}" style="color:var(--teal,#035772);text-decoration:none;font-weight:600;">${DOCTOR_NAME}</a></div>`;
+  const host = $x("main, .main, article").first();
+  if (host.length) host.append(box); else $x("body").append(box);
+}
+
+const REVIEW_FIELDS = () => ({
+  dateModified: REVIEW_ISO,
+  lastReviewed: REVIEW_ISO,
+  reviewedBy: { "@type": "Physician", name: DOCTOR_NAME, url: DOCTOR_URL, medicalSpecialty: "Orthopedic" },
+});
+
+function reviewSchemaNode(name, url) {
+  return { "@context": "https://schema.org", "@type": "MedicalWebPage", name, url, ...REVIEW_FIELDS() };
+}
+
+// Funde as datas + reviewedBy no nó MedicalWebPage existente; se não houver, anexa um novo.
+function augmentJsonLd(existing, name, url) {
+  if (!existing || !existing.trim()) return JSON.stringify(reviewSchemaNode(name, url));
+  try {
+    const parsed = JSON.parse(existing);
+    const nodes = Array.isArray(parsed)
+      ? parsed
+      : Array.isArray(parsed["@graph"]) ? parsed["@graph"] : [parsed];
+    let merged = false;
+    for (const n of nodes) {
+      const type = n && n["@type"];
+      if (type === "MedicalWebPage" || (Array.isArray(type) && type.includes("MedicalWebPage"))) {
+        Object.assign(n, REVIEW_FIELDS());
+        merged = true;
+      }
+    }
+    if (merged) return JSON.stringify(parsed);
+    // sem MedicalWebPage -> anexar o nosso nó
+    if (Array.isArray(parsed)) return JSON.stringify([...parsed, reviewSchemaNode(name, url)]);
+    if (Array.isArray(parsed["@graph"])) { parsed["@graph"].push(reviewSchemaNode(name, url)); return JSON.stringify(parsed); }
+    return JSON.stringify([parsed, reviewSchemaNode(name, url)]);
+  } catch {
+    return existing; // não parseável -> não arriscar; o bloco visível já dá o sinal
+  }
+}
+
 // Reescrita de links: slug antigo -> slug novo (onde há página nova)
 const LINK_MAP = {
   "/cartilagemjoelhodrnunocamelo": "/cartilagem",
@@ -523,15 +584,17 @@ for (const [file, seg] of Object.entries(ROUTES)) {
   removeAnatomySvg($);
   injectAmiLink($, "pt");
   setCredChips($, seg, "pt");
+  if (MEDICAL_SEGS.has(seg)) injectReviewDate($, "pt");
   let body = rewriteLinks($("body").html() || "");
+  const jsonldOut = MEDICAL_SEGS.has(seg) ? augmentJsonLd(jsonld, meta.title, meta.alternates?.canonical || `${BASE}/${seg}`) : jsonld;
 
   const dir = seg ? `${APP}/${seg}` : APP;
   await mkdir(dir, { recursive: true });
   const id = (seg || "home").replace(/[^a-z0-9]/g, "-");
   const content =
     seg === ""
-      ? homepageTemplate(meta, jsonld, body, inlineScript, id, "pt")
-      : pageTemplate(meta, css, jsonld, body, inlineScript, id, seg, "pt");
+      ? homepageTemplate(meta, jsonldOut, body, inlineScript, id, "pt")
+      : pageTemplate(meta, css, jsonldOut, body, inlineScript, id, seg, "pt");
   await writeFile(`${dir}/page.tsx`, content, "utf8");
   report.push(`  ✓ ${(seg || "(homepage)").padEnd(26)} ${body.length} chars  css=${css.length}  ld=${jsonld ? "sim" : "não"}`);
 }
@@ -590,13 +653,15 @@ for (const [file, seg] of Object.entries(ROUTES)) {
   removeAnatomySvg($e);
   injectAmiLink($e, "en");
   setCredChips($e, seg, "en");
+  if (MEDICAL_SEGS.has(seg)) injectReviewDate($e, "en");
   const body = rewriteLinksEn($e("body").html() || "");
+  const enJsonldOut = MEDICAL_SEGS.has(seg) ? augmentJsonLd(enJsonld, enMeta.title, enMeta.alternates?.canonical || `${BASE}/en/${seg}`) : enJsonld;
   const dir = seg ? `${APP}/en/${seg}` : `${APP}/en`;
   await mkdir(dir, { recursive: true });
   const id = "en-" + (seg || "home").replace(/[^a-z0-9]/g, "-");
   const content = seg === ""
-    ? homepageTemplate(enMeta, enJsonld, body, enScript, id, "en")
-    : pageTemplate(enMeta, css, enJsonld, body, enScript, id, seg, "en");
+    ? homepageTemplate(enMeta, enJsonldOut, body, enScript, id, "en")
+    : pageTemplate(enMeta, css, enJsonldOut, body, enScript, id, seg, "en");
   await writeFile(`${dir}/page.tsx`, content, "utf8");
   enCount++;
 }
@@ -647,13 +712,15 @@ for (const [file, seg] of Object.entries(ROUTES)) {
   removeAnatomySvg($r);
   injectAmiLink($r, "ru");
   setCredChips($r, seg, "ru");
+  if (MEDICAL_SEGS.has(seg)) injectReviewDate($r, "ru");
   const body = rewriteLinksRu($r("body").html() || "");
+  const ruJsonldOut = MEDICAL_SEGS.has(seg) ? augmentJsonLd(ruJsonld, ruMeta.title, ruMeta.alternates?.canonical || `${BASE}/ru/${seg}`) : ruJsonld;
   const dir = seg ? `${APP}/ru/${seg}` : `${APP}/ru`;
   await mkdir(dir, { recursive: true });
   const id = "ru-" + (seg || "home").replace(/[^a-z0-9]/g, "-");
   const content = seg === ""
-    ? homepageTemplate(ruMeta, ruJsonld, body, ruScript, id, "ru")
-    : pageTemplate(ruMeta, css, ruJsonld, body, ruScript, id, seg, "ru");
+    ? homepageTemplate(ruMeta, ruJsonldOut, body, ruScript, id, "ru")
+    : pageTemplate(ruMeta, css, ruJsonldOut, body, ruScript, id, seg, "ru");
   await writeFile(`${dir}/page.tsx`, content, "utf8");
   ruCount++;
 }
