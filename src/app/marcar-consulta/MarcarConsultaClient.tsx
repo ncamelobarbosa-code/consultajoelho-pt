@@ -76,7 +76,7 @@ const T = {
     emailLabel: 'Email', emailPh: 'email@exemplo.pt',
     dateLabel: 'Data pretendida', weekendErr: 'Não há consultas ao fim de semana. Escolha um dia útil.', noSlotErr: 'Sem consulta disponível neste dia. Escolha outra data.',
     schedTitle: 'Dias de consulta', chooseDayHint: 'Consultas de segunda a sexta. Toque num dia disponível (a verde):', chosenLabel: 'Dia escolhido',
-    quickTitle: 'Próximas datas disponíveis', calTitle: 'Ou escolha outra data no calendário',
+    quickTitle: 'Próximas datas disponíveis', calTitle: 'Ou escolha outra data no calendário', yourDetails: 'Os seus dados',
     periodPrefix: 'Período —', manha: 'Manhã', tarde: 'Tarde',
     reasonLabel: 'Motivo', reasonPh: 'Descreva brevemente o motivo da consulta.',
     submit: 'Confirmar marcação', submitting: 'A registar…',
@@ -103,7 +103,7 @@ const T = {
     emailLabel: 'Email', emailPh: 'email@example.com',
     dateLabel: 'Preferred date', weekendErr: 'No appointments on weekends. Please choose a weekday.', noSlotErr: 'No appointment available on this day. Please choose another date.',
     schedTitle: 'Appointment days', chooseDayHint: 'Appointments Monday to Friday. Tap an available day (in green):', chosenLabel: 'Chosen day',
-    quickTitle: 'Next available dates', calTitle: 'Or choose another date in the calendar',
+    quickTitle: 'Next available dates', calTitle: 'Or choose another date in the calendar', yourDetails: 'Your details',
     periodPrefix: 'Period —', manha: 'Morning', tarde: 'Afternoon',
     reasonLabel: 'Reason', reasonPh: 'Briefly describe the reason for the appointment.',
     submit: 'Confirm booking', submitting: 'Saving…',
@@ -129,7 +129,7 @@ const T = {
     emailLabel: 'Электронная почта', emailPh: 'email@example.com',
     dateLabel: 'Желаемая дата', weekendErr: 'В выходные приёма нет. Выберите будний день.', noSlotErr: 'В этот день приём недоступен. Выберите другую дату.',
     schedTitle: 'Дни приёма', chooseDayHint: 'Приём с понедельника по пятницу. Выберите доступный день (зелёный):', chosenLabel: 'Выбранный день',
-    quickTitle: 'Ближайшие свободные даты', calTitle: 'Или выберите другую дату в календаре',
+    quickTitle: 'Ближайшие свободные даты', calTitle: 'Или выберите другую дату в календаре', yourDetails: 'Ваши данные',
     periodPrefix: 'Период —', manha: 'Утро', tarde: 'День',
     reasonLabel: 'Причина', reasonPh: 'Кратко опишите причину приёма.',
     submit: 'Подтвердить запись', submitting: 'Сохранение…',
@@ -248,6 +248,7 @@ function BookingForm({ t, dias, lang }: { t: typeof T['pt']; dias: string[]; lan
     <>
       <header className="mc-header"><h1>{t.bHeading}</h1><p className="mc-sub">{t.bSub}</p></header>
       <form onSubmit={onSubmit} className="mc-form" noValidate>
+        {/* 1. Tipo de consulta */}
         <div className="mc-group">
           <label className="mc-label">{t.typeLabel}</label>
           <div className="mc-toggle">
@@ -260,29 +261,7 @@ function BookingForm({ t, dias, lang }: { t: typeof T['pt']; dias: string[]; lan
           </div>
         </div>
 
-        <div className="mc-group">
-          <label className="mc-label" htmlFor="nome">{t.nameLabel}</label>
-          <input id="nome" type="text" value={nome} onChange={(e) => setNome(e.target.value)} placeholder={t.namePh} autoComplete="name" required />
-        </div>
-
-        <div className="mc-row">
-          <div className="mc-group">
-            <label className="mc-label" htmlFor="sns">{t.snsLabel} <span className="mc-opt">{t.optional}</span></label>
-            <input id="sns" type="text" inputMode="numeric" value={numeroSNS}
-              onChange={(e) => setNumeroSNS(e.target.value.replace(/\D/g, '').slice(0, 9))} placeholder={t.snsPh} aria-invalid={snsPreenchidoInvalido} />
-            {snsPreenchidoInvalido && <span className="mc-err">{t.snsErr}</span>}
-          </div>
-          <div className="mc-group">
-            <label className="mc-label" htmlFor="tel">{t.phoneLabel}</label>
-            <input id="tel" type="tel" value={telefone} onChange={(e) => setTelefone(e.target.value)} placeholder={t.phonePh} autoComplete="tel" required />
-          </div>
-        </div>
-
-        <div className="mc-group">
-          <label className="mc-label" htmlFor="email">{t.emailLabel}</label>
-          <input id="email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder={t.emailPh} autoComplete="email" required />
-        </div>
-
+        {/* 2. Data (agenda semanal + próximas datas + calendário) */}
         <div className="mc-group">
           <label className="mc-label">{t.schedTitle}</label>
           <WeeklySchedule t={t} dias={dias} />
@@ -293,6 +272,7 @@ function BookingForm({ t, dias, lang }: { t: typeof T['pt']; dias: string[]; lan
           <Calendar value={dataConsulta} onChange={onDataChange} minISO={hojeISO} lang={lang} />
         </div>
 
+        {/* 3. Período */}
         {info && info.periodos.length > 0 && (
           <div className="mc-group">
             <label className="mc-label">{t.periodPrefix} {info.diaNome}</label>
@@ -307,6 +287,7 @@ function BookingForm({ t, dias, lang }: { t: typeof T['pt']; dias: string[]; lan
           </div>
         )}
 
+        {/* 4. Confirmação do slot escolhido */}
         {localPreview && (
           <div className="mc-preview">
             <span className="mc-preview-dot" aria-hidden="true">📍</span>
@@ -317,18 +298,48 @@ function BookingForm({ t, dias, lang }: { t: typeof T['pt']; dias: string[]; lan
           </div>
         )}
 
-        <div className="mc-group">
-          <label className="mc-label" htmlFor="motivo">{t.reasonLabel} <span className="mc-opt">{t.optional}</span></label>
-          <textarea id="motivo" value={motivo} onChange={(e) => setMotivo(e.target.value)} rows={3} placeholder={t.reasonPh} />
-        </div>
+        {/* 5. Dados pessoais — só aparecem depois de escolher data + período */}
+        {localPreview && (
+          <div className="mc-details">
+            <div className="mc-details-title">{t.yourDetails}</div>
 
-        {(status === 'error' || status === 'full') && (
-          <p className={`mc-alert ${status === 'full' ? 'mc-alert--warn' : ''}`}>{errorMsg}</p>
+            <div className="mc-group">
+              <label className="mc-label" htmlFor="nome">{t.nameLabel}</label>
+              <input id="nome" type="text" value={nome} onChange={(e) => setNome(e.target.value)} placeholder={t.namePh} autoComplete="name" required />
+            </div>
+
+            <div className="mc-row">
+              <div className="mc-group">
+                <label className="mc-label" htmlFor="sns">{t.snsLabel} <span className="mc-opt">{t.optional}</span></label>
+                <input id="sns" type="text" inputMode="numeric" value={numeroSNS}
+                  onChange={(e) => setNumeroSNS(e.target.value.replace(/\D/g, '').slice(0, 9))} placeholder={t.snsPh} aria-invalid={snsPreenchidoInvalido} />
+                {snsPreenchidoInvalido && <span className="mc-err">{t.snsErr}</span>}
+              </div>
+              <div className="mc-group">
+                <label className="mc-label" htmlFor="tel">{t.phoneLabel}</label>
+                <input id="tel" type="tel" value={telefone} onChange={(e) => setTelefone(e.target.value)} placeholder={t.phonePh} autoComplete="tel" required />
+              </div>
+            </div>
+
+            <div className="mc-group">
+              <label className="mc-label" htmlFor="email">{t.emailLabel}</label>
+              <input id="email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder={t.emailPh} autoComplete="email" required />
+            </div>
+
+            <div className="mc-group">
+              <label className="mc-label" htmlFor="motivo">{t.reasonLabel} <span className="mc-opt">{t.optional}</span></label>
+              <textarea id="motivo" value={motivo} onChange={(e) => setMotivo(e.target.value)} rows={3} placeholder={t.reasonPh} />
+            </div>
+
+            {(status === 'error' || status === 'full') && (
+              <p className={`mc-alert ${status === 'full' ? 'mc-alert--warn' : ''}`}>{errorMsg}</p>
+            )}
+
+            <button type="submit" className="mc-submit" disabled={!podeSubmeter || status === 'sending'}>
+              {status === 'sending' ? t.submitting : t.submit}
+            </button>
+          </div>
         )}
-
-        <button type="submit" className="mc-submit" disabled={!podeSubmeter || status === 'sending'}>
-          {status === 'sending' ? t.submitting : t.submit}
-        </button>
       </form>
     </>
   );
@@ -588,5 +599,9 @@ const CSS = `
 .mc-cal-cell.is-open:hover { background: #035772; color: #fff; transform: scale(1.06); border-color: #035772; }
 .mc-cal-cell.is-disabled { color: #c9d2cc; background: transparent; cursor: not-allowed; }
 .mc-cal-cell.is-sel { background: #035772; color: #fff; border-color: #035772; box-shadow: 0 6px 16px rgba(3,87,114,.3); }
+/* Secção de dados pessoais (revelada após escolher o slot) */
+.mc-details { border-top: 1px solid #e2ece1; padding-top: 1.3rem; margin-top: .3rem; display: flex; flex-direction: column; gap: 1.2rem; animation: mcReveal .3s ease; }
+.mc-details-title { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: .82rem; letter-spacing: .04em; text-transform: uppercase; color: #7a8a80; margin-bottom: -.4rem; }
+@keyframes mcReveal { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
 @media (max-width: 480px) { .mc-card { padding: 1.75rem 1.15rem; } .mc-row { grid-template-columns: 1fr; } .mc-sched-day { min-width: 54px; } .mc-cal-cell { font-size: .85rem; } }
 `;
