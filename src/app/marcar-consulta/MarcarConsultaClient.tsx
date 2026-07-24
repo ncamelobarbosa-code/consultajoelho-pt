@@ -28,6 +28,42 @@ const DIAS: Record<Lang, string[]> = {
   ru: ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'],
 };
 
+// Nomes curtos de dia da semana, começando à SEGUNDA (para o calendário)
+const WD_SHORT: Record<Lang, string[]> = {
+  pt: ['Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb', 'Dom'],
+  en: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+  ru: ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс'],
+};
+
+const MESES: Record<Lang, string[]> = {
+  pt: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
+  en: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+  ru: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'],
+};
+
+const MESES_SHORT: Record<Lang, string[]> = {
+  pt: ['jan', 'fev', 'mar', 'abr', 'mai', 'jun', 'jul', 'ago', 'set', 'out', 'nov', 'dez'],
+  en: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+  ru: ['янв', 'фев', 'мар', 'апр', 'май', 'июн', 'июл', 'авг', 'сен', 'окт', 'ноя', 'дек'],
+};
+
+const pad2 = (n: number) => String(n).padStart(2, '0');
+const isoOf = (y: number, m: number, d: number) => `${y}-${pad2(m + 1)}-${pad2(d)}`;
+
+// Próximas N datas úteis (com vaga) a partir de minISO
+function nextWeekdays(minISO: string, n: number): string[] {
+  const out: string[] = [];
+  const [y, m, d] = [parseInt(minISO.slice(0, 4)), parseInt(minISO.slice(5, 7)) - 1, parseInt(minISO.slice(8, 10))];
+  const cur = new Date(Date.UTC(y, m, d));
+  while (out.length < n) {
+    const iso = cur.toISOString().slice(0, 10);
+    const wd = cur.getUTCDay();
+    if (wd >= 1 && wd <= 5 && HORARIO[wd]) out.push(iso);
+    cur.setUTCDate(cur.getUTCDate() + 1);
+  }
+  return out;
+}
+
 const T = {
   pt: {
     tabBook: 'Marcar consulta', tabContact: 'Contacto / 2ª opinião',
@@ -39,6 +75,8 @@ const T = {
     phoneLabel: 'Telemóvel', phonePh: '+351 9XX XXX XXX',
     emailLabel: 'Email', emailPh: 'email@exemplo.pt',
     dateLabel: 'Data pretendida', weekendErr: 'Não há consultas ao fim de semana. Escolha um dia útil.', noSlotErr: 'Sem consulta disponível neste dia. Escolha outra data.',
+    schedTitle: 'Dias de consulta', chooseDayHint: 'Consultas de segunda a sexta. Toque num dia disponível (a verde):', chosenLabel: 'Dia escolhido',
+    quickTitle: 'Próximas datas disponíveis', calTitle: 'Ou escolha outra data no calendário',
     periodPrefix: 'Período —', manha: 'Manhã', tarde: 'Tarde',
     reasonLabel: 'Motivo', reasonPh: 'Descreva brevemente o motivo da consulta.',
     submit: 'Confirmar marcação', submitting: 'A registar…',
@@ -64,6 +102,8 @@ const T = {
     phoneLabel: 'Phone', phonePh: '+351 9XX XXX XXX',
     emailLabel: 'Email', emailPh: 'email@example.com',
     dateLabel: 'Preferred date', weekendErr: 'No appointments on weekends. Please choose a weekday.', noSlotErr: 'No appointment available on this day. Please choose another date.',
+    schedTitle: 'Appointment days', chooseDayHint: 'Appointments Monday to Friday. Tap an available day (in green):', chosenLabel: 'Chosen day',
+    quickTitle: 'Next available dates', calTitle: 'Or choose another date in the calendar',
     periodPrefix: 'Period —', manha: 'Morning', tarde: 'Afternoon',
     reasonLabel: 'Reason', reasonPh: 'Briefly describe the reason for the appointment.',
     submit: 'Confirm booking', submitting: 'Saving…',
@@ -88,6 +128,8 @@ const T = {
     phoneLabel: 'Телефон', phonePh: '+351 9XX XXX XXX',
     emailLabel: 'Электронная почта', emailPh: 'email@example.com',
     dateLabel: 'Желаемая дата', weekendErr: 'В выходные приёма нет. Выберите будний день.', noSlotErr: 'В этот день приём недоступен. Выберите другую дату.',
+    schedTitle: 'Дни приёма', chooseDayHint: 'Приём с понедельника по пятницу. Выберите доступный день (зелёный):', chosenLabel: 'Выбранный день',
+    quickTitle: 'Ближайшие свободные даты', calTitle: 'Или выберите другую дату в календаре',
     periodPrefix: 'Период —', manha: 'Утро', tarde: 'День',
     reasonLabel: 'Причина', reasonPh: 'Кратко опишите причину приёма.',
     submit: 'Подтвердить запись', submitting: 'Сохранение…',
@@ -126,7 +168,7 @@ export default function MarcarConsultaClient({ lang = 'pt' }: { lang?: Lang }) {
         </div>
 
         {mode === 'marcar'
-          ? <BookingForm t={t} dias={dias} />
+          ? <BookingForm t={t} dias={dias} lang={lang} />
           : <ContactMode t={t} lang={lang} />}
       </div>
       <style>{CSS}</style>
@@ -135,7 +177,7 @@ export default function MarcarConsultaClient({ lang = 'pt' }: { lang?: Lang }) {
 }
 
 // ---------------- MODO: Marcar consulta ----------------
-function BookingForm({ t, dias }: { t: typeof T['pt']; dias: string[] }) {
+function BookingForm({ t, dias, lang }: { t: typeof T['pt']; dias: string[]; lang: Lang }) {
   const [nome, setNome] = useState('');
   const [numeroSNS, setNumeroSNS] = useState('');
   const [telefone, setTelefone] = useState('');
@@ -242,10 +284,13 @@ function BookingForm({ t, dias }: { t: typeof T['pt']; dias: string[] }) {
         </div>
 
         <div className="mc-group">
-          <label className="mc-label" htmlFor="data">{t.dateLabel}</label>
-          <input id="data" type="date" value={dataConsulta} min={hojeISO} onChange={(e) => onDataChange(e.target.value)} required />
-          {info?.fimDeSemana && <span className="mc-err">{t.weekendErr}</span>}
-          {info && !info.fimDeSemana && info.periodos.length === 0 && <span className="mc-err">{t.noSlotErr}</span>}
+          <label className="mc-label">{t.schedTitle}</label>
+          <WeeklySchedule t={t} dias={dias} />
+          <p className="mc-hint">{t.chooseDayHint}</p>
+          <div className="mc-quick-title">{t.quickTitle}</div>
+          <NextDays value={dataConsulta} onChange={onDataChange} minISO={hojeISO} lang={lang} />
+          <div className="mc-cal-subtitle">{t.calTitle}</div>
+          <Calendar value={dataConsulta} onChange={onDataChange} minISO={hojeISO} lang={lang} />
         </div>
 
         {info && info.periodos.length > 0 && (
@@ -362,6 +407,101 @@ function ContactMode({ t, lang }: { t: typeof T['pt']; lang: Lang }) {
   );
 }
 
+// Agenda semanal (referência): que dias/períodos e em que hospital.
+function WeeklySchedule({ t, dias }: { t: typeof T['pt']; dias: string[] }) {
+  return (
+    <div className="mc-sched">
+      {[1, 2, 3, 4, 5].map((wd) => {
+        const disp = HORARIO[wd];
+        return (
+          <div className="mc-sched-row" key={wd}>
+            <span className="mc-sched-day">{dias[wd]}</span>
+            <div className="mc-sched-slots">
+              {(['manha', 'tarde'] as Periodo[]).filter((p) => disp[p]).map((p) => (
+                <span className="mc-sched-chip" key={p}>
+                  <b>{p === 'manha' ? t.manha : t.tarde}</b> · {disp[p]}
+                </span>
+              ))}
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
+// Tira horizontal com as próximas datas disponíveis (estilo Doctoralia) — seleção rápida.
+function NextDays({ value, onChange, minISO, lang }: { value: string; onChange: (iso: string) => void; minISO: string; lang: Lang }) {
+  const days = useMemo(() => nextWeekdays(minISO, 10), [minISO]);
+  return (
+    <div className="mc-next">
+      {days.map((iso) => {
+        const y = parseInt(iso.slice(0, 4)), m = parseInt(iso.slice(5, 7)) - 1, d = parseInt(iso.slice(8, 10));
+        const wd = weekdayOf(iso);
+        const selected = iso === value;
+        return (
+          <button type="button" key={iso} className={`mc-next-card ${selected ? 'is-sel' : ''}`} onClick={() => onChange(iso)} aria-pressed={selected}>
+            <span className="mc-next-wd">{WD_SHORT[lang][(wd + 6) % 7]}</span>
+            <span className="mc-next-day">{d}</span>
+            <span className="mc-next-mon">{MESES_SHORT[lang][m]}</span>
+          </button>
+        );
+      })}
+    </div>
+  );
+}
+
+// Calendário: dias úteis futuros = clicáveis (verde); fim de semana e passado = cinzentos.
+function Calendar({ value, onChange, minISO, lang }: { value: string; onChange: (iso: string) => void; minISO: string; lang: Lang }) {
+  const [minY, minM] = [parseInt(minISO.slice(0, 4)), parseInt(minISO.slice(5, 7)) - 1];
+  const [view, setView] = useState<{ y: number; m: number }>({ y: minY, m: minM });
+
+  const daysInMonth = new Date(view.y, view.m + 1, 0).getDate();
+  const firstWd = weekdayOf(isoOf(view.y, view.m, 1)); // 0=Dom
+  const lead = (firstWd + 6) % 7; // grelha começa à segunda
+  const canPrev = view.y > minY || (view.y === minY && view.m > minM);
+
+  const go = (delta: number) => {
+    let m = view.m + delta, y = view.y;
+    if (m < 0) { m = 11; y--; } else if (m > 11) { m = 0; y++; }
+    if (y < minY || (y === minY && m < minM)) return;
+    setView({ y, m });
+  };
+
+  const cells: (number | null)[] = [...Array(lead).fill(null), ...Array.from({ length: daysInMonth }, (_, i) => i + 1)];
+
+  return (
+    <div className="mc-cal">
+      <div className="mc-cal-head">
+        <button type="button" className="mc-cal-nav" onClick={() => go(-1)} disabled={!canPrev} aria-label="←">‹</button>
+        <span className="mc-cal-title">{MESES[lang][view.m]} {view.y}</span>
+        <button type="button" className="mc-cal-nav" onClick={() => go(1)} aria-label="→">›</button>
+      </div>
+      <div className="mc-cal-grid mc-cal-wd">
+        {WD_SHORT[lang].map((w, i) => <span key={i} className={`mc-cal-wdname ${i >= 5 ? 'is-off' : ''}`}>{w}</span>)}
+      </div>
+      <div className="mc-cal-grid">
+        {cells.map((d, i) => {
+          if (d === null) return <span key={i} className="mc-cal-cell is-empty" />;
+          const iso = isoOf(view.y, view.m, d);
+          const wd = weekdayOf(iso);
+          const weekend = wd === 0 || wd === 6;
+          const past = iso < minISO;
+          const disabled = weekend || past;
+          const selected = iso === value;
+          return (
+            <button type="button" key={i}
+              className={`mc-cal-cell ${disabled ? 'is-disabled' : 'is-open'} ${selected ? 'is-sel' : ''}`}
+              onClick={() => !disabled && onChange(iso)} disabled={disabled} aria-pressed={selected}>
+              {d}
+            </button>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
 const CSS = `
 .mc-wrap { min-height: 72vh; background: #F6F9F5; display: flex; align-items: flex-start; justify-content: center; padding: 3rem 1.5rem; }
 .mc-card { max-width: 640px; width: 100%; background: #fff; border: 1px solid #dde8dd; border-radius: 16px; padding: 2.25rem 2rem; box-shadow: 0 10px 44px rgba(3,87,114,0.08); }
@@ -409,5 +549,44 @@ const CSS = `
 .mc-summary > div:nth-child(odd) { background: #f6f9f5; }
 .mc-summary span { color: #718096; font-size: .85rem; text-transform: uppercase; letter-spacing: .04em; }
 .mc-summary strong { color: #091405; font-size: .95rem; text-align: right; }
-@media (max-width: 480px) { .mc-card { padding: 1.75rem 1.15rem; } .mc-row { grid-template-columns: 1fr; } }
+.mc-hint { font-family: 'Space Grotesk', sans-serif; font-size: .85rem; color: #4a5568; margin: .2rem 0 .2rem; }
+/* Agenda semanal (referência) */
+.mc-sched { display: flex; flex-direction: column; gap: .1rem; border: 1px solid #dde8dd; border-radius: 12px; overflow: hidden; background: #fbfdfb; }
+.mc-sched-row { display: flex; align-items: center; gap: .75rem; padding: .6rem .9rem; }
+.mc-sched-row:nth-child(odd) { background: #f2f7f1; }
+.mc-sched-day { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: .82rem; color: #035772; min-width: 68px; }
+.mc-sched-slots { display: flex; flex-wrap: wrap; gap: .4rem; }
+.mc-sched-chip { font-family: 'Space Grotesk', sans-serif; font-size: .76rem; color: #3a4a4f; background: #fff; border: 1px solid #d5e5d3; border-radius: 999px; padding: .2rem .6rem; }
+.mc-sched-chip b { color: #035772; font-weight: 700; }
+/* Título das secções de data */
+.mc-quick-title, .mc-cal-subtitle { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: .82rem; letter-spacing: .04em; text-transform: uppercase; color: #7a8a80; margin-top: 1.1rem; margin-bottom: .1rem; }
+/* Tira de próximas datas (Doctoralia-style) */
+.mc-next { display: flex; gap: .55rem; overflow-x: auto; padding: .35rem .1rem .6rem; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; }
+.mc-next::-webkit-scrollbar { height: 6px; }
+.mc-next::-webkit-scrollbar-thumb { background: #cfe0cd; border-radius: 999px; }
+.mc-next-card { scroll-snap-align: start; flex: 0 0 auto; width: 62px; display: flex; flex-direction: column; align-items: center; gap: .1rem; padding: .6rem .3rem; border: 1.5px solid #d9e6d7; border-radius: 14px; background: #fff; cursor: pointer; transition: transform .12s, border-color .15s, background .15s, box-shadow .15s; }
+.mc-next-card:hover { border-color: #AACBA8; transform: translateY(-2px); box-shadow: 0 6px 16px rgba(3,87,114,.1); }
+.mc-next-card.is-sel { border-color: #035772; background: #035772; box-shadow: 0 8px 20px rgba(3,87,114,.28); }
+.mc-next-wd { font-family: 'Space Grotesk', sans-serif; font-size: .68rem; font-weight: 600; text-transform: uppercase; letter-spacing: .04em; color: #6b7b71; }
+.mc-next-day { font-family: 'Space Grotesk', sans-serif; font-size: 1.35rem; font-weight: 700; color: #035772; line-height: 1.1; }
+.mc-next-mon { font-family: 'Space Grotesk', sans-serif; font-size: .7rem; color: #6b7b71; text-transform: uppercase; }
+.mc-next-card.is-sel .mc-next-wd, .mc-next-card.is-sel .mc-next-day, .mc-next-card.is-sel .mc-next-mon { color: #fff; }
+/* Calendário (Calendly-style) */
+.mc-cal { border: 1px solid #dde8dd; border-radius: 14px; padding: .9rem 1rem 1.1rem; background: #fff; }
+.mc-cal-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: .7rem; }
+.mc-cal-title { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 1rem; color: #091405; text-transform: capitalize; }
+.mc-cal-nav { width: 34px; height: 34px; border-radius: 50%; border: 1.5px solid #d9e6d7; background: #fff; color: #035772; font-size: 1.2rem; line-height: 1; cursor: pointer; transition: background .15s, border-color .15s; }
+.mc-cal-nav:hover:not(:disabled) { background: #eef6f4; border-color: #AACBA8; }
+.mc-cal-nav:disabled { opacity: .35; cursor: not-allowed; }
+.mc-cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: .25rem; }
+.mc-cal-wd { margin-bottom: .3rem; }
+.mc-cal-wdname { font-family: 'Space Grotesk', sans-serif; font-size: .72rem; font-weight: 600; color: #9aa8a0; text-align: center; text-transform: uppercase; padding: .2rem 0; }
+.mc-cal-wdname.is-off { color: #cbd5cb; }
+.mc-cal-cell { aspect-ratio: 1 / 1; display: flex; align-items: center; justify-content: center; border-radius: 50%; font-family: 'Space Grotesk', sans-serif; font-size: .92rem; font-weight: 600; border: 1.5px solid transparent; background: transparent; cursor: pointer; transition: transform .1s, background .15s, border-color .15s, color .15s; }
+.mc-cal-cell.is-empty { cursor: default; }
+.mc-cal-cell.is-open { color: #035772; background: #eef6f4; border-color: #d3e7d1; }
+.mc-cal-cell.is-open:hover { background: #035772; color: #fff; transform: scale(1.06); border-color: #035772; }
+.mc-cal-cell.is-disabled { color: #c9d2cc; background: transparent; cursor: not-allowed; }
+.mc-cal-cell.is-sel { background: #035772; color: #fff; border-color: #035772; box-shadow: 0 6px 16px rgba(3,87,114,.3); }
+@media (max-width: 480px) { .mc-card { padding: 1.75rem 1.15rem; } .mc-row { grid-template-columns: 1fr; } .mc-sched-day { min-width: 54px; } .mc-cal-cell { font-size: .85rem; } }
 `;
