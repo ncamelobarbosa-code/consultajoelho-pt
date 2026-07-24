@@ -46,7 +46,7 @@ const LINK_MAP = {
   "/medocirurgiajoelho": "/medo-cirurgia",
   "/avaliarjoelho": "/avaliar",
   "/infiltracaojoelho": "/infiltracoes",
-  "/agendamentonunocameloespecialistajoelho": "/contacto",
+  "/agendamentonunocameloespecialistajoelho": "/marcar-consulta",
 };
 // Também converter links .html (caso existam)
 for (const [file, seg] of Object.entries(ROUTES)) {
@@ -58,8 +58,8 @@ function rewriteLinks(html) {
   for (const [from, to] of Object.entries(LINK_MAP)) {
     out = out.split(`href="${from}"`).join(`href="${to}"`);
   }
-  // P0-2: qualquer link (relativo ou absoluto) para a rota inexistente "agendamento..." -> /contacto
-  out = out.replace(/href="[^"]*agendamentonunocameloespecialistajoelho[^"]*"/g, 'href="/contacto"');
+  // P0-2: qualquer link (relativo ou absoluto) para a rota inexistente "agendamento..." -> /marcar-consulta
+  out = out.replace(/href="[^"]*agendamentonunocameloespecialistajoelho[^"]*"/g, 'href="/marcar-consulta"');
   // P0-2: links à raiz por URL absoluto (com/sem www) -> relativo "/"
   out = out.replace(/href="https:\/\/(?:www\.)?consultajoelho\.pt\/?"/g, 'href="/"');
   return out;
@@ -160,7 +160,7 @@ for (const [file, seg] of Object.entries(ROUTES)) {
   } catch {}
 }
 const enSlugs = new Set(Object.keys(enRaw)); // segs com versão EN ("" = homepage)
-enSlugs.add("contacto"); // /en/contacto existe (página React, fora do pipeline HTML)
+enSlugs.add("marcar-consulta"); // /en/marcar-consulta existe (página React, fora do pipeline HTML)
 // /en via PortedArticle (conteúdo EN scraped/traduzido)
 for (const s of ["tendao-rotuliano-tendinite-drnunocamelo", "liquidojoelho-artrocentese-drnunocamelo", "entorsejoelho-drnunocamelo", "actividadecientificajoelho"]) enSlugs.add(s);
 
@@ -172,7 +172,7 @@ for (const [file, seg] of Object.entries(ROUTES)) {
   } catch {}
 }
 const ruSlugs = new Set(Object.keys(ruRaw)); // segs com versão RU ("" = homepage)
-ruSlugs.add("contacto"); // /ru/contacto existe (página React, fora do pipeline HTML)
+ruSlugs.add("marcar-consulta"); // /ru/marcar-consulta existe (página React, fora do pipeline HTML)
 // /ru via PortedArticle (conteúdo RU traduzido)
 for (const s of ["tendao-rotuliano-tendinite-drnunocamelo", "kneesurgeryinportugalprices", "liquidojoelho-artrocentese-drnunocamelo", "entorsejoelho-drnunocamelo", "actividadecientificajoelho"]) ruSlugs.add(s);
 

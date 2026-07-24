@@ -33,8 +33,10 @@ const slugRedirects: Record<string, string> = {
   dornojoelho: "joelhodrnunocamelo",
   avaliarjoelho: "avaliar",
   infiltracaojoelho: "infiltracoes",
-  agendamentonunocameloespecialistajoelho: "contacto",
-  agendar: "contacto",
+  agendamentonunocameloespecialistajoelho: "marcar-consulta",
+  // Página única de marcação (booking + contacto/2ª opinião) substitui o /contacto e o /agendar.
+  contacto: "marcar-consulta",
+  agendar: "marcar-consulta",
   "nuno-camelo-cirurgia-joelho": "nuno-camelo-especialista-cirurgia-joelho",
 };
 

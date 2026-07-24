@@ -30,7 +30,7 @@ const routes = [
   "kneesurgeryinportugalprices",
   "nuno-camelo-especialista-cirurgia-joelho",
   "actividadecientificajoelho",
-  "contacto",
+  "marcar-consulta",
   "videos",
 ];
 
@@ -55,7 +55,7 @@ const enRoutes = [
   "en/avaliar",
   "en/nuno-camelo-especialista-cirurgia-joelho",
   "en/joelhodrnunocamelo",
-  "en/contacto",
+  "en/marcar-consulta",
   "en/tendao-rotuliano-tendinite-drnunocamelo",
   "en/liquidojoelho-artrocentese-drnunocamelo",
   "en/entorsejoelho-drnunocamelo",
@@ -84,7 +84,7 @@ const ruRoutes = [
   "ru/avaliar",
   "ru/nuno-camelo-especialista-cirurgia-joelho",
   "ru/joelhodrnunocamelo",
-  "ru/contacto",
+  "ru/marcar-consulta",
   "ru/tendao-rotuliano-tendinite-drnunocamelo",
   "ru/kneesurgeryinportugalprices",
   "ru/liquidojoelho-artrocentese-drnunocamelo",

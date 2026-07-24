@@ -27,7 +27,8 @@ export default function Contacts() {
   const locale = localeOf(pathname);
   const isHome = pathname === "/" || pathname === "/en" || pathname === "/ru";
   const home = locale === "en" ? "/en" : locale === "ru" ? "/ru" : "/";
-  const bookHref = locale === "en" ? "/en/contacto" : locale === "ru" ? "/ru/contacto" : "/contacto";
+  // Página única de marcação (booking + contacto/2ª opinião), traduzida PT/EN/RU.
+  const bookHref = locale === "en" ? "/en/marcar-consulta" : locale === "ru" ? "/ru/marcar-consulta" : "/marcar-consulta";
 
   return (
     <footer aria-label="Contactos" style={{ background: "#fff", borderTop: "1px solid var(--border)", padding: "3rem 1.5rem" }}>

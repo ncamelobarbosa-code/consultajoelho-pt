@@ -17,19 +17,19 @@ const COPY: Record<Lang, {
     eyebrow: "", titleA: "Consulta de", titleB: "Joelho",
     tagline: "", sub: "",
     cta1: "", cta1href: "/avaliar",
-    cta2: "Agendar", cta2href: "/contacto",
+    cta2: "Agendar", cta2href: "/marcar-consulta",
   },
   en: {
     eyebrow: "", titleA: "Knee", titleB: "Clinic",
     tagline: "", sub: "",
     cta1: "", cta1href: "/en/avaliar",
-    cta2: "Book", cta2href: "/en/contacto",
+    cta2: "Book", cta2href: "/en/marcar-consulta",
   },
   ru: {
     eyebrow: "", titleA: "Клиника", titleB: "колена",
     tagline: "", sub: "",
     cta1: "", cta1href: "/ru/avaliar",
-    cta2: "Записаться", cta2href: "/ru/contacto",
+    cta2: "Записаться", cta2href: "/ru/marcar-consulta",
   },
 };
 

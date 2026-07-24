@@ -13,9 +13,9 @@ const FONT = "'Space Grotesk', sans-serif";
 type Loc = { city: string; hospital: string; logo: string; mapQuery: string; bookHref: Record<Lang, string> };
 
 const LOCAIS: Loc[] = [
-  { city: "Porto", hospital: "Hospital Lusíadas Porto", logo: "/img/logos/lusiadas.png", mapQuery: "Hospital Lusíadas Porto", bookHref: { pt: "/contacto", en: "/en/contacto", ru: "/ru/contacto" } },
-  { city: "Vila do Conde", hospital: "Hospital Misericórdia de Vila do Conde", logo: "/img/logos/hmvc.webp", mapQuery: "Hospital Misericórdia Vila do Conde", bookHref: { pt: "/contacto", en: "/en/contacto", ru: "/ru/contacto" } },
-  { city: "Paços de Ferreira", hospital: "Hospital Lusíadas Paços de Ferreira", logo: "/img/logos/lusiadas.png", mapQuery: "Hospital Lusíadas Paços de Ferreira", bookHref: { pt: "/contacto", en: "/en/contacto", ru: "/ru/contacto" } },
+  { city: "Porto", hospital: "Hospital Lusíadas Porto", logo: "/img/logos/lusiadas.png", mapQuery: "Hospital Lusíadas Porto", bookHref: { pt: "/marcar-consulta", en: "/en/marcar-consulta", ru: "/ru/marcar-consulta" } },
+  { city: "Vila do Conde", hospital: "Hospital Misericórdia de Vila do Conde", logo: "/img/logos/hmvc.webp", mapQuery: "Hospital Misericórdia Vila do Conde", bookHref: { pt: "/marcar-consulta", en: "/en/marcar-consulta", ru: "/ru/marcar-consulta" } },
+  { city: "Paços de Ferreira", hospital: "Hospital Lusíadas Paços de Ferreira", logo: "/img/logos/lusiadas.png", mapQuery: "Hospital Lusíadas Paços de Ferreira", bookHref: { pt: "/marcar-consulta", en: "/en/marcar-consulta", ru: "/ru/marcar-consulta" } },
 ];
 
 const BOOK: Record<Lang, string> = { pt: "Marcar consulta", en: "Book appointment", ru: "Записаться" };

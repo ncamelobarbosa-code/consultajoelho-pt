@@ -67,11 +67,11 @@ export async function POST(req: NextRequest) {
   const periodo = body.periodo as 'manha' | 'tarde';
   const motivo = (body.motivo || '').trim();
 
-  // Validações
-  if (!nome || !numeroSNS || !telefone || !email || !tipo || !dataConsulta || !periodo) {
+  // Validações (SNS é facultativo; se preenchido, tem de ter 9 dígitos)
+  if (!nome || !telefone || !email || !tipo || !dataConsulta || !periodo) {
     return NextResponse.json({ error: 'Campos em falta.' }, { status: 400 });
   }
-  if (!/^\d{9}$/.test(numeroSNS)) {
+  if (numeroSNS && !/^\d{9}$/.test(numeroSNS)) {
     return NextResponse.json({ error: 'Número de SNS inválido (9 dígitos).' }, { status: 400 });
   }
   if (tipo !== 'Presencial' && tipo !== 'Vídeo') {
