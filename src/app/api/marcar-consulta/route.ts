@@ -165,3 +165,36 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'Não foi possível registar a marcação. Tente novamente.' }, { status: 500 });
   }
 }
+
+// Disponibilidade de uma data: que combinações (período × tipo) já estão ocupadas.
+// GET /api/marcar-consulta?date=YYYY-MM-DD -> { taken: { manha:{Presencial,Vídeo}, tarde:{...} } }
+export async function GET(req: NextRequest) {
+  const date = (new URL(req.url).searchParams.get('date') || '').trim();
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(date)) {
+    return NextResponse.json({ error: 'Data inválida.' }, { status: 400 });
+  }
+
+  const taken = {
+    manha: { Presencial: false, 'Vídeo': false },
+    tarde: { Presencial: false, 'Vídeo': false },
+  };
+
+  try {
+    const sheets = getSheetsClient();
+    const dataFormatada = formatarDataSemZeros(date);
+    const res = await sheets.spreadsheets.values.get({ spreadsheetId: SHEET_ID, range: `${SHEET_TAB}!A:M` });
+    const rows = res.data.values || [];
+    for (const row of rows) {
+      if (row[6] === dataFormatada && row[11] === 'Confirmado') {
+        const p = row[8] as 'manha' | 'tarde';
+        const tp = row[5] as 'Presencial' | 'Vídeo';
+        if (taken[p] && tp in taken[p]) taken[p][tp] = true;
+      }
+    }
+    return NextResponse.json({ date, taken });
+  } catch (e) {
+    console.error('[marcar-consulta GET]', e instanceof Error ? e.message : e);
+    // Em caso de falha, devolver tudo livre (não bloquear a marcação; o POST valida à mesma).
+    return NextResponse.json({ date, taken });
+  }
+}

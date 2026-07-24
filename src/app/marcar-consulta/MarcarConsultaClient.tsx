@@ -47,6 +47,13 @@ const MESES_SHORT: Record<Lang, string[]> = {
   ru: ['янв', 'фев', 'мар', 'апр', 'май', 'июн', 'июл', 'авг', 'сен', 'окт', 'ноя', 'дек'],
 };
 
+// Hora de início por período (manhã 11h00, tarde 15h00)
+const HORAS: Record<Lang, Record<Periodo, string>> = {
+  pt: { manha: '11h00', tarde: '15h00' },
+  en: { manha: '11:00', tarde: '15:00' },
+  ru: { manha: '11:00', tarde: '15:00' },
+};
+
 const pad2 = (n: number) => String(n).padStart(2, '0');
 const isoOf = (y: number, m: number, d: number) => `${y}-${pad2(m + 1)}-${pad2(d)}`;
 
@@ -77,6 +84,7 @@ const T = {
     dateLabel: 'Data pretendida', weekendErr: 'Não há consultas ao fim de semana. Escolha um dia útil.', noSlotErr: 'Sem consulta disponível neste dia. Escolha outra data.',
     schedTitle: 'Dias de consulta', chooseDayHint: 'Consultas de segunda a sexta. Toque num dia disponível (a verde):', chosenLabel: 'Dia escolhido',
     quickTitle: 'Próximas datas disponíveis', calTitle: 'Ou escolha outra data no calendário', yourDetails: 'Os seus dados',
+    ultimaVaga: 'Última vaga', esgotado: 'Esgotado',
     periodPrefix: 'Período —', manha: 'Manhã', tarde: 'Tarde',
     reasonLabel: 'Motivo', reasonPh: 'Descreva brevemente o motivo da consulta.',
     submit: 'Confirmar marcação', submitting: 'A registar…',
@@ -104,6 +112,7 @@ const T = {
     dateLabel: 'Preferred date', weekendErr: 'No appointments on weekends. Please choose a weekday.', noSlotErr: 'No appointment available on this day. Please choose another date.',
     schedTitle: 'Appointment days', chooseDayHint: 'Appointments Monday to Friday. Tap an available day (in green):', chosenLabel: 'Chosen day',
     quickTitle: 'Next available dates', calTitle: 'Or choose another date in the calendar', yourDetails: 'Your details',
+    ultimaVaga: 'Last spot', esgotado: 'Fully booked',
     periodPrefix: 'Period —', manha: 'Morning', tarde: 'Afternoon',
     reasonLabel: 'Reason', reasonPh: 'Briefly describe the reason for the appointment.',
     submit: 'Confirm booking', submitting: 'Saving…',
@@ -130,6 +139,7 @@ const T = {
     dateLabel: 'Желаемая дата', weekendErr: 'В выходные приёма нет. Выберите будний день.', noSlotErr: 'В этот день приём недоступен. Выберите другую дату.',
     schedTitle: 'Дни приёма', chooseDayHint: 'Приём с понедельника по пятницу. Выберите доступный день (зелёный):', chosenLabel: 'Выбранный день',
     quickTitle: 'Ближайшие свободные даты', calTitle: 'Или выберите другую дату в календаре', yourDetails: 'Ваши данные',
+    ultimaVaga: 'Последнее место', esgotado: 'Мест нет',
     periodPrefix: 'Период —', manha: 'Утро', tarde: 'День',
     reasonLabel: 'Причина', reasonPh: 'Кратко опишите причину приёма.',
     submit: 'Подтвердить запись', submitting: 'Сохранение…',
@@ -189,6 +199,9 @@ function BookingForm({ t, dias, lang }: { t: typeof T['pt']; dias: string[]; lan
   const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error' | 'full'>('idle');
   const [errorMsg, setErrorMsg] = useState('');
   const [resultado, setResultado] = useState<{ local: string; data: string; periodo: string; diaNome: string } | null>(null);
+  // Disponibilidade da data escolhida (que período×tipo já está ocupado). null = ainda a carregar/sem data.
+  type Avail = { manha: Record<Tipo, boolean>; tarde: Record<Tipo, boolean> };
+  const [avail, setAvail] = useState<Avail | null>(null);
 
   const hojeISO = useMemo(() => new Date().toISOString().slice(0, 10), []);
 
@@ -200,6 +213,23 @@ function BookingForm({ t, dias, lang }: { t: typeof T['pt']; dias: string[]; lan
     const periodos: Periodo[] = disp ? (['manha', 'tarde'] as Periodo[]).filter((p) => disp[p]) : [];
     return { wd, diaNome: dias[wd], fimDeSemana, periodos, disp };
   }, [dataConsulta, dias]);
+
+  // Buscar disponibilidade real quando a data muda
+  useEffect(() => {
+    setAvail(null);
+    if (!dataConsulta || info?.fimDeSemana || !info?.periodos.length) return;
+    let cancelled = false;
+    fetch(`/api/marcar-consulta?date=${dataConsulta}`)
+      .then((r) => r.json())
+      .then((d) => { if (!cancelled && d?.taken) setAvail(d.taken); })
+      .catch(() => {});
+    return () => { cancelled = true; };
+  }, [dataConsulta, info]);
+
+  // Se o período escolhido ficar esgotado para o tipo atual, desmarca
+  useEffect(() => {
+    if (periodo && avail && avail[periodo]?.[tipo]) setPeriodo('');
+  }, [tipo, avail, periodo]);
 
   const localPreview = useMemo(() => {
     if (!dataConsulta || !periodo || !info?.disp) return null;
@@ -237,7 +267,7 @@ function BookingForm({ t, dias, lang }: { t: typeof T['pt']; dias: string[]; lan
         <div className="mc-summary">
           <div><span>{t.sType}</span><strong>{tipo}</strong></div>
           <div><span>{t.sDate}</span><strong>{resultado.diaNome}, {resultado.data}</strong></div>
-          <div><span>{t.sPeriod}</span><strong>{resultado.periodo === 'manha' ? t.manha : t.tarde}</strong></div>
+          <div><span>{t.sPeriod}</span><strong>{(resultado.periodo === 'manha' ? t.manha : t.tarde)} · {HORAS[lang][resultado.periodo as Periodo]}</strong></div>
           <div><span>{t.sLocal}</span><strong>{resultado.local}</strong></div>
         </div>
       </div>
@@ -264,7 +294,7 @@ function BookingForm({ t, dias, lang }: { t: typeof T['pt']; dias: string[]; lan
         {/* 2. Data (agenda semanal + próximas datas + calendário) */}
         <div className="mc-group">
           <label className="mc-label">{t.schedTitle}</label>
-          <WeeklySchedule t={t} dias={dias} />
+          <WeeklySchedule t={t} dias={dias} lang={lang} />
           <p className="mc-hint">{t.chooseDayHint}</p>
           <div className="mc-quick-title">{t.quickTitle}</div>
           <NextDays value={dataConsulta} onChange={onDataChange} minISO={hojeISO} lang={lang} />
@@ -277,12 +307,22 @@ function BookingForm({ t, dias, lang }: { t: typeof T['pt']; dias: string[]; lan
           <div className="mc-group">
             <label className="mc-label">{t.periodPrefix} {info.diaNome}</label>
             <div className="mc-periods">
-              {info.periodos.map((p) => (
-                <button type="button" key={p} className={`mc-period-btn ${periodo === p ? 'is-active' : ''}`} onClick={() => setPeriodo(p)} aria-pressed={periodo === p}>
-                  <span className="mc-period-name">{p === 'manha' ? t.manha : t.tarde}</span>
-                  <span className="mc-period-local">{info.disp![p]}</span>
-                </button>
-              ))}
+              {info.periodos.map((p) => {
+                const taken = avail ? avail[p]?.[tipo] : false;
+                return (
+                  <button type="button" key={p} disabled={!!taken}
+                    className={`mc-period-btn ${periodo === p ? 'is-active' : ''} ${taken ? 'is-taken' : ''}`}
+                    onClick={() => !taken && setPeriodo(p)} aria-pressed={periodo === p}>
+                    <span className="mc-period-name">{(p === 'manha' ? t.manha : t.tarde)} · {HORAS[lang][p]}</span>
+                    <span className="mc-period-local">{info.disp![p]}</span>
+                    {avail && (
+                      <span className={`mc-badge ${taken ? 'mc-badge--out' : 'mc-badge--last'}`}>
+                        {taken ? t.esgotado : t.ultimaVaga}
+                      </span>
+                    )}
+                  </button>
+                );
+              })}
             </div>
           </div>
         )}
@@ -293,7 +333,7 @@ function BookingForm({ t, dias, lang }: { t: typeof T['pt']; dias: string[]; lan
             <span className="mc-preview-dot" aria-hidden="true">📍</span>
             <div>
               <strong>{localPreview}</strong>
-              <span>{info?.diaNome}, {dataConsulta.split('-').reverse().join('/')} · {periodo === 'manha' ? t.manha : t.tarde} · {tipo}</span>
+              <span>{info?.diaNome}, {dataConsulta.split('-').reverse().join('/')} · {periodo === 'manha' ? t.manha : t.tarde} · {HORAS[lang][periodo as Periodo]} · {tipo}</span>
             </div>
           </div>
         )}
@@ -419,7 +459,7 @@ function ContactMode({ t, lang }: { t: typeof T['pt']; lang: Lang }) {
 }
 
 // Agenda semanal (referência): que dias/períodos e em que hospital.
-function WeeklySchedule({ t, dias }: { t: typeof T['pt']; dias: string[] }) {
+function WeeklySchedule({ t, dias, lang }: { t: typeof T['pt']; dias: string[]; lang: Lang }) {
   return (
     <div className="mc-sched">
       {[1, 2, 3, 4, 5].map((wd) => {
@@ -430,7 +470,7 @@ function WeeklySchedule({ t, dias }: { t: typeof T['pt']; dias: string[] }) {
             <div className="mc-sched-slots">
               {(['manha', 'tarde'] as Periodo[]).filter((p) => disp[p]).map((p) => (
                 <span className="mc-sched-chip" key={p}>
-                  <b>{p === 'manha' ? t.manha : t.tarde}</b> · {disp[p]}
+                  <b>{(p === 'manha' ? t.manha : t.tarde)} · {HORAS[lang][p]}</b> · {disp[p]}
                 </span>
               ))}
             </div>
@@ -537,7 +577,11 @@ const CSS = `
 .mc-toggle, .mc-periods { display: flex; gap: .6rem; }
 .mc-toggle-btn { flex: 1; font-family: 'Space Grotesk', sans-serif; font-size: .95rem; font-weight: 600; padding: .8rem 1rem; border-radius: 8px; border: 1.5px solid #cbd5e0; background: #fff; color: #4a5568; cursor: pointer; transition: all .15s; }
 .mc-toggle-btn.is-active { border-color: #035772; background: #035772; color: #fff; }
-.mc-period-btn { flex: 1; display: flex; flex-direction: column; gap: .2rem; text-align: left; font-family: 'Space Grotesk', sans-serif; padding: .8rem 1rem; border-radius: 8px; border: 1.5px solid #cbd5e0; background: #fff; cursor: pointer; transition: all .15s; }
+.mc-period-btn { position: relative; flex: 1; display: flex; flex-direction: column; gap: .2rem; text-align: left; font-family: 'Space Grotesk', sans-serif; padding: .8rem 1rem; border-radius: 8px; border: 1.5px solid #cbd5e0; background: #fff; cursor: pointer; transition: all .15s; }
+.mc-period-btn.is-taken { opacity: .55; cursor: not-allowed; background: #f4f5f4; }
+.mc-badge { align-self: flex-start; margin-top: .35rem; font-size: .68rem; font-weight: 700; letter-spacing: .03em; text-transform: uppercase; padding: .15rem .5rem; border-radius: 999px; }
+.mc-badge--last { color: #b23a00; background: #ffece1; border: 1px solid #ffcfb3; }
+.mc-badge--out { color: #6b7280; background: #e9ebe9; border: 1px solid #d7dbd7; }
 .mc-period-btn.is-active { border-color: #035772; background: #eef6f4; box-shadow: 0 0 0 3px rgba(3,87,114,.1); }
 .mc-period-name { font-weight: 700; color: #035772; font-size: .95rem; }
 .mc-period-local { font-size: .8rem; color: #4a5568; }
