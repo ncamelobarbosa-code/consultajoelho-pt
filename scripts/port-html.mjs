@@ -75,8 +75,8 @@ function injectAuthorBox($x, locale) {
     `<a href="${cvHref}" style="color:var(--teal,#035772);font-weight:600;text-decoration:none;">${a.profile}</a>` +
     ` &nbsp;·&nbsp; <a href="${bookHref}" style="color:var(--teal,#035772);font-weight:600;text-decoration:none;">${a.book} →</a></div>` +
     `</div></div>`;
-  const host = $x("main, .main, article").first();
-  if (host.length) host.append(box); else $x("body").append(box);
+  // Anexar ao fim do body -> garante que fica no FUNDO da página (depois de FAQ/CTA).
+  $x("body").append(box);
 }
 
 // Referências científicas por página (guidelines de sociedades + revisões — fontes reais verificadas).
@@ -135,8 +135,8 @@ function injectReferences($x, seg, locale) {
     `<h2 style="font-size:1rem;font-weight:700;color:var(--teal,#035772);margin:0 0 .3rem;">${REFS_HEADING[locale]}</h2>` +
     `<p style="font-size:.8rem;color:var(--muted,#6b7280);margin:0 0 .8rem;">${REFS_NOTE[locale]}</p>` +
     `<ol style="margin:0;padding-left:1.2rem;font-size:.85rem;color:var(--text,#091405);line-height:1.5;">${items}</ol></section>`;
-  const host = $x("main, .main, article").first();
-  if (host.length) host.append(box); else $x("body").append(box);
+  // Anexar ao fim do body -> garante que fica no FUNDO da página (depois de FAQ/CTA).
+  $x("body").append(box);
 }
 const citationsFor = (seg) => (REFERENCES[seg] || []).map((r) => r.u);
 
