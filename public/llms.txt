@@ -3,7 +3,7 @@
 > Knee-only orthopaedic surgery and consultation in Portugal (Porto, Vila do Conde and Paços de Ferreira). Dr. Nuno Camelo Barbosa is an orthopaedic surgeon subspecialised exclusively in the knee, with international fellowship training and an active role as a peer reviewer for orthopaedic journals (AJSM, KSSTA, OJSM, JEO). ORCID: 0000-0002-7443-4085. The site covers knee pathologies, surgery, recovery and patient self-assessment tools, in Portuguese (default), English (/en) and Russian (/ru).
 
 ## About the surgeon
-- Orthopaedic surgeon, exclusive knee subspecialty; international fellowship training (Centre Orthopédique Santy, Lyon).
+- Orthopaedic surgeon, exclusive knee subspecialty; international fellowship training in knee surgery.
 - Head of Orthopaedics at Hospital Lusíadas Paços de Ferreira; operates at Hospital Lusíadas Porto and Hospital Misericórdia de Vila do Conde.
 - Accepts SIGIC, health insurance (subsistemas) and private, at all units.
 - Identity / sameAs: ORCID https://orcid.org/0000-0002-7443-4085 · LinkedIn https://linkedin.com/in/nuno-camelo-barbosa-07b37277 · Facebook https://www.facebook.com/npccb

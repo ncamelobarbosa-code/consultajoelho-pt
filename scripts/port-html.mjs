@@ -60,33 +60,53 @@ const REVIEW_FIELDS = () => ({
 });
 
 function reviewSchemaNode(name, url) {
-  return { "@context": "https://schema.org", "@type": "MedicalWebPage", name, url, ...REVIEW_FIELDS() };
+  return { "@type": "MedicalWebPage", name, url, ...REVIEW_FIELDS() };
 }
 
-// Funde as datas + reviewedBy no nó MedicalWebPage existente; se não houver, anexa um novo.
-function augmentJsonLd(existing, name, url) {
-  if (!existing || !existing.trim()) return JSON.stringify(reviewSchemaNode(name, url));
-  try {
-    const parsed = JSON.parse(existing);
-    const nodes = Array.isArray(parsed)
-      ? parsed
-      : Array.isArray(parsed["@graph"]) ? parsed["@graph"] : [parsed];
-    let merged = false;
-    for (const n of nodes) {
-      const type = n && n["@type"];
-      if (type === "MedicalWebPage" || (Array.isArray(type) && type.includes("MedicalWebPage"))) {
-        Object.assign(n, REVIEW_FIELDS());
-        merged = true;
-      }
+// FAQPage a partir dos .faq-item (.faq-q pergunta / .faq-a resposta). null se não houver FAQs.
+function buildFaqSchema($x) {
+  const items = [];
+  $x(".faq-item").each((_, el) => {
+    const q = $x(el).find(".faq-q").first().text().replace(/\s+/g, " ").replace(/^[▾▸►▼+\-\s]+|[▾▸►▼+\-\s]+$/g, "").trim();
+    const a = $x(el).find(".faq-a").first().text().replace(/\s+/g, " ").trim();
+    if (q && a) items.push({ "@type": "Question", name: q, acceptedAnswer: { "@type": "Answer", text: a } });
+  });
+  return items.length ? { "@type": "FAQPage", mainEntity: items } : null;
+}
+
+// Migalhas (Início › Página)
+function breadcrumbNodeFor(seg, name, locale) {
+  const home = locale === "pt" ? BASE : `${BASE}/${locale}`;
+  const homeName = { pt: "Início", en: "Home", ru: "Главная" }[locale];
+  const item = locale === "pt" ? `${BASE}/${seg}` : `${BASE}/${locale}/${seg}`;
+  return {
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: homeName, item: home },
+      { "@type": "ListItem", position: 2, name, item },
+    ],
+  };
+}
+
+// Constrói o JSON-LD final da página: funde revisão no MedicalWebPage + adiciona FAQ/Breadcrumb, tudo num @graph.
+function buildPageJsonLd(existing, { name, url, faqNode, breadcrumbNode }) {
+  let nodes = [];
+  if (existing && existing.trim()) {
+    try {
+      const parsed = JSON.parse(existing);
+      nodes = Array.isArray(parsed) ? parsed : Array.isArray(parsed["@graph"]) ? parsed["@graph"] : [parsed];
+    } catch {
+      return existing; // não parseável -> não arriscar
     }
-    if (merged) return JSON.stringify(parsed);
-    // sem MedicalWebPage -> anexar o nosso nó
-    if (Array.isArray(parsed)) return JSON.stringify([...parsed, reviewSchemaNode(name, url)]);
-    if (Array.isArray(parsed["@graph"])) { parsed["@graph"].push(reviewSchemaNode(name, url)); return JSON.stringify(parsed); }
-    return JSON.stringify([parsed, reviewSchemaNode(name, url)]);
-  } catch {
-    return existing; // não parseável -> não arriscar; o bloco visível já dá o sinal
   }
+  const isMWP = (n) => n && (n["@type"] === "MedicalWebPage" || (Array.isArray(n["@type"]) && n["@type"].includes("MedicalWebPage")));
+  const mwp = nodes.find(isMWP);
+  if (mwp) Object.assign(mwp, REVIEW_FIELDS());
+  else nodes.push(reviewSchemaNode(name, url));
+  if (faqNode) nodes.push(faqNode);
+  if (breadcrumbNode) nodes.push(breadcrumbNode);
+  nodes.forEach((n) => { if (n && typeof n === "object") delete n["@context"]; });
+  return JSON.stringify({ "@context": "https://schema.org", "@graph": nodes });
 }
 
 // Reescrita de links: slug antigo -> slug novo (onde há página nova)
@@ -586,7 +606,14 @@ for (const [file, seg] of Object.entries(ROUTES)) {
   setCredChips($, seg, "pt");
   if (MEDICAL_SEGS.has(seg)) injectReviewDate($, "pt");
   let body = rewriteLinks($("body").html() || "");
-  const jsonldOut = MEDICAL_SEGS.has(seg) ? augmentJsonLd(jsonld, meta.title, meta.alternates?.canonical || `${BASE}/${seg}`) : jsonld;
+  const jsonldOut = MEDICAL_SEGS.has(seg)
+    ? buildPageJsonLd(jsonld, {
+        name: meta.title,
+        url: meta.alternates?.canonical || `${BASE}/${seg}`,
+        faqNode: buildFaqSchema($),
+        breadcrumbNode: breadcrumbNodeFor(seg, (meta.title || "").split("|")[0].trim(), "pt"),
+      })
+    : jsonld;
 
   const dir = seg ? `${APP}/${seg}` : APP;
   await mkdir(dir, { recursive: true });
@@ -655,7 +682,14 @@ for (const [file, seg] of Object.entries(ROUTES)) {
   setCredChips($e, seg, "en");
   if (MEDICAL_SEGS.has(seg)) injectReviewDate($e, "en");
   const body = rewriteLinksEn($e("body").html() || "");
-  const enJsonldOut = MEDICAL_SEGS.has(seg) ? augmentJsonLd(enJsonld, enMeta.title, enMeta.alternates?.canonical || `${BASE}/en/${seg}`) : enJsonld;
+  const enJsonldOut = MEDICAL_SEGS.has(seg)
+    ? buildPageJsonLd(enJsonld, {
+        name: enMeta.title,
+        url: enMeta.alternates?.canonical || `${BASE}/en/${seg}`,
+        faqNode: buildFaqSchema($e),
+        breadcrumbNode: breadcrumbNodeFor(seg, (enMeta.title || "").split("|")[0].trim(), "en"),
+      })
+    : enJsonld;
   const dir = seg ? `${APP}/en/${seg}` : `${APP}/en`;
   await mkdir(dir, { recursive: true });
   const id = "en-" + (seg || "home").replace(/[^a-z0-9]/g, "-");
@@ -714,7 +748,14 @@ for (const [file, seg] of Object.entries(ROUTES)) {
   setCredChips($r, seg, "ru");
   if (MEDICAL_SEGS.has(seg)) injectReviewDate($r, "ru");
   const body = rewriteLinksRu($r("body").html() || "");
-  const ruJsonldOut = MEDICAL_SEGS.has(seg) ? augmentJsonLd(ruJsonld, ruMeta.title, ruMeta.alternates?.canonical || `${BASE}/ru/${seg}`) : ruJsonld;
+  const ruJsonldOut = MEDICAL_SEGS.has(seg)
+    ? buildPageJsonLd(ruJsonld, {
+        name: ruMeta.title,
+        url: ruMeta.alternates?.canonical || `${BASE}/ru/${seg}`,
+        faqNode: buildFaqSchema($r),
+        breadcrumbNode: breadcrumbNodeFor(seg, (ruMeta.title || "").split("|")[0].trim(), "ru"),
+      })
+    : ruJsonld;
   const dir = seg ? `${APP}/ru/${seg}` : `${APP}/ru`;
   await mkdir(dir, { recursive: true });
   const id = "ru-" + (seg || "home").replace(/[^a-z0-9]/g, "-");
