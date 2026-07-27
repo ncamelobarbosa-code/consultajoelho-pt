@@ -9,6 +9,7 @@ import ScrollReveal from "@/components/ScrollReveal";
 import ConsentGate from "@/components/ConsentGate";
 import LeadTracking from "@/components/LeadTracking";
 import Contacts from "@/components/Contacts";
+import StickyCall from "@/components/StickyCall";
 import { Analytics } from "@vercel/analytics/next";
 import { site } from "@/lib/site";
 
@@ -35,6 +36,7 @@ export default function RootLayout({
         <SiteHeader />
         {children}
         <Contacts />
+        <StickyCall />
         <Analytics />
       </body>
     </html>

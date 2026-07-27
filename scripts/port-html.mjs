@@ -48,14 +48,33 @@ const MEDICAL_SEGS = new Set(
   Object.values(ROUTES).filter((s) => s && s !== "avaliar" && s !== "nuno-camelo-especialista-cirurgia-joelho"),
 );
 
-function injectReviewDate($x, locale) {
-  const docHref = `${locale === "pt" ? "" : "/" + locale}/nuno-camelo-especialista-cirurgia-joelho`;
+const AUTHOR_STR = {
+  pt: { role: "Cirurgião ortopédico · Subespecialista em cirurgia do joelho", cred: "Revisor científico (AJSM · KSSTA · OJSM · JEO)", profile: "Ver perfil completo", book: "Marcar consulta" },
+  en: { role: "Orthopaedic surgeon · Knee surgery subspecialty", cred: "Peer reviewer (AJSM · KSSTA · OJSM · JEO)", profile: "Full profile", book: "Book appointment" },
+  ru: { role: "Хирург-ортопед · Специализация на хирургии колена", cred: "Научный рецензент (AJSM · KSSTA · OJSM · JEO)", profile: "Полный профиль", book: "Записаться" },
+};
+
+// Caixa "Sobre o autor" (E-E-A-T) no fim de cada página médica.
+function injectAuthorBox($x, locale) {
+  const pfx = locale === "pt" ? "" : "/" + locale;
+  const cvHref = `${pfx}/nuno-camelo-especialista-cirurgia-joelho`;
+  const bookHref = `${pfx}/marcar-consulta`;
+  const a = AUTHOR_STR[locale];
   const box =
-    `<div class="med-review" style="max-width:900px;margin:2.5rem auto 0;padding:1.1rem 1.5rem 0;` +
-    `border-top:1px solid var(--border,#e2ece1);font-family:'Space Grotesk',sans-serif;font-size:.85rem;` +
-    `color:var(--muted,#6b7280);text-align:center;">` +
-    `${REVIEW_LABEL[locale]}: <strong style="color:var(--teal,#035772);font-weight:600;">${REVIEW_HUMAN[locale]}</strong>` +
-    ` · <a href="${docHref}" style="color:var(--teal,#035772);text-decoration:none;font-weight:600;">${DOCTOR_NAME}</a></div>`;
+    `<div class="author-box" style="max-width:900px;margin:2.75rem auto 0;padding:1.4rem 1.5rem;` +
+    `border:1px solid var(--border,#e2ece1);border-radius:14px;background:var(--bg,#f6f9f5);` +
+    `display:flex;gap:1.25rem;align-items:center;flex-wrap:wrap;font-family:'Space Grotesk',sans-serif;">` +
+    `<img src="/img/dr-nuno-camelo.jpg" alt="${DOCTOR_NAME}" width="86" height="86" loading="lazy" ` +
+    `style="width:86px;height:86px;border-radius:50%;object-fit:cover;object-position:center 30%;flex-shrink:0;" />` +
+    `<div style="flex:1;min-width:230px;">` +
+    `<div style="font-weight:700;color:var(--teal,#035772);font-size:1.05rem;">${DOCTOR_NAME}</div>` +
+    `<div style="color:var(--text,#091405);font-size:.9rem;margin-top:.15rem;">${a.role}</div>` +
+    `<div style="color:var(--muted,#6b7280);font-size:.82rem;margin-top:.3rem;">${a.cred}</div>` +
+    `<div style="color:var(--muted,#6b7280);font-size:.8rem;margin-top:.5rem;">${REVIEW_LABEL[locale]}: <strong style="color:var(--teal,#035772);font-weight:600;">${REVIEW_HUMAN[locale]}</strong></div>` +
+    `<div style="margin-top:.7rem;font-size:.85rem;">` +
+    `<a href="${cvHref}" style="color:var(--teal,#035772);font-weight:600;text-decoration:none;">${a.profile}</a>` +
+    ` &nbsp;·&nbsp; <a href="${bookHref}" style="color:var(--teal,#035772);font-weight:600;text-decoration:none;">${a.book} →</a></div>` +
+    `</div></div>`;
   const host = $x("main, .main, article").first();
   if (host.length) host.append(box); else $x("body").append(box);
 }
@@ -611,7 +630,7 @@ for (const [file, seg] of Object.entries(ROUTES)) {
   removeAnatomySvg($);
   injectAmiLink($, "pt");
   setCredChips($, seg, "pt");
-  if (MEDICAL_SEGS.has(seg)) injectReviewDate($, "pt");
+  if (MEDICAL_SEGS.has(seg)) injectAuthorBox($, "pt");
   let body = rewriteLinks($("body").html() || "");
   const jsonldOut = MEDICAL_SEGS.has(seg)
     ? buildPageJsonLd(jsonld, {
@@ -687,7 +706,7 @@ for (const [file, seg] of Object.entries(ROUTES)) {
   removeAnatomySvg($e);
   injectAmiLink($e, "en");
   setCredChips($e, seg, "en");
-  if (MEDICAL_SEGS.has(seg)) injectReviewDate($e, "en");
+  if (MEDICAL_SEGS.has(seg)) injectAuthorBox($e, "en");
   const body = rewriteLinksEn($e("body").html() || "");
   const enJsonldOut = MEDICAL_SEGS.has(seg)
     ? buildPageJsonLd(enJsonld, {
@@ -753,7 +772,7 @@ for (const [file, seg] of Object.entries(ROUTES)) {
   removeAnatomySvg($r);
   injectAmiLink($r, "ru");
   setCredChips($r, seg, "ru");
-  if (MEDICAL_SEGS.has(seg)) injectReviewDate($r, "ru");
+  if (MEDICAL_SEGS.has(seg)) injectAuthorBox($r, "ru");
   const body = rewriteLinksRu($r("body").html() || "");
   const ruJsonldOut = MEDICAL_SEGS.has(seg)
     ? buildPageJsonLd(ruJsonld, {
