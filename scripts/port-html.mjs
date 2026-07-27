@@ -79,6 +79,67 @@ function injectAuthorBox($x, locale) {
   if (host.length) host.append(box); else $x("body").append(box);
 }
 
+// Referências científicas por página (guidelines de sociedades + revisões — fontes reais verificadas).
+const REFERENCES = {
+  lca: [
+    { t: "AAOS Clinical Practice Guideline — Management of Anterior Cruciate Ligament Injuries. American Academy of Orthopaedic Surgeons, 2022.", u: "https://www.aaos.org/aaos-home/newsroom/press-releases/aaos-updates-guideline-for-management-of-acl-injuries/" },
+    { t: "Management of ACL revision: the 2022 ESSKA consensus. Knee Surg Sports Traumatol Arthrosc, 2023.", u: "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC10598192/" },
+  ],
+  menisco: [
+    { t: "Management of traumatic meniscus tears: the 2019 ESSKA meniscus consensus. Knee Surg Sports Traumatol Arthrosc, 2020.", u: "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7148286/" },
+    { t: "EU–US Meniscus Rehabilitation 2024 Consensus (ESSKA–AOSSM–AASPT), 2024.", u: "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC12310086/" },
+  ],
+  artrose: [
+    { t: "OARSI guidelines for the non-surgical management of knee, hip and polyarticular osteoarthritis. Osteoarthritis Cartilage, 2019.", u: "https://oarsi.org/research-oarsi-success/oarsi-guidelines-non-surgical-management-knee-hip-and-polyarticular" },
+    { t: "AAOS — Management of Osteoarthritis of the Knee (Non-Arthroplasty), 3rd ed.", u: "https://www.aaos.org/globalassets/quality-and-practice-resources/osteoarthritis-of-the-knee/oak3cpg.pdf" },
+  ],
+  cartilagem: [
+    { t: "Autologous chondrocyte implantation (ACI) for cartilage defects of the knee — DGOU guideline. The Knee, 2016.", u: "https://www.sciencedirect.com/science/article/abs/pii/S0968016016000429" },
+    { t: "International Cartilage Regeneration & Joint Preservation Society (ICRS) — classificação e tratamento da cartilagem.", u: "https://cartilage.org/" },
+  ],
+  "luxacao-rotula": [
+    { t: "Management of first-time patellar dislocation: the ESSKA 2024 formal consensus. Knee Surg Sports Traumatol Arthrosc, 2024.", u: "https://pubmed.ncbi.nlm.nih.gov/40053919/" },
+    { t: "Patellofemoral Instability: Consensus Statement (AOSSM/PFF). Orthop J Sports Med, 2018.", u: "https://pmc.ncbi.nlm.nih.gov/articles/PMC5794045/" },
+  ],
+  "tendao-rotuliano-tendinite-drnunocamelo": [
+    { t: "Management of patellar tendinopathy: systematic review and network meta-analysis of randomised studies, 2021.", u: "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8634001/" },
+    { t: "Patellar Tendinopathy: Clinical Diagnosis, Load Management and Advice. J Orthop Sports Phys Ther, 2015.", u: "https://www.jospt.org/doi/pdf/10.2519/jospt.2015.5987" },
+  ],
+  protese: [
+    { t: "Return to Sports and Return to Work After Total Knee Arthroplasty: systematic review and meta-analysis, 2023.", u: "https://pubmed.ncbi.nlm.nih.gov/37499045/" },
+    { t: "Return to Sport After Hip and Knee Arthroplasty. Curr Rev Musculoskelet Med, 2023.", u: "https://link.springer.com/article/10.1007/s12178-023-09839-x" },
+  ],
+  infiltracoes: [
+    { t: "OARSI guidelines for the non-surgical management of knee osteoarthritis (injeções intra-articulares). Osteoarthritis Cartilage, 2019.", u: "https://oarsi.org/research-oarsi-success/oarsi-guidelines-non-surgical-management-knee-hip-and-polyarticular" },
+    { t: "AAOS — Management of Osteoarthritis of the Knee (Non-Arthroplasty), 3rd ed.", u: "https://www.aaos.org/globalassets/quality-and-practice-resources/osteoarthritis-of-the-knee/oak3cpg.pdf" },
+  ],
+};
+
+const REFS_HEADING = { pt: "Referências", en: "References", ru: "Литература" };
+const REFS_NOTE = {
+  pt: "Guidelines de sociedades científicas e revisões que sustentam esta informação.",
+  en: "Clinical guidelines and scientific reviews supporting this information.",
+  ru: "Клинические рекомендации и научные обзоры, подтверждающие эту информацию.",
+};
+
+// Secção "Referências" (E-E-A-T) — só nas páginas com fontes definidas.
+function injectReferences($x, seg, locale) {
+  const refs = REFERENCES[seg];
+  if (!refs || !refs.length) return;
+  const items = refs
+    .map((r) => `<li style="margin-bottom:.5rem;"><a href="${r.u}" target="_blank" rel="noopener" style="color:var(--teal,#035772);text-decoration:none;">${r.t}</a></li>`)
+    .join("");
+  const box =
+    `<section class="references" style="max-width:900px;margin:2.5rem auto 0;padding:1.3rem 1.5rem;` +
+    `border:1px solid var(--border,#e2ece1);border-radius:14px;font-family:'Space Grotesk',sans-serif;">` +
+    `<h2 style="font-size:1rem;font-weight:700;color:var(--teal,#035772);margin:0 0 .3rem;">${REFS_HEADING[locale]}</h2>` +
+    `<p style="font-size:.8rem;color:var(--muted,#6b7280);margin:0 0 .8rem;">${REFS_NOTE[locale]}</p>` +
+    `<ol style="margin:0;padding-left:1.2rem;font-size:.85rem;color:var(--text,#091405);line-height:1.5;">${items}</ol></section>`;
+  const host = $x("main, .main, article").first();
+  if (host.length) host.append(box); else $x("body").append(box);
+}
+const citationsFor = (seg) => (REFERENCES[seg] || []).map((r) => r.u);
+
 const REVIEW_FIELDS = () => ({
   dateModified: REVIEW_ISO,
   lastReviewed: REVIEW_ISO,
@@ -115,7 +176,7 @@ function breadcrumbNodeFor(seg, name, locale) {
 }
 
 // Constrói o JSON-LD final da página: funde revisão no MedicalWebPage + adiciona FAQ/Breadcrumb, tudo num @graph.
-function buildPageJsonLd(existing, { name, url, faqNode, breadcrumbNode }) {
+function buildPageJsonLd(existing, { name, url, faqNode, breadcrumbNode, citations }) {
   let nodes = [];
   if (existing && existing.trim()) {
     try {
@@ -125,10 +186,11 @@ function buildPageJsonLd(existing, { name, url, faqNode, breadcrumbNode }) {
       return existing; // não parseável -> não arriscar
     }
   }
+  const citeField = citations && citations.length ? { citation: citations } : {};
   const isMWP = (n) => n && (n["@type"] === "MedicalWebPage" || (Array.isArray(n["@type"]) && n["@type"].includes("MedicalWebPage")));
   const mwp = nodes.find(isMWP);
-  if (mwp) Object.assign(mwp, REVIEW_FIELDS());
-  else nodes.push(reviewSchemaNode(name, url));
+  if (mwp) Object.assign(mwp, REVIEW_FIELDS(), citeField);
+  else nodes.push({ ...reviewSchemaNode(name, url), ...citeField });
   if (faqNode) nodes.push(faqNode);
   if (breadcrumbNode) nodes.push(breadcrumbNode);
   nodes.forEach((n) => { if (n && typeof n === "object") delete n["@context"]; });
@@ -630,7 +692,7 @@ for (const [file, seg] of Object.entries(ROUTES)) {
   removeAnatomySvg($);
   injectAmiLink($, "pt");
   setCredChips($, seg, "pt");
-  if (MEDICAL_SEGS.has(seg)) injectAuthorBox($, "pt");
+  if (MEDICAL_SEGS.has(seg)) { injectReferences($, seg, "pt"); injectAuthorBox($, "pt"); }
   let body = rewriteLinks($("body").html() || "");
   const jsonldOut = MEDICAL_SEGS.has(seg)
     ? buildPageJsonLd(jsonld, {
@@ -638,6 +700,7 @@ for (const [file, seg] of Object.entries(ROUTES)) {
         url: meta.alternates?.canonical || `${BASE}/${seg}`,
         faqNode: buildFaqSchema($),
         breadcrumbNode: breadcrumbNodeFor(seg, (meta.title || "").split("|")[0].trim(), "pt"),
+        citations: citationsFor(seg),
       })
     : jsonld;
 
@@ -706,7 +769,7 @@ for (const [file, seg] of Object.entries(ROUTES)) {
   removeAnatomySvg($e);
   injectAmiLink($e, "en");
   setCredChips($e, seg, "en");
-  if (MEDICAL_SEGS.has(seg)) injectAuthorBox($e, "en");
+  if (MEDICAL_SEGS.has(seg)) { injectReferences($e, seg, "en"); injectAuthorBox($e, "en"); }
   const body = rewriteLinksEn($e("body").html() || "");
   const enJsonldOut = MEDICAL_SEGS.has(seg)
     ? buildPageJsonLd(enJsonld, {
@@ -714,6 +777,7 @@ for (const [file, seg] of Object.entries(ROUTES)) {
         url: enMeta.alternates?.canonical || `${BASE}/en/${seg}`,
         faqNode: buildFaqSchema($e),
         breadcrumbNode: breadcrumbNodeFor(seg, (enMeta.title || "").split("|")[0].trim(), "en"),
+        citations: citationsFor(seg),
       })
     : enJsonld;
   const dir = seg ? `${APP}/en/${seg}` : `${APP}/en`;
@@ -772,7 +836,7 @@ for (const [file, seg] of Object.entries(ROUTES)) {
   removeAnatomySvg($r);
   injectAmiLink($r, "ru");
   setCredChips($r, seg, "ru");
-  if (MEDICAL_SEGS.has(seg)) injectAuthorBox($r, "ru");
+  if (MEDICAL_SEGS.has(seg)) { injectReferences($r, seg, "ru"); injectAuthorBox($r, "ru"); }
   const body = rewriteLinksRu($r("body").html() || "");
   const ruJsonldOut = MEDICAL_SEGS.has(seg)
     ? buildPageJsonLd(ruJsonld, {
@@ -780,6 +844,7 @@ for (const [file, seg] of Object.entries(ROUTES)) {
         url: ruMeta.alternates?.canonical || `${BASE}/ru/${seg}`,
         faqNode: buildFaqSchema($r),
         breadcrumbNode: breadcrumbNodeFor(seg, (ruMeta.title || "").split("|")[0].trim(), "ru"),
+        citations: citationsFor(seg),
       })
     : ruJsonld;
   const dir = seg ? `${APP}/ru/${seg}` : `${APP}/ru`;
