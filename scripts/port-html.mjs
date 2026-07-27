@@ -35,6 +35,13 @@ const REVIEW_HUMAN = { pt: "24 de julho de 2026", en: "24 July 2026", ru: "24 и
 const REVIEW_LABEL = { pt: "Última revisão médica", en: "Last medically reviewed", ru: "Последняя медицинская проверка" };
 const DOCTOR_NAME = "Dr. Nuno Camelo Barbosa";
 const DOCTOR_URL = "https://www.consultajoelho.pt/nuno-camelo-especialista-cirurgia-joelho";
+// Perfis externos (entity linking p/ LLMs e knowledge graph)
+const DOCTOR_SAMEAS = [
+  "https://orcid.org/0000-0002-7443-4085",
+  "https://www.researchgate.net/profile/Nuno-Camelo-Barbosa",
+  "https://scholar.google.com/citations?user=iTCpAfYAAAAJ",
+  "https://linkedin.com/in/nuno-camelo-barbosa-07b37277",
+];
 
 // Páginas médicas (patologia + cirurgia). Excluir homepage, ferramenta "avaliar" e o CV.
 const MEDICAL_SEGS = new Set(
@@ -56,7 +63,7 @@ function injectReviewDate($x, locale) {
 const REVIEW_FIELDS = () => ({
   dateModified: REVIEW_ISO,
   lastReviewed: REVIEW_ISO,
-  reviewedBy: { "@type": "Physician", name: DOCTOR_NAME, url: DOCTOR_URL, medicalSpecialty: "Orthopedic" },
+  reviewedBy: { "@type": "Physician", name: DOCTOR_NAME, url: DOCTOR_URL, medicalSpecialty: "Orthopedic", sameAs: DOCTOR_SAMEAS },
 });
 
 function reviewSchemaNode(name, url) {
