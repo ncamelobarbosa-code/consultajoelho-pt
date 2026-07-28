@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 import { getScraped, cleanTitle, type Block } from "@/lib/content";
 import { site, pages, type PageSlug, type PageMeta } from "@/lib/site";
+import ArticleEEAT from "@/components/ArticleEEAT";
 
 function renderBlocks(blocks: Block[]): ReactNode[] {
   const out: ReactNode[] = [];
@@ -118,6 +119,8 @@ export default function PortedArticle({
         <p>{t.sub}</p>
         <a href={t.contact}>{t.btn}</a>
       </section>
+
+      <ArticleEEAT slug={slug} locale={locale} title={title} />
     </article>
   );
 }
