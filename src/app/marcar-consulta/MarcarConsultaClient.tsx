@@ -181,8 +181,35 @@ export default function MarcarConsultaClient({ lang = 'pt' }: { lang?: Lang }) {
           ? <BookingForm t={t} dias={dias} lang={lang} />
           : <ContactMode t={t} lang={lang} />}
       </div>
+
+      <HospitalLinks lang={lang} />
+
       <style>{CSS}</style>
     </main>
+  );
+}
+
+// Marcação alternativa diretamente nos hospitais (fundo da página).
+function HospitalLinks({ lang }: { lang: Lang }) {
+  const STR = {
+    pt: { title: "Prefere marcar diretamente no hospital?", lus: "Perfil no Hospital Lusíadas", mis: "Contactos — Misericórdia de Vila do Conde" },
+    en: { title: "Prefer to book directly at the hospital?", lus: "Profile at Hospital Lusíadas", mis: "Contacts — Misericórdia de Vila do Conde" },
+    ru: { title: "Предпочитаете записаться напрямую в больнице?", lus: "Профиль в Hospital Lusíadas", mis: "Контакты — Misericórdia de Vila do Conde" },
+  }[lang];
+  return (
+    <section className="mc-hosp" aria-label={STR.title}>
+      <p className="mc-hosp-title">{STR.title}</p>
+      <div className="mc-hosp-grid">
+        <a className="mc-hosp-card" href="https://www.lusiadas.pt/corpo-clinico/dr-nuno-camelo-barbosa" target="_blank" rel="noopener">
+          <img src="/img/logos/lusiadas.png" alt="Hospital Lusíadas" loading="lazy" />
+          <span>{STR.lus} →</span>
+        </a>
+        <a className="mc-hosp-card" href="https://hospitaldamisericordia.pt/contactos" target="_blank" rel="noopener">
+          <img src="/img/logos/hmvc.webp" alt="Hospital da Misericórdia de Vila do Conde" loading="lazy" />
+          <span>{STR.mis} →</span>
+        </a>
+      </div>
+    </section>
   );
 }
 
@@ -554,7 +581,16 @@ function Calendar({ value, onChange, minISO, lang }: { value: string; onChange: 
 }
 
 const CSS = `
-.mc-wrap { min-height: 72vh; background: #F6F9F5; display: flex; align-items: flex-start; justify-content: center; padding: 3rem 1.5rem; }
+.mc-wrap { min-height: 72vh; background: #F6F9F5; display: flex; flex-direction: column; align-items: center; padding: 3rem 1.5rem; }
+/* Marcação alternativa nos hospitais (fundo da página) */
+.mc-hosp { max-width: 640px; width: 100%; margin: 1.5rem auto 0; text-align: center; }
+.mc-hosp-title { font-family: 'Space Grotesk', sans-serif; font-size: .9rem; font-weight: 600; color: #4a5568; margin: 0 0 .9rem; }
+.mc-hosp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: .9rem; }
+.mc-hosp-card { display: flex; flex-direction: column; align-items: center; gap: .7rem; padding: 1.1rem 1rem; background: #fff; border: 1px solid #dde8dd; border-radius: 14px; text-decoration: none; transition: transform .12s, box-shadow .15s, border-color .15s; }
+.mc-hosp-card:hover { transform: translateY(-2px); box-shadow: 0 8px 22px rgba(3,87,114,.1); border-color: #AACBA8; }
+.mc-hosp-card img { height: 40px; width: auto; max-width: 80%; object-fit: contain; }
+.mc-hosp-card span { font-family: 'Space Grotesk', sans-serif; font-size: .82rem; font-weight: 600; color: #035772; line-height: 1.3; }
+@media (max-width: 480px) { .mc-hosp-grid { grid-template-columns: 1fr; } }
 .mc-card { max-width: 640px; width: 100%; background: #fff; border: 1px solid #dde8dd; border-radius: 16px; padding: 2.25rem 2rem; box-shadow: 0 10px 44px rgba(3,87,114,0.08); }
 .mc-modes { display: flex; gap: .5rem; background: #eef3ee; padding: .35rem; border-radius: 10px; margin-bottom: 1.75rem; }
 .mc-mode-btn { flex: 1; font-family: 'Space Grotesk', sans-serif; font-size: .92rem; font-weight: 600; padding: .65rem .8rem; border-radius: 8px; border: none; background: transparent; color: #4a5568; cursor: pointer; transition: all .15s; }
