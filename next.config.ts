@@ -17,6 +17,9 @@ const securityHeaders = [
 // Slugs antigos (scraped) -> novos (design portado). 301 permanentes para preservar SEO.
 const slugRedirects: Record<string, string> = {
   ligamentocruzadoanterior: "lca",
+  "ligamentocruzadoanterioranteriorjoelho-drnunocamelo": "lca",
+  ligamentocruzadoanteriorjoelho: "lca",
+  ligamentocruzadoanteriordrnunocamelo: "lca",
   cartilagemjoelhodrnunocamelo: "cartilagem",
   meniscosnojoelho: "menisco",
   protesejoelhodesportodrnunocamelo: "protese",
