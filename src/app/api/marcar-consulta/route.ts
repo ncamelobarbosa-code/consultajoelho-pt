@@ -59,6 +59,7 @@ export async function POST(req: NextRequest) {
   }
 
   const nome = (body.nome || '').trim();
+  const dataNascimento = (body.dataNascimento || '').trim();
   const numeroSNS = (body.numeroSNS || '').trim();
   const telefone = (body.telefone || '').trim();
   const email = (body.email || '').trim();
@@ -137,23 +138,24 @@ export async function POST(req: NextRequest) {
 
     await sheets.spreadsheets.values.append({
       spreadsheetId: SHEET_ID,
-      range: `${SHEET_TAB}!A:M`,
+      range: `${SHEET_TAB}!A:N`,
       valueInputOption: 'USER_ENTERED',
       requestBody: {
         values: [[
-          new Date().toISOString(), // Timestamp
-          nome,
-          numeroSNS,
-          telefone,
-          email,
-          tipo,
-          dataFormatada,
-          diaSemana,
-          periodo,
-          local,
-          motivo,
-          'Confirmado',
-          'FALSE', // Notificado_Secretaria (o Make trata)
+          new Date().toISOString(), // A Timestamp
+          nome,                       // B
+          numeroSNS,                  // C
+          telefone,                   // D
+          email,                      // E
+          tipo,                       // F
+          dataFormatada,              // G
+          diaSemana,                  // H
+          periodo,                    // I
+          local,                      // J
+          motivo,                     // K
+          'Confirmado',               // L Status
+          'FALSE',                    // M Notificado_Secretaria (o Make trata)
+          dataNascimento,             // N Data_Nascimento (coluna nova; não altera índices 0-12 do Make)
         ]],
       },
     });

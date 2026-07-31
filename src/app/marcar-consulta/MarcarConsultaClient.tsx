@@ -84,6 +84,7 @@ const T = {
     dateLabel: 'Data pretendida', weekendErr: 'Não há consultas ao fim de semana. Escolha um dia útil.', noSlotErr: 'Sem consulta disponível neste dia. Escolha outra data.',
     schedTitle: 'Dias de consulta', chooseDayHint: 'Consultas de segunda a sexta. Toque num dia disponível (a verde):', chosenLabel: 'Dia escolhido',
     quickTitle: 'Próximas datas disponíveis', calTitle: 'Ou escolha outra data no calendário', yourDetails: 'Os seus dados',
+    dobLabel: 'Data de nascimento', pickSlotFirst: 'Escolha primeiro a data e o período acima.',
     ultimaVaga: '1 vaga disponível', esgotado: 'Esgotado',
     periodPrefix: 'Período —', manha: 'Manhã', tarde: 'Tarde',
     reasonLabel: 'Motivo', reasonPh: 'Descreva brevemente o motivo da consulta.',
@@ -112,6 +113,7 @@ const T = {
     dateLabel: 'Preferred date', weekendErr: 'No appointments on weekends. Please choose a weekday.', noSlotErr: 'No appointment available on this day. Please choose another date.',
     schedTitle: 'Appointment days', chooseDayHint: 'Appointments Monday to Friday. Tap an available day (in green):', chosenLabel: 'Chosen day',
     quickTitle: 'Next available dates', calTitle: 'Or choose another date in the calendar', yourDetails: 'Your details',
+    dobLabel: 'Date of birth', pickSlotFirst: 'First choose the date and period above.',
     ultimaVaga: '1 spot available', esgotado: 'Fully booked',
     periodPrefix: 'Period —', manha: 'Morning', tarde: 'Afternoon',
     reasonLabel: 'Reason', reasonPh: 'Briefly describe the reason for the appointment.',
@@ -139,6 +141,7 @@ const T = {
     dateLabel: 'Желаемая дата', weekendErr: 'В выходные приёма нет. Выберите будний день.', noSlotErr: 'В этот день приём недоступен. Выберите другую дату.',
     schedTitle: 'Дни приёма', chooseDayHint: 'Приём с понедельника по пятницу. Выберите доступный день (зелёный):', chosenLabel: 'Выбранный день',
     quickTitle: 'Ближайшие свободные даты', calTitle: 'Или выберите другую дату в календаре', yourDetails: 'Ваши данные',
+    dobLabel: 'Дата рождения', pickSlotFirst: 'Сначала выберите дату и период выше.',
     ultimaVaga: '1 место свободно', esgotado: 'Мест нет',
     periodPrefix: 'Период —', manha: 'Утро', tarde: 'День',
     reasonLabel: 'Причина', reasonPh: 'Кратко опишите причину приёма.',
@@ -216,6 +219,7 @@ function HospitalLinks({ lang }: { lang: Lang }) {
 // ---------------- MODO: Marcar consulta ----------------
 function BookingForm({ t, dias, lang }: { t: typeof T['pt']; dias: string[]; lang: Lang }) {
   const [nome, setNome] = useState('');
+  const [dataNascimento, setDataNascimento] = useState('');
   const [numeroSNS, setNumeroSNS] = useState('');
   const [telefone, setTelefone] = useState('');
   const [email, setEmail] = useState('');
@@ -265,7 +269,7 @@ function BookingForm({ t, dias, lang }: { t: typeof T['pt']; dias: string[]; lan
 
   const onDataChange = (v: string) => { setDataConsulta(v); setPeriodo(''); };
   const snsPreenchidoInvalido = numeroSNS.length > 0 && !/^\d{9}$/.test(numeroSNS);
-  const podeSubmeter = nome.trim() && !snsPreenchidoInvalido && telefone.trim() && email.trim() && dataConsulta && periodo && !!localPreview;
+  const podeSubmeter = nome.trim() && dataNascimento && !snsPreenchidoInvalido && telefone.trim() && email.trim() && dataConsulta && periodo && !!localPreview;
 
   async function onSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -274,7 +278,7 @@ function BookingForm({ t, dias, lang }: { t: typeof T['pt']; dias: string[]; lan
     try {
       const res = await fetch('/api/marcar-consulta', {
         method: 'POST', headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ nome, numeroSNS, telefone, email, tipo, dataConsulta, periodo, motivo }),
+        body: JSON.stringify({ nome, dataNascimento, numeroSNS, telefone, email, tipo, dataConsulta, periodo, motivo }),
       });
       const data = await res.json();
       if (res.ok && data.success) {
@@ -365,48 +369,53 @@ function BookingForm({ t, dias, lang }: { t: typeof T['pt']; dias: string[]; lan
           </div>
         )}
 
-        {/* 5. Dados pessoais — só aparecem depois de escolher data + período */}
-        {localPreview && (
-          <div className="mc-details">
-            <div className="mc-details-title">{t.yourDetails}</div>
+        {/* 5. Dados pessoais — painel sempre aberto */}
+        <div className="mc-details">
+          <div className="mc-details-title">{t.yourDetails}</div>
 
+          <div className="mc-group">
+            <label className="mc-label" htmlFor="nome">{t.nameLabel}</label>
+            <input id="nome" type="text" value={nome} onChange={(e) => setNome(e.target.value)} placeholder={t.namePh} autoComplete="name" required />
+          </div>
+
+          <div className="mc-row">
             <div className="mc-group">
-              <label className="mc-label" htmlFor="nome">{t.nameLabel}</label>
-              <input id="nome" type="text" value={nome} onChange={(e) => setNome(e.target.value)} placeholder={t.namePh} autoComplete="name" required />
+              <label className="mc-label" htmlFor="dob">{t.dobLabel}</label>
+              <input id="dob" type="date" value={dataNascimento} max={hojeISO} onChange={(e) => setDataNascimento(e.target.value)} required />
             </div>
-
-            <div className="mc-row">
-              <div className="mc-group">
-                <label className="mc-label" htmlFor="sns">{t.snsLabel} <span className="mc-opt">{t.optional}</span></label>
-                <input id="sns" type="text" inputMode="numeric" value={numeroSNS}
-                  onChange={(e) => setNumeroSNS(e.target.value.replace(/\D/g, '').slice(0, 9))} placeholder={t.snsPh} aria-invalid={snsPreenchidoInvalido} />
-                {snsPreenchidoInvalido && <span className="mc-err">{t.snsErr}</span>}
-              </div>
-              <div className="mc-group">
-                <label className="mc-label" htmlFor="tel">{t.phoneLabel}</label>
-                <input id="tel" type="tel" value={telefone} onChange={(e) => setTelefone(e.target.value)} placeholder={t.phonePh} autoComplete="tel" required />
-              </div>
+            <div className="mc-group">
+              <label className="mc-label" htmlFor="sns">{t.snsLabel} <span className="mc-opt">{t.optional}</span></label>
+              <input id="sns" type="text" inputMode="numeric" value={numeroSNS}
+                onChange={(e) => setNumeroSNS(e.target.value.replace(/\D/g, '').slice(0, 9))} placeholder={t.snsPh} aria-invalid={snsPreenchidoInvalido} />
+              {snsPreenchidoInvalido && <span className="mc-err">{t.snsErr}</span>}
             </div>
+          </div>
 
+          <div className="mc-row">
+            <div className="mc-group">
+              <label className="mc-label" htmlFor="tel">{t.phoneLabel}</label>
+              <input id="tel" type="tel" value={telefone} onChange={(e) => setTelefone(e.target.value)} placeholder={t.phonePh} autoComplete="tel" required />
+            </div>
             <div className="mc-group">
               <label className="mc-label" htmlFor="email">{t.emailLabel}</label>
               <input id="email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder={t.emailPh} autoComplete="email" required />
             </div>
-
-            <div className="mc-group">
-              <label className="mc-label" htmlFor="motivo">{t.reasonLabel} <span className="mc-opt">{t.optional}</span></label>
-              <textarea id="motivo" value={motivo} onChange={(e) => setMotivo(e.target.value)} rows={3} placeholder={t.reasonPh} />
-            </div>
-
-            {(status === 'error' || status === 'full') && (
-              <p className={`mc-alert ${status === 'full' ? 'mc-alert--warn' : ''}`}>{errorMsg}</p>
-            )}
-
-            <button type="submit" className="mc-submit" disabled={!podeSubmeter || status === 'sending'}>
-              {status === 'sending' ? t.submitting : t.submit}
-            </button>
           </div>
-        )}
+
+          <div className="mc-group">
+            <label className="mc-label" htmlFor="motivo">{t.reasonLabel} <span className="mc-opt">{t.optional}</span></label>
+            <textarea id="motivo" value={motivo} onChange={(e) => setMotivo(e.target.value)} rows={3} placeholder={t.reasonPh} />
+          </div>
+
+          {!localPreview && <p className="mc-hint" style={{ textAlign: 'center' }}>{t.pickSlotFirst}</p>}
+          {(status === 'error' || status === 'full') && (
+            <p className={`mc-alert ${status === 'full' ? 'mc-alert--warn' : ''}`}>{errorMsg}</p>
+          )}
+
+          <button type="submit" className="mc-submit" disabled={!podeSubmeter || status === 'sending'}>
+            {status === 'sending' ? t.submitting : t.submit}
+          </button>
+        </div>
       </form>
     </>
   );
