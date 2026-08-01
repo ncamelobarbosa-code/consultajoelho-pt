@@ -3,24 +3,14 @@
 import { useState, useMemo, useEffect } from 'react';
 import { useForm, ValidationError } from '@formspree/react';
 import { event } from '@/lib/gtag';
+// Regras de negócio partilhadas com a API (única fonte de verdade). No cliente
+// servem só para PREVIEW; a validação real acontece sempre no servidor.
+import { HORARIO, BLACKOUTS, weekdayOf, blackoutDe, proximaDataUtil } from '@/lib/marcacoes';
 
 type Lang = 'pt' | 'en' | 'ru';
 type Periodo = 'manha' | 'tarde';
 type Tipo = 'Presencial' | 'Vídeo';
 type Mode = 'marcar' | 'contacto';
-
-// --- Regra de negócio (espelho EXATO da API, só para preview no cliente) ---
-const HORARIO: Record<number, { manha?: string; tarde?: string }> = {
-  1: { manha: 'Lusíadas Porto', tarde: 'Lusíadas Porto' },            // Segunda
-  2: { manha: 'Lusíadas Paços de Ferreira' },                          // Terça
-  3: { manha: 'Lusíadas Porto' },                                      // Quarta
-  4: { manha: 'Lusíadas Paços de Ferreira', tarde: 'Lusíadas Porto' }, // Quinta
-  5: { manha: 'Lusíadas Paços de Ferreira', tarde: 'Misericórdia de Vila do Conde' }, // Sexta
-};
-
-function weekdayOf(dataISO: string): number {
-  return new Date(dataISO + 'T12:00:00Z').getUTCDay();
-}
 
 const DIAS: Record<Lang, string[]> = {
   pt: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'],
@@ -65,10 +55,41 @@ function nextWeekdays(minISO: string, n: number): string[] {
   while (out.length < n) {
     const iso = cur.toISOString().slice(0, 10);
     const wd = cur.getUTCDay();
-    if (wd >= 1 && wd <= 5 && HORARIO[wd]) out.push(iso);
+    if (wd >= 1 && wd <= 5 && HORARIO[wd] && !blackoutDe(iso)) out.push(iso);
     cur.setUTCDate(cur.getUTCDate() + 1);
   }
   return out;
+}
+
+// Texto de vagas restantes, por idioma.
+function vagasTxt(lang: Lang, n: number): string {
+  if (lang === 'en') return n === 1 ? '1 spot available' : `${n} spots available`;
+  if (lang === 'ru') return n === 1 ? '1 место свободно' : `${n} мест свободно`;
+  return n === 1 ? '1 vaga disponível' : `${n} vagas disponíveis`;
+}
+
+// Frase de férias: "Sem consultas entre 15 e 28 de agosto. Escolha uma data a
+// partir de 31 de agosto." Gerada a partir do próprio blackout (datas + próximo
+// dia útil disponível), em cada idioma.
+function blackoutNota(lang: Lang, b: { inicio: string; fim: string }): string {
+  const [, m1, d1] = b.inicio.split('-').map(Number);
+  const [, m2, d2] = b.fim.split('-').map(Number);
+  const [, pm, pd] = proximaDataUtil(b.fim).split('-').map(Number);
+  const M = MESES[lang];
+  const sameMonth = m1 === m2;
+  if (lang === 'en') {
+    const range = sameMonth ? `${M[m1 - 1]} ${d1}–${d2}` : `${M[m1 - 1]} ${d1} – ${M[m2 - 1]} ${d2}`;
+    return `No appointments ${range}. Please choose a date from ${M[pm - 1]} ${pd}.`;
+  }
+  if (lang === 'ru') {
+    const range = sameMonth ? `с ${d1} по ${d2} ${M[m2 - 1]}` : `с ${d1} ${M[m1 - 1]} по ${d2} ${M[m2 - 1]}`;
+    return `Приём недоступен ${range}. Выберите дату начиная с ${pd} ${M[pm - 1]}.`;
+  }
+  const mes = (i: number) => M[i].toLowerCase(); // meses em minúsculas no corpo do texto (PT)
+  const range = sameMonth
+    ? `entre ${d1} e ${d2} de ${mes(m2 - 1)}`
+    : `entre ${d1} de ${mes(m1 - 1)} e ${d2} de ${mes(m2 - 1)}`;
+  return `Sem consultas ${range}. Escolha uma data a partir de ${pd} de ${mes(pm - 1)}.`;
 }
 
 const T = {
@@ -91,7 +112,8 @@ const T = {
     submit: 'Confirmar marcação', submitting: 'A registar…',
     okTitle: 'Marcação registada', okBody: 'Recebemos o seu pedido de consulta. A secretaria irá confirmar os detalhes.',
     sType: 'Tipo', sDate: 'Data', sPeriod: 'Período', sLocal: 'Local',
-    full: 'Este período já está esgotado. Por favor escolha outra data.', err: 'Ocorreu um erro. Tente novamente.',
+    full: 'Este período já está esgotado. Por favor escolha outra data — os seus dados ficam guardados.', err: 'Ocorreu um erro. Tente novamente.',
+    blackoutFull: 'Nessas datas o consultório está de férias. Por favor escolha outra data.',
     // contact
     cHeading: 'Pedido de Contacto ou 2ª Opinião', cSub: 'Preencha o formulário e entraremos em contacto, habitualmente no próprio dia útil. Em alternativa, ligue para',
     cReasonLabel: 'Motivo do contacto', cReasonPh: 'Seleccione o motivo',
@@ -120,7 +142,8 @@ const T = {
     submit: 'Confirm booking', submitting: 'Saving…',
     okTitle: 'Appointment registered', okBody: 'We have received your request. Our secretariat will confirm the details.',
     sType: 'Type', sDate: 'Date', sPeriod: 'Period', sLocal: 'Location',
-    full: 'This slot is already taken. Please choose another date.', err: 'An error occurred. Please try again.',
+    full: 'This slot is already fully booked. Please choose another date — your details are kept.', err: 'An error occurred. Please try again.',
+    blackoutFull: 'The practice is on holiday on those dates. Please choose another date.',
     cHeading: 'Contact or Second Opinion', cSub: 'Fill in the form and we will contact you, usually the same working day. Alternatively, call',
     cReasonLabel: 'Reason for contact', cReasonPh: 'Select a reason',
     cReasons: ['Second opinion', 'Request a quote', 'Knee pain', 'Ligament injury (ACL / PCL)', 'Meniscal injury', 'Cartilage injury', 'Knee osteoarthritis', 'Medical tourism', 'Other'],
@@ -148,7 +171,8 @@ const T = {
     submit: 'Подтвердить запись', submitting: 'Сохранение…',
     okTitle: 'Запись зарегистрирована', okBody: 'Мы получили ваш запрос. Секретариат подтвердит детали.',
     sType: 'Тип', sDate: 'Дата', sPeriod: 'Период', sLocal: 'Место',
-    full: 'Это время уже занято. Пожалуйста, выберите другую дату.', err: 'Произошла ошибка. Попробуйте снова.',
+    full: 'Это время уже занято. Пожалуйста, выберите другую дату — ваши данные сохранены.', err: 'Произошла ошибка. Попробуйте снова.',
+    blackoutFull: 'В эти даты кабинет на отпуске. Пожалуйста, выберите другую дату.',
     cHeading: 'Связаться или второе мнение', cSub: 'Заполните форму, и мы свяжемся с Вами, обычно в тот же рабочий день. Также Вы можете позвонить по номеру',
     cReasonLabel: 'Причина обращения', cReasonPh: 'Выберите причину',
     cReasons: ['Второе мнение', 'Запросить смету', 'Боль в колене', 'Повреждение связки (ПКС / ЗКС)', 'Повреждение мениска', 'Повреждение хряща', 'Остеоартроз коленного сустава', 'Медицинский туризм', 'Другое'],
@@ -230,8 +254,9 @@ function BookingForm({ t, dias, lang }: { t: typeof T['pt']; dias: string[]; lan
   const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error' | 'full'>('idle');
   const [errorMsg, setErrorMsg] = useState('');
   const [resultado, setResultado] = useState<{ local: string; data: string; periodo: string; diaNome: string } | null>(null);
-  // Disponibilidade da data escolhida (que período×tipo já está ocupado). null = ainda a carregar/sem data.
-  type Avail = { manha: Record<Tipo, boolean>; tarde: Record<Tipo, boolean> };
+  // Disponibilidade da data escolhida: vagas restantes por período×tipo.
+  // null = ainda a carregar / sem data.
+  type Avail = { manha: Record<Tipo, number>; tarde: Record<Tipo, number> };
   const [avail, setAvail] = useState<Avail | null>(null);
 
   const hojeISO = useMemo(() => new Date().toISOString().slice(0, 10), []);
@@ -252,14 +277,14 @@ function BookingForm({ t, dias, lang }: { t: typeof T['pt']; dias: string[]; lan
     let cancelled = false;
     fetch(`/api/marcar-consulta?date=${dataConsulta}`)
       .then((r) => r.json())
-      .then((d) => { if (!cancelled && d?.taken) setAvail(d.taken); })
+      .then((d) => { if (!cancelled && d?.restantes) setAvail(d.restantes); })
       .catch(() => {});
     return () => { cancelled = true; };
   }, [dataConsulta, info]);
 
-  // Se o período escolhido ficar esgotado para o tipo atual, desmarca
+  // Se o período escolhido ficar esgotado (0 vagas) para o tipo atual, desmarca
   useEffect(() => {
-    if (periodo && avail && avail[periodo]?.[tipo]) setPeriodo('');
+    if (periodo && avail && (avail[periodo]?.[tipo] ?? 1) <= 0) setPeriodo('');
   }, [tipo, avail, periodo]);
 
   const localPreview = useMemo(() => {
@@ -284,8 +309,12 @@ function BookingForm({ t, dias, lang }: { t: typeof T['pt']; dias: string[]; lan
       if (res.ok && data.success) {
         setResultado({ local: data.local, data: data.data, periodo, diaNome: info!.diaNome });
         setStatus('success');
-      } else if (res.status === 409) { setStatus('full'); setErrorMsg(data.error || t.full); }
-      else { setStatus('error'); setErrorMsg(data.error || t.err); }
+      } else if (res.status === 409) {
+        // 'indisponivel' (férias) ou 'periodo_esgotado'. Mantém o formulário
+        // preenchido — o utilizador só precisa de escolher outra data.
+        setStatus('full');
+        setErrorMsg(data.erro === 'indisponivel' ? t.blackoutFull : t.full);
+      } else { setStatus('error'); setErrorMsg(data.error || t.err); }
     } catch { setStatus('error'); setErrorMsg(t.err); }
   }
 
@@ -327,6 +356,9 @@ function BookingForm({ t, dias, lang }: { t: typeof T['pt']; dias: string[]; lan
           <label className="mc-label">{t.schedTitle}</label>
           <WeeklySchedule t={t} dias={dias} lang={lang} />
           <p className="mc-hint">{t.chooseDayHint}</p>
+          {BLACKOUTS.filter((b) => b.fim >= hojeISO).map((b) => (
+            <p key={b.inicio} className="mc-note">🏖️ {blackoutNota(lang, b)}</p>
+          ))}
           <div className="mc-quick-title">{t.quickTitle}</div>
           <NextDays value={dataConsulta} onChange={onDataChange} minISO={hojeISO} lang={lang} />
           <div className="mc-cal-subtitle">{t.calTitle}</div>
@@ -339,16 +371,17 @@ function BookingForm({ t, dias, lang }: { t: typeof T['pt']; dias: string[]; lan
             <label className="mc-label">{t.periodPrefix} {info.diaNome}</label>
             <div className="mc-periods">
               {info.periodos.map((p) => {
-                const taken = avail ? avail[p]?.[tipo] : false;
+                const rest = avail ? avail[p]?.[tipo] : undefined;
+                const taken = rest !== undefined && rest <= 0;
                 return (
-                  <button type="button" key={p} disabled={!!taken}
+                  <button type="button" key={p} disabled={taken}
                     className={`mc-period-btn ${periodo === p ? 'is-active' : ''} ${taken ? 'is-taken' : ''}`}
                     onClick={() => !taken && setPeriodo(p)} aria-pressed={periodo === p}>
                     <span className="mc-period-name">{(p === 'manha' ? t.manha : t.tarde)} · {HORAS[lang][p]}</span>
                     <span className="mc-period-local">{info.disp![p]}</span>
-                    {avail && (
+                    {rest !== undefined && (
                       <span className={`mc-badge ${taken ? 'mc-badge--out' : 'mc-badge--last'}`}>
-                        {taken ? t.esgotado : t.ultimaVaga}
+                        {taken ? t.esgotado : vagasTxt(lang, rest)}
                       </span>
                     )}
                   </button>
@@ -365,6 +398,9 @@ function BookingForm({ t, dias, lang }: { t: typeof T['pt']; dias: string[]; lan
             <div>
               <strong>{localPreview}</strong>
               <span>{info?.diaNome}, {dataConsulta.split('-').reverse().join('/')} · {periodo === 'manha' ? t.manha : t.tarde} · {HORAS[lang][periodo as Periodo]} · {tipo}</span>
+              {periodo && avail && avail[periodo as Periodo]?.[tipo] !== undefined && (
+                <span className="mc-preview-vagas">{vagasTxt(lang, avail[periodo as Periodo][tipo])}</span>
+              )}
             </div>
           </div>
         )}
@@ -574,11 +610,12 @@ function Calendar({ value, onChange, minISO, lang }: { value: string; onChange: 
           const wd = weekdayOf(iso);
           const weekend = wd === 0 || wd === 6;
           const past = iso < minISO;
-          const disabled = weekend || past;
+          const blocked = !!blackoutDe(iso); // férias
+          const disabled = weekend || past || blocked;
           const selected = iso === value;
           return (
             <button type="button" key={i}
-              className={`mc-cal-cell ${disabled ? 'is-disabled' : 'is-open'} ${selected ? 'is-sel' : ''}`}
+              className={`mc-cal-cell ${disabled ? 'is-disabled' : 'is-open'} ${blocked ? 'is-blackout' : ''} ${selected ? 'is-sel' : ''}`}
               onClick={() => !disabled && onChange(iso)} disabled={disabled} aria-pressed={selected}>
               {d}
             </button>
@@ -634,6 +671,10 @@ const CSS = `
 .mc-preview-dot { font-size: 1.3rem; }
 .mc-preview strong { display: block; font-family: 'Space Grotesk', sans-serif; color: #035772; font-size: 1.05rem; font-weight: 700; }
 .mc-preview span { font-family: 'Space Grotesk', sans-serif; color: #4a5568; font-size: .85rem; }
+.mc-preview-vagas { display: block; margin-top: .3rem; font-family: 'Space Grotesk', sans-serif; font-size: .8rem; font-weight: 700; color: #2f7d55; }
+/* Nota de férias (blackout) */
+.mc-note { font-family: 'Space Grotesk', sans-serif; font-size: .82rem; color: #8a5a00; background: #fdf3d8; border: 1px solid #f0dca0; border-radius: 8px; padding: .55rem .8rem; margin: .6rem 0 0; line-height: 1.4; }
+.mc-cal-cell.is-blackout { text-decoration: line-through; color: #cdb78f; }
 .mc-checkbox .mc-check-label { display: flex; align-items: flex-start; gap: .7rem; font-family: 'Space Grotesk', sans-serif; font-size: .85rem; color: #4a5568; line-height: 1.5; cursor: pointer; }
 .mc-check-label input[type=checkbox] { width: 18px; height: 18px; min-width: 18px; margin-top: 2px; accent-color: #035772; cursor: pointer; }
 .mc-check-label a { color: #035772; text-decoration: underline; }
