@@ -140,6 +140,20 @@ function injectReferences($x, seg, locale) {
 }
 const citationsFor = (seg) => (REFERENCES[seg] || []).map((r) => r.u);
 
+// Condição clínica de cada página (schema.org about -> MedicalCondition). Reforça relevância temática (Google + LLMs).
+const CONDITIONS = {
+  menisco: { pt: "Rotura do menisco", en: "Meniscus tear", ru: "Разрыв мениска" },
+  lca: { pt: "Rotura do ligamento cruzado anterior", en: "Anterior cruciate ligament injury", ru: "Разрыв передней крестообразной связки" },
+  cartilagem: { pt: "Lesão da cartilagem do joelho", en: "Knee cartilage injury", ru: "Повреждение хряща коленного сустава" },
+  artrose: { pt: "Artrose do joelho (gonartrose)", en: "Knee osteoarthritis", ru: "Остеоартроз коленного сустава" },
+  protese: { pt: "Artroplastia do joelho", en: "Knee replacement", ru: "Эндопротезирование коленного сустава" },
+  "quisto-baker": { pt: "Quisto de Baker", en: "Baker's cyst", ru: "Киста Бейкера" },
+  "quistos-parameniscais": { pt: "Quistos parameniscais", en: "Parameniscal cysts", ru: "Параменисковые кисты" },
+  "sindrome-banda-iliotibial": { pt: "Síndrome da banda iliotibial", en: "Iliotibial band syndrome", ru: "Синдром илиотибиального тракта" },
+  "luxacao-rotula": { pt: "Instabilidade e luxação da rótula", en: "Patellar instability", ru: "Нестабильность надколенника" },
+};
+const conditionFor = (seg, locale) => (CONDITIONS[seg] ? { "@type": "MedicalCondition", name: CONDITIONS[seg][locale] } : null);
+
 const REVIEW_FIELDS = () => ({
   dateModified: REVIEW_ISO,
   lastReviewed: REVIEW_ISO,
@@ -176,7 +190,7 @@ function breadcrumbNodeFor(seg, name, locale) {
 }
 
 // Constrói o JSON-LD final da página: funde revisão no MedicalWebPage + adiciona FAQ/Breadcrumb, tudo num @graph.
-function buildPageJsonLd(existing, { name, url, faqNode, breadcrumbNode, citations }) {
+function buildPageJsonLd(existing, { name, url, faqNode, breadcrumbNode, citations, about }) {
   let nodes = [];
   if (existing && existing.trim()) {
     try {
@@ -187,10 +201,11 @@ function buildPageJsonLd(existing, { name, url, faqNode, breadcrumbNode, citatio
     }
   }
   const citeField = citations && citations.length ? { citation: citations } : {};
+  const aboutField = about ? { about } : {};
   const isMWP = (n) => n && (n["@type"] === "MedicalWebPage" || (Array.isArray(n["@type"]) && n["@type"].includes("MedicalWebPage")));
   const mwp = nodes.find(isMWP);
-  if (mwp) Object.assign(mwp, REVIEW_FIELDS(), citeField);
-  else nodes.push({ ...reviewSchemaNode(name, url), ...citeField });
+  if (mwp) Object.assign(mwp, REVIEW_FIELDS(), citeField, aboutField);
+  else nodes.push({ ...reviewSchemaNode(name, url), ...citeField, ...aboutField });
   if (faqNode) nodes.push(faqNode);
   if (breadcrumbNode) nodes.push(breadcrumbNode);
   nodes.forEach((n) => { if (n && typeof n === "object") delete n["@context"]; });
@@ -701,6 +716,7 @@ for (const [file, seg] of Object.entries(ROUTES)) {
         faqNode: buildFaqSchema($),
         breadcrumbNode: breadcrumbNodeFor(seg, (meta.title || "").split("|")[0].trim(), "pt"),
         citations: citationsFor(seg),
+        about: conditionFor(seg, "pt"),
       })
     : jsonld;
 
@@ -778,6 +794,7 @@ for (const [file, seg] of Object.entries(ROUTES)) {
         faqNode: buildFaqSchema($e),
         breadcrumbNode: breadcrumbNodeFor(seg, (enMeta.title || "").split("|")[0].trim(), "en"),
         citations: citationsFor(seg),
+        about: conditionFor(seg, "en"),
       })
     : enJsonld;
   const dir = seg ? `${APP}/en/${seg}` : `${APP}/en`;
@@ -845,6 +862,7 @@ for (const [file, seg] of Object.entries(ROUTES)) {
         faqNode: buildFaqSchema($r),
         breadcrumbNode: breadcrumbNodeFor(seg, (ruMeta.title || "").split("|")[0].trim(), "ru"),
         citations: citationsFor(seg),
+        about: conditionFor(seg, "ru"),
       })
     : ruJsonld;
   const dir = seg ? `${APP}/ru/${seg}` : `${APP}/ru`;
