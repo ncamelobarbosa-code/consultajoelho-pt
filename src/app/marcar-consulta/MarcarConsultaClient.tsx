@@ -86,6 +86,10 @@ const T = {
     quickTitle: 'Próximas datas disponíveis', calTitle: 'Ou escolha outra data no calendário', yourDetails: 'Os seus dados',
     dobLabel: 'Data de nascimento', pickSlotFirst: 'Escolha primeiro a data e o período acima.',
     ultimaVaga: '1 vaga disponível', esgotado: 'Esgotado',
+    urgentBtn: 'Pedir consulta urgente',
+    urgentNotice: 'Esta vaga já está preenchida. Pode pedir uma consulta urgente — o Dr. Nuno Camelo avalia a disponibilidade e responde-lhe diretamente.',
+    urgentOkTitle: 'Pedido de consulta urgente enviado',
+    urgentOkBody: 'O Dr. Nuno Camelo irá avaliar a disponibilidade e contactá-lo diretamente. Em caso de emergência médica, dirija-se ao serviço de urgência.',
     periodPrefix: 'Período —', manha: 'Manhã', tarde: 'Tarde',
     reasonLabel: 'Motivo', reasonPh: 'Descreva brevemente o motivo da consulta.',
     submit: 'Confirmar marcação', submitting: 'A registar…',
@@ -115,6 +119,10 @@ const T = {
     quickTitle: 'Next available dates', calTitle: 'Or choose another date in the calendar', yourDetails: 'Your details',
     dobLabel: 'Date of birth', pickSlotFirst: 'First choose the date and period above.',
     ultimaVaga: '1 spot available', esgotado: 'Fully booked',
+    urgentBtn: 'Request urgent appointment',
+    urgentNotice: 'This slot is already taken. You can request an urgent appointment — Dr. Nuno Camelo will assess availability and contact you directly.',
+    urgentOkTitle: 'Urgent appointment request sent',
+    urgentOkBody: 'Dr. Nuno Camelo will assess availability and contact you directly. In a medical emergency, please go to the emergency department.',
     periodPrefix: 'Period —', manha: 'Morning', tarde: 'Afternoon',
     reasonLabel: 'Reason', reasonPh: 'Briefly describe the reason for the appointment.',
     submit: 'Confirm booking', submitting: 'Saving…',
@@ -143,6 +151,10 @@ const T = {
     quickTitle: 'Ближайшие свободные даты', calTitle: 'Или выберите другую дату в календаре', yourDetails: 'Ваши данные',
     dobLabel: 'Дата рождения', pickSlotFirst: 'Сначала выберите дату и период выше.',
     ultimaVaga: '1 место свободно', esgotado: 'Мест нет',
+    urgentBtn: 'Запросить срочный приём',
+    urgentNotice: 'Это время уже занято. Вы можете запросить срочный приём — д-р Нуну Камелу оценит возможность и свяжется с вами напрямую.',
+    urgentOkTitle: 'Запрос на срочный приём отправлен',
+    urgentOkBody: 'Д-р Нуну Камелу оценит доступность и свяжется с вами напрямую. При неотложном состоянии обратитесь в отделение неотложной помощи.',
     periodPrefix: 'Период —', manha: 'Утро', tarde: 'День',
     reasonLabel: 'Причина', reasonPh: 'Кратко опишите причину приёма.',
     submit: 'Подтвердить запись', submitting: 'Сохранение…',
@@ -227,7 +239,7 @@ function BookingForm({ t, dias, lang }: { t: typeof T['pt']; dias: string[]; lan
   const [tipo, setTipo] = useState<Tipo>('Presencial');
   const [dataConsulta, setDataConsulta] = useState('');
   const [periodo, setPeriodo] = useState<Periodo | ''>('');
-  const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error' | 'full'>('idle');
+  const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error' | 'full' | 'urgentSent'>('idle');
   const [errorMsg, setErrorMsg] = useState('');
   const [resultado, setResultado] = useState<{ local: string; data: string; periodo: string; diaNome: string } | null>(null);
   // Disponibilidade da data escolhida (que período×tipo já está ocupado). null = ainda a carregar/sem data.
@@ -257,15 +269,13 @@ function BookingForm({ t, dias, lang }: { t: typeof T['pt']; dias: string[]; lan
     return () => { cancelled = true; };
   }, [dataConsulta, info]);
 
-  // Se o período escolhido ficar esgotado para o tipo atual, desmarca
-  useEffect(() => {
-    if (periodo && avail && avail[periodo]?.[tipo]) setPeriodo('');
-  }, [tipo, avail, periodo]);
-
   const localPreview = useMemo(() => {
     if (!dataConsulta || !periodo || !info?.disp) return null;
     return info.disp[periodo] ?? null;
   }, [dataConsulta, periodo, info]);
+
+  // Vaga preenchida para o tipo escolhido -> fluxo de "pedido urgente" (em vez de bloquear)
+  const slotTaken = !!(periodo && avail && avail[periodo]?.[tipo]);
 
   const onDataChange = (v: string) => { setDataConsulta(v); setPeriodo(''); };
   const snsPreenchidoInvalido = numeroSNS.length > 0 && !/^\d{9}$/.test(numeroSNS);
@@ -275,6 +285,29 @@ function BookingForm({ t, dias, lang }: { t: typeof T['pt']; dias: string[]; lan
     e.preventDefault();
     if (!podeSubmeter) return;
     setStatus('sending'); setErrorMsg('');
+
+    // Vaga preenchida -> pedido de consulta urgente, direto para o Dr. (email via Formspree)
+    if (slotTaken) {
+      try {
+        const dataPT = dataConsulta.split('-').reverse().join('/');
+        const res = await fetch('https://formspree.io/f/mpqganlp', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+          body: JSON.stringify({
+            _subject: `⚠️ PEDIDO DE CONSULTA URGENTE — ${nome} — ${dataPT} (${periodo === 'manha' ? t.manha : t.tarde})`,
+            tipo_pedido: 'CONSULTA URGENTE (vaga preenchida — a autorizar pelo Dr. Nuno Camelo)',
+            nome, data_nascimento: dataNascimento, numero_sns: numeroSNS || '(não indicado)',
+            telefone, email, tipo,
+            data_pretendida: `${info?.diaNome}, ${dataPT} · ${periodo === 'manha' ? t.manha : t.tarde} · ${HORAS[lang][periodo as Periodo]}`,
+            local: localPreview, motivo: motivo || '(não indicado)',
+          }),
+        });
+        if (res.ok) setStatus('urgentSent');
+        else { setStatus('error'); setErrorMsg(t.err); }
+      } catch { setStatus('error'); setErrorMsg(t.err); }
+      return;
+    }
+
     try {
       const res = await fetch('/api/marcar-consulta', {
         method: 'POST', headers: { 'Content-Type': 'application/json' },
@@ -287,6 +320,16 @@ function BookingForm({ t, dias, lang }: { t: typeof T['pt']; dias: string[]; lan
       } else if (res.status === 409) { setStatus('full'); setErrorMsg(data.error || t.full); }
       else { setStatus('error'); setErrorMsg(data.error || t.err); }
     } catch { setStatus('error'); setErrorMsg(t.err); }
+  }
+
+  if (status === 'urgentSent') {
+    return (
+      <div className="mc-success">
+        <div className="mc-check" style={{ background: '#b23a00' }}>!</div>
+        <h1>{t.urgentOkTitle}</h1>
+        <p className="mc-sub">{t.urgentOkBody}</p>
+      </div>
+    );
   }
 
   if (status === 'success' && resultado) {
@@ -341,9 +384,9 @@ function BookingForm({ t, dias, lang }: { t: typeof T['pt']; dias: string[]; lan
               {info.periodos.map((p) => {
                 const taken = avail ? avail[p]?.[tipo] : false;
                 return (
-                  <button type="button" key={p} disabled={!!taken}
+                  <button type="button" key={p}
                     className={`mc-period-btn ${periodo === p ? 'is-active' : ''} ${taken ? 'is-taken' : ''}`}
-                    onClick={() => !taken && setPeriodo(p)} aria-pressed={periodo === p}>
+                    onClick={() => setPeriodo(p)} aria-pressed={periodo === p}>
                     <span className="mc-period-name">{(p === 'manha' ? t.manha : t.tarde)} · {HORAS[lang][p]}</span>
                     <span className="mc-period-local">{info.disp![p]}</span>
                     {avail && (
@@ -358,13 +401,14 @@ function BookingForm({ t, dias, lang }: { t: typeof T['pt']; dias: string[]; lan
           </div>
         )}
 
-        {/* 4. Confirmação do slot escolhido */}
+        {/* 4. Confirmação do slot escolhido (ou aviso de vaga preenchida -> urgente) */}
         {localPreview && (
-          <div className="mc-preview">
-            <span className="mc-preview-dot" aria-hidden="true">📍</span>
+          <div className={`mc-preview ${slotTaken ? 'mc-preview--urgent' : ''}`}>
+            <span className="mc-preview-dot" aria-hidden="true">{slotTaken ? '⚠️' : '📍'}</span>
             <div>
               <strong>{localPreview}</strong>
               <span>{info?.diaNome}, {dataConsulta.split('-').reverse().join('/')} · {periodo === 'manha' ? t.manha : t.tarde} · {HORAS[lang][periodo as Periodo]} · {tipo}</span>
+              {slotTaken && <span className="mc-urgent-note">{t.urgentNotice}</span>}
             </div>
           </div>
         )}
@@ -412,8 +456,8 @@ function BookingForm({ t, dias, lang }: { t: typeof T['pt']; dias: string[]; lan
             <p className={`mc-alert ${status === 'full' ? 'mc-alert--warn' : ''}`}>{errorMsg}</p>
           )}
 
-          <button type="submit" className="mc-submit" disabled={!podeSubmeter || status === 'sending'}>
-            {status === 'sending' ? t.submitting : t.submit}
+          <button type="submit" className={`mc-submit ${slotTaken ? 'mc-submit--urgent' : ''}`} disabled={!podeSubmeter || status === 'sending'}>
+            {status === 'sending' ? t.submitting : (slotTaken ? t.urgentBtn : t.submit)}
           </button>
         </div>
       </form>
@@ -623,7 +667,14 @@ const CSS = `
 .mc-toggle-btn { flex: 1; font-family: 'Space Grotesk', sans-serif; font-size: .95rem; font-weight: 600; padding: .8rem 1rem; border-radius: 8px; border: 1.5px solid #cbd5e0; background: #fff; color: #4a5568; cursor: pointer; transition: all .15s; }
 .mc-toggle-btn.is-active { border-color: #035772; background: #035772; color: #fff; }
 .mc-period-btn { position: relative; flex: 1; display: flex; flex-direction: column; gap: .2rem; text-align: left; font-family: 'Space Grotesk', sans-serif; padding: .8rem 1rem; border-radius: 8px; border: 1.5px solid #cbd5e0; background: #fff; cursor: pointer; transition: all .15s; }
-.mc-period-btn.is-taken { opacity: .55; cursor: not-allowed; background: #f4f5f4; }
+.mc-period-btn.is-taken { background: #fdf3e6; border-color: #f0c78a; }
+.mc-period-btn.is-taken.is-active { border-color: #b23a00; background: #fbe6d4; box-shadow: 0 0 0 3px rgba(178,58,0,.12); }
+.mc-period-btn.is-taken .mc-period-name { color: #b23a00; }
+.mc-preview--urgent { background: #fdf3e6; border-color: #f0c78a; align-items: flex-start; }
+.mc-preview--urgent strong { color: #b23a00; }
+.mc-urgent-note { display: block; margin-top: .4rem; font-size: .82rem; color: #7a4a1a; line-height: 1.45; }
+.mc-submit--urgent { background: #b23a00; }
+.mc-submit--urgent:hover:not(:disabled) { background: #953000; }
 .mc-badge { align-self: flex-start; margin-top: .35rem; font-size: .68rem; font-weight: 700; letter-spacing: .03em; text-transform: uppercase; padding: .15rem .5rem; border-radius: 999px; }
 .mc-badge--last { color: #b23a00; background: #ffece1; border: 1px solid #ffcfb3; }
 .mc-badge--out { color: #6b7280; background: #e9ebe9; border: 1px solid #d7dbd7; }
