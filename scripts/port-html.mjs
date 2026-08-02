@@ -84,6 +84,8 @@ const REFERENCES = {
   lca: [
     { t: "AAOS Clinical Practice Guideline — Management of Anterior Cruciate Ligament Injuries. American Academy of Orthopaedic Surgeons, 2022.", u: "https://www.aaos.org/aaos-home/newsroom/press-releases/aaos-updates-guideline-for-management-of-acl-injuries/" },
     { t: "Management of ACL revision: the 2022 ESSKA consensus. Knee Surg Sports Traumatol Arthrosc, 2023.", u: "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC10598192/" },
+    { t: "Watson SL, et al. ACL Injury Risk Reduction: Demonstration of Key Exercises. Video Journal of Sports Medicine, 2025. PMID 41209365.", u: "https://pubmed.ncbi.nlm.nih.gov/41209365/" },
+    { t: "Remnant preservation may improve proprioception after anterior cruciate ligament reconstruction. Journal of Orthopaedics and Traumatology, 2022. PMID 35478294.", u: "https://pubmed.ncbi.nlm.nih.gov/35478294/" },
   ],
   menisco: [
     { t: "Management of traumatic meniscus tears: the 2019 ESSKA meniscus consensus. Knee Surg Sports Traumatol Arthrosc, 2020.", u: "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7148286/" },
