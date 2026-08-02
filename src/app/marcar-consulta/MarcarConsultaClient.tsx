@@ -86,7 +86,7 @@ const T = {
     quickTitle: 'Próximas datas disponíveis', calTitle: 'Ou escolha outra data no calendário', yourDetails: 'Os seus dados',
     dobLabel: 'Data de nascimento', pickSlotFirst: 'Escolha primeiro a data e o período acima.',
     ultimaVaga: '1 vaga disponível', esgotado: 'Esgotado',
-    urgentBtn: 'Pedir consulta urgente',
+    urgentBtn: 'Pedir consulta urgente', urgentHint: '↳ toca para pedir consulta urgente',
     urgentNotice: 'Esta vaga já está preenchida. Pode pedir uma consulta urgente — o Dr. Nuno Camelo avalia a disponibilidade e responde-lhe diretamente.',
     urgentOkTitle: 'Pedido de consulta urgente enviado',
     urgentOkBody: 'O Dr. Nuno Camelo irá avaliar a disponibilidade e contactá-lo diretamente. Em caso de emergência médica, dirija-se ao serviço de urgência.',
@@ -119,7 +119,7 @@ const T = {
     quickTitle: 'Next available dates', calTitle: 'Or choose another date in the calendar', yourDetails: 'Your details',
     dobLabel: 'Date of birth', pickSlotFirst: 'First choose the date and period above.',
     ultimaVaga: '1 spot available', esgotado: 'Fully booked',
-    urgentBtn: 'Request urgent appointment',
+    urgentBtn: 'Request urgent appointment', urgentHint: '↳ tap to request an urgent appointment',
     urgentNotice: 'This slot is already taken. You can request an urgent appointment — Dr. Nuno Camelo will assess availability and contact you directly.',
     urgentOkTitle: 'Urgent appointment request sent',
     urgentOkBody: 'Dr. Nuno Camelo will assess availability and contact you directly. In a medical emergency, please go to the emergency department.',
@@ -151,7 +151,7 @@ const T = {
     quickTitle: 'Ближайшие свободные даты', calTitle: 'Или выберите другую дату в календаре', yourDetails: 'Ваши данные',
     dobLabel: 'Дата рождения', pickSlotFirst: 'Сначала выберите дату и период выше.',
     ultimaVaga: '1 место свободно', esgotado: 'Мест нет',
-    urgentBtn: 'Запросить срочный приём',
+    urgentBtn: 'Запросить срочный приём', urgentHint: '↳ нажмите, чтобы запросить срочный приём',
     urgentNotice: 'Это время уже занято. Вы можете запросить срочный приём — д-р Нуну Камелу оценит возможность и свяжется с вами напрямую.',
     urgentOkTitle: 'Запрос на срочный приём отправлен',
     urgentOkBody: 'Д-р Нуну Камелу оценит доступность и свяжется с вами напрямую. При неотложном состоянии обратитесь в отделение неотложной помощи.',
@@ -394,6 +394,7 @@ function BookingForm({ t, dias, lang }: { t: typeof T['pt']; dias: string[]; lan
                         {taken ? t.esgotado : t.ultimaVaga}
                       </span>
                     )}
+                    {avail && taken && <span className="mc-period-hint">{t.urgentHint}</span>}
                   </button>
                 );
               })}
@@ -678,6 +679,7 @@ const CSS = `
 .mc-badge { align-self: flex-start; margin-top: .35rem; font-size: .68rem; font-weight: 700; letter-spacing: .03em; text-transform: uppercase; padding: .15rem .5rem; border-radius: 999px; }
 .mc-badge--last { color: #b23a00; background: #ffece1; border: 1px solid #ffcfb3; }
 .mc-badge--out { color: #6b7280; background: #e9ebe9; border: 1px solid #d7dbd7; }
+.mc-period-hint { display:block; margin-top:.35rem; font-size:.72rem; font-weight:700; color:#b23a00; }
 .mc-period-btn.is-active { border-color: #035772; background: #eef6f4; box-shadow: 0 0 0 3px rgba(3,87,114,.1); }
 .mc-period-name { font-weight: 700; color: #035772; font-size: .95rem; }
 .mc-period-local { font-size: .8rem; color: #4a5568; }
