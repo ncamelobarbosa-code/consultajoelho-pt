@@ -3,8 +3,8 @@
 export type BlockTipo = 'Presencial' | 'Vídeo' | 'all';
 
 export const AGENDA_BLOCKS: { from: string; to: string; tipo: BlockTipo; motivo: string }[] = [
-  // Férias de agosto — sem consultas presenciais (vídeo mantém-se)
-  { from: '2026-08-15', to: '2026-08-29', tipo: 'Presencial', motivo: 'ferias' },
+  // Férias de agosto — sem consultas (presencial e vídeo)
+  { from: '2026-08-15', to: '2026-08-29', tipo: 'all', motivo: 'ferias' },
 ];
 
 // Devolve o bloqueio aplicável a (data, tipo), ou null se disponível.
