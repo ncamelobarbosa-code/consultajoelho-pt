@@ -368,7 +368,6 @@ function BookingForm({ t, dias, lang }: { t: typeof T['pt']; dias: string[]; lan
         {/* 2. Data (agenda semanal + próximas datas + calendário) */}
         <div className="mc-group">
           <label className="mc-label">{t.schedTitle}</label>
-          <WeeklySchedule t={t} dias={dias} lang={lang} />
           <p className="mc-hint">{t.chooseDayHint}</p>
           <div className="mc-quick-title">{t.quickTitle}</div>
           <NextDays value={dataConsulta} onChange={onDataChange} minISO={hojeISO} lang={lang} />
