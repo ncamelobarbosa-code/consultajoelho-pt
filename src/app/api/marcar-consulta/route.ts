@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { google } from 'googleapis';
+import { agendaBlock } from '@/lib/agenda-block';
 
 // googleapis precisa do runtime Node (não Edge); nunca cachear.
 export const runtime = 'nodejs';
@@ -93,6 +94,11 @@ export async function POST(req: NextRequest) {
   const local = getLocal(dataConsulta, periodo);
   if (!local) {
     return NextResponse.json({ error: 'Sem consulta disponível nesse dia/período.' }, { status: 400 });
+  }
+
+  // Agenda fechada (férias/ausência) — rejeitar no servidor
+  if (agendaBlock(dataConsulta, tipo)) {
+    return NextResponse.json({ error: 'Agenda indisponível nesta data (período de férias). Escolha outra data ou uma teleconsulta.' }, { status: 409 });
   }
 
   let sheets;

@@ -3,6 +3,7 @@
 import { useState, useMemo, useEffect } from 'react';
 import { useForm, ValidationError } from '@formspree/react';
 import { event } from '@/lib/gtag';
+import { agendaBlock } from '@/lib/agenda-block';
 
 type Lang = 'pt' | 'en' | 'ru';
 type Periodo = 'manha' | 'tarde';
@@ -87,6 +88,7 @@ const T = {
     dobLabel: 'Data de nascimento', pickSlotFirst: 'Escolha primeiro a data e o período acima.',
     ultimaVaga: '1 vaga disponível', esgotado: 'Esgotado',
     urgentBtn: 'Pedir consulta urgente', urgentHint: '↳ toca para pedir consulta urgente',
+    vacationNotice: 'O Dr. Nuno Camelo está de férias neste período (15–29 de agosto) — sem consultas presenciais. Escolha outra data, ou selecione "Vídeo" para uma teleconsulta.',
     urgentNotice: 'Esta vaga já está preenchida. Pode pedir uma consulta urgente — o Dr. Nuno Camelo avalia a disponibilidade e responde-lhe diretamente.',
     urgentOkTitle: 'Pedido de consulta urgente enviado',
     urgentOkBody: 'O Dr. Nuno Camelo irá avaliar a disponibilidade e contactá-lo diretamente. Em caso de emergência médica, dirija-se ao serviço de urgência.',
@@ -120,6 +122,7 @@ const T = {
     dobLabel: 'Date of birth', pickSlotFirst: 'First choose the date and period above.',
     ultimaVaga: '1 spot available', esgotado: 'Fully booked',
     urgentBtn: 'Request urgent appointment', urgentHint: '↳ tap to request an urgent appointment',
+    vacationNotice: 'Dr. Nuno Camelo is on holiday during this period (15–29 August) — no in-person appointments. Please choose another date, or select "Video" for a teleconsultation.',
     urgentNotice: 'This slot is already taken. You can request an urgent appointment — Dr. Nuno Camelo will assess availability and contact you directly.',
     urgentOkTitle: 'Urgent appointment request sent',
     urgentOkBody: 'Dr. Nuno Camelo will assess availability and contact you directly. In a medical emergency, please go to the emergency department.',
@@ -152,6 +155,7 @@ const T = {
     dobLabel: 'Дата рождения', pickSlotFirst: 'Сначала выберите дату и период выше.',
     ultimaVaga: '1 место свободно', esgotado: 'Мест нет',
     urgentBtn: 'Запросить срочный приём', urgentHint: '↳ нажмите, чтобы запросить срочный приём',
+    vacationNotice: 'Д-р Нуну Камелу в отпуске в этот период (15–29 августа) — очных приёмов нет. Выберите другую дату или «Видео» для телеконсультации.',
     urgentNotice: 'Это время уже занято. Вы можете запросить срочный приём — д-р Нуну Камелу оценит возможность и свяжется с вами напрямую.',
     urgentOkTitle: 'Запрос на срочный приём отправлен',
     urgentOkBody: 'Д-р Нуну Камелу оценит доступность и свяжется с вами напрямую. При неотложном состоянии обратитесь в отделение неотложной помощи.',
@@ -276,10 +280,12 @@ function BookingForm({ t, dias, lang }: { t: typeof T['pt']; dias: string[]; lan
 
   // Vaga preenchida para o tipo escolhido -> fluxo de "pedido urgente" (em vez de bloquear)
   const slotTaken = !!(periodo && avail && avail[periodo]?.[tipo]);
+  // Agenda fechada (férias) para a data+tipo escolhidos
+  const blocked = dataConsulta ? agendaBlock(dataConsulta, tipo) : null;
 
   const onDataChange = (v: string) => { setDataConsulta(v); setPeriodo(''); };
   const snsPreenchidoInvalido = numeroSNS.length > 0 && !/^\d{9}$/.test(numeroSNS);
-  const podeSubmeter = nome.trim() && dataNascimento && !snsPreenchidoInvalido && telefone.trim() && email.trim() && dataConsulta && periodo && !!localPreview;
+  const podeSubmeter = nome.trim() && dataNascimento && !snsPreenchidoInvalido && telefone.trim() && email.trim() && dataConsulta && periodo && !!localPreview && !blocked;
 
   async function onSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -375,8 +381,10 @@ function BookingForm({ t, dias, lang }: { t: typeof T['pt']; dias: string[]; lan
           <Calendar value={dataConsulta} onChange={onDataChange} minISO={hojeISO} lang={lang} />
         </div>
 
-        {/* 3. Período */}
-        {info && info.periodos.length > 0 && (
+        {/* 3. Período (ou aviso de férias) */}
+        {blocked ? (
+          <div className="mc-vacation">{t.vacationNotice}</div>
+        ) : info && info.periodos.length > 0 ? (
           <div className="mc-group">
             <label className="mc-label">{t.periodPrefix} {info.diaNome}</label>
             <div className="mc-periods">
@@ -399,10 +407,10 @@ function BookingForm({ t, dias, lang }: { t: typeof T['pt']; dias: string[]; lan
               })}
             </div>
           </div>
-        )}
+        ) : null}
 
         {/* 4. Confirmação do slot escolhido (ou aviso de vaga preenchida -> urgente) */}
-        {localPreview && (
+        {localPreview && !blocked && (
           <div className={`mc-preview ${slotTaken ? 'mc-preview--urgent' : ''}`}>
             <span className="mc-preview-dot" aria-hidden="true">{slotTaken ? '⚠️' : '📍'}</span>
             <div>
@@ -679,6 +687,7 @@ const CSS = `
 .mc-badge--last { color: #b23a00; background: #ffece1; border: 1px solid #ffcfb3; }
 .mc-badge--out { color: #6b7280; background: #e9ebe9; border: 1px solid #d7dbd7; }
 .mc-period-hint { display:block; margin-top:.35rem; font-size:.72rem; font-weight:700; color:#b23a00; }
+.mc-vacation { font-family:'Space Grotesk',sans-serif; font-size:.9rem; line-height:1.55; color:#7a4a1a; background:#fdf3e6; border:1px solid #f0c78a; border-radius:12px; padding:1rem 1.2rem; }
 .mc-period-btn.is-active { border-color: #035772; background: #eef6f4; box-shadow: 0 0 0 3px rgba(3,87,114,.1); }
 .mc-period-name { font-weight: 700; color: #035772; font-size: .95rem; }
 .mc-period-local { font-size: .8rem; color: #4a5568; }
