@@ -67,6 +67,12 @@ export default function ConsentGate({ gaId }: { gaId: string }) {
           <Script id="gtag-init" strategy="afterInteractive">
             {`window.dataLayer = window.dataLayer || [];
 function gtag(){dataLayer.push(arguments);}
+gtag('consent', 'default', {
+  ad_storage: 'granted',
+  analytics_storage: 'granted',
+  ad_user_data: 'granted',
+  ad_personalization: 'granted'
+});
 gtag('js', new Date());
 gtag('config', '${gaId}');
 gtag('config', '${ADS_ID}');`}
