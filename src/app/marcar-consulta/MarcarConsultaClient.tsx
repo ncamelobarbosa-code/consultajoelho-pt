@@ -308,7 +308,11 @@ function BookingForm({ t, dias, lang }: { t: typeof T['pt']; dias: string[]; lan
             local: localPreview, motivo: motivo || '(não indicado)',
           }),
         });
-        if (res.ok) setStatus('urgentSent');
+        if (res.ok) {
+          event('generate_lead', { method: 'booking_urgent' });
+          event('conversion', { send_to: 'AW-859136288/jNYHCPHO28ccEKDC1ZkD' });
+          setStatus('urgentSent');
+        }
         else { setStatus('error'); setErrorMsg(t.err); }
       } catch { setStatus('error'); setErrorMsg(t.err); }
       return;
@@ -322,6 +326,8 @@ function BookingForm({ t, dias, lang }: { t: typeof T['pt']; dias: string[]; lan
       const data = await res.json();
       if (res.ok && data.success) {
         setResultado({ local: data.local, data: data.data, periodo, diaNome: info!.diaNome });
+        event('generate_lead', { method: 'booking' });
+        event('conversion', { send_to: 'AW-859136288/jNYHCPHO28ccEKDC1ZkD' });
         setStatus('success');
       } else if (res.status === 409) { setStatus('full'); setErrorMsg(data.error || t.full); }
       else { setStatus('error'); setErrorMsg(data.error || t.err); }
