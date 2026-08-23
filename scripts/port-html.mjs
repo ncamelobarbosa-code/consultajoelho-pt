@@ -142,6 +142,78 @@ function injectReferences($x, seg, locale) {
 }
 const citationsFor = (seg) => (REFERENCES[seg] || []).map((r) => r.u);
 
+// ── FAQ de PREÇO da cirurgia (3 vias + valores "a partir de", já publicados) ──
+const PRICE_HREF = { pt: "/kneesurgeryinportugalprices", en: "/kneesurgeryinportugalprices", ru: "/ru/kneesurgeryinportugalprices" };
+const BOOK_HREF = { pt: "/marcar-consulta", en: "/en/marcar-consulta", ru: "/ru/marcar-consulta" };
+const PRICING_FAQ = {
+  pt: {
+    q: "Quanto custa a cirurgia ao joelho?",
+    a: `O custo depende da via de tratamento. <strong>SIGIC (SNS):</strong> através do vale de cirurgia, a cirurgia é totalmente comparticipada — sem custo para o doente. <strong>Seguros e subsistemas de saúde:</strong> cirurgia convencionada, conforme o seu plano. <strong>Particular:</strong> orçamento personalizado — a título indicativo, a partir de €3.000 na artroscopia (menisco, ligamentos ou cartilagem), a partir de €4.000 na reconstrução do ligamento cruzado anterior (LCA) e a partir de €8.000 na prótese do joelho. Os valores finais dependem do caso clínico, do hospital e dos implantes. Para um orçamento certo, <a href="${BOOK_HREF.pt}">marque uma consulta</a> ou veja <a href="${PRICE_HREF.pt}">preços e orçamentos</a>.`,
+  },
+  en: {
+    q: "How much does knee surgery cost?",
+    a: `The cost depends on the treatment pathway. <strong>SIGIC (Portuguese NHS):</strong> with a surgery voucher, the procedure is fully covered — no cost to the patient. <strong>Health insurance / subsystems:</strong> contracted surgery, according to your plan. <strong>Private:</strong> a personalised quote — as a guide, from €3,000 for arthroscopy (meniscus, ligaments or cartilage), from €4,000 for anterior cruciate ligament (ACL) reconstruction and from €8,000 for knee replacement. Final prices depend on the clinical case, hospital and implants. For an exact quote, <a href="${BOOK_HREF.en}">book an appointment</a> or see <a href="${PRICE_HREF.en}">prices &amp; quotes</a>.`,
+  },
+  ru: {
+    q: "Сколько стоит операция на колене?",
+    a: `Стоимость зависит от способа лечения. <strong>SIGIC (гос. система Португалии):</strong> по хирургическому талону операция полностью покрывается — без затрат для пациента. <strong>Страховки и субсистемы:</strong> операция по договору, согласно вашему плану. <strong>Частно:</strong> индивидуальная смета — ориентировочно от €3 000 за артроскопию (мениск, связки или хрящ), от €4 000 за реконструкцию передней крестообразной связки (ПКС) и от €8 000 за эндопротезирование колена. Итоговая стоимость зависит от случая, больницы и имплантатов. Для точной сметы <a href="${BOOK_HREF.ru}">запишитесь на приём</a> или смотрите <a href="${PRICE_HREF.ru}">цены и сметы</a>.`,
+  },
+};
+
+// FAQ clínica para as páginas que não tinham nenhuma (gonalgia, quadríceps).
+const EXTRA_FAQ = {
+  joelhodrnunocamelo: {
+    pt: [
+      { q: "Tenho dor no joelho — quando devo consultar um especialista?", a: "Procure avaliação se a dor persiste mais de 2–3 semanas, se houve traumatismo com inchaço, se o joelho bloqueia, falseia ou não suporta o peso, ou se há vermelhidão e febre. A avaliação precoce evita que problemas tratáveis (menisco, ligamentos, cartilagem) evoluam." },
+      { q: "A dor no joelho é sempre sinal de artrose?", a: "Não. A dor no joelho tem muitas causas — lesões do menisco, ligamentos (LCA), cartilagem, tendinopatias, instabilidade da rótula ou dor referida da anca/coluna. O diagnóstico correto depende da história, do exame e, quando necessário, de imagem." },
+    ],
+    en: [
+      { q: "I have knee pain — when should I see a specialist?", a: "Seek assessment if pain lasts more than 2–3 weeks, if there was trauma with swelling, if the knee locks, gives way or cannot bear weight, or if there is redness and fever. Early assessment prevents treatable problems (meniscus, ligaments, cartilage) from progressing." },
+      { q: "Does knee pain always mean osteoarthritis?", a: "No. Knee pain has many causes — meniscus, ligament (ACL) or cartilage injuries, tendinopathies, patellar instability, or pain referred from the hip/spine. The correct diagnosis depends on history, examination and, when needed, imaging." },
+    ],
+    ru: [
+      { q: "У меня болит колено — когда обращаться к специалисту?", a: "Обратитесь за оценкой, если боль длится более 2–3 недель, был травматизм с отёком, колено блокируется, подкашивается или не выдерживает вес, либо есть покраснение и температура. Ранняя оценка не даёт излечимым проблемам (мениск, связки, хрящ) прогрессировать." },
+      { q: "Боль в колене всегда означает артроз?", a: "Нет. У боли в колене много причин — повреждения мениска, связок (ПКС) или хряща, тендинопатии, нестабильность надколенника или отражённая боль из бедра/позвоночника. Диагноз зависит от анамнеза, осмотра и, при необходимости, снимков." },
+    ],
+  },
+  quadriceps: {
+    pt: [
+      { q: "O que é a inibição muscular artrogénica (AMI) do quadricípite?", a: "É a dificuldade em ativar o quadricípite após lesão ou cirurgia do joelho, mesmo sem lesão do músculo — o joelho 'trava' a contração por um reflexo protetor. Reconhecê-la e tratá-la (ativação precoce, eletroestimulação, exercícios específicos) é essencial para recuperar bem e prevenir a re-lesão." },
+      { q: "Porque é tão importante o quadricípite na recuperação do joelho?", a: "O quadricípite é o principal estabilizador ativo do joelho. A sua força determina em grande parte o regresso ao desporto e o resultado após cirurgia (LCA, prótese, cartilagem). Por isso a reabilitação foca-se na sua ativação e reforço desde cedo." },
+    ],
+    en: [
+      { q: "What is arthrogenic muscle inhibition (AMI) of the quadriceps?", a: "It is difficulty activating the quadriceps after a knee injury or surgery, even without muscle damage — the knee 'blocks' the contraction through a protective reflex. Recognising and treating it (early activation, electrostimulation, specific exercises) is key to a good recovery and to preventing re-injury." },
+      { q: "Why is the quadriceps so important in knee recovery?", a: "The quadriceps is the knee's main active stabiliser. Its strength largely determines return to sport and the outcome after surgery (ACL, replacement, cartilage). That is why rehabilitation focuses on activating and strengthening it early." },
+    ],
+    ru: [
+      { q: "Что такое артрогенное мышечное торможение (AMI) квадрицепса?", a: "Это трудность активации квадрицепса после травмы или операции на колене, даже без повреждения самой мышцы — колено «блокирует» сокращение защитным рефлексом. Его распознавание и лечение (ранняя активация, электростимуляция, специальные упражнения) необходимы для хорошего восстановления и профилактики повторной травмы." },
+      { q: "Почему квадрицепс так важен в восстановлении колена?", a: "Квадрицепс — главный активный стабилизатор колена. Его сила во многом определяет возвращение в спорт и результат после операции (ПКС, эндопротез, хрящ). Поэтому реабилитация с самого начала направлена на его активацию и укрепление." },
+    ],
+  },
+};
+
+// Injeta FAQ: pricing em todas as páginas médicas; + FAQ clínica nas que não tinham.
+// Se a página já tem .faq-section, acrescenta lá (estilo existente + toggleFaq); senão cria bloco nativo.
+function addFaqs($x, seg, locale) {
+  const items = [...((EXTRA_FAQ[seg] && EXTRA_FAQ[seg][locale]) || []), PRICING_FAQ[locale]];
+  const section = $x(".faq-section").first();
+  if (section.length) {
+    for (const it of items) {
+      section.append(
+        `<div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">${it.q} <span class="arrow">▾</span></button><div class="faq-a">${it.a}</div></div>`
+      );
+    }
+  } else {
+    const heading = { pt: "Perguntas frequentes", en: "Frequently asked questions", ru: "Часто задаваемые вопросы" }[locale];
+    const rows = items
+      .map((it) => `<details class="faq-item" style="border:1px solid var(--border,#e2ece1);border-radius:12px;padding:.9rem 1.1rem;margin-bottom:.6rem;"><summary class="faq-q" style="cursor:pointer;font-weight:600;color:var(--teal,#035772);font-family:'Space Grotesk',sans-serif;">${it.q}</summary><div class="faq-a" style="margin-top:.6rem;line-height:1.6;color:var(--text,#091405);">${it.a}</div></details>`)
+      .join("");
+    $x("body").append(
+      `<section class="faq-section" style="max-width:900px;margin:2.5rem auto 0;padding:0 1.5rem;font-family:'Space Grotesk',sans-serif;"><h2 style="font-size:1.4rem;color:var(--teal,#035772);margin:0 0 1rem;">${heading}</h2>${rows}</section>`
+    );
+  }
+}
+
 // Condição clínica de cada página (schema.org about -> MedicalCondition). Reforça relevância temática (Google + LLMs).
 const CONDITIONS = {
   menisco: { pt: "Rotura do menisco", en: "Meniscus tear", ru: "Разрыв мениска" },
@@ -709,7 +781,7 @@ for (const [file, seg] of Object.entries(ROUTES)) {
   removeAnatomySvg($);
   injectAmiLink($, "pt");
   setCredChips($, seg, "pt");
-  if (MEDICAL_SEGS.has(seg)) { injectReferences($, seg, "pt"); injectAuthorBox($, "pt"); }
+  if (MEDICAL_SEGS.has(seg)) { addFaqs($, seg, "pt"); injectReferences($, seg, "pt"); injectAuthorBox($, "pt"); }
   let body = rewriteLinks($("body").html() || "");
   const jsonldOut = MEDICAL_SEGS.has(seg)
     ? buildPageJsonLd(jsonld, {
@@ -787,7 +859,7 @@ for (const [file, seg] of Object.entries(ROUTES)) {
   removeAnatomySvg($e);
   injectAmiLink($e, "en");
   setCredChips($e, seg, "en");
-  if (MEDICAL_SEGS.has(seg)) { injectReferences($e, seg, "en"); injectAuthorBox($e, "en"); }
+  if (MEDICAL_SEGS.has(seg)) { addFaqs($e, seg, "en"); injectReferences($e, seg, "en"); injectAuthorBox($e, "en"); }
   const body = rewriteLinksEn($e("body").html() || "");
   const enJsonldOut = MEDICAL_SEGS.has(seg)
     ? buildPageJsonLd(enJsonld, {
@@ -855,7 +927,7 @@ for (const [file, seg] of Object.entries(ROUTES)) {
   removeAnatomySvg($r);
   injectAmiLink($r, "ru");
   setCredChips($r, seg, "ru");
-  if (MEDICAL_SEGS.has(seg)) { injectReferences($r, seg, "ru"); injectAuthorBox($r, "ru"); }
+  if (MEDICAL_SEGS.has(seg)) { addFaqs($r, seg, "ru"); injectReferences($r, seg, "ru"); injectAuthorBox($r, "ru"); }
   const body = rewriteLinksRu($r("body").html() || "");
   const ruJsonldOut = MEDICAL_SEGS.has(seg)
     ? buildPageJsonLd(ruJsonld, {
