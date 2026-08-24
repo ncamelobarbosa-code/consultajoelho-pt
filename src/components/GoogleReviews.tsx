@@ -20,6 +20,12 @@ const REVIEWS: Review[] = [
     weeksAgo: 0,
   },
   {
+    author: "Afonso Carneiro",
+    rating: 5,
+    text: "Excelente acompanhamento pós-operatório. O Dr. Nuno Camelo demonstrou sempre grande competência, atenção e disponibilidade, explicando de forma clara todas as fases da recuperação e esclarecendo todas as dúvidas. Senti-me muito bem acompanhado e o resultado do tratamento foi muito positivo. Recomendo sem hesitação.",
+    weeksAgo: 4,
+  },
+  {
     author: "Marlene Teixeira",
     rating: 5,
     text: "A minha mãe fez prótese do joelho com o Dr. Nuno Camelo. Excelente profissional.",
@@ -84,7 +90,7 @@ export default function GoogleReviews({
   lang = "pt",
   reviews = REVIEWS,
   rating = 5.0,
-  total = 14,
+  total = 15,
 }: {
   lang?: Lang;
   reviews?: Review[];
