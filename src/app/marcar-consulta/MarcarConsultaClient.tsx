@@ -301,6 +301,7 @@ function BookingForm({ t, dias, lang }: { t: typeof T['pt']; dias: string[]; lan
           headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
           body: JSON.stringify({
             _subject: `⚠️ PEDIDO DE CONSULTA URGENTE — ${nome} — ${dataPT} (${periodo === 'manha' ? t.manha : t.tarde})`,
+            _cc: 'ncamelobarbosa@gmail.com',
             tipo_pedido: 'CONSULTA URGENTE (vaga preenchida — a autorizar pelo Dr. Nuno Camelo)',
             nome, data_nascimento: dataNascimento, numero_sns: numeroSNS || '(não indicado)',
             telefone, email, tipo,
@@ -509,6 +510,7 @@ function ContactMode({ t, lang }: { t: typeof T['pt']; lang: Lang }) {
       </header>
       <form onSubmit={handleSubmit} className="mc-form" noValidate>
         <input type="hidden" name="_lang" value={lang} />
+        <input type="hidden" name="_cc" value="ncamelobarbosa@gmail.com" />
         <input type="hidden" name="origem" value="marcar-consulta / contacto-2a-opiniao" />
         <div className="mc-group">
           <label className="mc-label" htmlFor="c-nome">{t.nameLabel}</label>

@@ -126,6 +126,7 @@ export default function ContactForm({ lang = 'pt' }: { lang?: 'pt' | 'en' | 'ru'
         </div>
 
         <form onSubmit={handleSubmit} className="contact-form" noValidate>
+          <input type="hidden" name="_cc" value="ncamelobarbosa@gmail.com" />
           {/* Nome */}
           <div className="form-group">
             <label htmlFor="nome">{t.nameLabel}</label>
