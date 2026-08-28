@@ -21,6 +21,7 @@ const routes = [
   "preparar-cirurgia",
   "recuperar-cirurgia",
   "sigic",
+  "artroscopia",
   "avaliar",
   // páginas antigas mantidas (ainda por portar)
   "joelhodrnunocamelo",
@@ -52,6 +53,7 @@ const enRoutes = [
   "en/preparar-cirurgia",
   "en/recuperar-cirurgia",
   "en/sigic",
+  "en/artroscopia",
   "en/avaliar",
   "en/nuno-camelo-especialista-cirurgia-joelho",
   "en/joelhodrnunocamelo",
@@ -81,6 +83,7 @@ const ruRoutes = [
   "ru/preparar-cirurgia",
   "ru/recuperar-cirurgia",
   "ru/sigic",
+  "ru/artroscopia",
   "ru/avaliar",
   "ru/nuno-camelo-especialista-cirurgia-joelho",
   "ru/joelhodrnunocamelo",

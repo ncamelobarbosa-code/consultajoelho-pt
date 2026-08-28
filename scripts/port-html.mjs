@@ -23,6 +23,7 @@ const ROUTES = {
   "preparar_cirurgia_joelho.html": "preparar-cirurgia",
   "recuperar_cirurgia_joelho.html": "recuperar-cirurgia",
   "sigic_vale_cirurgia.html": "sigic",
+  "artroscopia_joelho.html": "artroscopia",
   "avaliar_joelho.html": "avaliar",
   "nuno_camelo_cv_curriculo.html": "nuno-camelo-especialista-cirurgia-joelho",
   "algoritmo_gonalgia_nuno_camelo.html": "joelhodrnunocamelo",
@@ -198,7 +199,10 @@ const EXTRA_FAQ = {
 // Injeta FAQ: pricing em todas as páginas médicas; + FAQ clínica nas que não tinham.
 // Se a página já tem .faq-section, acrescenta lá (estilo existente + toggleFaq); senão cria bloco nativo.
 function addFaqs($x, seg, locale) {
-  const items = [...((EXTRA_FAQ[seg] && EXTRA_FAQ[seg][locale]) || []), PRICING_FAQ[locale]];
+  // infiltrações tem a sua própria FAQ de preço (por injeção) e usa outro toggle -> não juntar a de cirurgia.
+  const extra = (EXTRA_FAQ[seg] && EXTRA_FAQ[seg][locale]) || [];
+  const items = seg === "infiltracoes" ? extra : [...extra, PRICING_FAQ[locale]];
+  if (!items.length) return;
   const section = $x(".faq-section").first();
   if (section.length) {
     for (const it of items) {
