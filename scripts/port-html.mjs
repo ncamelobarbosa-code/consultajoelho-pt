@@ -112,7 +112,10 @@ const REFERENCES = {
     { t: "Return to Sport After Hip and Knee Arthroplasty. Curr Rev Musculoskelet Med, 2023.", u: "https://link.springer.com/article/10.1007/s12178-023-09839-x" },
   ],
   infiltracoes: [
-    { t: "OARSI guidelines for the non-surgical management of knee osteoarthritis (injeções intra-articulares). Osteoarthritis Cartilage, 2019.", u: "https://oarsi.org/research-oarsi-success/oarsi-guidelines-non-surgical-management-knee-hip-and-polyarticular" },
+    { t: "McAlindon TE, et al. Effect of Intra-articular Triamcinolone vs Saline on Knee Cartilage Volume and Pain in Knee Osteoarthritis: a randomized clinical trial. JAMA, 2017. PMID 28510679.", u: "https://doi.org/10.1001/jama.2017.5283" },
+    { t: "Bensa A, et al. PRP Injections for Knee Osteoarthritis: clinically significant improvement influenced by platelet concentration — meta-analysis of RCTs. Am J Sports Med, 2025. PMID 39751394.", u: "https://doi.org/10.1177/03635465241246524" },
+    { t: "Belk JW, et al. Platelet-Rich Plasma Versus Hyaluronic Acid for Knee Osteoarthritis: systematic review and meta-analysis of RCTs. Am J Sports Med, 2020. PMID 32302218.", u: "https://doi.org/10.1177/0363546520909397" },
+    { t: "OARSI guidelines for the non-surgical management of knee osteoarthritis. Osteoarthritis Cartilage, 2019.", u: "https://oarsi.org/research-oarsi-success/oarsi-guidelines-non-surgical-management-knee-hip-and-polyarticular" },
     { t: "AAOS — Management of Osteoarthritis of the Knee (Non-Arthroplasty), 3rd ed.", u: "https://www.aaos.org/globalassets/quality-and-practice-resources/osteoarthritis-of-the-knee/oak3cpg.pdf" },
   ],
 };
