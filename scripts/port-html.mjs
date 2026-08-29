@@ -112,6 +112,11 @@ const REFERENCES = {
     { t: "Return to Sports and Return to Work After Total Knee Arthroplasty: systematic review and meta-analysis, 2023.", u: "https://pubmed.ncbi.nlm.nih.gov/37499045/" },
     { t: "Return to Sport After Hip and Knee Arthroplasty. Curr Rev Musculoskelet Med, 2023.", u: "https://link.springer.com/article/10.1007/s12178-023-09839-x" },
   ],
+  artroscopia: [
+    { t: "Moseley JB, et al. A controlled trial of arthroscopic surgery for osteoarthritis of the knee. N Engl J Med, 2002. PMID 12110735.", u: "https://pubmed.ncbi.nlm.nih.gov/12110735/" },
+    { t: "Siemieniuk RAC, et al. Arthroscopic surgery for degenerative knee arthritis and meniscal tears: a clinical practice guideline. BMJ, 2017. PMID 28490431.", u: "https://pubmed.ncbi.nlm.nih.gov/28490431/" },
+    { t: "Management of traumatic meniscus tears: the 2019 ESSKA meniscus consensus. Knee Surg Sports Traumatol Arthrosc, 2020.", u: "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7148286/" },
+  ],
   infiltracoes: [
     { t: "McAlindon TE, et al. Effect of Intra-articular Triamcinolone vs Saline on Knee Cartilage Volume and Pain in Knee Osteoarthritis: a randomized clinical trial. JAMA, 2017. PMID 28510679.", u: "https://doi.org/10.1001/jama.2017.5283" },
     { t: "Bensa A, et al. PRP Injections for Knee Osteoarthritis: clinically significant improvement influenced by platelet concentration — meta-analysis of RCTs. Am J Sports Med, 2025. PMID 39751394.", u: "https://doi.org/10.1177/03635465241246524" },
