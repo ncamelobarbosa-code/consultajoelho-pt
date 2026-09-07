@@ -56,12 +56,12 @@
     },
     {
       "pergunta": "Uma rotura radial do menisco dá para reparar ou tem de se remover?",
-      "resposta": "Durante muitos anos a rotura radial era tratada por remoção do fragmento, porque atravessa as fibras circunferenciais e era considerada irreparável na prática. A evidência recente mudou essa leitura: uma revisão sistemática de 2026 com 316 doentes reportou cicatrização satisfatória em 82,5% das reparações, com 3,7% de complicações e melhoria significativa nos resultados funcionais. Como remover menisco acelera o desgaste da cartilagem a prazo, preservar é o objectivo sempre que a rotura e o tecido o permitirem.",
+      "resposta": "Durante muitos anos a rotura radial era tratada por remoção do fragmento, porque atravessa as fibras circunferenciais e era considerada irreparável na prática. A evidência recente mudou essa leitura: uma revisão sistemática de 2026 com 316 doentes reportou cicatrização satisfatória em 82,5% das reparações, com 3,7% de complicações e melhoria significativa nos resultados funcionais. Como remover menisco acelera o desgaste da cartilagem a prazo, a tendência actual é reparar as roturas radiais — e não removê-las — sempre que a rotura e o tecido o permitirem.",
       "refs": ["borim2026radial"]
     },
     {
       "pergunta": "Preciso mesmo de ressonância para diagnosticar uma rotura do menisco?",
-      "resposta": "Nem sempre, e essa é uma conclusão que costuma surpreender. Numa meta-análise de 2026 com 1643 joelhos, em que cada doente fez exame clínico e ressonância com confirmação por artroscopia, o exame clínico feito por um clínico experiente atingiu 85% de sensibilidade e 95% de especificidade no menisco interno — números próximos dos 90% e 91% da ressonância. A ressonância continua a ser essencial para planear cirurgia e para ver o resto da articulação, e a sua especificidade diminui nos joelhos já com alterações degenerativas. O exame do joelho não é uma formalidade antes da ressonância: é parte do diagnóstico.",
+      "resposta": "Na prática clínica, sim — a ressonância é necessária em praticamente todas as situações. Uma meta-análise de 2026 com 1643 joelhos mostrou que o exame clínico feito por um clínico experiente é muito fiável no menisco interno (85% de sensibilidade e 95% de especificidade, próximo dos 90% e 91% da ressonância) — mas o exame diz que há uma lesão, não mostra o tipo, a localização nem o estado da cartilagem e dos ligamentos, e a sua fiabilidade cai no menisco externo. A ressonância é essencial para confirmar o diagnóstico, planear o tratamento e avaliar o resto da articulação. O exame do joelho orienta e complementa; não dispensa a ressonância.",
       "refs": ["rana2026diagnostico"]
     },
     {
