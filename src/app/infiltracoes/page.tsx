@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Script from "next/script";
+import Evidencia from "@/components/Evidencia";
 
 export const metadata: Metadata = {
   "title": "Infiltração do Joelho: \"Regenerativas\" vs. Não-Regenerativas | Dr. Nuno Camelo Porto",
@@ -29,8 +30,9 @@ export default function Page() {
   return (
     <>
       <style dangerouslySetInnerHTML={{ __html: css }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd }} />
       <div dangerouslySetInnerHTML={{ __html: html }} />
+      {/* Emite o JSON-LD da página já fundido com as referências e FAQ novas. */}
+      <Evidencia slug="infiltracoes" pageUrl="https://www.consultajoelho.pt/infiltracoes" baseJsonLd={jsonLd} />
       <Script id="infiltracoes-js" strategy="afterInteractive" dangerouslySetInnerHTML={{ __html: pageScript }} />
     </>
   );

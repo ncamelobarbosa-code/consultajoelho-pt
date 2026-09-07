@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Script from "next/script";
+import Evidencia from "@/components/Evidencia";
 import PageVideos from "@/components/PageVideos";
 
 export const metadata: Metadata = {
@@ -30,8 +31,9 @@ export default function Page() {
   return (
     <>
       <style dangerouslySetInnerHTML={{ __html: css }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd }} />
       <div dangerouslySetInnerHTML={{ __html: html }} />
+      {/* Emite o JSON-LD da página já fundido com as referências e FAQ novas. */}
+      <Evidencia slug="menisco" pageUrl="https://www.consultajoelho.pt/menisco" baseJsonLd={jsonLd} />
       <PageVideos slug="menisco" lang="pt" />
       <Script id="menisco-js" strategy="afterInteractive" dangerouslySetInnerHTML={{ __html: pageScript }} />
     </>

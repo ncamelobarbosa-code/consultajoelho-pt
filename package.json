@@ -6,7 +6,10 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "prebuild": "node scripts/evidencia-validate.mjs",
+    "literatura:rotacao": "node scripts/lit-rotacao.mjs",
+    "literatura:validar": "node scripts/evidencia-validate.mjs"
   },
   "dependencies": {
     "@formspree/react": "^3.0.0",

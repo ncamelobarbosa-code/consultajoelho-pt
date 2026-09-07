@@ -1,0 +1,73 @@
+{
+  "slug": "artrose",
+  "atualizado": "2026-08-31",
+  "revistoPor": "Dr. Nuno Camelo",
+  "referencias": [
+    {
+      "id": "yan2025exercicio",
+      "autores": "Yan L, Li D, Xing D, Fan Z, Ge L, Wang B, et al.",
+      "titulo": "Comparative efficacy and safety of exercise modalities in knee osteoarthritis: systematic review and network meta-analysis.",
+      "revista": "BMJ",
+      "ano": 2025,
+      "tipo": "Meta-análise",
+      "pmid": "41093618",
+      "doi": "10.1136/bmj-2025-085242",
+      "resumoPt": "Duzentos e dezassete ensaios aleatorizados, 15 684 participantes. Comparando modalidades de exercício entre si, o exercício aeróbio foi consistentemente o melhor classificado na dor, função, marcha e qualidade de vida, com evidência de certeza moderada. Reforço muscular e programas mistos também melhoraram a função a médio prazo."
+    },
+    {
+      "id": "schleimer2026revisao",
+      "autores": "Schleimer T, Teichert F, Henriksen M, Innocenti T, Pieper D, Belavy DL, et al.",
+      "titulo": "Effectiveness of exercise therapy for osteoarthritis: an overview of systematic reviews and randomised controlled trials.",
+      "revista": "RMD Open",
+      "ano": 2026,
+      "tipo": "Revisão sistemática",
+      "pmid": "41702669",
+      "doi": "10.1136/rmdopen-2025-006275",
+      "resumoPt": "Revisão de revisões que reanalisou 5 revisões (8631 doentes) e 28 ensaios adicionais. Contra placebo, o exercício reduziu a dor do joelho em cerca de 11 pontos numa escala de 0 a 100 a curto prazo — um efeito pequeno, de certeza muito baixa, e menor nos ensaios maiores e mais longos. Os resultados foram comparáveis aos de educação, terapia manual, analgésicos e infiltrações. Os autores questionam a promoção universal do exercício."
+    },
+    {
+      "id": "lanza2026embolizacao",
+      "autores": "Lanza E, Poretti D, Pedicini V, Kon E, Laghi A.",
+      "titulo": "Permanent vs. temporary embolic agents in genicular artery embolization for knee osteoarthritis: a systematic review and meta-analysis.",
+      "revista": "European Journal of Radiology",
+      "ano": 2026,
+      "tipo": "Meta-análise",
+      "pmid": "42208168",
+      "doi": "10.1016/j.ejrad.2026.112968",
+      "resumoPt": "Vinte e dois estudos, 633 doentes. Os estudos sem grupo de controlo mostram grandes reduções de dor, mas os três ensaios aleatorizados com procedimento simulado não encontraram diferença significativa entre embolizar e não embolizar. Osteonecrose focal assintomática foi descrita apenas com microesferas permanentes. Os autores concluem que faltam ensaios adequados antes de recomendar o procedimento."
+    },
+    {
+      "id": "mcgowan2025obesidade",
+      "autores": "McGowan B, Ciudin A, Busetto L, Frühbeck G, Sbraccia P, Yumuk V, et al.",
+      "titulo": "A systematic review and meta-analysis of the efficacy and safety of pharmacological treatments for obesity in adults.",
+      "revista": "Nature Medicine",
+      "ano": 2025,
+      "tipo": "Meta-análise",
+      "pmid": "41039116",
+      "doi": "10.1038/s41591-025-03978-z",
+      "resumoPt": "Cinquenta e seis ensaios aleatorizados, 60 307 doentes, comparando fármacos para a obesidade. O semaglutido e o tirzepatido levaram a perdas de peso acima de 10% do peso corporal. Entre os desfechos analisados, o semaglutido reduziu a dor na artrose do joelho. Este é um estudo sobre tratamento da obesidade, não sobre tratamento da artrose."
+    }
+  ],
+  "faq": [
+    {
+      "pergunta": "Que tipo de exercício funciona melhor na artrose do joelho?",
+      "resposta": "Se vai escolher um, o exercício aeróbio é o que reúne mais apoio. Numa network meta-analysis publicada no BMJ em 2025, que juntou 217 ensaios aleatorizados e 15 684 participantes, o exercício aeróbio ficou consistentemente melhor classificado na dor, na função, na marcha e na qualidade de vida, com certeza moderada. Reforço muscular e programas mistos também melhoraram a função a médio prazo. Caminhar, bicicleta e natação continuam a ser a base — e o melhor programa é o que consegue manter.",
+      "refs": ["yan2025exercicio"]
+    },
+    {
+      "pergunta": "O exercício resolve mesmo a dor da artrose, ou é o que se diz a toda a gente?",
+      "resposta": "Vale a pena ser franco, porque a evidência não é unânime. Uma revisão de revisões publicada em 2026 reanalisou os dados e encontrou, contra placebo, uma redução de dor de cerca de 11 pontos numa escala de 0 a 100 a curto prazo — um efeito pequeno, de certeza muito baixa, e que diminuía nos ensaios maiores e mais longos. Os resultados foram semelhantes aos de educação, terapia manual, analgésicos e infiltrações. Isto não é razão para deixar de se mexer: o exercício tem benefícios cardiovasculares, metabólicos e de autonomia que nenhum destes estudos mede, e não tem os riscos das alternativas. É razão para não prometer que o exercício sozinho resolve a dor de toda a gente.",
+      "refs": ["schleimer2026revisao", "yan2025exercicio"]
+    },
+    {
+      "pergunta": "Ouvi falar da embolização das artérias do joelho. Funciona?",
+      "resposta": "Por agora, a evidência não sustenta o entusiasmo. Uma meta-análise de 2026 juntou 22 estudos e 633 doentes: os trabalhos sem grupo de comparação mostram grandes reduções de dor, mas os três ensaios aleatorizados que compararam a embolização com um procedimento simulado não encontraram diferença significativa entre os dois. Foi ainda descrita osteonecrose focal, sem sintomas, apenas nos casos tratados com microesferas permanentes. É um procedimento que continua em investigação, não um tratamento estabelecido — e vale a pena essa distinção antes de o considerar.",
+      "refs": ["lanza2026embolizacao"]
+    },
+    {
+      "pergunta": "Perder peso com medicação ajuda o joelho?",
+      "resposta": "Há um sinal nesse sentido, ainda que indirecto. Uma meta-análise publicada na Nature Medicine em 2025, com 56 ensaios aleatorizados e mais de 60 000 doentes, avaliou os fármacos para a obesidade: o semaglutido e o tirzepatido levaram a perdas superiores a 10% do peso corporal, e entre os desfechos analisados o semaglutido reduziu a dor na artrose do joelho. É importante ler isto pelo que é — um estudo sobre tratamento da obesidade, em que o joelho aparece como um dos benefícios, e não um tratamento para a artrose. A decisão de usar estes fármacos é médica e depende do quadro geral, não apenas do joelho.",
+      "refs": ["mcgowan2025obesidade"]
+    }
+  ]
+}

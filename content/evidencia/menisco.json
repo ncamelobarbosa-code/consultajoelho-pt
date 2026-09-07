@@ -1,0 +1,73 @@
+{
+  "slug": "menisco",
+  "atualizado": "2026-08-31",
+  "revistoPor": "Dr. Nuno Camelo",
+  "referencias": [
+    {
+      "id": "moews2026timing",
+      "autores": "Moews LD, Thamrongskulsiri N, Morgan JT, Vega TF, Verma NN, Chahla J.",
+      "titulo": "Surgical timing and outcomes in medial meniscus posterior root tear repair: a systematic review.",
+      "revista": "The American Journal of Sports Medicine",
+      "ano": 2026,
+      "tipo": "Revisão sistemática",
+      "pmid": "41923442",
+      "doi": "10.1177/03635465261426366",
+      "resumoPt": "Onze estudos, 366 doentes com rotura da raiz posterior do menisco interno tratados por reinserção transtibial. Operar nos primeiros 3 meses deu os melhores ganhos funcionais (IKDC +39,0; Lysholm +44), mas mesmo a reparação feita para lá dos 6 meses trouxe melhorias com significado clínico. As taxas de falência (5,9% a 20,9%) não acompanharam o atraso de forma consistente."
+    },
+    {
+      "id": "borim2026radial",
+      "autores": "Moreira Borim F, Zeng C, Rechsteiner J, Lording T.",
+      "titulo": "Surgical repair of radial meniscus tears yields favorable healing rates: a systematic review.",
+      "revista": "Journal of Orthopaedic Surgery and Research",
+      "ano": 2026,
+      "tipo": "Revisão sistemática",
+      "pmid": "42432690",
+      "doi": "10.1186/s13018-026-07080-z",
+      "resumoPt": "Dezoito estudos, 316 doentes e 321 reparações de roturas radiais, com seguimento médio de 36 meses. Cicatrização satisfatória em 82,5% das roturas avaliadas e complicações em 3,7%. As roturas radiais eram tradicionalmente tratadas por remoção; estes números apoiam tentar reparar."
+    },
+    {
+      "id": "rana2026diagnostico",
+      "autores": "Rana R, Mehan N, Hassan R, Gohil Y, Tyagi A, Maffulli N.",
+      "titulo": "Diagnostic accuracy of clinical examination versus MRI for meniscal tears: a systematic review and meta-analysis.",
+      "revista": "British Medical Bulletin",
+      "ano": 2026,
+      "tipo": "Meta-análise",
+      "pmid": "42544509",
+      "doi": "10.1093/bmb/ldag023",
+      "resumoPt": "Dez estudos, 1643 joelhos, todos submetidos a exame clínico e ressonância, com a artroscopia como referência. Para o menisco interno a ressonância teve 90% de sensibilidade e 91% de especificidade; o exame clínico teve 85% e 95%. No menisco externo ambos perderam precisão. Os autores notam que a especificidade da ressonância cai nos joelhos com alterações degenerativas."
+    },
+    {
+      "id": "gazi2026cinetica",
+      "autores": "Gazi Ş, Birinci Olgun T, Ziroglu N, Taşkıran H, Kaya Mutlu E.",
+      "titulo": "Initiating rehabilitation with open versus closed kinetic chain exercises in patients with degenerative meniscal tears: a randomized controlled trial.",
+      "revista": "American Journal of Physical Medicine & Rehabilitation",
+      "ano": 2026,
+      "tipo": "Ensaio clínico aleatorizado",
+      "pmid": "41961011",
+      "doi": "10.1097/PHM.0000000000002998",
+      "resumoPt": "Cinquenta e seis doentes com rotura degenerativa do menisco, num programa de 8 semanas. Começar com exercícios em cadeia cinética aberta nas primeiras duas semanas deu melhor resultado na dor e na qualidade de vida do que começar em cadeia fechada. Ambos os grupos melhoraram — a diferença está na ordem por que se introduzem os exercícios."
+    }
+  ],
+  "faq": [
+    {
+      "pergunta": "Tenho uma rotura da raiz do menisco. Perdi a altura de operar?",
+      "resposta": "Provavelmente não. Uma revisão sistemática de 2026 com 366 doentes mostrou que os melhores ganhos funcionais aparecem quando a reinserção é feita nos primeiros 3 meses — mas também que doentes operados para lá dos 6 meses tiveram melhorias com significado clínico real. As roturas da raiz são frequentemente diagnosticadas tarde, porque começam sem trauma evidente e são fáceis de confundir com artrose. Chegar tarde não fecha a porta; o que decide é o estado da cartilagem e do alinhamento no momento em que é avaliado.",
+      "refs": ["moews2026timing"]
+    },
+    {
+      "pergunta": "Uma rotura radial do menisco dá para reparar ou tem de se remover?",
+      "resposta": "Durante muitos anos a rotura radial era tratada por remoção do fragmento, porque atravessa as fibras circunferenciais e era considerada irreparável na prática. A evidência recente mudou essa leitura: uma revisão sistemática de 2026 com 316 doentes reportou cicatrização satisfatória em 82,5% das reparações, com 3,7% de complicações e melhoria significativa nos resultados funcionais. Como remover menisco acelera o desgaste da cartilagem a prazo, a tendência actual é reparar as roturas radiais — e não removê-las — sempre que a rotura e o tecido o permitirem.",
+      "refs": ["borim2026radial"]
+    },
+    {
+      "pergunta": "Preciso mesmo de ressonância para diagnosticar uma rotura do menisco?",
+      "resposta": "Na prática clínica, sim — a ressonância é necessária em praticamente todas as situações. Uma meta-análise de 2026 com 1643 joelhos mostrou que o exame clínico feito por um clínico experiente é muito fiável no menisco interno (85% de sensibilidade e 95% de especificidade, próximo dos 90% e 91% da ressonância) — mas o exame diz que há uma lesão, não mostra o tipo, a localização nem o estado da cartilagem e dos ligamentos, e a sua fiabilidade cai no menisco externo. A ressonância é essencial para confirmar o diagnóstico, planear o tratamento e avaliar o resto da articulação. O exame do joelho orienta e complementa; não dispensa a ressonância.",
+      "refs": ["rana2026diagnostico"]
+    },
+    {
+      "pergunta": "Que exercícios devo fazer primeiro numa rotura degenerativa?",
+      "resposta": "A rotura degenerativa do menisco trata-se, na maioria dos casos, sem cirurgia — e a forma como a reabilitação começa parece contar. Num ensaio aleatorizado de 2026 com 56 doentes, começar as primeiras duas semanas com exercícios em cadeia cinética aberta (o pé livre, tipo extensão do joelho sentado) deu melhor controlo da dor e melhor qualidade de vida do que começar em cadeia fechada (o pé apoiado, tipo agachamento). Os dois grupos melhoraram ao fim das 8 semanas: o que mudou foi a ordem. É um estudo pequeno, e a progressão deve ser sempre ajustada ao seu joelho.",
+      "refs": ["gazi2026cinetica"]
+    }
+  ]
+}

@@ -15,3 +15,12 @@ Antes de pegar em tarefas novas, consulta:
 Achados que exigem validação do Dr. antes de aplicar: ressalva clínica da tendinopatia rotuliana (P0-3) e remoção de credenciais FIFA/Lyon/Sonnery-Cottet das páginas públicas (P0-7).
 <!-- END:active-work-plan -->
 
+
+<!-- BEGIN:agente-literatura -->
+# Agente de literatura (mensal)
+
+Se a tarefa for actualizar referências científicas ou FAQ das páginas de patologia,
+o runbook é **`AGENTE-LITERATURA.md`**. Regra que não se quebra: o conteúdo novo
+entra por `content/evidencia/<slug>.json`, nunca por edição das strings escapadas
+em `src/app/**/page.tsx`.
+<!-- END:agente-literatura -->

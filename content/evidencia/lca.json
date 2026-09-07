@@ -1,0 +1,73 @@
+{
+  "slug": "lca",
+  "atualizado": "2026-08-14",
+  "revistoPor": "Dr. Nuno Camelo",
+  "referencias": [
+    {
+      "id": "kienberger2026leap",
+      "autores": "Kienberger S, Kratochwil L, Gotterbarm T, Deichsel A, Winkler PW.",
+      "titulo": "Lateral extra-articular procedures reduce anterior cruciate ligament graft failure in patients younger than 21 years undergoing primary anterior cruciate ligament reconstruction: a systematic review.",
+      "revista": "Journal of ISAKOS",
+      "ano": 2026,
+      "tipo": "Revisão sistemática",
+      "pmid": "42142710",
+      "doi": "10.1016/j.jisako.2026.101139",
+      "resumoPt": "Nove estudos, 598 doentes com menos de 21 anos. Juntar um procedimento lateral extra-articular à reconstrução do LCA associou-se a menos re-roturas do enxerto (0–6%) do que a reconstrução isolada (5–12%), com regresso ao desporto entre os 9 e os 11 meses. Os autores sublinham que os estudos são heterogéneos e que a conclusão deve ser lida com prudência."
+    },
+    {
+      "id": "desouza2026peroneal",
+      "autores": "Desouza C, Nighot A, Sahu A, Shetty V.",
+      "titulo": "Peroneus longus autograft versus hamstring tendon autograft in primary anterior cruciate ligament reconstruction: a systematic review and meta-analysis of randomised controlled trials.",
+      "revista": "European Journal of Orthopaedic Surgery & Traumatology",
+      "ano": 2026,
+      "tipo": "Meta-análise",
+      "pmid": "42542493",
+      "doi": "10.1007/s00590-026-04907-7",
+      "resumoPt": "Quatro ensaios aleatorizados, 407 doentes. O enxerto de peroneal longo deu resultados funcionais e estabilidade equivalentes aos isquiotibiais, com menos queixas na zona de colheita e maior diâmetro de enxerto. A função do tornozelo não se deteriorou. É uma alternativa válida, sobretudo quando os isquiotibiais são finos ou já foram usados."
+    },
+    {
+      "id": "yuwarungsikul2026incisao",
+      "autores": "Yuwarungsikul C, Veerathumjumras P, Thamrongskulsiri N, et al.",
+      "titulo": "Oblique incision is associated with lower sensory loss compared with vertical incision for hamstring harvest in anterior cruciate ligament reconstruction: a systematic review and meta-analysis.",
+      "revista": "Journal of ISAKOS",
+      "ano": 2026,
+      "tipo": "Meta-análise",
+      "pmid": "42229723",
+      "doi": "10.1016/j.jisako.2026.101154",
+      "resumoPt": "Oito ensaios aleatorizados, 626 doentes. A incisão oblíqua para colher os isquiotibiais reduziu em cerca de um terço a probabilidade de perda de sensibilidade à volta da cicatriz, e reduziu também a área afectada, sem diferença nos resultados funcionais. A certeza da evidência é baixa por heterogeneidade entre estudos."
+    },
+    {
+      "id": "sinha2026ligamentizacao",
+      "autores": "Sinha S, Arumugham KC, Singh DK, et al.",
+      "titulo": "ACL reconstruction with attachment-sparing hamstring autograft results in earlier graft maturation and better short-term clinical outcome in comparison to free graft: a randomized controlled trial.",
+      "revista": "The American Journal of Sports Medicine",
+      "ano": 2026,
+      "tipo": "Ensaio clínico aleatorizado",
+      "pmid": "42310826",
+      "doi": "10.1177/03635465261455046",
+      "resumoPt": "Ensaio aleatorizado com ressonância seriada aos 3, 6 e 9 meses. Preservar a inserção tibial do enxerto acelerou a maturação: sinal de enxerto maduro já aos 3 meses, contra 6 meses no enxerto livre. Confirma que a ligamentização é um processo de muitos meses — e é por isso que o regresso ao desporto não se decide pelo calendário."
+    }
+  ],
+  "faq": [
+    {
+      "pergunta": "A tenodese lateral compensa em atletas jovens?",
+      "resposta": "A evidência mais recente aponta nesse sentido. Numa revisão sistemática de 2026 com quase 600 doentes abaixo dos 21 anos, acrescentar um procedimento lateral extra-articular à reconstrução do LCA associou-se a menos re-roturas do enxerto — na ordem dos 0 a 6%, contra 5 a 12% na reconstrução isolada — sem penalizar a função nem o regresso ao desporto. As plastias anterolaterais têm ganho importância crescente na reconstrução do LCA — pesam sobretudo em joelhos hiperlaxos, em desportos de pivô e rotação e em cirurgias de revisão, mas fica em aberto se o seu benefício não se estenderá a um leque mais amplo de doentes. A evidência mais forte é ainda nos mais jovens e os estudos são heterogéneos, pelo que a decisão continua a ser individual.",
+      "refs": ["kienberger2026leap"]
+    },
+    {
+      "pergunta": "Que tendão é usado como enxerto — e o peroneal é uma boa alternativa?",
+      "resposta": "Os isquiotibiais continuam a ser o enxerto mais usado, mas nem sempre têm calibre suficiente, e em cirurgias de revisão podem já ter sido gastos. Uma meta-análise de quatro ensaios aleatorizados publicada em 2026 comparou o tendão do peroneal longo com os isquiotibiais em 407 doentes: estabilidade e resultados funcionais equivalentes, enxerto de maior diâmetro e menos queixas na zona de colheita, sem perda mensurável de função do tornozelo. Na prática, existem vários enxertos possíveis — isquiotibiais, tendão rotuliano, quadricípite/recto femoral e peroneal longo — e cada um é sobretudo um meio de atingir um fim: um enxerto forte, bem posicionado e bem integrado. O peroneal é mais uma alternativa credível, sobretudo quando os isquiotibiais são finos ou já foram usados.",
+      "refs": ["desouza2026peroneal"]
+    },
+    {
+      "pergunta": "Vou ficar com uma zona dormente à volta da cicatriz?",
+      "resposta": "É uma queixa comum e quase sempre benigna: durante a colheita dos isquiotibiais pode ser lesado um pequeno ramo sensitivo do nervo safeno, deixando uma área de pele com menos sensibilidade abaixo e ao lado da cicatriz. Não afecta a força nem o funcionamento do joelho e tende a diminuir com o tempo. A orientação da incisão conta: uma meta-análise de oito ensaios aleatorizados, publicada em 2026, mostrou que a incisão oblíqua reduz cerca de um terço a probabilidade desta perda de sensibilidade e diminui a área afectada, quando comparada com a incisão vertical.",
+      "refs": ["yuwarungsikul2026incisao"]
+    },
+    {
+      "pergunta": "Quanto tempo demora o novo ligamento a ficar mesmo forte?",
+      "resposta": "O enxerto não fica ligamento de um dia para o outro. Passa por um processo chamado ligamentização, em que o tendão transplantado é progressivamente revascularizado e remodelado — e isso mede-se em meses, não em semanas. Um ensaio aleatorizado de 2026 com ressonância seriada mostrou sinais de maturação do enxerto a partir dos 3 meses nas técnicas que preservam a inserção tibial, e por volta dos 6 meses no enxerto livre. É esta biologia, e não o calendário, que explica por que motivo o regresso a desportos de pivô se decide por critérios de força, estabilidade e testes funcionais, tipicamente entre os 9 e os 12 meses.",
+      "refs": ["sinha2026ligamentizacao"]
+    }
+  ]
+}
