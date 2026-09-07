@@ -1,0 +1,57 @@
+{
+  "slug": "protese",
+  "atualizado": "2026-09-01",
+  "revistoPor": "Dr. Nuno Camelo",
+  "referencias": [
+    {
+      "id": "kayani2026robotica",
+      "autores": "Kayani B, Fontalis A, Tahmassebi J, Konan S, Plastow R, Oussedik S, et al.",
+      "titulo": "A prospective double-blinded randomized controlled trial comparing conventional jig-based versus robotic arm-assisted medial unicompartmental knee arthroplasty.",
+      "revista": "The Bone & Joint Journal",
+      "ano": 2026,
+      "tipo": "Ensaio clínico aleatorizado",
+      "pmid": "42674575",
+      "doi": "10.1302/0301-620X.108B9.BJJ-2025-1481.R1",
+      "resumoPt": "Cento e sete doentes com artrose do compartimento interno, aleatorizados a prótese unicompartimental convencional ou assistida por braço robótico, em estudo com dupla ocultação. O robô colocou os componentes mais perto do planeado e associou-se a menos dor no internamento, menos morfina e alta mais cedo. Aos dois anos, as pontuações habituais de função eram iguais nos dois grupos; só o Forgotten Joint Score — o quanto o doente se esquece do joelho — ficou melhor no grupo do robô. São resultados intercalares."
+    },
+    {
+      "id": "taylorrowan2026anestesia",
+      "autores": "Taylor-Rowan M, Mactier I, Nevill C, Said R, Kearns RJ, Macfarlane AJR, et al.",
+      "titulo": "Regional anaesthesia and chronic postsurgical pain: a systematic review and network meta-analysis.",
+      "revista": "British Journal of Anaesthesia",
+      "ano": 2026,
+      "tipo": "Meta-análise",
+      "pmid": "42425794",
+      "doi": "10.1016/j.bja.2026.04.082",
+      "resumoPt": "Cento e cinquenta e oito ensaios aleatorizados e 18 794 doentes operados a vários tipos de cirurgia. A anestesia locorregional associou-se a menos dor crónica pós-operatória até 12 meses (risco relativo 0,73) e, no subgrupo da prótese do joelho, a um risco 29% menor. O consumo de opióides a longo prazo não foi diferente. A certeza da evidência é baixa."
+    },
+    {
+      "id": "cao2026telereabilitacao",
+      "autores": "Cao F, Shi L, Wang X.",
+      "titulo": "Analysis of the application effect of new rehabilitation nursing methods in orthopedic postoperative rehabilitation: a systematic review and meta-analysis of randomized controlled trials.",
+      "revista": "Journal of Telemedicine and Telecare",
+      "ano": 2026,
+      "tipo": "Meta-análise",
+      "pmid": "41525304",
+      "doi": "10.1177/1357633X251408308",
+      "resumoPt": "Quinze ensaios aleatorizados, 1966 doentes operados à anca ou ao joelho, todos com baixo risco de enviesamento. A reabilitação apoiada por tecnologia — realidade virtual, aplicações e telereabilitação — deu uma melhoria pequena mas real na função relatada pelo doente, com certeza moderada. A realidade virtual teve o maior efeito estimado, sem chegar a diferenciar-se claramente das restantes."
+    }
+  ],
+  "faq": [
+    {
+      "pergunta": "A prótese do joelho feita com robô dá melhor resultado?",
+      "resposta": "Dá melhor precisão; o que essa precisão vale para o doente é uma pergunta mais fina. Num ensaio aleatorizado com dupla ocultação, publicado em 2026 com 107 doentes operados a prótese unicompartimental interna, o braço robótico colocou os componentes mais perto do plano, e os doentes tiveram menos dor no internamento, precisaram de menos morfina e tiveram alta mais cedo. Aos dois anos, porém, as pontuações habituais de função e dor eram iguais nas duas técnicas; a única diferença que se manteve foi o quanto o doente se esquece de que tem uma prótese. São resultados intercalares de um estudo ainda a decorrer, e valem sobretudo para a prótese unicompartimental.",
+      "refs": ["kayani2026robotica"]
+    },
+    {
+      "pergunta": "Posso ficar com dor crónica depois da prótese?",
+      "resposta": "Pode, e é honesto dizê-lo: uma minoria de doentes mantém dor para lá dos três meses, muito depois de a cirurgia estar cicatrizada. A forma como a anestesia é feita parece contar. Uma network meta-analysis publicada em 2026, com 158 ensaios aleatorizados e quase 19 000 doentes, mostrou que as técnicas de anestesia locorregional se associaram a menos dor crónica até 12 meses após a cirurgia — no subgrupo da prótese do joelho, um risco cerca de 29% menor. A certeza da evidência é baixa, e o consumo de analgésicos a longo prazo não foi diferente. É, ainda assim, um dos poucos factores modificáveis conhecidos, e vale a pena falar dele com a equipa de anestesia antes da cirurgia.",
+      "refs": ["taylorrowan2026anestesia"]
+    },
+    {
+      "pergunta": "Posso fazer parte da reabilitação em casa, com aplicações ou realidade virtual?",
+      "resposta": "É uma opção defensável, com ganhos modestos. Uma meta-análise de 2026 juntou 15 ensaios aleatorizados e quase 2000 doentes operados à anca ou ao joelho, todos com baixo risco de enviesamento, e encontrou uma melhoria pequena mas real da função relatada pelo doente quando a reabilitação era apoiada por tecnologia — telereabilitação, aplicações ou realidade virtual — comparada com o acompanhamento habitual. A certeza da evidência foi classificada como moderada, e a realidade virtual teve o maior efeito estimado, sem se destacar claramente. O que isto sugere não é substituir o fisioterapeuta, mas que estas ferramentas ajudam a manter o programa quando o acesso presencial é limitado.",
+      "refs": ["cao2026telereabilitacao"]
+    }
+  ]
+}

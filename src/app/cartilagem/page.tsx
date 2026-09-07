@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Script from "next/script";
 import PageVideos from "@/components/PageVideos";
+import Evidencia from "@/components/Evidencia";
 
 export const metadata: Metadata = {
   "title": "Lesões da Cartilagem do Joelho — Tratamento e Opções | Dr. Nuno Camelo Porto",
@@ -30,8 +31,9 @@ export default function Page() {
   return (
     <>
       <style dangerouslySetInnerHTML={{ __html: css }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd }} />
       <div dangerouslySetInnerHTML={{ __html: html }} />
+      {/* Emite o JSON-LD da página já fundido com as referências e FAQ novas. */}
+      <Evidencia slug="cartilagem" pageUrl="https://www.consultajoelho.pt/cartilagem" baseJsonLd={jsonLd} />
       <PageVideos slug="cartilagem" lang="pt" />
       <Script id="cartilagem-js" strategy="afterInteractive" dangerouslySetInnerHTML={{ __html: pageScript }} />
     </>

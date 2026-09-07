@@ -1,0 +1,73 @@
+{
+  "slug": "infiltracoes",
+  "atualizado": "2026-09-01",
+  "revistoPor": "Dr. Nuno Camelo",
+  "referencias": [
+    {
+      "id": "borgstein2026aapmr",
+      "autores": "Borg-Stein J, Jayaram P, Colorado BS, de Luigi AJ, Khadavi M, Latzka E, et al.",
+      "titulo": "AAPM&R guidance statement on platelet rich plasma for knee osteoarthritis.",
+      "revista": "PM&R",
+      "ano": 2026,
+      "tipo": "Norma de orientação clínica",
+      "pmid": "41989317",
+      "doi": "10.1002/pmrj.70144",
+      "resumoPt": "Documento de orientação de um painel de peritos da American Academy of Physical Medicine and Rehabilitation, com revisão estruturada da literatura até junho de 2025 e método Delphi. Resultou em 5 recomendações baseadas em evidência e 11 boas práticas de consenso. O painel mantém como cuidado padrão a perda de peso, a fisioterapia, os analgésicos e a infiltração de corticosteroide, e classifica o PRP como área em evolução, à espera de ensaios aleatorizados que estabeleçam a dose."
+    },
+    {
+      "id": "li2025prpha",
+      "autores": "Li YF, Xing HH, Wei CK, Chen YT, Sun YQ, Liu FL, Wu YH, Yang W.",
+      "titulo": "Platelet-rich plasma is more effective than hyaluronic acid injections for osteoarthritis of the knee: a meta-analysis based on randomized, double-blinded, controlled clinical trials.",
+      "revista": "Arthroscopy",
+      "ano": 2025,
+      "tipo": "Meta-análise",
+      "pmid": "40681006",
+      "doi": "10.1016/j.arthro.2025.06.033",
+      "resumoPt": "Quinze ensaios aleatorizados com dupla ocultação, 1632 doentes com artrose de grau I a III. Aos 12 meses, o PRP associou-se a menos dor e melhor função do que o ácido hialurónico, com uma diferença que atingiu o limiar de relevância clínica no índice WOMAC. Ao primeiro mês a vantagem era pequena — o benefício aparece com o tempo, não logo a seguir à infiltração."
+    },
+    {
+      "id": "oka2026biologicos",
+      "autores": "Oka T, Kitagawa T, Nasu T, Kurasawa Y, Kunihara H, Suzuki K, Nakamura N.",
+      "titulo": "Clinical outcomes of biologic therapies for knee osteoarthritis: a systematic review and meta-analysis of studies with 12-month or longer follow-up.",
+      "revista": "Modern Rheumatology",
+      "ano": 2026,
+      "tipo": "Meta-análise",
+      "pmid": "41685775",
+      "doi": "10.1093/mr/roag010",
+      "resumoPt": "Catorze ensaios aleatorizados de terapias biológicas — PRP e terapias celulares — todos com pelo menos 12 meses de seguimento, em artrose de grau I a III. No conjunto houve redução da dor e melhoria da função face aos comparadores, com sinais preliminares de benefício estrutural. Os autores classificam a certeza da evidência como muito baixa, por grande heterogeneidade de protocolos e suspeita de viés de publicação."
+    },
+    {
+      "id": "nelson2026trajetorias",
+      "autores": "Nelson BL, Jayaram P, Boden SD, Mautner K, Gottschalk MB, Myer GD, Drissi H, Diekfuss JA.",
+      "titulo": "SPOT: an early detection tool for predicting pain trajectories following intra-articular injections.",
+      "revista": "Journal of Orthopaedic Research",
+      "ano": 2026,
+      "tipo": "Ensaio clínico aleatorizado",
+      "pmid": "42671292",
+      "doi": "10.1002/jor.70270",
+      "resumoPt": "Análise de 317 participantes de um ensaio aleatorizado multicêntrico de infiltrações com concentrado de medula óssea, células do cordão umbilical ou fracção vascular estromal. Ao longo de 12 meses distinguiram-se dois percursos: 66,6% dos doentes melhoraram e 33,4% mantiveram a dor. A resposta aos 3 meses previa com razoável fiabilidade em que grupo o doente estava a cair."
+    }
+  ],
+  "faq": [
+    {
+      "pergunta": "O PRP é um tratamento reconhecido para a artrose do joelho?",
+      "resposta": "É um tratamento usado e estudado, mas não é ainda um tratamento padrão. Em 2026 a American Academy of Physical Medicine and Rehabilitation publicou um documento de orientação sobre PRP na artrose do joelho, com revisão estruturada da literatura e consenso formal de peritos: chegou a 5 recomendações baseadas em evidência e 11 boas práticas apoiadas sobretudo em opinião de peritos. O painel manteve como base do tratamento a perda de peso, a fisioterapia, os analgésicos e a infiltração de corticosteroide, e descreveu o PRP como uma área em evolução, à espera de ensaios que definam a dose. É útil ler isto como um enquadramento honesto e não como um travão: o PRP tem lugar, mas em cima da base e não em vez dela.",
+      "refs": ["borgstein2026aapmr"]
+    },
+    {
+      "pergunta": "PRP ou ácido hialurónico — qual deles dura mais?",
+      "resposta": "A comparação directa favorece o PRP a médio prazo. Uma meta-análise publicada na Arthroscopy em 2025, que incluiu apenas ensaios aleatorizados com dupla ocultação — 15 estudos e 1632 doentes com artrose de grau I a III — encontrou aos 12 meses menos dor e melhor função com PRP do que com ácido hialurónico, com uma diferença que atingiu o limiar considerado clinicamente relevante. Repare no calendário: ao primeiro mês a diferença era pequena. Isto encaixa com o que se observa na consulta — o efeito do PRP tende a instalar-se ao longo de semanas. Nenhum dos dois reconstrói cartilagem, e a escolha depende do grau de artrose, do padrão de dor e do que já foi tentado.",
+      "refs": ["li2025prpha"]
+    },
+    {
+      "pergunta": "As infiltrações \"regenerativas\" mudam mesmo alguma coisa ao fim de um ano?",
+      "resposta": "Em média sim, mas com uma certeza que convém não exagerar. Uma meta-análise de 2026 reuniu 14 ensaios aleatorizados de terapias biológicas — PRP e terapias com células — todos com pelo menos 12 meses de seguimento: no conjunto houve menos dor e melhor função do que nos comparadores, e alguns estudos descreveram sinais estruturais favoráveis na imagem. Os próprios autores classificam a certeza da evidência como muito baixa, por os protocolos serem muito diferentes entre si e por suspeita de viés de publicação. O que isto significa na prática: o benefício sintomático é plausível e pode durar, a reconstrução de cartilagem destruída continua sem sustentação, e ninguém deve prometer-lhe a segunda coisa para lhe vender a primeira.",
+      "refs": ["oka2026biologicos", "borgstein2026aapmr"]
+    },
+    {
+      "pergunta": "Como sei se a infiltração está a resultar — e quanto tempo devo esperar?",
+      "resposta": "Os três meses são um marco mais informativo do que a maioria das pessoas imagina. Numa análise de 317 participantes de um ensaio aleatorizado de infiltrações com concentrado de medula óssea, células do cordão umbilical ou fracção vascular estromal, o percurso da dor ao longo de 12 meses dividiu-se em dois grupos nítidos: cerca de dois terços melhoraram de forma sustentada e um terço manteve a dor. E a evolução medida aos 3 meses já permitia prever, com razoável fiabilidade, em qual dos dois o doente estava a cair. A leitura útil é dupla: não julgar o resultado nas primeiras semanas, mas também não prolongar indefinidamente um tratamento que aos 3 meses não deu qualquer sinal. Essa reavaliação faz parte do plano e deve ser marcada à partida.",
+      "refs": ["nelson2026trajetorias"]
+    }
+  ]
+}

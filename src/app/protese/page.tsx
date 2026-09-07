@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Script from "next/script";
+import Evidencia from "@/components/Evidencia";
 
 export const metadata: Metadata = {
   "title": "Prótese do Joelho e Desporto — O que pode fazer? | Dr. Nuno Camelo Porto",
@@ -29,8 +30,9 @@ export default function Page() {
   return (
     <>
       <style dangerouslySetInnerHTML={{ __html: css }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd }} />
       <div dangerouslySetInnerHTML={{ __html: html }} />
+      {/* Emite o JSON-LD da página já fundido com as referências e FAQ novas. */}
+      <Evidencia slug="protese" pageUrl="https://www.consultajoelho.pt/protese" baseJsonLd={jsonLd} />
       <Script id="protese-js" strategy="afterInteractive" dangerouslySetInnerHTML={{ __html: pageScript }} />
     </>
   );

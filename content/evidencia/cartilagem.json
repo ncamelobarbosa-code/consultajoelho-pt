@@ -1,0 +1,73 @@
+{
+  "slug": "cartilagem",
+  "atualizado": "2026-09-01",
+  "revistoPor": "Dr. Nuno Camelo",
+  "referencias": [
+    {
+      "id": "snow2026aci10anos",
+      "autores": "Snow M, Middleton L, Mehta S, Roberts A, Richardson J, Kuiper JH.",
+      "titulo": "Ten year follow-up of a randomized trial of autologous chondrocyte implantation versus alternative forms of surgical cartilage management in the knee.",
+      "revista": "Osteoarthritis and Cartilage",
+      "ano": 2026,
+      "tipo": "Ensaio clínico aleatorizado",
+      "pmid": "41833791",
+      "doi": "10.1016/j.joca.2026.03.112",
+      "resumoPt": "Trezentos e noventa doentes entre os 18 e os 55 anos, todos com uma cirurgia anterior à cartilagem que não resultou, seguidos durante 10 anos. O implante de condrócitos autólogos manteve melhor função do joelho do que as alternativas cirúrgicas (7,3 pontos no Lysholm), mas as taxas de falência aos 10 anos foram semelhantes nos dois grupos (29% e 25%). O resultado do implante não foi prejudicado por uma microfractura prévia; o das alternativas foi."
+    },
+    {
+      "id": "altschuler2026aragonite",
+      "autores": "Altschuler N, Zaslav KR, Di Matteo B, Sherman SL, Gomoll AH, Verdonk P, et al.",
+      "titulo": "Five-year follow-up of a multicenter randomized controlled trial comparing an aragonite-based scaffold with microfracture and debridement for chondral and osteochondral knee lesions.",
+      "revista": "The American Journal of Sports Medicine",
+      "ano": 2026,
+      "tipo": "Ensaio clínico aleatorizado",
+      "pmid": "41992573",
+      "doi": "10.1177/03635465261437781",
+      "resumoPt": "Ensaio aleatorizado em 26 centros de 8 países, 251 doentes seguidos 5 anos. O implante de aragonite associou-se a melhor pontuação KOOS do que a microfractura ou o desbridamento (81,0 contra 59,1) e a menos falências (15,0% contra 35,7%). A vantagem manteve-se no subgrupo com artrose ligeira a moderada, habitualmente excluído deste tipo de estudos. Vários autores declaram ligação à indústria do implante."
+    },
+    {
+      "id": "walker2025fragmento",
+      "autores": "Walker PB, Araujo G, Sridharan M, Edogun E, Sheppard WL, Kremen TJ, et al.",
+      "titulo": "Direct fixation of acute chondral-only fragments in young patients.",
+      "revista": "Cartilage",
+      "ano": 2025,
+      "tipo": "Revisão sistemática",
+      "pmid": "40590335",
+      "doi": "10.1177/19476035251351781",
+      "resumoPt": "Dezoito estudos, 76 doentes com idade média de 14,3 anos, em que um fragmento só de cartilagem — sem osso — foi fixado em vez de removido. Cicatrização em 96% dos casos e regresso ao desporto em 86%, em média aos 10,3 meses. São números animadores, mas de estudos pequenos e sem grupo de comparação: os próprios autores pedem ensaios prospectivos."
+    },
+    {
+      "id": "gelber2026bmac",
+      "autores": "Gelber PE, Ramírez-Bermejo E, Caviasso G, Juncosa-Chacón J, Fariñas O.",
+      "titulo": "Bone marrow aspirate concentrate improves the early osseous integration of fresh osteochondral allografts in the knee: a randomized controlled trial.",
+      "revista": "The American Journal of Sports Medicine",
+      "ano": 2026,
+      "tipo": "Ensaio clínico aleatorizado",
+      "pmid": "41992571",
+      "doi": "10.1177/03635465261437779",
+      "resumoPt": "Trinta e seis doentes com aloenxerto osteocondral fresco, aleatorizados a receber ou não concentrado de medula óssea, com TC aos 3, 6 e 12 meses. A integração do osso do enxerto foi melhor aos 3 meses no grupo com medula, mas a diferença desapareceu aos 6 e 12 meses, e não houve qualquer diferença nos resultados clínicos aos 2 anos."
+    }
+  ],
+  "faq": [
+    {
+      "pergunta": "Já fiz uma microfractura que não resultou. O que se pode fazer a seguir?",
+      "resposta": "É uma situação frequente e não é um beco sem saída. Um ensaio aleatorizado com 390 doentes, todos com uma cirurgia de cartilagem anterior falhada, comparou o implante de condrócitos autólogos com as alternativas cirúrgicas habituais e seguiu-os durante 10 anos: o implante manteve melhor função do joelho (cerca de 7 pontos no Lysholm), embora as taxas de falência ao fim de uma década tenham sido semelhantes nos dois grupos. O dado mais útil desse estudo é outro: quem já tinha feito microfractura teve pior resultado com as técnicas alternativas, mas não com o implante de condrócitos. Qual a opção certa no seu caso depende do tamanho e da localização da lesão, do alinhamento da perna e do estado do resto da articulação.",
+      "refs": ["snow2026aci10anos"]
+    },
+    {
+      "pergunta": "Existe algum implante que substitua a cartilagem danificada?",
+      "resposta": "Há andaimes (scaffolds) que se colocam no defeito para que o próprio organismo o preencha, e um deles tem agora resultados a 5 anos. Num ensaio aleatorizado em 26 centros e 8 países, com 251 doentes, um implante à base de aragonite deu melhores pontuações de função e dor do que a microfractura ou o desbridamento (81 contra 59 no KOOS) e menos falências (15% contra 36%), incluindo em doentes que já tinham artrose ligeira a moderada. Duas ressalvas honestas: vários autores do estudo declaram ligação à indústria do implante, e o resultado é de um implante concreto, não de todos os andaimes. É uma opção a discutir em consulta, não uma indicação automática.",
+      "refs": ["altschuler2026aragonite"]
+    },
+    {
+      "pergunta": "Um fragmento de cartilagem que se soltou pode ser colado de volta?",
+      "resposta": "Durante muito tempo assumiu-se que um fragmento só de cartilagem, sem osso agarrado, não tinha capacidade de colar e devia ser removido. A leitura mudou. Uma revisão sistemática de 2025 reuniu 18 estudos e 76 doentes — quase todos adolescentes e adultos jovens — em que esses fragmentos foram fixados: cicatrizaram em 96% dos casos e 86% voltaram ao desporto, em média aos 10 meses. São números pequenos e sem grupo de comparação, por isso valem como sinal e não como prova. O que decide na prática é a rapidez: um fragmento recente, num joelho jovem, tem muito mais hipóteses do que um fragmento antigo.",
+      "refs": ["walker2025fragmento"]
+    },
+    {
+      "pergunta": "Vale a pena juntar concentrado de medula óssea à cirurgia da cartilagem?",
+      "resposta": "A ideia é boa e o resultado, para já, é modesto. Num ensaio aleatorizado de 2026 com 36 doentes submetidos a transplante de aloenxerto osteocondral, acrescentar concentrado de medula óssea melhorou a integração do osso do enxerto na tomografia aos 3 meses — mas essa vantagem já não existia aos 6 nem aos 12 meses, e ao fim de 2 anos não houve qualquer diferença nas queixas ou na função. Por outras palavras: houve um efeito visível na imagem que não se traduziu no que o doente sente. É um estudo pequeno e não fecha a questão, mas não justifica, hoje, apresentar a medula óssea como um extra que muda o resultado.",
+      "refs": ["gelber2026bmac"]
+    }
+  ]
+}
