@@ -1,0 +1,118 @@
+# Motor alternativo do agente de literatura, dentro do GitHub.
+#
+# O motor principal e a tarefa agendada do Cowork, que corre no dia 1 e usa o MCP
+# do PubMed. Este workflow existe como rede de seguranca: se essa sessao nao tiver
+# o repo autorizado (aconteceu em agosto e em setembro de 2026), esta corre a mesma
+# e abre o PR — o GitHub Actions tem sempre escrita no proprio repo.
+#
+# ATIVAR — tres coisas, por esta ordem:
+#   1. Instalar a app do GitHub: https://github.com/apps/claude
+#   2. Definir UM destes segredos em Settings -> Secrets and variables -> Actions:
+#      - CLAUDE_CODE_OAUTH_TOKEN  (usa a subscricao Claude; gera-se com
+#        `claude setup-token`) — preferivel, nao gasta creditos de API
+#      - ANTHROPIC_API_KEY        (chave da Claude Console; e faturada a parte)
+#   3. Fazer merge deste ficheiro para o `main`. O GitHub so corre workflows
+#      agendados a partir do branch por omissao.
+#
+# Sem segredo nenhum o workflow termina em verde sem fazer nada — nao enche o
+# historico de falhas vermelhas todos os meses.
+
+name: Literatura mensal
+
+on:
+  schedule:
+    # 09:00 UTC do dia 2. Um dia depois da tarefa do Cowork, para nao duplicarem.
+    - cron: "0 9 2 * *"
+  workflow_dispatch:
+    inputs:
+      mes:
+        description: "Mes a processar (AAAA-MM). Vazio = mes corrente."
+        required: false
+
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+  # Necessario para a autenticacao da app do GitHub usada pela claude-code-action.
+  id-token: write
+  actions: read
+
+jobs:
+  literatura:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Verificar segredo
+        id: guard
+        env:
+          OAUTH: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          APIKEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: |
+          if [ -n "$OAUTH" ]; then
+            echo "Autenticacao: subscricao (CLAUDE_CODE_OAUTH_TOKEN)."
+            echo "auth=oauth" >> "$GITHUB_OUTPUT"
+          elif [ -n "$APIKEY" ]; then
+            echo "Autenticacao: chave de API (ANTHROPIC_API_KEY)."
+            echo "auth=apikey" >> "$GITHUB_OUTPUT"
+          else
+            echo "Nenhum segredo definido — a saltar. Ver o cabecalho deste ficheiro."
+            echo "auth=none" >> "$GITHUB_OUTPUT"
+          fi
+
+      - uses: actions/setup-node@v4
+        if: steps.guard.outputs.auth != 'none'
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Instalar
+        if: steps.guard.outputs.auth != 'none'
+        run: npm ci
+
+      - name: Rotacao do mes
+        if: steps.guard.outputs.auth != 'none'
+        run: node scripts/lit-rotacao.mjs ${{ inputs.mes }}
+
+      - name: Correr o agente (subscricao)
+        if: steps.guard.outputs.auth == 'oauth'
+        uses: anthropics/claude-code-action@v1
+        with:
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          prompt: |
+            Le AGENTE-LITERATURA.md na raiz do repositorio e executa o runbook
+            mensal por inteiro, do passo 1 ao passo 7.
+
+            Contexto desta execucao: nao ha MCP do PubMed disponivel aqui. Usa a
+            API E-utilities do NCBI directamente por HTTP
+            (https://eutils.ncbi.nlm.nih.gov/entrez/eutils/) — esearch para os
+            PMIDs, efetch com retmode=xml para os metadados. Todo o resto do
+            runbook aplica-se sem alteracao, incluindo os filtros de rejeicao.
+
+            No fim, cria o branch literatura/AAAA-MM, faz push e abre o PR com o
+            gh CLI. NAO facas merge.
+          claude_args: |
+            --max-turns 60
+            --allowedTools "Bash,Read,Write,Edit,Glob,Grep,WebFetch"
+
+      - name: Correr o agente (chave de API)
+        if: steps.guard.outputs.auth == 'apikey'
+        uses: anthropics/claude-code-action@v1
+        with:
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          prompt: |
+            Le AGENTE-LITERATURA.md na raiz do repositorio e executa o runbook
+            mensal por inteiro, do passo 1 ao passo 7.
+
+            Contexto desta execucao: nao ha MCP do PubMed disponivel aqui. Usa a
+            API E-utilities do NCBI directamente por HTTP
+            (https://eutils.ncbi.nlm.nih.gov/entrez/eutils/) — esearch para os
+            PMIDs, efetch com retmode=xml para os metadados. Todo o resto do
+            runbook aplica-se sem alteracao, incluindo os filtros de rejeicao.
+
+            No fim, cria o branch literatura/AAAA-MM, faz push e abre o PR com o
+            gh CLI. NAO facas merge.
+          claude_args: |
+            --max-turns 60
+            --allowedTools "Bash,Read,Write,Edit,Glob,Grep,WebFetch"
