@@ -17,14 +17,22 @@ const securityHeaders = [
 // Slugs antigos (scraped) -> novos (design portado). 301 permanentes para preservar SEO.
 const slugRedirects: Record<string, string> = {
   ligamentocruzadoanterior: "lca",
-  "ligamentocruzadoanterioranteriorjoelho-drnunocamelo": "lca",
+  "ligamentocruzadoanteriorjoelho-drnunocamelo": "lca",
   ligamentocruzadoanteriorjoelho: "lca",
   ligamentocruzadoanteriordrnunocamelo: "lca",
   cartilagemjoelhodrnunocamelo: "cartilagem",
+  cartilagemjoelho: "cartilagem",
   meniscosnojoelho: "menisco",
   protesejoelhodesportodrnunocamelo: "protese",
+  protesejoelhodesporto: "protese",
   quistobakerjoelhodrnunocamelo: "quisto-baker",
+  quistobakerjoelho: "quisto-baker",
   quistosparameniscaisjoelho: "quistos-parameniscais",
+  // Gémeos Wix mortos -> páginas vivas (que ficam no slug antigo, mas rankeiam bem)
+  liquidojoelho: "liquidojoelho-artrocentese-drnunocamelo",
+  "liquidojoelho-artrocentese": "liquidojoelho-artrocentese-drnunocamelo",
+  "tendao-rotuliano-tendinite": "tendao-rotuliano-tendinite-drnunocamelo",
+  entorsejoelho: "entorsejoelho-drnunocamelo",
   sindromebandailiotibialjoelho: "sindrome-banda-iliotibial",
   luxacaorotulajoelho: "luxacao-rotula",
   quadricepsjoelho: "quadriceps",
@@ -61,8 +69,14 @@ const nextConfig: NextConfig = {
       out.push({ source: `/en/${from}`, destination: `/en/${to}`, permanent: true });
       out.push({ source: `/ru/${from}`, destination: `/ru/${to}`, permanent: true });
     }
-    // Páginas de serviço do Wix (marcação) -> contacto
-    out.push({ source: "/service-page/:rest*", destination: "/contacto", permanent: true });
+    // Páginas de serviço do Wix (marcação) -> página única de marcação (evita cadeia 301->301 via /contacto)
+    out.push({ source: "/service-page/:rest*", destination: "/marcar-consulta", permanent: true });
+    // Duplicados acidentais do editor Wix ("cópia-...") indexados pelo Google
+    out.push({ source: "/cópia-medo-da-cirurgia-do-joelho", destination: "/medo-cirurgia", permanent: true });
+    out.push({ source: "/en/cópia-síndrome-da-banda-iliotibial", destination: "/en/sindrome-banda-iliotibial", permanent: true });
+    // Resíduo de templates Wix e página de ombro num site de joelho
+    out.push({ source: "/services-5", destination: "/", permanent: true });
+    out.push({ source: "/rotura-do-labrum-do-ombro", destination: "/", permanent: true });
     return out;
   },
   async headers() {

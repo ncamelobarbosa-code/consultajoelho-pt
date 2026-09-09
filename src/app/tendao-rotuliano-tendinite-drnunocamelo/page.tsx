@@ -13,6 +13,9 @@ export const metadata = {
       "x-default": "https://www.consultajoelho.pt/tendao-rotuliano-tendinite-drnunocamelo",
     },
   },
+  title: "Tendinite Rotuliana (Joelho do Saltador) | Dr. Nuno Camelo",
+  description:
+    "Tendinite rotuliana (joelho do saltador): causas, sintomas e tratamento com exercício de carga progressiva e PRP. Dr. Nuno Camelo, joelho no Porto.",
 };
 
 const NOTICE = {

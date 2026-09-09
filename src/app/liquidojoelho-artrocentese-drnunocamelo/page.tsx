@@ -13,6 +13,9 @@ export const metadata = {
       "x-default": "https://www.consultajoelho.pt/liquidojoelho-artrocentese-drnunocamelo",
     },
   },
+  title: "Líquido no Joelho e Artrocentese | Dr. Nuno Camelo Porto",
+  description:
+    "Líquido no joelho (derrame articular): porque acontece, quando é preciso drenar e como se faz a artrocentese. Dr. Nuno Camelo, joelho no Porto.",
 };
 
 export default function Page() {
