@@ -1,5 +1,6 @@
 import * as cheerio from "cheerio";
 import { readFile, writeFile, mkdir } from "node:fs/promises";
+import { existsSync, readdirSync } from "node:fs";
 
 const SRC = "/Users/nunocamelobarbosa/Desktop/ConsultaJoelho Vercel";
 const APP = "src/app";
@@ -157,15 +158,25 @@ const BOOK_HREF = { pt: "/marcar-consulta", en: "/en/marcar-consulta", ru: "/ru/
 const PRICING_FAQ = {
   pt: {
     q: "Quanto custa a cirurgia ao joelho?",
-    a: `O custo depende da via de tratamento. <strong>SIGIC (SNS):</strong> através do vale de cirurgia, a cirurgia é totalmente comparticipada — sem custo para o doente. <strong>Seguros e subsistemas de saúde:</strong> cirurgia convencionada, conforme o seu plano. <strong>Particular:</strong> orçamento personalizado — a título indicativo, a partir de €3.000 na artroscopia (menisco, ligamentos ou cartilagem), a partir de €4.000 na reconstrução do ligamento cruzado anterior (LCA) e a partir de €8.000 na prótese do joelho. Os valores finais dependem do caso clínico, do hospital e dos implantes. Para um orçamento certo, <a href="${BOOK_HREF.pt}">marque uma consulta</a> ou veja <a href="${PRICE_HREF.pt}">preços e orçamentos</a>.`,
+    a: `O custo depende da via de tratamento. <strong>SIGIC (SNS):</strong> através do vale de cirurgia, a cirurgia é totalmente comparticipada — sem custo para o doente. <strong>Seguros e subsistemas de saúde:</strong> cirurgia convencionada, conforme o seu plano. <strong>Particular:</strong> orçamento personalizado — a título indicativo, a partir de €3.000 na artroscopia (menisco, ligamentos ou cartilagem, incluindo a reconstrução do ligamento cruzado anterior) e a partir de €8.000 na prótese do joelho. Os valores finais dependem do caso clínico, do hospital e dos implantes. Para um orçamento certo, <a href="${BOOK_HREF.pt}">marque uma consulta</a> ou veja <a href="${PRICE_HREF.pt}">preços e orçamentos</a>.`,
   },
   en: {
     q: "How much does knee surgery cost?",
-    a: `The cost depends on the treatment pathway. <strong>SIGIC (Portuguese NHS):</strong> with a surgery voucher, the procedure is fully covered — no cost to the patient. <strong>Health insurance / subsystems:</strong> contracted surgery, according to your plan. <strong>Private:</strong> a personalised quote — as a guide, from €3,000 for arthroscopy (meniscus, ligaments or cartilage), from €4,000 for anterior cruciate ligament (ACL) reconstruction and from €8,000 for knee replacement. Final prices depend on the clinical case, hospital and implants. For an exact quote, <a href="${BOOK_HREF.en}">book an appointment</a> or see <a href="${PRICE_HREF.en}">prices &amp; quotes</a>.`,
+    a: `The cost depends on the treatment pathway. <strong>SIGIC (Portuguese NHS):</strong> with a surgery voucher, the procedure is fully covered — no cost to the patient. <strong>Health insurance / subsystems:</strong> contracted surgery, according to your plan. <strong>Private:</strong> a personalised quote — as a guide, from €3,000 for arthroscopy (meniscus, ligaments or cartilage, including anterior cruciate ligament reconstruction) and from €8,000 for knee replacement. Final prices depend on the clinical case, hospital and implants. For an exact quote, <a href="${BOOK_HREF.en}">book an appointment</a> or see <a href="${PRICE_HREF.en}">prices &amp; quotes</a>.`,
   },
   ru: {
     q: "Сколько стоит операция на колене?",
-    a: `Стоимость зависит от способа лечения. <strong>SIGIC (гос. система Португалии):</strong> по хирургическому талону операция полностью покрывается — без затрат для пациента. <strong>Страховки и субсистемы:</strong> операция по договору, согласно вашему плану. <strong>Частно:</strong> индивидуальная смета — ориентировочно от €3 000 за артроскопию (мениск, связки или хрящ), от €4 000 за реконструкцию передней крестообразной связки (ПКС) и от €8 000 за эндопротезирование колена. Итоговая стоимость зависит от случая, больницы и имплантатов. Для точной сметы <a href="${BOOK_HREF.ru}">запишитесь на приём</a> или смотрите <a href="${PRICE_HREF.ru}">цены и сметы</a>.`,
+    a: `Стоимость зависит от способа лечения. <strong>SIGIC (гос. система Португалии):</strong> по хирургическому талону операция полностью покрывается — без затрат для пациента. <strong>Страховки и субсистемы:</strong> операция по договору, согласно вашему плану. <strong>Частно:</strong> индивидуальная смета — ориентировочно от €3 000 за артроскопию (мениск, связки или хрящ, включая реконструкцию передней крестообразной связки) и от €8 000 за эндопротезирование колена. Итоговая стоимость зависит от случая, больницы и имплантатов. Для точной сметы <a href="${BOOK_HREF.ru}">запишитесь на приём</a> или смотрите <a href="${PRICE_HREF.ru}">цены и сметы</a>.`,
+  },
+};
+
+// Override da FAQ de preço quando o valor é específico da patologia (substitui a PRICING_FAQ genérica nessa página).
+const PRICING_FAQ_OVERRIDE = {
+  lca: {
+    pt: {
+      q: "Quanto custa a cirurgia ao ligamento cruzado?",
+      a: `Como doente particular, a reconstrução do LCA começa nos €3.000. O valor final depende dos gestos associados — <a href="/menisco">reparação do menisco</a>, tratamento de lesão da cartilagem ou reforço anterolateral —, do tipo de implantes e do regime de internamento. Com seguro de saúde, a maior parte do custo é comparticipada mediante pré-autorização prévia. E se estiver inscrito em lista de espera do SNS acima do tempo garantido, pode ser operado sem qualquer custo através de <a href="/sigic">vale cirurgia (SIGIC)</a>.`,
+    },
   },
 };
 
@@ -206,7 +217,8 @@ const EXTRA_FAQ = {
 function addFaqs($x, seg, locale) {
   // infiltrações tem a sua própria FAQ de preço (por injeção) e usa outro toggle -> não juntar a de cirurgia.
   const extra = (EXTRA_FAQ[seg] && EXTRA_FAQ[seg][locale]) || [];
-  const items = seg === "infiltracoes" ? extra : [...extra, PRICING_FAQ[locale]];
+  const priceFaq = (PRICING_FAQ_OVERRIDE[seg] && PRICING_FAQ_OVERRIDE[seg][locale]) || PRICING_FAQ[locale];
+  const items = seg === "infiltracoes" ? extra : [...extra, priceFaq];
   if (!items.length) return;
   const section = $x(".faq-section").first();
   if (section.length) {
@@ -371,9 +383,21 @@ function buildMetadata($) {
 // slugs (página PT) que têm secção de vídeo (ver src/lib/videos.ts PAGE_VIDEOS)
 const VIDEO_PAGE_SLUGS = new Set(["lca", "menisco", "cartilagem", "quadriceps"]);
 
+// slugs (página PT) com camada de evidência científica (content/evidencia/<slug>.json).
+// O componente Evidencia funde a FAQ de literatura no @graph e re-emite o JSON-LD final.
+const EVIDENCIA_SLUGS = new Set(
+  existsSync("content/evidencia")
+    ? readdirSync("content/evidencia").filter((f) => f.endsWith(".json")).map((f) => f.replace(/\.json$/, ""))
+    : []
+);
+
 const pageTemplate = (meta, css, jsonld, body, script, id, slug = "", locale = "pt") => {
   const hasVideos = VIDEO_PAGE_SLUGS.has(slug);
-  return `import type { Metadata } from "next";${script ? `\nimport Script from "next/script";` : ""}${hasVideos ? `\nimport PageVideos from "@/components/PageVideos";` : ""}
+  // Só em PT: o componente Evidencia funde a FAQ de literatura no jsonLd e re-emite o <script>.
+  // Quando presente NÃO se imprime o <script> cru (senão ficavam dois nós FAQPage na página).
+  const hasEvidencia = locale === "pt" && !!jsonld && EVIDENCIA_SLUGS.has(slug);
+  const pageUrl = `https://www.consultajoelho.pt/${slug}`;
+  return `import type { Metadata } from "next";${script ? `\nimport Script from "next/script";` : ""}${hasVideos ? `\nimport PageVideos from "@/components/PageVideos";` : ""}${hasEvidencia ? `\nimport Evidencia from "@/components/Evidencia";` : ""}
 
 export const metadata: Metadata = ${JSON.stringify(meta, null, 2)};
 
@@ -383,8 +407,8 @@ const html = ${JSON.stringify(body)};${jsonld ? `\nconst jsonLd = ${JSON.stringi
 export default function Page() {
   return (
     <>
-      <style dangerouslySetInnerHTML={{ __html: css }} />${jsonld ? `\n      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd }} />` : ""}
-      <div dangerouslySetInnerHTML={{ __html: html }} />${hasVideos ? `\n      <PageVideos slug="${slug}" lang="${locale}" />` : ""}${script ? `\n      <Script id="${id}-js" strategy="afterInteractive" dangerouslySetInnerHTML={{ __html: pageScript }} />` : ""}
+      <style dangerouslySetInnerHTML={{ __html: css }} />${!hasEvidencia && jsonld ? `\n      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd }} />` : ""}
+      <div dangerouslySetInnerHTML={{ __html: html }} />${hasEvidencia ? `\n      <Evidencia slug="${slug}" pageUrl="${pageUrl}" baseJsonLd={jsonLd} />` : ""}${hasVideos ? `\n      <PageVideos slug="${slug}" lang="${locale}" />` : ""}${script ? `\n      <Script id="${id}-js" strategy="afterInteractive" dangerouslySetInnerHTML={{ __html: pageScript }} />` : ""}
     </>
   );
 }
