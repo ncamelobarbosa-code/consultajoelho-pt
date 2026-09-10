@@ -175,7 +175,7 @@ const PRICING_FAQ_OVERRIDE = {
   lca: {
     pt: {
       q: "Quanto custa a cirurgia ao ligamento cruzado?",
-      a: `Como doente particular, a reconstrução do LCA começa nos €3.000. O valor final depende dos gestos associados — <a href="/menisco">reparação do menisco</a>, tratamento de lesão da cartilagem ou reforço anterolateral —, do tipo de implantes e do regime de internamento. Com seguro de saúde, a maior parte do custo é comparticipada mediante pré-autorização prévia. E se estiver inscrito em lista de espera do SNS acima do tempo garantido, pode ser operado sem qualquer custo através de <a href="/sigic">vale cirurgia (SIGIC)</a>.`,
+      a: `Como doente particular, a reconstrução do LCA começa nos €3.000. Este valor inclui habitualmente a estadia em ambulatório, o material de consumo básico do bloco operatório e o material necessário à realização da ligamentoplastia. Não inclui o material específico para tratar lesões associadas — como a <a href="/menisco">reparação do menisco</a> ou o tratamento de lesões da cartilagem —, que, a existirem, acrescem ao valor. O custo final depende ainda do tipo de implantes e do regime de internamento. Com seguro de saúde, a maior parte é comparticipada mediante pré-autorização prévia; e se estiver inscrito em lista de espera do SNS acima do tempo garantido, pode ser operado sem qualquer custo através de <a href="/sigic">vale cirurgia (SIGIC)</a>.`,
     },
   },
 };
