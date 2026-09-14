@@ -20,6 +20,12 @@ const HORARIO: Record<number, { manha?: string; tarde?: string }> = {
 
 const DIAS_NOME = ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'];
 
+// Hora fixa mostrada ao doente por período (espelha HORAS em MarcarConsultaClient.tsx).
+const HORA_POR_PERIODO: Record<'manha' | 'tarde', string> = {
+  manha: '11h00',
+  tarde: '15h00',
+};
+
 // Calcular o dia da semana de forma determinística (UTC ao meio-dia evita
 // deslizes de fuso: no Vercel o servidor corre em UTC).
 function weekdayOf(dataISO: string): number {
@@ -144,7 +150,7 @@ export async function POST(req: NextRequest) {
 
     await sheets.spreadsheets.values.append({
       spreadsheetId: SHEET_ID,
-      range: `${SHEET_TAB}!A:N`,
+      range: `${SHEET_TAB}!A:O`,
       valueInputOption: 'USER_ENTERED',
       requestBody: {
         values: [[
@@ -162,11 +168,12 @@ export async function POST(req: NextRequest) {
           'Confirmado',               // L Status
           'FALSE',                    // M Notificado_Secretaria (o Make trata)
           dataNascimento,             // N Data_Nascimento (coluna nova; não altera índices 0-12 do Make)
+          HORA_POR_PERIODO[periodo],  // O Hora
         ]],
       },
     });
 
-    return NextResponse.json({ success: true, local, diaSemana, periodo, data: dataFormatada });
+    return NextResponse.json({ success: true, local, diaSemana, periodo, data: dataFormatada, hora: HORA_POR_PERIODO[periodo] });
   } catch (e) {
     const msg = e instanceof Error ? e.message : 'Erro desconhecido.';
     console.error('[marcar-consulta] sheets', msg);
