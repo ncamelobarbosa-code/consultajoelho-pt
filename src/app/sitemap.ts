@@ -12,6 +12,7 @@ const routes = [
   "menisco",
   "protese",
   "artrose",
+  "anti-inflamatorios",
   "quisto-baker",
   "quistos-parameniscais",
   "sindrome-banda-iliotibial",

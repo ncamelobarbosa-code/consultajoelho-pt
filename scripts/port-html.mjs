@@ -15,6 +15,7 @@ const ROUTES = {
   "menisco_rotura.html": "menisco",
   "protese_joelho_desporto.html": "protese",
   "artrose_gonartrose.html": "artrose",
+  "anti_inflamatorios_joelho.html": "anti-inflamatorios",
   "quisto_baker.html": "quisto-baker",
   "quistos_parameniscais.html": "quistos-parameniscais",
   "sindrome_banda_iliotibial.html": "sindrome-banda-iliotibial",
