@@ -49,6 +49,8 @@ const slugRedirects: Record<string, string> = {
   contacto: "marcar-consulta",
   agendar: "marcar-consulta",
   "nuno-camelo-cirurgia-joelho": "nuno-camelo-especialista-cirurgia-joelho",
+  // Slug inicial do Velys -> slug definitivo da cirurgia robótica
+  velys: "roboticajoelho",
 };
 
 const nextConfig: NextConfig = {
