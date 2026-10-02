@@ -11,6 +11,7 @@ const routes = [
   "lca",
   "menisco",
   "protese",
+  "velys",
   "artrose",
   "anti-inflamatorios",
   "quisto-baker",

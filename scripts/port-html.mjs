@@ -14,6 +14,7 @@ const ROUTES = {
   "lca_ligamento_cruzado_anterior.html": "lca",
   "menisco_rotura.html": "menisco",
   "protese_joelho_desporto.html": "protese",
+  "velys_cirurgia_robotica_joelho.html": "velys",
   "artrose_gonartrose.html": "artrose",
   "anti_inflamatorios_joelho.html": "anti-inflamatorios",
   "quisto_baker.html": "quisto-baker",
@@ -525,6 +526,7 @@ function applyMetaDesc(meta, seg, locale) {
 const HERO_IMAGES = {
   lca: "/img/hero/lca.jpg",
   protese: "/img/hero/protese.jpg",
+  velys: "/img/hero/velys.jpg",
   "recuperar-cirurgia": "/img/hero/recuperar.jpg",
   cartilagem: "/img/hero/cartilagem.jpg",
   avaliar: "/img/hero/avaliar.jpg",
