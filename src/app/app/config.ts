@@ -1,15 +1,18 @@
 // Configuração da PWA /app (acompanhamento pós-operatório).
 // Fonte: "app-textos-e-especificacao.md" e "followup-v2-make.md" (projeto Consultajoelho.pt).
 
-// Texto obrigatório — não alterar sem validação do Dr. Nuno Camelo Barbosa.
-export const AVISO_SEGURANCA =
-  "Esta app não é monitorizada em tempo real. Se tiver febre, dor intensa que não cede à medicação, ferida a abrir ou com pus, ou dor/inchaço na barriga da perna, contacte WhatsApp +351 912 188 800. Se não conseguir contactar o seu médico assistente, dirija-se ao serviço de urgência do hospital da sua área de residência (SNS 24: 808 24 24 24; emergência: 112).";
+// Aviso de segurança — não alterar sem validação do Dr. Nuno Camelo Barbosa.
+// Mostrado de forma discreta no fim da página (pedido do Dr. Nuno).
+export const AVISO_INTRO =
+  "Esta app não é monitorizada em tempo real. Se tiver febre, dor intensa que não cede à medicação, ferida a abrir ou com pus, ou dor/inchaço na barriga da perna:";
+export const HOSPITAIS = ["Hospital Lusíadas Porto", "Hospital da Misericórdia de Vila do Conde"] as const;
 
 export const WHATSAPP_HREF = "https://wa.me/351912188800";
 export const WHATSAPP_LABEL = "+351 912 188 800";
 export const EMAIL = "joelho@consultajoelho.pt";
 
-export const CODIGO_RE = /^NC-[0-9A-F]{6}$/;
+export const CODIGO_PREFIXO = "CJ";
+export const CODIGO_RE = /^CJ-[0-9A-F]{6}$/;
 export const CODIGO_STORAGE_KEY = "cj-app-codigo";
 
 // Google Forms — só o campo Código é pré-preenchido.
@@ -28,3 +31,12 @@ export function formUrl(pub: string, entry: string, codigo: string): string {
 export const VAS_WEBHOOK = "https://hook.eu1.make.com/taefgvviwv0b8icvmued7plncq8r0yn8";
 
 export const GOOGLE_REVIEW_HREF = "https://share.google/6QUpHEnfGKhNEjRc7";
+
+// Páginas do site para os botões "Saiba mais".
+export const SAIBA_MAIS = {
+  codigo: "/privacidade",
+  medicacao: "/anti-inflamatorios",
+  recuperacao: "/recuperar-cirurgia",
+  quadricipite: "/quadriceps",
+  questionarios: "/actividadecientificajoelho",
+} as const;

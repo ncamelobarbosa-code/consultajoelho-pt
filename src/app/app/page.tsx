@@ -1,7 +1,8 @@
 import type { Metadata, Viewport } from "next";
 import AppClient from "./AppClient";
-import { AVISO_SEGURANCA, EMAIL, WHATSAPP_HREF, WHATSAPP_LABEL } from "./config";
-import { IconAlert, IconChat, IconMail } from "./icons";
+import { AVISO_INTRO, EMAIL, HOSPITAIS, SAIBA_MAIS, WHATSAPP_HREF, WHATSAPP_LABEL } from "./config";
+import { IconAlert, IconChat, IconMail, IconPill, IconSnow, IconMuscle } from "./icons";
+import SaibaMais from "./SaibaMais";
 
 // PWA de acompanhamento pós-operatório. Não indexada, fora do sitemap,
 // sem analytics nem cookies (o layout esconde o chrome do site nesta rota).
@@ -49,19 +50,6 @@ const css = `
 .cjapp-brand{font-weight:700;font-size:1.2rem;letter-spacing:-0.01em;line-height:1.2;}
 .cjapp-brand span{color:var(--sage);}
 .cjapp-sub{font-size:.98rem;opacity:.9;margin:.15rem 0 0;line-height:1.35;}
-
-/* Faixa de urgência */
-.cjapp-urgente{position:sticky;top:0;z-index:10;background:rgba(255,244,214,.96);backdrop-filter:saturate(1.4) blur(6px);
-  -webkit-backdrop-filter:saturate(1.4) blur(6px);border-bottom:1px solid #e9c36b;color:var(--warn-ink);font-size:1rem;
-  box-shadow:0 2px 10px rgba(122,79,0,.08);}
-.cjapp-urgente .cjapp-wrap{display:flex;align-items:center;gap:.4rem;min-height:52px;flex-wrap:wrap;}
-.cjapp-urgente strong{display:flex;align-items:center;gap:.4rem;margin-right:.2rem;}
-.cjapp-pill{display:inline-flex;align-items:center;min-height:36px;padding:0 .8rem;border-radius:999px;
-  background:#fff;border:1.5px solid #e2b85a;color:var(--warn-ink);font-weight:700;text-decoration:none;
-  transition:background .2s var(--ease),transform .15s var(--ease);}
-.cjapp-pill:hover{background:#fffaf0;}
-.cjapp-pill:active{transform:scale(.96);}
-.cjapp-urgente .cjapp-ler{margin-left:auto;color:var(--warn-ink);font-weight:600;text-decoration:underline;text-underline-offset:3px;padding:.4rem 0;}
 
 /* Cartões */
 .cjapp-main{padding-top:1.1rem;}
@@ -146,13 +134,38 @@ const css = `
 .cjapp-done circle{fill:#1d5c2e;}
 .cjapp-done path{fill:none;stroke:#fff;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:24;stroke-dashoffset:0;}
 
-/* Aviso completo */
-.cjapp-aviso{scroll-margin-top:72px;background:var(--warn-bg);border:2px solid #d9a63a;border-radius:20px;padding:1.15rem 1.2rem;margin:0 0 1rem;color:var(--warn-ink);}
-.cjapp-aviso .cjapp-head{margin-bottom:.5rem;}
-.cjapp-aviso .cjapp-ico{background:#fde7a8;color:var(--warn);}
-.cjapp-aviso h2{font-size:1.2rem;margin:0;color:var(--warn-ink);font-weight:700;}
-.cjapp-aviso p{margin:0;font-size:1.05rem;line-height:1.6;}
-.cjapp-aviso:target{animation:cjapp-pulse 1.2s var(--ease) 1;}
+/* Saiba mais */
+.cjapp-mais{display:inline-flex;align-items:center;gap:.35rem;margin-top:.9rem;padding:.45rem .85rem;min-height:44px;border-radius:999px;
+  background:var(--teal-soft);color:var(--teal);font-weight:600;font-size:.98rem;text-decoration:none;
+  transition:background-color .2s var(--ease),transform .15s var(--ease);}
+.cjapp-mais:hover{background:#d6e8ec;}
+.cjapp-mais:active{transform:scale(.97);}
+.cjapp-mais svg{transition:transform .2s var(--ease);}
+.cjapp-mais:hover svg{transform:translate(2px,-2px);}
+
+/* Medicação */
+.cjapp-meds{list-style:none;margin:.4rem 0 0;padding:0;display:grid;gap:.55rem;}
+.cjapp-meds li{border:1px solid var(--border);border-left:4px solid var(--teal);border-radius:12px;padding:.7rem .9rem;background:#fbfdfb;}
+.cjapp-meds li.sos{border-left-color:#a15c00;}
+.cjapp-meds b{display:block;font-size:1.1rem;}
+.cjapp-meds li > span{display:block;color:var(--muted);font-size:1rem;line-height:1.45;}
+.cjapp-tag{display:inline-block;font-size:.8rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;border-radius:999px;padding:.1rem .55rem;margin-left:.4rem;vertical-align:middle;background:#fdebd3;color:#7a4f00;}
+.cjapp-nota{color:var(--muted);font-size:1rem;margin:.8rem 0 0 !important;}
+.cjapp-nota a{color:var(--teal);font-weight:600;}
+
+/* Quadricípite (destaque) */
+.cjapp-destaque{background:linear-gradient(160deg,#ffffff 0%,var(--sage-soft) 100%);border:2px solid var(--sage);}
+.cjapp-destaque .cjapp-ico{background:var(--teal);color:#fff;}
+.cjapp-kicker{display:inline-block;font-size:.82rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#1d5c2e;margin-bottom:.35rem;}
+
+/* Urgência (discreto, no fim) */
+.cjapp-urg{scroll-margin-top:16px;border:1px solid var(--border);border-radius:16px;padding:1rem 1.1rem;margin:0 0 1rem;background:transparent;color:var(--muted);font-size:1rem;}
+.cjapp-urg h2{display:flex;align-items:center;gap:.45rem;font-size:1.05rem;color:var(--text);margin:0 0 .4rem;font-weight:700;}
+.cjapp-urg h2 svg{color:#7a4f00;}
+.cjapp-urg p{margin:0 0 .5rem;line-height:1.5;}
+.cjapp-urg ol{list-style:decimal;margin:0;padding-left:1.4rem;display:grid;gap:.35rem;line-height:1.5;}
+.cjapp-urg a{color:var(--teal);font-weight:600;white-space:nowrap;}
+.cjapp-urg:target{animation:cjapp-pulse 1.2s var(--ease) 1;}
 
 /* Rodapé */
 .cjapp-foot{text-align:center;font-size:1rem;color:var(--muted);margin-top:1.75rem;}
@@ -166,14 +179,14 @@ const css = `
 @keyframes cjapp-pop{0%{transform:scale(.6);opacity:0;}70%{transform:scale(1.08);opacity:1;}100%{transform:scale(1);}}
 @keyframes cjapp-draw{from{stroke-dashoffset:24;}to{stroke-dashoffset:0;}}
 @keyframes cjapp-shake{0%,100%{transform:none;}25%{transform:translateX(-5px);}75%{transform:translateX(5px);}}
-@keyframes cjapp-pulse{0%{box-shadow:0 0 0 0 rgba(217,166,58,.55);}100%{box-shadow:0 0 0 16px rgba(217,166,58,0);}}
+@keyframes cjapp-pulse{0%{box-shadow:0 0 0 0 rgba(3,87,114,.35);}100%{box-shadow:0 0 0 16px rgba(217,166,58,0);}}
 @media (prefers-reduced-motion: no-preference){
   .cjapp-main > *{animation:cjapp-up .5s var(--ease) both;}
   .cjapp-main > *:nth-child(2){animation-delay:.06s;}
   .cjapp-main > *:nth-child(3){animation-delay:.12s;}
   .cjapp-main > *:nth-child(4){animation-delay:.18s;}
   .cjapp-main > *:nth-child(5){animation-delay:.24s;}
-  .cjapp-main > *:nth-child(6){animation-delay:.3s;}
+  .cjapp-main > *:nth-child(n+6){animation-delay:.3s;}
   .cjapp-swap{animation:cjapp-fade .35s var(--ease) both;}
   .cjapp-codebox .cjapp-tick,.cjapp-done svg{animation:cjapp-pop .45s var(--ease) both;}
   .cjapp-done path{animation:cjapp-draw .4s .2s var(--ease) both;}
@@ -205,19 +218,8 @@ export default function AppPage() {
         </div>
       </header>
 
-      <div className="cjapp-urgente" role="note" aria-label="Contacto urgente">
-        <div className="cjapp-wrap">
-          <strong>
-            <IconAlert size={20} /> Urgente?
-          </strong>
-          <a className="cjapp-pill" href={WHATSAPP_HREF} rel="noopener noreferrer" target="_blank">WhatsApp</a>
-          <a className="cjapp-pill" href="tel:112">112</a>
-          <a className="cjapp-ler" href="#cjapp-aviso">Ler aviso</a>
-        </div>
-      </div>
-
       <div className="cjapp-wrap cjapp-main">
-        <AppClient />
+        <AppClient info={<InfoCards />} />
 
         <section className="cjapp-card" aria-labelledby="cjapp-contactos">
           <div className="cjapp-head">
@@ -232,12 +234,21 @@ export default function AppPage() {
           </a>
         </section>
 
-        <section id="cjapp-aviso" className="cjapp-aviso" role="note" aria-labelledby="cjapp-aviso-t">
-          <div className="cjapp-head">
-            <span className="cjapp-ico"><IconAlert /></span>
-            <h2 id="cjapp-aviso-t">Aviso de segurança</h2>
-          </div>
-          <p>{AVISO_SEGURANCA}</p>
+        <section id="cjapp-urgencia" className="cjapp-urg" aria-labelledby="cjapp-urg-t">
+          <h2 id="cjapp-urg-t">
+            <IconAlert size={18} /> Em caso de urgência
+          </h2>
+          <p>{AVISO_INTRO}</p>
+          <ol>
+            <li>
+              Contacte o seu médico pelo{" "}
+              <a href={WHATSAPP_HREF} rel="noopener noreferrer" target="_blank">WhatsApp {WHATSAPP_LABEL}</a>.
+            </li>
+            <li>Se não conseguir, dirija-se à urgência do hospital onde foi operado: {HOSPITAIS.join(" ou ")}.</li>
+            <li>
+              Emergência: <a href="tel:112">112</a> · SNS 24: <a href="tel:+351808242424">808 24 24 24</a>.
+            </li>
+          </ol>
         </section>
 
         <footer className="cjapp-foot">
@@ -249,5 +260,80 @@ export default function AppPage() {
         </footer>
       </div>
     </main>
+  );
+}
+
+// Cartões informativos (estáticos, legíveis offline). Esquema habitual do Dr. Nuno Camelo Barbosa.
+function InfoCards() {
+  return (
+    <>
+      <section className="cjapp-card" aria-labelledby="cjapp-med">
+        <div className="cjapp-head">
+          <span className="cjapp-ico"><IconPill /></span>
+          <h2 id="cjapp-med">Medicação após a cirurgia</h2>
+        </div>
+        <p className="cjapp-muted">
+          Este é o esquema habitual. Siga sempre a receita e as indicações da sua alta: podem ser diferentes em caso de
+          alergias, intolerâncias ou outras doenças.
+        </p>
+        <ul className="cjapp-meds">
+          <li>
+            <b>Paracetamol 1 g</b>
+            <span>1 comprimido de 8 em 8 horas, até acabar a caixa.</span>
+          </li>
+          <li>
+            <b>Etoricoxib</b>
+            <span>1 comprimido por dia, até acabar a caixa.</span>
+          </li>
+          <li>
+            <b>Vitamina C 1 g</b>
+            <span>1 por dia, até acabar a caixa.</span>
+          </li>
+          <li className="sos">
+            <b>
+              Tapentadol 50 mg <span className="cjapp-tag">SOS</span>
+            </b>
+            <span>Se tiver dor: 1 comprimido depois do jantar ou de 12 em 12 horas.</span>
+          </li>
+          <li>
+            <b>Enoxaparina 40 mg</b>
+            <span>1 injeção por dia durante 1 mês, para prevenir tromboses. A dose depende do peso: use a que lhe foi receitada.</span>
+          </li>
+        </ul>
+        <SaibaMais href={SAIBA_MAIS.medicacao}>anti-inflamatórios</SaibaMais>
+      </section>
+
+      <section className="cjapp-card cjapp-destaque" aria-labelledby="cjapp-quad">
+        <div className="cjapp-head">
+          <span className="cjapp-ico"><IconMuscle /></span>
+          <h2 id="cjapp-quad">Quadricípite: o mais importante</h2>
+        </div>
+        <span className="cjapp-kicker">Comece desde os primeiros dias</span>
+        <p>
+          Faça os <strong>exercícios isométricos do quadricípite</strong>: contrair a coxa com a perna esticada, sem
+          dobrar o joelho, como lhe foi ensinado.
+        </p>
+        <p style={{ marginBottom: 0 }}>
+          Evitam a <strong>inibição muscular artrogénica (AMI)</strong>, quando o músculo &quot;desliga&quot; depois da
+          cirurgia e deixa de responder. Um quadricípite ativo é a base de toda a recuperação.
+        </p>
+        <SaibaMais href={SAIBA_MAIS.quadricipite}>quadricípite e AMI</SaibaMais>
+      </section>
+
+      <section className="cjapp-card" aria-labelledby="cjapp-frio">
+        <div className="cjapp-head">
+          <span className="cjapp-ico"><IconSnow /></span>
+          <h2 id="cjapp-frio">Gelo e compressão</h2>
+        </div>
+        <p>
+          Faça <strong>crioterapia 3 a 4 vezes por dia</strong>.
+        </p>
+        <p style={{ marginBottom: 0 }}>
+          Recomendo o <strong>Game Ready</strong> ou sistemas semelhantes (frio com compressão), porque ajudam a acelerar
+          a recuperação.
+        </p>
+        <SaibaMais href={SAIBA_MAIS.recuperacao}>recuperar da cirurgia</SaibaMais>
+      </section>
+    </>
   );
 }

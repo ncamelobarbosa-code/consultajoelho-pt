@@ -1,17 +1,20 @@
 "use client";
 
-// Parte interativa da PWA /app: código do doente (só localStorage), questionários,
-// escala de dor (VAS) e pedido de avaliação no Google. Sem cookies nem analytics.
+// Parte interativa da PWA /app: código do doente (só localStorage), escala de dor (VAS),
+// questionários e pedido de avaliação no Google. Sem cookies nem analytics.
+// `info` são os cartões estáticos (medicação, quadricípite, frio), renderizados no servidor.
 import { useEffect, useState } from "react";
 import {
-  AVISO_SEGURANCA,
+  CODIGO_PREFIXO,
   CODIGO_RE,
   CODIGO_STORAGE_KEY,
   GOOGLE_REVIEW_HREF,
   QUESTIONARIOS,
   VAS_WEBHOOK,
+  SAIBA_MAIS,
   formUrl,
 } from "./config";
+import SaibaMais from "./SaibaMais";
 import { IconArrow, IconCheck, IconClipboard, IconGauge, IconKey, IconStar } from "./icons";
 
 type Momento = "D1" | "D7";
@@ -30,8 +33,8 @@ type Envio = "idle" | "sending" | "ok" | "error" | "offline";
 
 function normalizar(v: string): string {
   const s = v.trim().toUpperCase().replace(/\s+/g, "");
-  // Aceita "AB12CD" sem prefixo e completa para "NC-AB12CD".
-  return /^[0-9A-F]{6}$/.test(s) ? `NC-${s}` : s;
+  // Aceita "AB12CD" sem prefixo e completa para "CJ-AB12CD".
+  return /^[0-9A-F]{6}$/.test(s) ? `${CODIGO_PREFIXO}-${s}` : s;
 }
 
 function registarSW() {
@@ -50,7 +53,7 @@ function registarSW() {
     .catch(() => {});
 }
 
-export default function AppClient() {
+export default function AppClient({ info }: { info: React.ReactNode }) {
   const [codigo, setCodigo] = useState<string | null>(null);
   const [draft, setDraft] = useState("");
   const [editing, setEditing] = useState(false);
@@ -76,7 +79,7 @@ export default function AppClient() {
     e.preventDefault();
     const v = normalizar(draft);
     if (!CODIGO_RE.test(v)) {
-      setErroCodigo("Código inválido. O formato é NC- seguido de 6 caracteres (0–9 e A–F), por exemplo NC-3F9A0B.");
+      setErroCodigo("Código inválido. O formato é CJ- seguido de 6 caracteres (0–9 e A–F), por exemplo CJ-3F9A0B.");
       return;
     }
     try {
@@ -156,14 +159,14 @@ export default function AppClient() {
           </div>
         ) : (
           <form key="form" className="cjapp-swap" onSubmit={guardar} noValidate>
-            <p className="cjapp-muted">Está nos emails de acompanhamento (formato NC-XXXXXX). Fica guardado só neste dispositivo.</p>
+            <p className="cjapp-muted">Está nos emails de acompanhamento (formato CJ-XXXXXX). Fica guardado só neste dispositivo.</p>
             <label htmlFor="cjapp-codigo-input">Código</label>
             <input
               id="cjapp-codigo-input"
               className="cjapp-input"
               value={draft}
               onChange={(e) => setDraft(e.target.value)}
-              placeholder="NC-XXXXXX"
+              placeholder="CJ-XXXXXX"
               autoComplete="off"
               autoCapitalize="characters"
               autoCorrect="off"
@@ -180,47 +183,10 @@ export default function AppClient() {
             <button type="submit" className="cjapp-btn">Guardar código</button>
           </form>
         )}
+        <SaibaMais href={SAIBA_MAIS.codigo}>como usamos o código</SaibaMais>
       </section>
 
-      <section className="cjapp-card" aria-labelledby="cjapp-quest">
-        <div className="cjapp-head">
-          <span className="cjapp-ico"><IconClipboard /></span>
-          <h2 id="cjapp-quest">Questionários</h2>
-        </div>
-        <p className="cjapp-muted">
-          Responda quando receber o email correspondente. O código é preenchido automaticamente.
-        </p>
-        <div className="cjapp-quest">
-          {QUESTIONARIOS.map((q) => {
-            const [sigla, ...resto] = q.label.split(" — ");
-            const conteudo = (
-              <>
-                <b>{sigla}</b>
-                <small>{resto.join(" — ")}</small>
-                <IconArrow size={18} />
-              </>
-            );
-            return temCodigo ? (
-              <a
-                key={q.id}
-                className="cjapp-tile"
-                href={formUrl(q.pub, q.entry, codigo!)}
-                target="_blank"
-                rel="noopener noreferrer"
-                referrerPolicy="no-referrer"
-                aria-label={`Questionário ${q.label} (abre o Google Forms)`}
-              >
-                {conteudo}
-              </a>
-            ) : (
-              <button key={q.id} type="button" className="cjapp-tile" disabled aria-label={`Questionário ${q.label}`}>
-                {conteudo}
-              </button>
-            );
-          })}
-        </div>
-        {!temCodigo && <p className="cjapp-hint"><IconKey size={18} /> Guarde primeiro o seu código.</p>}
-      </section>
+      {info}
 
       <section className="cjapp-card" aria-labelledby="cjapp-dor">
         <div className="cjapp-head">
@@ -236,9 +202,10 @@ export default function AppClient() {
               </svg>
               <p className="cjapp-ok">Obrigado. Registo enviado ({momento}: {score}/10).</p>
             </div>
-            <div className="cjapp-aviso" style={{ margin: "0 0 .25rem" }}>
-              <p><strong>Aviso de segurança.</strong> {AVISO_SEGURANCA}</p>
-            </div>
+            <p className="cjapp-nota">
+              Esta app não é monitorizada em tempo real. Se a dor não ceder à medicação ou tiver febre, veja os{" "}
+              <a href="#cjapp-urgencia">contactos de urgência</a> no fim da página.
+            </p>
             <button type="button" className="cjapp-btn cjapp-btn--ghost" onClick={novoRegisto}>
               Novo registo
             </button>
@@ -308,6 +275,48 @@ export default function AppClient() {
             {!temCodigo && <p className="cjapp-hint"><IconKey size={18} /> Guarde primeiro o seu código.</p>}
           </form>
         )}
+        <SaibaMais href={SAIBA_MAIS.recuperacao}>recuperar da cirurgia</SaibaMais>
+      </section>
+
+      <section className="cjapp-card" aria-labelledby="cjapp-quest">
+        <div className="cjapp-head">
+          <span className="cjapp-ico"><IconClipboard /></span>
+          <h2 id="cjapp-quest">Questionários</h2>
+        </div>
+        <p className="cjapp-muted">
+          Responda quando receber o email correspondente. O código é preenchido automaticamente.
+        </p>
+        <div className="cjapp-quest">
+          {QUESTIONARIOS.map((q) => {
+            const [sigla, ...resto] = q.label.split(" — ");
+            const conteudo = (
+              <>
+                <b>{sigla}</b>
+                <small>{resto.join(" — ")}</small>
+                <IconArrow size={18} />
+              </>
+            );
+            return temCodigo ? (
+              <a
+                key={q.id}
+                className="cjapp-tile"
+                href={formUrl(q.pub, q.entry, codigo!)}
+                target="_blank"
+                rel="noopener noreferrer"
+                referrerPolicy="no-referrer"
+                aria-label={`Questionário ${q.label} (abre o Google Forms)`}
+              >
+                {conteudo}
+              </a>
+            ) : (
+              <button key={q.id} type="button" className="cjapp-tile" disabled aria-label={`Questionário ${q.label}`}>
+                {conteudo}
+              </button>
+            );
+          })}
+        </div>
+        {!temCodigo && <p className="cjapp-hint"><IconKey size={18} /> Guarde primeiro o seu código.</p>}
+        <SaibaMais href={SAIBA_MAIS.questionarios}>para que servem os questionários</SaibaMais>
       </section>
 
       <section className="cjapp-card" aria-labelledby="cjapp-review">

@@ -37,3 +37,12 @@ export const IconArrow = (p: P) => (
 export const IconCheck = (p: P) => (
   <Svg {...p}><path d="m5 12 5 5 9-10" /></Svg>
 );
+export const IconPill = (p: P) => (
+  <Svg {...p}><rect x="3" y="8.5" width="18" height="7" rx="3.5" transform="rotate(-45 12 12)" /><path d="m9.5 9.5 5 5" /></Svg>
+);
+export const IconSnow = (p: P) => (
+  <Svg {...p}><path d="M12 2v20M4.9 6l14.2 12M19.1 6 4.9 18M9 3.5 12 6l3-2.5M9 20.5l3-2.5 3 2.5" /></Svg>
+);
+export const IconMuscle = (p: P) => (
+  <Svg {...p}><path d="M3 12h4l3-8 4 16 3-8h4" /></Svg>
+);
