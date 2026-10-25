@@ -12,8 +12,20 @@ import {
   VAS_WEBHOOK,
   formUrl,
 } from "./config";
+import { IconArrow, IconCheck, IconClipboard, IconGauge, IconKey, IconStar } from "./icons";
 
 type Momento = "D1" | "D7";
+
+// Cores da escala 0–10 (verde → vermelho), todas com contraste AA com texto branco.
+const COR_DOR = ["#2f6f3e", "#3b7a3a", "#4a7d2a", "#5e7a1a", "#7a6f00", "#8f6100", "#a15c00", "#b24c00", "#b93a0f", "#b42318", "#9b1c1c"];
+
+function descreverDor(n: number): string {
+  if (n === 0) return "Sem dor";
+  if (n <= 3) return "Dor ligeira";
+  if (n <= 6) return "Dor moderada";
+  if (n <= 9) return "Dor intensa";
+  return "Pior dor imaginável";
+}
 type Envio = "idle" | "sending" | "ok" | "error" | "offline";
 
 function normalizar(v: string): string {
@@ -120,11 +132,19 @@ export default function AppClient() {
   return (
     <>
       <section className="cjapp-card" aria-labelledby="cjapp-codigo">
-        <h2 id="cjapp-codigo">O seu código</h2>
+        <div className="cjapp-head">
+          <span className="cjapp-ico"><IconKey /></span>
+          <h2 id="cjapp-codigo">O seu código</h2>
+        </div>
         {temCodigo ? (
-          <>
-            <p className="cjapp-code" aria-live="polite">{codigo}</p>
-            <p className="cjapp-muted">Guardado apenas neste dispositivo.</p>
+          <div key="guardado" className="cjapp-swap">
+            <div className="cjapp-codebox">
+              <span className="cjapp-tick"><IconCheck size={20} /></span>
+              <div>
+                <p className="cjapp-code" aria-live="polite">{codigo}</p>
+                <span className="cjapp-muted">Guardado apenas neste dispositivo</span>
+              </div>
+            </div>
             <div className="cjapp-row">
               <button type="button" className="cjapp-btn cjapp-btn--ghost" onClick={() => { setDraft(codigo ?? ""); setEditing(true); }}>
                 Alterar
@@ -133,9 +153,9 @@ export default function AppClient() {
                 Apagar
               </button>
             </div>
-          </>
+          </div>
         ) : (
-          <form onSubmit={guardar} noValidate>
+          <form key="form" className="cjapp-swap" onSubmit={guardar} noValidate>
             <p className="cjapp-muted">Está nos emails de acompanhamento (formato NC-XXXXXX). Fica guardado só neste dispositivo.</p>
             <label htmlFor="cjapp-codigo-input">Código</label>
             <input
@@ -163,46 +183,68 @@ export default function AppClient() {
       </section>
 
       <section className="cjapp-card" aria-labelledby="cjapp-quest">
-        <h2 id="cjapp-quest">Questionários</h2>
+        <div className="cjapp-head">
+          <span className="cjapp-ico"><IconClipboard /></span>
+          <h2 id="cjapp-quest">Questionários</h2>
+        </div>
         <p className="cjapp-muted">
           Responda quando receber o email correspondente. O código é preenchido automaticamente.
         </p>
-        {QUESTIONARIOS.map((q) =>
-          temCodigo ? (
-            <a
-              key={q.id}
-              className="cjapp-btn"
-              href={formUrl(q.pub, q.entry, codigo!)}
-              target="_blank"
-              rel="noopener noreferrer"
-              referrerPolicy="no-referrer"
-            >
-              {q.label}
-            </a>
-          ) : (
-            <button key={q.id} type="button" className="cjapp-btn" disabled>
-              {q.label}
-            </button>
-          ),
-        )}
-        {!temCodigo && <p className="cjapp-muted" style={{ marginTop: ".75rem" }}>Guarde primeiro o seu código.</p>}
+        <div className="cjapp-quest">
+          {QUESTIONARIOS.map((q) => {
+            const [sigla, ...resto] = q.label.split(" — ");
+            const conteudo = (
+              <>
+                <b>{sigla}</b>
+                <small>{resto.join(" — ")}</small>
+                <IconArrow size={18} />
+              </>
+            );
+            return temCodigo ? (
+              <a
+                key={q.id}
+                className="cjapp-tile"
+                href={formUrl(q.pub, q.entry, codigo!)}
+                target="_blank"
+                rel="noopener noreferrer"
+                referrerPolicy="no-referrer"
+                aria-label={`Questionário ${q.label} (abre o Google Forms)`}
+              >
+                {conteudo}
+              </a>
+            ) : (
+              <button key={q.id} type="button" className="cjapp-tile" disabled aria-label={`Questionário ${q.label}`}>
+                {conteudo}
+              </button>
+            );
+          })}
+        </div>
+        {!temCodigo && <p className="cjapp-hint"><IconKey size={18} /> Guarde primeiro o seu código.</p>}
       </section>
 
       <section className="cjapp-card" aria-labelledby="cjapp-dor">
-        <h2 id="cjapp-dor">Escala de dor</h2>
+        <div className="cjapp-head">
+          <span className="cjapp-ico"><IconGauge /></span>
+          <h2 id="cjapp-dor">Escala de dor</h2>
+        </div>
         {envio === "ok" ? (
-          <div role="status">
-            <p className="cjapp-ok">Obrigado. O seu registo de dor ({momento}: {score}/10) foi enviado.</p>
-            <div className="cjapp-aviso" style={{ margin: ".75rem 0" }}>
-              <strong>Aviso de segurança</strong>
-              <p>{AVISO_SEGURANCA}</p>
+          <div key="ok" className="cjapp-swap" role="status">
+            <div className="cjapp-done">
+              <svg width="44" height="44" viewBox="0 0 44 44" aria-hidden="true">
+                <circle cx="22" cy="22" r="22" />
+                <path d="m13 22.5 6 6 12-13" />
+              </svg>
+              <p className="cjapp-ok">Obrigado. Registo enviado ({momento}: {score}/10).</p>
+            </div>
+            <div className="cjapp-aviso" style={{ margin: "0 0 .25rem" }}>
+              <p><strong>Aviso de segurança.</strong> {AVISO_SEGURANCA}</p>
             </div>
             <button type="button" className="cjapp-btn cjapp-btn--ghost" onClick={novoRegisto}>
               Novo registo
             </button>
           </div>
         ) : (
-          <form onSubmit={enviarVAS}>
+          <form key="form" className="cjapp-swap" onSubmit={enviarVAS}>
             <fieldset>
               <legend>Quando?</legend>
               <div className="cjapp-seg">
@@ -218,7 +260,7 @@ export default function AppClient() {
               <legend>Quanta dor tem agora? (0 = sem dor, 10 = pior dor imaginável)</legend>
               <div className="cjapp-scale">
                 {Array.from({ length: 11 }, (_, n) => (
-                  <label key={n} className="cjapp-opt">
+                  <label key={n} className="cjapp-opt" style={{ "--c": COR_DOR[n] } as React.CSSProperties}>
                     <input type="radio" name="score" value={n} checked={score === n} onChange={() => setScore(n)} />
                     <span>{n}</span>
                   </label>
@@ -228,6 +270,20 @@ export default function AppClient() {
                 <span>0 sem dor</span>
                 <span>10 pior dor</span>
               </div>
+              <p
+                className="cjapp-readout"
+                aria-live="polite"
+                style={score !== null ? ({ "--c": COR_DOR[score] } as React.CSSProperties) : undefined}
+              >
+                {score !== null ? (
+                  <>
+                    <b>{score}/10</b>
+                    <span>{descreverDor(score)}</span>
+                  </>
+                ) : (
+                  <span>Escolha um número.</span>
+                )}
+              </p>
             </fieldset>
             {envio === "error" && (
               <p className="cjapp-err" role="alert">Não foi possível enviar. Tente de novo dentro de momentos.</p>
@@ -239,16 +295,26 @@ export default function AppClient() {
               type="submit"
               className="cjapp-btn"
               disabled={!temCodigo || !momento || score === null || envio === "sending"}
+              aria-busy={envio === "sending" || undefined}
             >
-              {envio === "sending" ? "A enviar…" : "Enviar"}
+              {envio === "sending" ? (
+                <>
+                  <span className="cjapp-spin" aria-hidden="true" /> A enviar…
+                </>
+              ) : (
+                "Enviar"
+              )}
             </button>
-            {!temCodigo && <p className="cjapp-muted" style={{ marginTop: ".75rem" }}>Guarde primeiro o seu código.</p>}
+            {!temCodigo && <p className="cjapp-hint"><IconKey size={18} /> Guarde primeiro o seu código.</p>}
           </form>
         )}
       </section>
 
       <section className="cjapp-card" aria-labelledby="cjapp-review">
-        <h2 id="cjapp-review">Avaliação no Google</h2>
+        <div className="cjapp-head">
+          <span className="cjapp-ico"><IconStar /></span>
+          <h2 id="cjapp-review">Avaliação no Google</h2>
+        </div>
         <p>
           Se quiser, pode deixar uma avaliação pública no Google. É voluntária e não influencia os cuidados prestados.
         </p>
@@ -256,7 +322,7 @@ export default function AppClient() {
           <strong>Por favor, não inclua informação clínica.</strong>
         </p>
         <a className="cjapp-btn cjapp-btn--ghost" href={GOOGLE_REVIEW_HREF} target="_blank" rel="noopener noreferrer" referrerPolicy="no-referrer">
-          Deixar avaliação no Google
+          <IconStar /> Deixar avaliação no Google
         </a>
       </section>
     </>
