@@ -1,0 +1,19 @@
+{
+  "id": "/app",
+  "name": "ConsultaJoelho.pt — Acompanhamento",
+  "short_name": "Joelho",
+  "description": "Acompanhamento pós-operatório do Dr. Nuno Camelo Barbosa: contactos, questionários e escala de dor.",
+  "lang": "pt-PT",
+  "dir": "ltr",
+  "start_url": "/app",
+  "scope": "/app",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#F6F9F5",
+  "theme_color": "#035772",
+  "icons": [
+    { "src": "/app/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/app/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "/app/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}
