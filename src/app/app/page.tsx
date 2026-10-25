@@ -36,7 +36,12 @@ const css = `
 .cjapp-brand{font-weight:700;font-size:1.25rem;letter-spacing:-0.01em;}
 .cjapp-brand span{color:var(--sage);}
 .cjapp-sub{font-size:1rem;opacity:.92;margin:.15rem 0 0;}
-.cjapp-aviso{background:#fff4d6;border:2px solid #b07a00;border-radius:12px;padding:1rem 1.1rem;margin:1rem 0;color:#3d2800;}
+.cjapp-urgente{position:sticky;top:0;z-index:10;background:#fff4d6;border-bottom:2px solid #b07a00;color:#3d2800;font-size:1rem;}
+.cjapp-urgente .cjapp-wrap{display:flex;align-items:center;gap:1rem;min-height:48px;flex-wrap:wrap;}
+.cjapp-urgente span{font-weight:700;}
+.cjapp-urgente a{color:#3d2800;font-weight:700;text-decoration:underline;text-underline-offset:3px;padding:.5rem 0;}
+.cjapp-urgente a:last-child{margin-left:auto;}
+.cjapp-aviso{scroll-margin-top:64px;background:#fff4d6;border:2px solid #b07a00;border-radius:12px;padding:1rem 1.1rem;margin:1rem 0;color:#3d2800;}
 .cjapp-aviso strong{display:block;font-size:1.05rem;margin-bottom:.35rem;color:#3d2800;}
 .cjapp-aviso p{margin:0;font-size:1.05rem;line-height:1.55;}
 .cjapp-aviso a{color:#3d2800;font-weight:700;}
@@ -87,11 +92,17 @@ export default function AppPage() {
         </div>
       </header>
 
+      <div className="cjapp-urgente" role="note" aria-label="Contacto urgente">
+        <div className="cjapp-wrap">
+          <span>Urgente?</span>
+          <a href={WHATSAPP_HREF} rel="noopener noreferrer" target="_blank">WhatsApp</a>
+          <a href="tel:112">112</a>
+          <a href="#cjapp-aviso">Ler aviso</a>
+        </div>
+      </div>
+
       <div className="cjapp-wrap">
-        <section className="cjapp-aviso" role="note" aria-label="Aviso de segurança">
-          <strong>Aviso de segurança</strong>
-          <p>{AVISO_SEGURANCA}</p>
-        </section>
+        <AppClient />
 
         <section className="cjapp-card" aria-labelledby="cjapp-contactos">
           <h2 id="cjapp-contactos">Contactos</h2>
@@ -103,7 +114,10 @@ export default function AppPage() {
           </a>
         </section>
 
-        <AppClient />
+        <section id="cjapp-aviso" className="cjapp-aviso" role="note" aria-label="Aviso de segurança">
+          <strong>Aviso de segurança</strong>
+          <p>{AVISO_SEGURANCA}</p>
+        </section>
 
         <footer className="cjapp-foot">
           <nav aria-label="Informação legal">
