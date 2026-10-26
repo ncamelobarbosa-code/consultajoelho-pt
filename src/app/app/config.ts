@@ -1,0 +1,46 @@
+// Configuração da PWA /app (acompanhamento pós-operatório).
+// Fonte: "app-textos-e-especificacao.md" e "followup-v2-make.md" (projeto Consultajoelho.pt).
+
+// Aviso de segurança — não alterar sem validação do Dr. Nuno Camelo Barbosa.
+// Mostrado de forma discreta no fim da página (pedido do Dr. Nuno).
+export const AVISO_INTRO =
+  "Esta app não é monitorizada em tempo real. Se tiver febre, dor intensa que não cede à medicação, ferida a abrir ou com pus, ou dor/inchaço na barriga da perna:";
+// Contactos gerais confirmados nos sites oficiais (lusiadas.pt, scmvc.pt) em 26/10/2026.
+export const HOSPITAIS = [
+  { nome: "Hospital Lusíadas Porto", tel: "22 605 64 50", href: "tel:+351226056450" },
+  { nome: "Hospital da Misericórdia de Vila do Conde", tel: "252 249 100", href: "tel:+351252249100" },
+] as const;
+
+export const WHATSAPP_HREF = "https://wa.me/351912188800";
+export const WHATSAPP_LABEL = "+351 912 188 800";
+export const EMAIL = "joelho@consultajoelho.pt";
+
+export const CODIGO_PREFIXO = "CJ";
+export const CODIGO_RE = /^CJ-[0-9A-F]{6}$/;
+export const CODIGO_STORAGE_KEY = "cj-app-codigo";
+
+// Google Forms — só o campo Código é pré-preenchido.
+export const QUESTIONARIOS = [
+  { id: "T0", label: "T0 — antes da cirurgia", pub: "1FAIpQLScCLoQsWCKGTlJwv-MFf9yc1BvSeCHvZ24wMtmR2JSHY3tfeQ", entry: "1453390334" },
+  { id: "M6", label: "M6 — 6 meses", pub: "1FAIpQLSc46T_roaSfxyL9WIdzDo49hEKWWbN6AVX0-TYSHQu12OePYw", entry: "1466336669" },
+  { id: "M12", label: "M12 — 12 meses", pub: "1FAIpQLSe7rtFg9HhXQHwq7ckNWqebhxV4uKgJqOfKCR6FLpkWvjM-uQ", entry: "483170902" },
+  { id: "M24", label: "M24 — 24 meses", pub: "1FAIpQLSesgVaFLyD51tErgQcsMB_AKqzCn7ZePA_5TQpifj6iwaJU4g", entry: "1897997052" },
+] as const;
+
+export function formUrl(pub: string, entry: string, codigo: string): string {
+  return `https://docs.google.com/forms/d/e/${pub}/viewform?usp=pp_url&entry.${entry}=${encodeURIComponent(codigo)}`;
+}
+
+// Webhook Make (cenário 8164467 "Receber VAS"): grava codigo, momento e score.
+export const VAS_WEBHOOK = "https://hook.eu1.make.com/taefgvviwv0b8icvmued7plncq8r0yn8";
+
+export const GOOGLE_REVIEW_HREF = "https://share.google/6QUpHEnfGKhNEjRc7";
+
+// Páginas do site para os botões "Saiba mais".
+export const SAIBA_MAIS = {
+  codigo: "/privacidade",
+  medicacao: "/anti-inflamatorios",
+  recuperacao: "/recuperar-cirurgia",
+  quadricipite: "/quadriceps",
+  questionarios: "/actividadecientificajoelho",
+} as const;

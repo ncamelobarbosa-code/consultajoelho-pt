@@ -12,6 +12,7 @@ import Contacts from "@/components/Contacts";
 import StickyCall from "@/components/StickyCall";
 import { Analytics } from "@vercel/analytics/next";
 import { site } from "@/lib/site";
+import HideOnApp from "@/components/HideOnApp";
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
@@ -29,15 +30,19 @@ export default function RootLayout({
   return (
     <html lang="pt">
       <body>
-        <ConsentGate gaId={process.env.NEXT_PUBLIC_GA_ID ?? "G-RZ37G397BW"} />
-        <LeadTracking />
-        <LangSync />
-        <ScrollReveal />
-        <SiteHeader />
+        <HideOnApp>
+          <ConsentGate gaId={process.env.NEXT_PUBLIC_GA_ID ?? "G-RZ37G397BW"} />
+          <LeadTracking />
+          <LangSync />
+          <ScrollReveal />
+          <SiteHeader />
+        </HideOnApp>
         {children}
-        <Contacts />
-        <StickyCall />
-        <Analytics />
+        <HideOnApp>
+          <Contacts />
+          <StickyCall />
+          <Analytics />
+        </HideOnApp>
       </body>
     </html>
   );
