@@ -165,6 +165,7 @@ const css = `
 .cjapp-urg p{margin:0 0 .5rem;line-height:1.5;}
 .cjapp-urg ol{list-style:decimal;margin:0;padding-left:1.4rem;display:grid;gap:.35rem;line-height:1.5;}
 .cjapp-urg a{color:var(--teal);font-weight:600;white-space:nowrap;}
+.cjapp-urg ul.cjapp-hosp{list-style:none;padding:0;margin:.3rem 0 0;display:grid;gap:.2rem;}
 .cjapp-urg:target{animation:cjapp-pulse 1.2s var(--ease) 1;}
 
 /* Rodapé */
@@ -244,7 +245,16 @@ export default function AppPage() {
               Contacte o seu médico pelo{" "}
               <a href={WHATSAPP_HREF} rel="noopener noreferrer" target="_blank">WhatsApp {WHATSAPP_LABEL}</a>.
             </li>
-            <li>Se não conseguir, dirija-se à urgência do hospital onde foi operado: {HOSPITAIS.join(" ou ")}.</li>
+            <li>
+              Se não conseguir, contacte ou dirija-se à urgência do hospital onde é assistido:
+              <ul className="cjapp-hosp">
+                {HOSPITAIS.map((h) => (
+                  <li key={h.nome}>
+                    {h.nome}: <a href={h.href}>{h.tel}</a>
+                  </li>
+                ))}
+              </ul>
+            </li>
             <li>
               Emergência: <a href="tel:112">112</a> · SNS 24: <a href="tel:+351808242424">808 24 24 24</a>.
             </li>
@@ -297,7 +307,7 @@ function InfoCards() {
           </li>
           <li>
             <b>Enoxaparina 40 mg</b>
-            <span>1 injeção por dia durante 1 mês, para prevenir tromboses. A dose depende do peso: use a que lhe foi receitada.</span>
+            <span>1 injeção subcutânea por dia durante 1 mês, para prevenir tromboses. A dose depende do peso: use a que lhe foi receitada.</span>
           </li>
         </ul>
         <SaibaMais href={SAIBA_MAIS.medicacao}>anti-inflamatórios</SaibaMais>

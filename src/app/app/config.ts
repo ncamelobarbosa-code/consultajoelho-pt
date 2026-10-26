@@ -5,7 +5,11 @@
 // Mostrado de forma discreta no fim da página (pedido do Dr. Nuno).
 export const AVISO_INTRO =
   "Esta app não é monitorizada em tempo real. Se tiver febre, dor intensa que não cede à medicação, ferida a abrir ou com pus, ou dor/inchaço na barriga da perna:";
-export const HOSPITAIS = ["Hospital Lusíadas Porto", "Hospital da Misericórdia de Vila do Conde"] as const;
+// Contactos gerais confirmados nos sites oficiais (lusiadas.pt, scmvc.pt) em 26/10/2026.
+export const HOSPITAIS = [
+  { nome: "Hospital Lusíadas Porto", tel: "22 605 64 50", href: "tel:+351226056450" },
+  { nome: "Hospital da Misericórdia de Vila do Conde", tel: "252 249 100", href: "tel:+351252249100" },
+] as const;
 
 export const WHATSAPP_HREF = "https://wa.me/351912188800";
 export const WHATSAPP_LABEL = "+351 912 188 800";

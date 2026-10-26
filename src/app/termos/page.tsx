@@ -28,7 +28,7 @@ export default function TermosPage() {
             <a href="https://wa.me/351912188800" rel="noopener noreferrer" target="_blank">
               +351 912 188 800
             </a>{" "}
-            ou, se não conseguir, o serviço de urgência do hospital da sua área de residência (SNS 24:{" "}
+            ou, se não conseguir, o serviço de urgência do hospital onde é assistido (SNS 24:{" "}
             <a href="tel:+351808242424">808 24 24 24</a>; emergência: <a href="tel:112">112</a>).
           </li>
           <li>
