@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import scraped from "../../content/scraped-pages.json";
 import scrapedEn from "../../content/scraped-en.json";
 import scrapedRu from "../../content/scraped-ru.json";
+import scrapedDe from "../../content/scraped-de.json";
+import scrapedFr from "../../content/scraped-fr.json";
 import { seo } from "./seo";
 import { navGroups, pages, type PageSlug, type PageMeta } from "./site";
 
@@ -28,9 +30,18 @@ const listEn = scrapedEn as unknown as ScrapedPage[];
 const bySlugEn = new Map(listEn.map((p) => [p.slug, p]));
 const listRu = scrapedRu as unknown as ScrapedPage[];
 const bySlugRu = new Map(listRu.map((p) => [p.slug, p]));
+const listDe = scrapedDe as unknown as ScrapedPage[];
+const bySlugDe = new Map(listDe.map((p) => [p.slug, p]));
+const listFr = scrapedFr as unknown as ScrapedPage[];
+const bySlugFr = new Map(listFr.map((p) => [p.slug, p]));
 
-export function getScraped(slug: string, lang: "pt" | "en" | "ru" = "pt"): ScrapedPage | undefined {
-  const map = lang === "en" ? bySlugEn : lang === "ru" ? bySlugRu : bySlug;
+export function getScraped(slug: string, lang: "pt" | "en" | "ru" | "de" | "fr" = "pt"): ScrapedPage | undefined {
+  const map =
+    lang === "en" ? bySlugEn
+    : lang === "ru" ? bySlugRu
+    : lang === "de" ? bySlugDe
+    : lang === "fr" ? bySlugFr
+    : bySlug;
   return map.get(slug);
 }
 

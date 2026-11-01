@@ -40,6 +40,8 @@ const STRINGS = {
   pt: { home: "Início", author: "", cta: "Marque a sua consulta", sub: "Resposta em menos de 24 horas.", btn: "Avaliar o meu joelho", contact: "/avaliar", root: "/" },
   en: { home: "Home", author: "Knee Surgeon", cta: "Book your consultation", sub: "Reply within 24 hours.", btn: "Contact us", contact: "/en/contacto", root: "/en" },
   ru: { home: "Главная", author: "Хирург коленного сустава", cta: "Запишитесь на приём", sub: "Ответ в течение 24 часов.", btn: "Связаться с нами", contact: "/ru/contacto", root: "/ru" },
+  de: { home: "Startseite", author: "Kniechirurg", cta: "Vereinbaren Sie Ihren Termin", sub: "Antwort innerhalb von 24 Stunden.", btn: "Termin vereinbaren", contact: "/de/marcar-consulta", root: "/de" },
+  fr: { home: "Accueil", author: "Chirurgien du genou", cta: "Prenez votre rendez-vous", sub: "Réponse sous 24 heures.", btn: "Prendre rendez-vous", contact: "/fr/marcar-consulta", root: "/fr" },
 } as const;
 
 export default function PortedArticle({
@@ -53,7 +55,7 @@ export default function PortedArticle({
   extra,
 }: {
   slug: string;
-  lang?: "pt" | "en" | "ru";
+  lang?: "pt" | "en" | "ru" | "de" | "fr";
   title?: string;
   description?: string;
   notice?: { title: string; body: string };
@@ -62,7 +64,7 @@ export default function PortedArticle({
   extra?: ReactNode;
 }) {
   const meta = pages[slug as PageSlug] as PageMeta | undefined;
-  const locale: "pt" | "en" | "ru" = lang || (meta?.lang === "en" ? "en" : "pt");
+  const locale: "pt" | "en" | "ru" | "de" | "fr" = lang || (meta?.lang === "en" ? "en" : "pt");
   const data = getScraped(slug, locale);
   if (!data) return null;
 

@@ -110,8 +110,15 @@ const coreSegs = [
   "preparar-cirurgia", "recuperar-cirurgia", "sigic", "artroscopia", "avaliar",
   "nuno-camelo-especialista-cirurgia-joelho", "joelhodrnunocamelo", "marcar-consulta",
 ];
-const deRoutes = ["de", ...coreSegs.map((s) => `de/${s}`)];
-const frRoutes = ["fr", ...coreSegs.map((s) => `fr/${s}`)];
+const portedSegs = [
+  "tendao-rotuliano-tendinite-drnunocamelo",
+  "liquidojoelho-artrocentese-drnunocamelo",
+  "entorsejoelho-drnunocamelo",
+  "actividadecientificajoelho",
+  "kneesurgeryinportugalprices",
+];
+const deRoutes = ["de", ...coreSegs.map((s) => `de/${s}`), ...portedSegs.map((s) => `de/${s}`)];
+const frRoutes = ["fr", ...coreSegs.map((s) => `fr/${s}`), ...portedSegs.map((s) => `fr/${s}`)];
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();

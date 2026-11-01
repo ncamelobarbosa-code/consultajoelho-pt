@@ -2,13 +2,13 @@
 // Alinha estas páginas com as do pipeline (author box / dateModified / reviewedBy / citation).
 import { site } from "@/lib/site";
 
-type Locale = "pt" | "en" | "ru";
+type Locale = "pt" | "en" | "ru" | "de" | "fr";
 
 const DOCTOR = "Dr. Nuno Camelo Barbosa";
 const DOCTOR_URL = "https://www.consultajoelho.pt/nuno-camelo-especialista-cirurgia-joelho";
 const REVIEW_ISO = "2026-07-24";
-const REVIEW_HUMAN: Record<Locale, string> = { pt: "24 de julho de 2026", en: "24 July 2026", ru: "24 июля 2026 г." };
-const REVIEW_LABEL: Record<Locale, string> = { pt: "Última revisão médica", en: "Last medically reviewed", ru: "Последняя медицинская проверка" };
+const REVIEW_HUMAN: Record<Locale, string> = { pt: "24 de julho de 2026", en: "24 July 2026", ru: "24 июля 2026 г.", de: "24. Juli 2026", fr: "24 juillet 2026" };
+const REVIEW_LABEL: Record<Locale, string> = { pt: "Última revisão médica", en: "Last medically reviewed", ru: "Последняя медицинская проверка", de: "Zuletzt medizinisch geprüft", fr: "Dernière révision médicale" };
 const SAMEAS = [
   "https://orcid.org/0000-0002-7443-4085",
   "https://www.researchgate.net/profile/Nuno-Camelo-Barbosa",
@@ -20,13 +20,17 @@ const AUTHOR: Record<Locale, { role: string; cred: string; profile: string; book
   pt: { role: "Cirurgião ortopédico · Subespecialista em cirurgia do joelho", cred: "Revisor científico (AJSM · KSSTA · OJSM · JEO)", profile: "Ver perfil completo", book: "Marcar consulta" },
   en: { role: "Orthopaedic surgeon · Knee surgery subspecialty", cred: "Peer reviewer (AJSM · KSSTA · OJSM · JEO)", profile: "Full profile", book: "Book appointment" },
   ru: { role: "Хирург-ортопед · Специализация на хирургии колена", cred: "Научный рецензент (AJSM · KSSTA · OJSM · JEO)", profile: "Полный профиль", book: "Записаться" },
+  de: { role: "Facharzt für Orthopädie · Spezialisierung auf Kniechirurgie", cred: "Wissenschaftlicher Gutachter (AJSM · KSSTA · OJSM · JEO)", profile: "Vollständiges Profil", book: "Termin vereinbaren" },
+  fr: { role: "Chirurgien orthopédiste · Surspécialité en chirurgie du genou", cred: "Relecteur scientifique (AJSM · KSSTA · OJSM · JEO)", profile: "Profil complet", book: "Prendre rendez-vous" },
 };
 
-const REFS_HEADING: Record<Locale, string> = { pt: "Referências", en: "References", ru: "Литература" };
+const REFS_HEADING: Record<Locale, string> = { pt: "Referências", en: "References", ru: "Литература", de: "Referenzen", fr: "Références" };
 const REFS_NOTE: Record<Locale, string> = {
   pt: "Guidelines de sociedades científicas e revisões que sustentam esta informação.",
   en: "Clinical guidelines and scientific reviews supporting this information.",
   ru: "Клинические рекомендации и научные обзоры, подтверждающие эту информацию.",
+  de: "Leitlinien wissenschaftlicher Fachgesellschaften und Übersichtsarbeiten, die diese Informationen stützen.",
+  fr: "Recommandations de sociétés savantes et revues scientifiques qui étayent ces informations.",
 };
 
 const REFERENCES: Record<string, { t: string; u: string }[]> = {
