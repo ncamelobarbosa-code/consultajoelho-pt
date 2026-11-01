@@ -14,21 +14,23 @@ const LINKS = [
   { label: "ORCID", href: "https://orcid.org/0000-0002-7443-4085", icon: "M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20ZM8.06 6.56a.86.86 0 1 1 0 1.72.86.86 0 0 1 0-1.72ZM7.3 9.4h1.5v7.2H7.3V9.4Zm3 0h2.9c2.77 0 3.99 1.98 3.99 3.6 0 1.76-1.38 3.6-3.97 3.6h-2.92V9.4Zm1.5 1.36v4.48h1.31c1.87 0 2.3-1.42 2.3-2.24 0-1.33-.85-2.24-2.34-2.24h-1.27Z" },
 ];
 
-const BOOK: Record<string, string> = { pt: "Marcar consulta", en: "Book appointment", ru: "Записаться" };
+const BOOK: Record<string, string> = { pt: "Marcar consulta", en: "Book appointment", ru: "Записаться", de: "Termin vereinbaren", fr: "Prendre rendez-vous" };
 
-function localeOf(p: string): "pt" | "en" | "ru" {
+function localeOf(p: string): "pt" | "en" | "ru" | "de" | "fr" {
   if (p === "/en" || p.startsWith("/en/")) return "en";
   if (p === "/ru" || p.startsWith("/ru/")) return "ru";
+  if (p === "/de" || p.startsWith("/de/")) return "de";
+  if (p === "/fr" || p.startsWith("/fr/")) return "fr";
   return "pt";
 }
 
 export default function Contacts() {
   const pathname = usePathname() || "/";
   const locale = localeOf(pathname);
-  const isHome = pathname === "/" || pathname === "/en" || pathname === "/ru";
-  const home = locale === "en" ? "/en" : locale === "ru" ? "/ru" : "/";
-  // Página única de marcação (booking + contacto/2ª opinião), traduzida PT/EN/RU.
-  const bookHref = locale === "en" ? "/en/marcar-consulta" : locale === "ru" ? "/ru/marcar-consulta" : "/marcar-consulta";
+  const isHome = pathname === "/" || pathname === "/en" || pathname === "/ru" || pathname === "/de" || pathname === "/fr";
+  const home = locale === "pt" ? "/" : `/${locale}`;
+  // Página única de marcação (booking + contacto/2ª opinião), traduzida PT/EN/RU/DE/FR.
+  const bookHref = locale === "pt" ? "/marcar-consulta" : `/${locale}/marcar-consulta`;
 
   return (
     <footer aria-label="Contactos" style={{ background: "#fff", borderTop: "1px solid var(--border)", padding: "3rem 1.5rem" }}>

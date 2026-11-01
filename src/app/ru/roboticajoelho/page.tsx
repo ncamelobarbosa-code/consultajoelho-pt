@@ -10,7 +10,9 @@ export const metadata: Metadata = {
       "pt-PT": "https://www.consultajoelho.pt/roboticajoelho",
       "x-default": "https://www.consultajoelho.pt/roboticajoelho",
       "en-GB": "https://www.consultajoelho.pt/en/roboticajoelho",
-      "ru-RU": "https://www.consultajoelho.pt/ru/roboticajoelho"
+      "ru-RU": "https://www.consultajoelho.pt/ru/roboticajoelho",
+      "de-DE": "https://www.consultajoelho.pt/de/roboticajoelho",
+      "fr-FR": "https://www.consultajoelho.pt/fr/roboticajoelho"
     }
   },
   "openGraph": {

@@ -102,9 +102,20 @@ const ruRoutes = [
   "ru/videos",
 ];
 
+// Rotas DE/FR traduzidas (22 páginas centrais + marcação).
+const coreSegs = [
+  "infiltracoes", "cartilagem", "lca", "menisco", "protese", "roboticajoelho",
+  "artrose", "anti-inflamatorios", "quisto-baker", "quistos-parameniscais",
+  "sindrome-banda-iliotibial", "luxacao-rotula", "quadriceps", "medo-cirurgia",
+  "preparar-cirurgia", "recuperar-cirurgia", "sigic", "artroscopia", "avaliar",
+  "nuno-camelo-especialista-cirurgia-joelho", "joelhodrnunocamelo", "marcar-consulta",
+];
+const deRoutes = ["de", ...coreSegs.map((s) => `de/${s}`)];
+const frRoutes = ["fr", ...coreSegs.map((s) => `fr/${s}`)];
+
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
-  return [...routes, ...enRoutes, ...ruRoutes].map((r) => ({
+  return [...routes, ...enRoutes, ...ruRoutes, ...deRoutes, ...frRoutes].map((r) => ({
     url: r ? `${site.url}/${r}` : site.url,
     lastModified: now,
     changeFrequency: "monthly",

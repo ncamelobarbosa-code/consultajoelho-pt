@@ -13,7 +13,11 @@ export default function LangSync() {
         ? "en"
         : path === "/ru" || path.startsWith("/ru/")
           ? "ru"
-          : "pt";
+          : path === "/de" || path.startsWith("/de/")
+            ? "de"
+            : path === "/fr" || path.startsWith("/fr/")
+              ? "fr"
+              : "pt";
     document.documentElement.lang = lang;
   }, [p]);
   return null;

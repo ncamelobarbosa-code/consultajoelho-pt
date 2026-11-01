@@ -9,7 +9,9 @@ export const metadata: Metadata = {
       "pt-PT": "https://www.consultajoelho.pt/nuno-camelo-especialista-cirurgia-joelho",
       "x-default": "https://www.consultajoelho.pt/nuno-camelo-especialista-cirurgia-joelho",
       "en-GB": "https://www.consultajoelho.pt/en/nuno-camelo-especialista-cirurgia-joelho",
-      "ru-RU": "https://www.consultajoelho.pt/ru/nuno-camelo-especialista-cirurgia-joelho"
+      "ru-RU": "https://www.consultajoelho.pt/ru/nuno-camelo-especialista-cirurgia-joelho",
+      "de-DE": "https://www.consultajoelho.pt/de/nuno-camelo-especialista-cirurgia-joelho",
+      "fr-FR": "https://www.consultajoelho.pt/fr/nuno-camelo-especialista-cirurgia-joelho"
     }
   },
   "openGraph": {

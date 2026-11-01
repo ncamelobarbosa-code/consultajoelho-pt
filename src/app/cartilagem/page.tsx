@@ -12,7 +12,9 @@ export const metadata: Metadata = {
       "pt-PT": "https://www.consultajoelho.pt/cartilagem",
       "x-default": "https://www.consultajoelho.pt/cartilagem",
       "en-GB": "https://www.consultajoelho.pt/en/cartilagem",
-      "ru-RU": "https://www.consultajoelho.pt/ru/cartilagem"
+      "ru-RU": "https://www.consultajoelho.pt/ru/cartilagem",
+      "de-DE": "https://www.consultajoelho.pt/de/cartilagem",
+      "fr-FR": "https://www.consultajoelho.pt/fr/cartilagem"
     }
   },
   "openGraph": {

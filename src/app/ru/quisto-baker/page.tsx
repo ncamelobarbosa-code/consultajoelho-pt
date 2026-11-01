@@ -10,7 +10,9 @@ export const metadata: Metadata = {
       "pt-PT": "https://www.consultajoelho.pt/quisto-baker",
       "x-default": "https://www.consultajoelho.pt/quisto-baker",
       "en-GB": "https://www.consultajoelho.pt/en/quisto-baker",
-      "ru-RU": "https://www.consultajoelho.pt/ru/quisto-baker"
+      "ru-RU": "https://www.consultajoelho.pt/ru/quisto-baker",
+      "de-DE": "https://www.consultajoelho.pt/de/quisto-baker",
+      "fr-FR": "https://www.consultajoelho.pt/fr/quisto-baker"
     }
   },
   "openGraph": {

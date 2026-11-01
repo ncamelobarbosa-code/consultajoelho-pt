@@ -2,7 +2,7 @@
 // no mesmo formato dos nomes das cidades. Centrado a meio caminho (padding igual em cima/baixo,
 // definido em polish.css .home-intro).
 
-type Lang = "pt" | "en" | "ru";
+type Lang = "pt" | "en" | "ru" | "de" | "fr";
 
 const FONT = "'Space Grotesk', sans-serif";
 
@@ -10,6 +10,8 @@ const COPY: Record<Lang, string[]> = {
   pt: ["Experiência", "Ciência", "Excelência"],
   en: ["Experience", "Science", "Excellence"],
   ru: ["Опыт", "Наука", "Совершенство"],
+  de: ["Erfahrung", "Wissenschaft", "Exzellenz"],
+  fr: ["Expérience", "Science", "Excellence"],
 };
 
 export default function HomeIntro({ lang = "pt" }: { lang?: Lang }) {

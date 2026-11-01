@@ -12,7 +12,9 @@ export const metadata: Metadata = {
       "pt-PT": "https://www.consultajoelho.pt/menisco",
       "x-default": "https://www.consultajoelho.pt/menisco",
       "en-GB": "https://www.consultajoelho.pt/en/menisco",
-      "ru-RU": "https://www.consultajoelho.pt/ru/menisco"
+      "ru-RU": "https://www.consultajoelho.pt/ru/menisco",
+      "de-DE": "https://www.consultajoelho.pt/de/menisco",
+      "fr-FR": "https://www.consultajoelho.pt/fr/menisco"
     }
   },
   "openGraph": {

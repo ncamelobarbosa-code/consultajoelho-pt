@@ -3,8 +3,9 @@
 export type BlockTipo = 'Presencial' | 'Vídeo' | 'all';
 
 export const AGENDA_BLOCKS: { from: string; to: string; tipo: BlockTipo; motivo: string }[] = [
-  // Férias de agosto — sem consultas (presencial e vídeo)
-  { from: '2026-08-15', to: '2026-08-29', tipo: 'all', motivo: 'ferias' },
+  // Agenda aberta — sem bloqueios ativos.
+  // Para fechar a agenda num período, adicionar uma entrada (datas ISO, inclusivas). Exemplo:
+  // { from: '2026-08-15', to: '2026-08-29', tipo: 'all', motivo: 'ferias' },
 ];
 
 // Devolve o bloqueio aplicável a (data, tipo), ou null se disponível.

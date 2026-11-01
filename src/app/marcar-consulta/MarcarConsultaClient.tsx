@@ -5,7 +5,7 @@ import { useForm, ValidationError } from '@formspree/react';
 import { event } from '@/lib/gtag';
 import { agendaBlock } from '@/lib/agenda-block';
 
-type Lang = 'pt' | 'en' | 'ru';
+type Lang = 'pt' | 'en' | 'ru' | 'de' | 'fr';
 type Periodo = 'manha' | 'tarde';
 type Tipo = 'Presencial' | 'Vídeo';
 type Mode = 'marcar' | 'contacto';
@@ -27,6 +27,8 @@ const DIAS: Record<Lang, string[]> = {
   pt: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'],
   en: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
   ru: ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'],
+  de: ['Sonntag', 'Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag'],
+  fr: ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'],
 };
 
 // Nomes curtos de dia da semana, começando à SEGUNDA (para o calendário)
@@ -34,25 +36,47 @@ const WD_SHORT: Record<Lang, string[]> = {
   pt: ['Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb', 'Dom'],
   en: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
   ru: ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс'],
+  de: ['Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa', 'So'],
+  fr: ['Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam', 'Dim'],
 };
 
 const MESES: Record<Lang, string[]> = {
   pt: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
   en: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
   ru: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'],
+  de: ['Januar', 'Februar', 'März', 'April', 'Mai', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember'],
+  fr: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'],
 };
 
 const MESES_SHORT: Record<Lang, string[]> = {
   pt: ['jan', 'fev', 'mar', 'abr', 'mai', 'jun', 'jul', 'ago', 'set', 'out', 'nov', 'dez'],
   en: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
   ru: ['янв', 'фев', 'мар', 'апр', 'май', 'июн', 'июл', 'авг', 'сен', 'окт', 'ноя', 'дек'],
+  de: ['Jan', 'Feb', 'Mär', 'Apr', 'Mai', 'Jun', 'Jul', 'Aug', 'Sep', 'Okt', 'Nov', 'Dez'],
+  fr: ['jan', 'fév', 'mar', 'avr', 'mai', 'juin', 'juil', 'août', 'sep', 'oct', 'nov', 'déc'],
 };
+
+// Meses russos no genitivo (para "с 15 по 29 августа")
+const MESES_RU_GEN = ['января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря'];
+
+// Formata uma data ISO (YYYY-MM-DD) como "dia de mês" para o aviso de férias.
+function vacDate(iso: string, lang: Lang): string {
+  const [, mo, d] = iso.split('-').map(Number);
+  const day = d, mIdx = mo - 1;
+  if (lang === 'pt') return `${day} de ${MESES.pt[mIdx].toLowerCase()}`;
+  if (lang === 'ru') return `${day} ${MESES_RU_GEN[mIdx]}`;
+  if (lang === 'de') return `${day}. ${MESES.de[mIdx]}`;
+  if (lang === 'fr') return `${day} ${MESES.fr[mIdx].toLowerCase()}`;
+  return `${day} ${MESES.en[mIdx]}`;
+}
 
 // Hora de início por período (manhã 11h00, tarde 15h00)
 const HORAS: Record<Lang, Record<Periodo, string>> = {
   pt: { manha: '11h00', tarde: '15h00' },
   en: { manha: '11:00', tarde: '15:00' },
   ru: { manha: '11:00', tarde: '15:00' },
+  de: { manha: '11:00', tarde: '15:00' },
+  fr: { manha: '11:00', tarde: '15:00' },
 };
 
 const pad2 = (n: number) => String(n).padStart(2, '0');
@@ -88,7 +112,7 @@ const T = {
     dobLabel: 'Data de nascimento', pickSlotFirst: 'Escolha primeiro a data e o período acima.',
     ultimaVaga: '1 vaga disponível', esgotado: 'Esgotado',
     urgentBtn: 'Pedir consulta urgente', urgentHint: '↳ toca para pedir consulta urgente',
-    vacationNotice: 'O Dr. Nuno Camelo está de férias de 15 a 29 de agosto — sem consultas neste período. Por favor escolha outra data.',
+    vacationNotice: (from: string, to: string) => `O Dr. Nuno Camelo está de férias de ${vacDate(from, 'pt')} a ${vacDate(to, 'pt')} — sem consultas neste período. Por favor escolha outra data.`,
     urgentNotice: 'Esta vaga já está preenchida. Pode pedir uma consulta urgente — o Dr. Nuno Camelo avalia a disponibilidade e responde-lhe diretamente.',
     urgentOkTitle: 'Pedido de consulta urgente enviado',
     urgentOkBody: 'O Dr. Nuno Camelo irá avaliar a disponibilidade e contactá-lo diretamente. Em caso de emergência médica, dirija-se ao serviço de urgência.',
@@ -122,7 +146,7 @@ const T = {
     dobLabel: 'Date of birth', pickSlotFirst: 'First choose the date and period above.',
     ultimaVaga: '1 spot available', esgotado: 'Fully booked',
     urgentBtn: 'Request urgent appointment', urgentHint: '↳ tap to request an urgent appointment',
-    vacationNotice: 'Dr. Nuno Camelo is on holiday from 15 to 29 August — no appointments during this period. Please choose another date.',
+    vacationNotice: (from: string, to: string) => `Dr. Nuno Camelo is on holiday from ${vacDate(from, 'en')} to ${vacDate(to, 'en')} — no appointments during this period. Please choose another date.`,
     urgentNotice: 'This slot is already taken. You can request an urgent appointment — Dr. Nuno Camelo will assess availability and contact you directly.',
     urgentOkTitle: 'Urgent appointment request sent',
     urgentOkBody: 'Dr. Nuno Camelo will assess availability and contact you directly. In a medical emergency, please go to the emergency department.',
@@ -155,7 +179,7 @@ const T = {
     dobLabel: 'Дата рождения', pickSlotFirst: 'Сначала выберите дату и период выше.',
     ultimaVaga: '1 место свободно', esgotado: 'Мест нет',
     urgentBtn: 'Запросить срочный приём', urgentHint: '↳ нажмите, чтобы запросить срочный приём',
-    vacationNotice: 'Д-р Нуну Камелу в отпуске с 15 по 29 августа — приёмов в этот период нет. Пожалуйста, выберите другую дату.',
+    vacationNotice: (from: string, to: string) => `Д-р Нуну Камелу в отпуске с ${vacDate(from, 'ru')} по ${vacDate(to, 'ru')} — приёмов в этот период нет. Пожалуйста, выберите другую дату.`,
     urgentNotice: 'Это время уже занято. Вы можете запросить срочный приём — д-р Нуну Камелу оценит возможность и свяжется с вами напрямую.',
     urgentOkTitle: 'Запрос на срочный приём отправлен',
     urgentOkBody: 'Д-р Нуну Камелу оценит доступность и свяжется с вами напрямую. При неотложном состоянии обратитесь в отделение неотложной помощи.',
@@ -173,6 +197,72 @@ const T = {
     cSubmit: 'Отправить запрос', cSubmitting: 'Отправка…',
     cOkTitle: 'Сообщение получено', cOkBody: 'Мы свяжемся с Вами в ближайшее время, обычно в тот же или на следующий рабочий день.',
     cErr: 'Произошла ошибка. Проверьте поля и попробуйте снова.',
+  },
+  de: {
+    tabBook: 'Termin buchen', tabContact: 'Kontakt / Zweitmeinung',
+    bHeading: 'Termin buchen', bSub: 'Wählen Sie Art und Datum. Der Standort wird automatisch gemäß dem Terminplan von Dr. Nuno Camelo zugewiesen.',
+    typeLabel: 'Art des Termins', presencial: '🏥 Präsenztermin', video: '💻 Video',
+    nameLabel: 'Vollständiger Name', namePh: 'Ihr Name',
+    snsLabel: 'Patientennummer (SNS)', optional: '(optional)', snsPh: '9 Ziffern', snsErr: 'Falls angegeben, müssen es 9 Ziffern sein.',
+    phoneLabel: 'Telefon', phonePh: '+351 9XX XXX XXX',
+    emailLabel: 'E-Mail', emailPh: 'email@example.com',
+    dateLabel: 'Gewünschtes Datum', weekendErr: 'Am Wochenende finden keine Termine statt. Bitte wählen Sie einen Werktag.', noSlotErr: 'An diesem Tag ist kein Termin verfügbar. Bitte wählen Sie ein anderes Datum.',
+    schedTitle: 'Sprechtage', chooseDayHint: 'Termine von Montag bis Freitag. Tippen Sie auf einen verfügbaren Tag (grün):', chosenLabel: 'Gewählter Tag',
+    quickTitle: 'Nächste freie Termine', calTitle: 'Oder wählen Sie ein anderes Datum im Kalender', yourDetails: 'Ihre Angaben',
+    dobLabel: 'Geburtsdatum', pickSlotFirst: 'Wählen Sie zuerst oben das Datum und den Zeitraum.',
+    ultimaVaga: '1 Platz verfügbar', esgotado: 'Ausgebucht',
+    urgentBtn: 'Dringenden Termin anfragen', urgentHint: '↳ tippen, um einen dringenden Termin anzufragen',
+    vacationNotice: (from: string, to: string) => `Dr. Nuno Camelo ist von ${vacDate(from, 'de')} bis ${vacDate(to, 'de')} im Urlaub — in diesem Zeitraum finden keine Termine statt. Bitte wählen Sie ein anderes Datum.`,
+    urgentNotice: 'Dieser Termin ist bereits vergeben. Sie können einen dringenden Termin anfragen — Dr. Nuno Camelo prüft die Verfügbarkeit und meldet sich direkt bei Ihnen.',
+    urgentOkTitle: 'Anfrage für dringenden Termin gesendet',
+    urgentOkBody: 'Dr. Nuno Camelo prüft die Verfügbarkeit und meldet sich direkt bei Ihnen. Begeben Sie sich bei einem medizinischen Notfall in die Notaufnahme.',
+    periodPrefix: 'Zeitraum —', manha: 'Vormittag', tarde: 'Nachmittag',
+    reasonLabel: 'Grund', reasonPh: 'Beschreiben Sie kurz den Grund des Termins.',
+    submit: 'Termin bestätigen', submitting: 'Wird gespeichert…',
+    okTitle: 'Termin registriert', okBody: 'Wir haben Ihre Anfrage erhalten. Unser Sekretariat wird die Einzelheiten bestätigen.',
+    sType: 'Art', sDate: 'Datum', sPeriod: 'Zeitraum', sLocal: 'Standort',
+    full: 'Dieser Termin ist bereits vergeben. Bitte wählen Sie ein anderes Datum.', err: 'Ein Fehler ist aufgetreten. Bitte versuchen Sie es erneut.',
+    cHeading: 'Kontakt oder Zweitmeinung', cSub: 'Füllen Sie das Formular aus, und wir melden uns bei Ihnen, in der Regel noch am selben Werktag. Alternativ rufen Sie an unter',
+    cReasonLabel: 'Grund der Kontaktaufnahme', cReasonPh: 'Grund auswählen',
+    cReasons: ['Zweitmeinung', 'Kostenvoranschlag anfragen', 'Knieschmerzen', 'Bandverletzung (VKB / HKB)', 'Meniskusverletzung', 'Knorpelverletzung', 'Kniegelenksarthrose', 'Medizintourismus', 'Sonstiges'],
+    cMessageLabel: 'Nachricht', cMessagePh: 'Beschreiben Sie kurz Ihre Situation, bereits durchgeführte Untersuchungen oder sonstige relevante Informationen.',
+    gdprBefore: 'Ich willige in die Verarbeitung meiner personenbezogenen Daten zu Kontaktzwecken gemäß der', gdprLink: 'Datenschutzerklärung', privacyHref: '/privacidade',
+    cSubmit: 'Anfrage senden', cSubmitting: 'Wird gesendet…',
+    cOkTitle: 'Nachricht erhalten', cOkBody: 'Wir melden uns in Kürze bei Ihnen, in der Regel noch am selben oder am nächsten Werktag.',
+    cErr: 'Ein Fehler ist aufgetreten. Bitte überprüfen Sie die Felder und versuchen Sie es erneut.',
+  },
+  fr: {
+    tabBook: 'Prendre rendez-vous', tabContact: 'Contact / deuxième avis',
+    bHeading: 'Prendre rendez-vous', bSub: 'Choisissez le type et la date. Le lieu est attribué automatiquement selon l’agenda du Dr. Nuno Camelo.',
+    typeLabel: 'Type de rendez-vous', presencial: '🏥 En présentiel', video: '💻 Vidéo',
+    nameLabel: 'Nom complet', namePh: 'Votre nom',
+    snsLabel: 'Numéro de patient (SNS)', optional: '(facultatif)', snsPh: '9 chiffres', snsErr: 'Si renseigné, il doit comporter 9 chiffres.',
+    phoneLabel: 'Téléphone', phonePh: '+351 9XX XXX XXX',
+    emailLabel: 'E-mail', emailPh: 'email@example.com',
+    dateLabel: 'Date souhaitée', weekendErr: 'Pas de consultations le week-end. Veuillez choisir un jour ouvrable.', noSlotErr: 'Aucun rendez-vous disponible ce jour-là. Veuillez choisir une autre date.',
+    schedTitle: 'Jours de consultation', chooseDayHint: 'Consultations du lundi au vendredi. Touchez un jour disponible (en vert) :', chosenLabel: 'Jour choisi',
+    quickTitle: 'Prochaines dates disponibles', calTitle: 'Ou choisissez une autre date dans le calendrier', yourDetails: 'Vos informations',
+    dobLabel: 'Date de naissance', pickSlotFirst: 'Choisissez d’abord la date et la période ci-dessus.',
+    ultimaVaga: '1 place disponible', esgotado: 'Complet',
+    urgentBtn: 'Demander un rendez-vous urgent', urgentHint: '↳ touchez pour demander un rendez-vous urgent',
+    vacationNotice: (from: string, to: string) => `Le Dr. Nuno Camelo est en congé du ${vacDate(from, 'fr')} au ${vacDate(to, 'fr')} — aucune consultation durant cette période. Veuillez choisir une autre date.`,
+    urgentNotice: 'Ce créneau est déjà pris. Vous pouvez demander un rendez-vous urgent — le Dr. Nuno Camelo évaluera la disponibilité et vous contactera directement.',
+    urgentOkTitle: 'Demande de rendez-vous urgent envoyée',
+    urgentOkBody: 'Le Dr. Nuno Camelo évaluera la disponibilité et vous contactera directement. En cas d’urgence médicale, rendez-vous au service des urgences.',
+    periodPrefix: 'Période —', manha: 'Matin', tarde: 'Après-midi',
+    reasonLabel: 'Motif', reasonPh: 'Décrivez brièvement le motif de la consultation.',
+    submit: 'Confirmer le rendez-vous', submitting: 'Enregistrement…',
+    okTitle: 'Rendez-vous enregistré', okBody: 'Nous avons bien reçu votre demande. Notre secrétariat confirmera les détails.',
+    sType: 'Type', sDate: 'Date', sPeriod: 'Période', sLocal: 'Lieu',
+    full: 'Ce créneau est déjà pris. Veuillez choisir une autre date.', err: 'Une erreur est survenue. Veuillez réessayer.',
+    cHeading: 'Contact ou deuxième avis', cSub: 'Remplissez le formulaire et nous vous contacterons, généralement le jour ouvrable même. Vous pouvez aussi appeler le',
+    cReasonLabel: 'Motif du contact', cReasonPh: 'Sélectionnez un motif',
+    cReasons: ['Deuxième avis', 'Demander un devis', 'Douleur au genou', 'Lésion ligamentaire (LCA / LCP)', 'Lésion méniscale', 'Lésion cartilagineuse', 'Gonarthrose', 'Tourisme médical', 'Autre'],
+    cMessageLabel: 'Message', cMessagePh: 'Décrivez brièvement votre situation, les examens déjà réalisés ou toute information pertinente.',
+    gdprBefore: 'Je consens au traitement de mes données personnelles à des fins de contact, conformément à la', gdprLink: 'politique de confidentialité', privacyHref: '/privacidade',
+    cSubmit: 'Envoyer la demande', cSubmitting: 'Envoi…',
+    cOkTitle: 'Message reçu', cOkBody: 'Nous vous contacterons sous peu, généralement le jour même ou le jour ouvrable suivant.',
+    cErr: 'Une erreur est survenue. Veuillez vérifier les champs et réessayer.',
   },
 };
 
@@ -214,6 +304,8 @@ function HospitalLinks({ lang }: { lang: Lang }) {
     pt: { title: "Prefere marcar diretamente no hospital?", lus: "Perfil no Hospital Lusíadas", mis: "Contactos — Misericórdia de Vila do Conde" },
     en: { title: "Prefer to book directly at the hospital?", lus: "Profile at Hospital Lusíadas", mis: "Contacts — Misericórdia de Vila do Conde" },
     ru: { title: "Предпочитаете записаться напрямую в больнице?", lus: "Профиль в Hospital Lusíadas", mis: "Контакты — Misericórdia de Vila do Conde" },
+    de: { title: "Möchten Sie lieber direkt im Krankenhaus buchen?", lus: "Profil im Hospital Lusíadas", mis: "Kontakt — Misericórdia de Vila do Conde" },
+    fr: { title: "Vous préférez réserver directement à l’hôpital ?", lus: "Profil à l’Hospital Lusíadas", mis: "Contacts — Misericórdia de Vila do Conde" },
   }[lang];
   return (
     <section className="mc-hosp" aria-label={STR.title}>
@@ -390,7 +482,7 @@ function BookingForm({ t, dias, lang }: { t: typeof T['pt']; dias: string[]; lan
 
         {/* 3. Período (ou aviso de férias) */}
         {blocked ? (
-          <div className="mc-vacation">{t.vacationNotice}</div>
+          <div className="mc-vacation">{t.vacationNotice(blocked.from, blocked.to)}</div>
         ) : info && info.periodos.length > 0 ? (
           <div className="mc-group">
             <label className="mc-label">{t.periodPrefix} {info.diaNome}</label>

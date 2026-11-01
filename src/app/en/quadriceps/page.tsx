@@ -10,7 +10,9 @@ export const metadata: Metadata = {
       "pt-PT": "https://www.consultajoelho.pt/quadriceps",
       "x-default": "https://www.consultajoelho.pt/quadriceps",
       "en-GB": "https://www.consultajoelho.pt/en/quadriceps",
-      "ru-RU": "https://www.consultajoelho.pt/ru/quadriceps"
+      "ru-RU": "https://www.consultajoelho.pt/ru/quadriceps",
+      "de-DE": "https://www.consultajoelho.pt/de/quadriceps",
+      "fr-FR": "https://www.consultajoelho.pt/fr/quadriceps"
     }
   },
   "openGraph": {

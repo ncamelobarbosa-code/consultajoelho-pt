@@ -10,7 +10,9 @@ export const metadata: Metadata = {
       "pt-PT": "https://www.consultajoelho.pt/joelhodrnunocamelo",
       "x-default": "https://www.consultajoelho.pt/joelhodrnunocamelo",
       "en-GB": "https://www.consultajoelho.pt/en/joelhodrnunocamelo",
-      "ru-RU": "https://www.consultajoelho.pt/ru/joelhodrnunocamelo"
+      "ru-RU": "https://www.consultajoelho.pt/ru/joelhodrnunocamelo",
+      "de-DE": "https://www.consultajoelho.pt/de/joelhodrnunocamelo",
+      "fr-FR": "https://www.consultajoelho.pt/fr/joelhodrnunocamelo"
     }
   },
   "openGraph": {

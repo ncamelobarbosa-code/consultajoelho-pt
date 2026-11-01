@@ -39,7 +39,7 @@ const REVIEWS: Review[] = [
   },
 ];
 
-type Lang = "pt" | "en" | "ru";
+type Lang = "pt" | "en" | "ru" | "de" | "fr";
 
 const STRINGS = {
   pt: {
@@ -62,6 +62,20 @@ const STRINGS = {
     see: "Смотреть отзывы в Google",
     leave: "Оставить отзыв",
     ago: (w: number) => (w <= 0 ? "На этой неделе" : `${w} недель назад`),
+  },
+  de: {
+    heading: "Was Patienten sagen",
+    count: (n: number) => `${n} Google-Bewertungen`,
+    see: "Bewertungen auf Google ansehen",
+    leave: "Bewertung abgeben",
+    ago: (w: number) => (w <= 0 ? "Diese Woche" : `vor ${w} Wochen`),
+  },
+  fr: {
+    heading: "Ce que disent les patients",
+    count: (n: number) => `${n} avis sur Google`,
+    see: "Voir les avis sur Google",
+    leave: "Laisser un avis",
+    ago: (w: number) => (w <= 0 ? "Cette semaine" : `il y a ${w} semaines`),
   },
 } as const;
 

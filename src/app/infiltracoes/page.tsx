@@ -16,7 +16,9 @@ export const metadata: Metadata = {
       "pt-PT": "https://www.consultajoelho.pt/infiltracoes",
       "x-default": "https://www.consultajoelho.pt/infiltracoes",
       "en-GB": "https://www.consultajoelho.pt/en/infiltracoes",
-      "ru-RU": "https://www.consultajoelho.pt/ru/infiltracoes"
+      "ru-RU": "https://www.consultajoelho.pt/ru/infiltracoes",
+      "de-DE": "https://www.consultajoelho.pt/de/infiltracoes",
+      "fr-FR": "https://www.consultajoelho.pt/fr/infiltracoes"
     }
   }
 };

@@ -10,7 +10,9 @@ export const metadata: Metadata = {
       "pt-PT": "https://www.consultajoelho.pt/avaliar",
       "x-default": "https://www.consultajoelho.pt/avaliar",
       "en-GB": "https://www.consultajoelho.pt/en/avaliar",
-      "ru-RU": "https://www.consultajoelho.pt/ru/avaliar"
+      "ru-RU": "https://www.consultajoelho.pt/ru/avaliar",
+      "de-DE": "https://www.consultajoelho.pt/de/avaliar",
+      "fr-FR": "https://www.consultajoelho.pt/fr/avaliar"
     }
   },
   "openGraph": {

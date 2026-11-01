@@ -35,8 +35,8 @@ const ROUTES = {
 // ── Revisão médica (E-E-A-T / GEO): "última revisão médica" visível + schema ──
 // Data de revisão real das páginas (atualizar quando houver nova revisão de conteúdo).
 const REVIEW_ISO = "2026-07-24";
-const REVIEW_HUMAN = { pt: "24 de julho de 2026", en: "24 July 2026", ru: "24 июля 2026 г." };
-const REVIEW_LABEL = { pt: "Última revisão médica", en: "Last medically reviewed", ru: "Последняя медицинская проверка" };
+const REVIEW_HUMAN = { pt: "24 de julho de 2026", en: "24 July 2026", ru: "24 июля 2026 г.", de: "24. Juli 2026", fr: "24 juillet 2026" };
+const REVIEW_LABEL = { pt: "Última revisão médica", en: "Last medically reviewed", ru: "Последняя медицинская проверка", de: "Zuletzt medizinisch geprüft", fr: "Dernière révision médicale" };
 const DOCTOR_NAME = "Dr. Nuno Camelo Barbosa";
 const DOCTOR_URL = "https://www.consultajoelho.pt/nuno-camelo-especialista-cirurgia-joelho";
 // Perfis externos (entity linking p/ LLMs e knowledge graph)
@@ -56,6 +56,8 @@ const AUTHOR_STR = {
   pt: { role: "Cirurgião ortopédico · Subespecialista em cirurgia do joelho", cred: "Revisor científico (AJSM · KSSTA · OJSM · JEO)", profile: "Ver perfil completo", book: "Marcar consulta" },
   en: { role: "Orthopaedic surgeon · Knee surgery subspecialty", cred: "Peer reviewer (AJSM · KSSTA · OJSM · JEO)", profile: "Full profile", book: "Book appointment" },
   ru: { role: "Хирург-ортопед · Специализация на хирургии колена", cred: "Научный рецензент (AJSM · KSSTA · OJSM · JEO)", profile: "Полный профиль", book: "Записаться" },
+  de: { role: "Facharzt für Orthopädie · Spezialisierung auf Kniechirurgie", cred: "Wissenschaftlicher Gutachter (AJSM · KSSTA · OJSM · JEO)", profile: "Vollständiges Profil", book: "Termin vereinbaren" },
+  fr: { role: "Chirurgien orthopédiste · Surspécialité en chirurgie du genou", cred: "Relecteur scientifique (AJSM · KSSTA · OJSM · JEO)", profile: "Profil complet", book: "Prendre rendez-vous" },
 };
 
 // Caixa "Sobre o autor" (E-E-A-T) no fim de cada página médica.
@@ -129,11 +131,13 @@ const REFERENCES = {
   ],
 };
 
-const REFS_HEADING = { pt: "Referências", en: "References", ru: "Литература" };
+const REFS_HEADING = { pt: "Referências", en: "References", ru: "Литература", de: "Referenzen", fr: "Références" };
 const REFS_NOTE = {
   pt: "Guidelines de sociedades científicas e revisões que sustentam esta informação.",
   en: "Clinical guidelines and scientific reviews supporting this information.",
   ru: "Клинические рекомендации и научные обзоры, подтверждающие эту информацию.",
+  de: "Leitlinien wissenschaftlicher Fachgesellschaften und Übersichtsarbeiten, die diese Informationen stützen.",
+  fr: "Recommandations de sociétés savantes et revues scientifiques qui étayent ces informations.",
 };
 
 // Secção "Referências" (E-E-A-T) — só nas páginas com fontes definidas.
@@ -155,8 +159,8 @@ function injectReferences($x, seg, locale) {
 const citationsFor = (seg) => (REFERENCES[seg] || []).map((r) => r.u);
 
 // ── FAQ de PREÇO da cirurgia (3 vias + valores "a partir de", já publicados) ──
-const PRICE_HREF = { pt: "/kneesurgeryinportugalprices", en: "/kneesurgeryinportugalprices", ru: "/ru/kneesurgeryinportugalprices" };
-const BOOK_HREF = { pt: "/marcar-consulta", en: "/en/marcar-consulta", ru: "/ru/marcar-consulta" };
+const PRICE_HREF = { pt: "/kneesurgeryinportugalprices", en: "/kneesurgeryinportugalprices", ru: "/ru/kneesurgeryinportugalprices", de: "/kneesurgeryinportugalprices", fr: "/kneesurgeryinportugalprices" };
+const BOOK_HREF = { pt: "/marcar-consulta", en: "/en/marcar-consulta", ru: "/ru/marcar-consulta", de: "/de/marcar-consulta", fr: "/fr/marcar-consulta" };
 const PRICING_FAQ = {
   pt: {
     q: "Quanto custa a cirurgia ao joelho?",
@@ -169,6 +173,14 @@ const PRICING_FAQ = {
   ru: {
     q: "Сколько стоит операция на колене?",
     a: `Стоимость зависит от способа лечения. <strong>SIGIC (гос. система Португалии):</strong> по хирургическому талону операция полностью покрывается — без затрат для пациента. <strong>Страховки и субсистемы:</strong> операция по договору, согласно вашему плану. <strong>Частно:</strong> индивидуальная смета — ориентировочно от €3 000 за артроскопию (мениск, связки или хрящ, включая реконструкцию передней крестообразной связки) и от €8 000 за эндопротезирование колена. Итоговая стоимость зависит от случая, больницы и имплантатов. Для точной сметы <a href="${BOOK_HREF.ru}">запишитесь на приём</a> или смотрите <a href="${PRICE_HREF.ru}">цены и сметы</a>.`,
+  },
+  de: {
+    q: "Was kostet eine Knieoperation?",
+    a: `Die Kosten hängen vom Behandlungsweg ab. <strong>SIGIC (portugiesischer Gesundheitsdienst SNS):</strong> mit dem Operationsgutschein ist der Eingriff vollständig gedeckt — ohne Kosten für den Patienten. <strong>Krankenversicherung / Subsysteme:</strong> vertraglich geregelte Operation gemäß Ihrem Tarif. <strong>Privat:</strong> individueller Kostenvoranschlag — richtwertweise ab 3.000 € für eine Arthroskopie (Meniskus, Bänder oder Knorpel, einschließlich Rekonstruktion des vorderen Kreuzbands) und ab 8.000 € für eine Knieprothese. Die Endpreise hängen vom klinischen Fall, vom Krankenhaus und von den Implantaten ab. Für einen genauen Kostenvoranschlag <a href="${BOOK_HREF.de}">vereinbaren Sie einen Termin</a> oder sehen Sie <a href="${PRICE_HREF.de}">Preise und Kostenvoranschläge</a>.`,
+  },
+  fr: {
+    q: "Combien coûte une chirurgie du genou ?",
+    a: `Le coût dépend de la voie de traitement. <strong>SIGIC (service de santé portugais SNS) :</strong> avec le bon de chirurgie, l'intervention est entièrement prise en charge — sans frais pour le patient. <strong>Assurances et sous-systèmes de santé :</strong> chirurgie conventionnée, selon votre contrat. <strong>Privé :</strong> devis personnalisé — à titre indicatif, à partir de 3 000 € pour une arthroscopie (ménisque, ligaments ou cartilage, y compris la reconstruction du ligament croisé antérieur) et à partir de 8 000 € pour une prothèse du genou. Les prix finaux dépendent du cas clinique, de l'hôpital et des implants. Pour un devis précis, <a href="${BOOK_HREF.fr}">prenez rendez-vous</a> ou consultez les <a href="${PRICE_HREF.fr}">prix et devis</a>.`,
   },
 };
 
@@ -197,6 +209,14 @@ const EXTRA_FAQ = {
       { q: "У меня болит колено — когда обращаться к специалисту?", a: "Обратитесь за оценкой, если боль длится более 2–3 недель, был травматизм с отёком, колено блокируется, подкашивается или не выдерживает вес, либо есть покраснение и температура. Ранняя оценка не даёт излечимым проблемам (мениск, связки, хрящ) прогрессировать." },
       { q: "Боль в колене всегда означает артроз?", a: "Нет. У боли в колене много причин — повреждения мениска, связок (ПКС) или хряща, тендинопатии, нестабильность надколенника или отражённая боль из бедра/позвоночника. Диагноз зависит от анамнеза, осмотра и, при необходимости, снимков." },
     ],
+    de: [
+      { q: "Ich habe Knieschmerzen — wann sollte ich einen Facharzt aufsuchen?", a: "Lassen Sie sich untersuchen, wenn die Schmerzen länger als 2–3 Wochen anhalten, wenn ein Trauma mit Schwellung vorlag, wenn das Knie blockiert, wegknickt oder das Gewicht nicht tragen kann, oder bei Rötung und Fieber. Eine frühzeitige Abklärung verhindert, dass behandelbare Probleme (Meniskus, Bänder, Knorpel) fortschreiten." },
+      { q: "Bedeuten Knieschmerzen immer eine Arthrose?", a: "Nein. Knieschmerzen haben viele Ursachen — Verletzungen von Meniskus, Bändern (VKB) oder Knorpel, Tendinopathien, Patellainstabilität oder von Hüfte/Wirbelsäule ausstrahlende Schmerzen. Die richtige Diagnose hängt von Anamnese, Untersuchung und bei Bedarf Bildgebung ab." },
+    ],
+    fr: [
+      { q: "J'ai mal au genou — quand consulter un spécialiste ?", a: "Consultez si la douleur persiste plus de 2 à 3 semaines, en cas de traumatisme avec gonflement, si le genou se bloque, se dérobe ou ne supporte plus le poids, ou en cas de rougeur et de fièvre. Une évaluation précoce évite que des problèmes traitables (ménisque, ligaments, cartilage) ne s'aggravent." },
+      { q: "Une douleur au genou signifie-t-elle toujours de l'arthrose ?", a: "Non. La douleur au genou a de nombreuses causes — lésions du ménisque, des ligaments (LCA) ou du cartilage, tendinopathies, instabilité rotulienne ou douleur projetée de la hanche/colonne. Le diagnostic correct dépend de l'anamnèse, de l'examen et, si nécessaire, de l'imagerie." },
+    ],
   },
   quadriceps: {
     pt: [
@@ -210,6 +230,14 @@ const EXTRA_FAQ = {
     ru: [
       { q: "Что такое артрогенное мышечное торможение (AMI) квадрицепса?", a: "Это трудность активации квадрицепса после травмы или операции на колене, даже без повреждения самой мышцы — колено «блокирует» сокращение защитным рефлексом. Его распознавание и лечение (ранняя активация, электростимуляция, специальные упражнения) необходимы для хорошего восстановления и профилактики повторной травмы." },
       { q: "Почему квадрицепс так важен в восстановлении колена?", a: "Квадрицепс — главный активный стабилизатор колена. Его сила во многом определяет возвращение в спорт и результат после операции (ПКС, эндопротез, хрящ). Поэтому реабилитация с самого начала направлена на его активацию и укрепление." },
+    ],
+    de: [
+      { q: "Was ist die arthrogene Muskelhemmung (AMI) des Quadrizeps?", a: "Es ist die Schwierigkeit, den Quadrizeps nach einer Knieverletzung oder -operation zu aktivieren, auch ohne Muskelschaden — das Knie blockiert die Kontraktion durch einen Schutzreflex. Das Erkennen und Behandeln (frühe Aktivierung, Elektrostimulation, gezielte Übungen) ist entscheidend für eine gute Genesung und zur Vermeidung erneuter Verletzungen." },
+      { q: "Warum ist der Quadrizeps für die Genesung des Knies so wichtig?", a: "Der Quadrizeps ist der wichtigste aktive Stabilisator des Knies. Seine Kraft bestimmt maßgeblich die Rückkehr zum Sport und das Ergebnis nach einer Operation (VKB, Prothese, Knorpel). Deshalb konzentriert sich die Rehabilitation von Anfang an auf seine Aktivierung und Kräftigung." },
+    ],
+    fr: [
+      { q: "Qu'est-ce que l'inhibition musculaire arthrogénique (AMI) du quadriceps ?", a: "C'est la difficulté à activer le quadriceps après une blessure ou une chirurgie du genou, même sans lésion musculaire — le genou bloque la contraction par un réflexe de protection. La reconnaître et la traiter (activation précoce, électrostimulation, exercices spécifiques) est essentiel pour une bonne récupération et pour prévenir une nouvelle blessure." },
+      { q: "Pourquoi le quadriceps est-il si important dans la récupération du genou ?", a: "Le quadriceps est le principal stabilisateur actif du genou. Sa force détermine en grande partie le retour au sport et le résultat après une chirurgie (LCA, prothèse, cartilage). C'est pourquoi la rééducation se concentre sur son activation et son renforcement dès le début." },
     ],
   },
 };
@@ -230,7 +258,7 @@ function addFaqs($x, seg, locale) {
       );
     }
   } else {
-    const heading = { pt: "Perguntas frequentes", en: "Frequently asked questions", ru: "Часто задаваемые вопросы" }[locale];
+    const heading = { pt: "Perguntas frequentes", en: "Frequently asked questions", ru: "Часто задаваемые вопросы", de: "Häufige Fragen", fr: "Questions fréquentes" }[locale];
     const rows = items
       .map((it) => `<details class="faq-item" style="border:1px solid var(--border,#e2ece1);border-radius:12px;padding:.9rem 1.1rem;margin-bottom:.6rem;"><summary class="faq-q" style="cursor:pointer;font-weight:600;color:var(--teal,#035772);font-family:'Space Grotesk',sans-serif;">${it.q}</summary><div class="faq-a" style="margin-top:.6rem;line-height:1.6;color:var(--text,#091405);">${it.a}</div></details>`)
       .join("");
@@ -242,15 +270,15 @@ function addFaqs($x, seg, locale) {
 
 // Condição clínica de cada página (schema.org about -> MedicalCondition). Reforça relevância temática (Google + LLMs).
 const CONDITIONS = {
-  menisco: { pt: "Rotura do menisco", en: "Meniscus tear", ru: "Разрыв мениска" },
-  lca: { pt: "Rotura do ligamento cruzado anterior", en: "Anterior cruciate ligament injury", ru: "Разрыв передней крестообразной связки" },
-  cartilagem: { pt: "Lesão da cartilagem do joelho", en: "Knee cartilage injury", ru: "Повреждение хряща коленного сустава" },
-  artrose: { pt: "Artrose do joelho (gonartrose)", en: "Knee osteoarthritis", ru: "Остеоартроз коленного сустава" },
-  protese: { pt: "Artroplastia do joelho", en: "Knee replacement", ru: "Эндопротезирование коленного сустава" },
-  "quisto-baker": { pt: "Quisto de Baker", en: "Baker's cyst", ru: "Киста Бейкера" },
-  "quistos-parameniscais": { pt: "Quistos parameniscais", en: "Parameniscal cysts", ru: "Параменисковые кисты" },
-  "sindrome-banda-iliotibial": { pt: "Síndrome da banda iliotibial", en: "Iliotibial band syndrome", ru: "Синдром илиотибиального тракта" },
-  "luxacao-rotula": { pt: "Instabilidade e luxação da rótula", en: "Patellar instability", ru: "Нестабильность надколенника" },
+  menisco: { pt: "Rotura do menisco", en: "Meniscus tear", ru: "Разрыв мениска", de: "Meniskusriss", fr: "Rupture du ménisque" },
+  lca: { pt: "Rotura do ligamento cruzado anterior", en: "Anterior cruciate ligament injury", ru: "Разрыв передней крестообразной связки", de: "Riss des vorderen Kreuzbands", fr: "Rupture du ligament croisé antérieur" },
+  cartilagem: { pt: "Lesão da cartilagem do joelho", en: "Knee cartilage injury", ru: "Повреждение хряща коленного сустава", de: "Knorpelschaden im Knie", fr: "Lésion du cartilage du genou" },
+  artrose: { pt: "Artrose do joelho (gonartrose)", en: "Knee osteoarthritis", ru: "Остеоартроз коленного сустава", de: "Kniearthrose (Gonarthrose)", fr: "Arthrose du genou (gonarthrose)" },
+  protese: { pt: "Artroplastia do joelho", en: "Knee replacement", ru: "Эндопротезирование коленного сустава", de: "Knieendoprothese", fr: "Prothèse du genou" },
+  "quisto-baker": { pt: "Quisto de Baker", en: "Baker's cyst", ru: "Киста Бейкера", de: "Baker-Zyste", fr: "Kyste de Baker" },
+  "quistos-parameniscais": { pt: "Quistos parameniscais", en: "Parameniscal cysts", ru: "Параменисковые кисты", de: "Parameniskale Zysten", fr: "Kystes paraméniscaux" },
+  "sindrome-banda-iliotibial": { pt: "Síndrome da banda iliotibial", en: "Iliotibial band syndrome", ru: "Синдром илиотибиального тракта", de: "Tractus-iliotibialis-Syndrom", fr: "Syndrome de la bandelette ilio-tibiale" },
+  "luxacao-rotula": { pt: "Instabilidade e luxação da rótula", en: "Patellar instability", ru: "Нестабильность надколенника", de: "Patellainstabilität und -luxation", fr: "Instabilité et luxation de la rotule" },
 };
 const conditionFor = (seg, locale) => (CONDITIONS[seg] ? { "@type": "MedicalCondition", name: CONDITIONS[seg][locale] } : null);
 
@@ -278,7 +306,7 @@ function buildFaqSchema($x) {
 // Migalhas (Início › Página)
 function breadcrumbNodeFor(seg, name, locale) {
   const home = locale === "pt" ? BASE : `${BASE}/${locale}`;
-  const homeName = { pt: "Início", en: "Home", ru: "Главная" }[locale];
+  const homeName = { pt: "Início", en: "Home", ru: "Главная", de: "Startseite", fr: "Accueil" }[locale];
   const item = locale === "pt" ? `${BASE}/${seg}` : `${BASE}/${locale}/${seg}`;
   return {
     "@type": "BreadcrumbList",
@@ -472,6 +500,21 @@ ruSlugs.add("marcar-consulta"); // /ru/marcar-consulta existe (página React, fo
 // /ru via PortedArticle (conteúdo RU traduzido)
 for (const s of ["tendao-rotuliano-tendinite-drnunocamelo", "kneesurgeryinportugalprices", "liquidojoelho-artrocentese-drnunocamelo", "entorsejoelho-drnunocamelo", "actividadecientificajoelho"]) ruSlugs.add(s);
 
+// ── i18n DE/FR: descobrir que segs têm versão traduzida (do EN) ──
+const deRaw = {};
+for (const [file, seg] of Object.entries(ROUTES)) {
+  try { deRaw[seg] = await readFile(`${SRC}/${file.replace(/\.html$/, "_de.html")}`, "utf8"); } catch {}
+}
+const deSlugs = new Set(Object.keys(deRaw));
+deSlugs.add("marcar-consulta"); // /de/marcar-consulta (página React)
+
+const frRaw = {};
+for (const [file, seg] of Object.entries(ROUTES)) {
+  try { frRaw[seg] = await readFile(`${SRC}/${file.replace(/\.html$/, "_fr.html")}`, "utf8"); } catch {}
+}
+const frSlugs = new Set(Object.keys(frRaw));
+frSlugs.add("marcar-consulta"); // /fr/marcar-consulta (página React)
+
 // hreflang: URLs alternativos por seg ("" = homepage). Só lista locales que existem.
 const BASE = "https://www.consultajoelho.pt";
 function langAlternates(seg) {
@@ -479,15 +522,26 @@ function langAlternates(seg) {
   const langs = { "pt-PT": `${BASE}${path}`, "x-default": `${BASE}${path}` };
   if (enSlugs.has(seg)) langs["en-GB"] = `${BASE}/en${path}`;
   if (ruSlugs.has(seg)) langs["ru-RU"] = `${BASE}/ru${path}`;
+  if (deSlugs.has(seg)) langs["de-DE"] = `${BASE}/de${path}`;
+  if (frSlugs.has(seg)) langs["fr-FR"] = `${BASE}/fr${path}`;
   return langs;
 }
-const hasTranslation = (seg) => enSlugs.has(seg) || ruSlugs.has(seg);
+const hasTranslation = (seg) => enSlugs.has(seg) || ruSlugs.has(seg) || deSlugs.has(seg) || frSlugs.has(seg);
 
 // Seletor de idioma de 3 línguas: cada locale mostra as outras duas (apontam para a home do locale).
+const LANG_LINKS = {
+  pt: '<a href="/" class="nav-lang" hreflang="pt" title="Português">PT</a>',
+  en: '<a href="/en" class="nav-lang" hreflang="en" title="English">EN</a>',
+  ru: '<a href="/ru" class="nav-lang" hreflang="ru" title="Русский">RU</a>',
+  de: '<a href="/de" class="nav-lang" hreflang="de" title="Deutsch">DE</a>',
+  fr: '<a href="/fr" class="nav-lang" hreflang="fr" title="Français">FR</a>',
+};
 const SWITCHER = {
-  pt: '<a href="/en" class="nav-lang" hreflang="en" title="English">EN</a><a href="/ru" class="nav-lang" hreflang="ru" title="Русский">RU</a>',
-  en: '<a href="/" class="nav-lang" hreflang="pt" title="Português">PT</a><a href="/ru" class="nav-lang" hreflang="ru" title="Русский">RU</a>',
-  ru: '<a href="/" class="nav-lang" hreflang="pt" title="Português">PT</a><a href="/en" class="nav-lang" hreflang="en" title="English">EN</a>',
+  pt: LANG_LINKS.en + LANG_LINKS.ru + LANG_LINKS.de + LANG_LINKS.fr,
+  en: LANG_LINKS.pt + LANG_LINKS.ru + LANG_LINKS.de + LANG_LINKS.fr,
+  ru: LANG_LINKS.pt + LANG_LINKS.en + LANG_LINKS.de + LANG_LINKS.fr,
+  de: LANG_LINKS.pt + LANG_LINKS.en + LANG_LINKS.ru + LANG_LINKS.fr,
+  fr: LANG_LINKS.pt + LANG_LINKS.en + LANG_LINKS.ru + LANG_LINKS.de,
 };
 function injectSwitcher(html, locale) {
   // substitui o(s) link(s) nav-lang existente(s) pelo conjunto correto do locale
@@ -501,6 +555,7 @@ const VIDEOS_LINK = {
   ru: { href: "/ru/videos", label: "Видео" },
 };
 function injectVideosLink(html, locale) {
+  if (!VIDEOS_LINK[locale]) return html; // locales sem página de vídeos (de/fr)
   const { href, label } = VIDEOS_LINK[locale];
   if (html.includes(`href="${href}"`)) return html; // já existe
   return html.replace("</nav>", `<div class="nav-item"><a href="${href}">${label}</a></div></nav>`);
@@ -631,19 +686,27 @@ const PROSE_SPORT = {
     t: "Спорт после эндопротезирования? Да.",
     p: "Эндопротез коленного сустава — не конец активной жизни; напротив, цель операции — вернуть безболезненную подвижность. Большинство пациентов возвращаются к нагрузкам низкой и средней интенсивности: ходьба, плавание, аквааэробика, велосипед, гольф, пешие походы, парный теннис и любительские лыжи. Рекомендуется избегать лишь высокоинтенсивных ударных нагрузок (бег на длинные дистанции, прыжки и контактные виды спорта), которые ускоряют износ имплантата.",
   },
+  de: {
+    t: "Sport nach einer Knieprothese? Ja.",
+    p: "Eine Knieprothese ist nicht das Ende eines aktiven Lebens — im Gegenteil, das Ziel der Operation ist es, schmerzfreie Beweglichkeit zurückzugeben. Die meisten Patienten kehren zu Aktivitäten mit geringer und mittlerer Belastung zurück: Gehen, Schwimmen, Wassergymnastik, Radfahren, Golf, Wandern, Doppel-Tennis und Freizeit-Skifahren. Zu vermeiden sind lediglich hochintensive, wiederholte Stoßbelastungen (Langstreckenlauf, Springen und Kontaktsportarten), die den Verschleiß des Implantats beschleunigen.",
+  },
+  fr: {
+    t: "Du sport après une prothèse du genou ? Oui.",
+    p: "Une prothèse du genou n'est pas la fin d'une vie active — au contraire, l'objectif de la chirurgie est de rendre une mobilité sans douleur. La plupart des patients reprennent des activités à faible et moyen impact : marche, natation, aquagym, vélo, golf, randonnée, tennis en double et ski de loisir. Il est seulement conseillé d'éviter les impacts répétés de haute intensité (course de longue distance, sauts et sports de contact), qui accélèrent l'usure de l'implant.",
+  },
 };
 // Cartão de anatomia (.anatomy-card): por slug, substitui o desenho por imagem real
 // (artrose→RX, quisto-baker→RMN) ou remove-o (quistos-parameniscais, banda iliotibial).
 const ANATOMY_IMG = {
   artrose: {
     img: "/img/rx-artrose-bilateral.png",
-    h: { pt: "Artrose Bilateral — Predomínio Interno", en: "Bilateral Osteoarthritis — Medial Predominance", ru: "Двусторонний остеоартроз — медиальное преобладание" },
-    cap: { pt: "Radiografia em carga: pinçamento do compartimento interno em ambos os joelhos.", en: "Weight-bearing X-ray: medial compartment narrowing in both knees.", ru: "Рентген с нагрузкой: сужение медиального отдела в обоих коленях." },
+    h: { pt: "Artrose Bilateral — Predomínio Interno", en: "Bilateral Osteoarthritis — Medial Predominance", ru: "Двусторонний остеоартроз — медиальное преобладание", de: "Beidseitige Arthrose — mediale Betonung", fr: "Arthrose bilatérale — prédominance interne" },
+    cap: { pt: "Radiografia em carga: pinçamento do compartimento interno em ambos os joelhos.", en: "Weight-bearing X-ray: medial compartment narrowing in both knees.", ru: "Рентген с нагрузкой: сужение медиального отдела в обоих коленях.", de: "Röntgenaufnahme unter Belastung: Verschmälerung des medialen Kompartiments in beiden Knien.", fr: "Radiographie en charge : pincement du compartiment interne des deux genoux." },
   },
   "quisto-baker": {
     img: "/img/rmn-baker.jpg",
-    h: { pt: "Quisto de Baker — RMN", en: "Baker's Cyst — MRI", ru: "Киста Бейкера — МРТ" },
-    cap: { pt: "RMN axial do joelho: quisto de Baker (estrutura de sinal líquido na região poplítea).", en: "Axial knee MRI: Baker's cyst (fluid-signal structure in the popliteal region).", ru: "Аксиальная МРТ колена: киста Бейкера (структура с жидкостным сигналом в подколенной области)." },
+    h: { pt: "Quisto de Baker — RMN", en: "Baker's Cyst — MRI", ru: "Киста Бейкера — МРТ", de: "Baker-Zyste — MRT", fr: "Kyste de Baker — IRM" },
+    cap: { pt: "RMN axial do joelho: quisto de Baker (estrutura de sinal líquido na região poplítea).", en: "Axial knee MRI: Baker's cyst (fluid-signal structure in the popliteal region).", ru: "Аксиальная МРТ колена: киста Бейкера (структура с жидкостным сигналом в подколенной области).", de: "Axiale Knie-MRT: Baker-Zyste (flüssigkeitsisointense Struktur in der Kniekehle).", fr: "IRM axiale du genou : kyste de Baker (structure à signal liquidien dans la région poplitée)." },
   },
 };
 const ANATOMY_REMOVE = new Set(["quistos-parameniscais", "sindrome-banda-iliotibial", "luxacao-rotula"]);
@@ -685,7 +748,7 @@ function setCredChips($x, seg, locale) {
   const set = CRED_CHIPS[seg];
   const box = $x(".credentials");
   if (!set || !box.length) return;
-  const chips = (set[locale] || set.pt).map((c) => `<span class="cred-tag">${c}</span>`).join("");
+  const chips = (set[locale] || set.en || set.pt).map((c) => `<span class="cred-tag">${c}</span>`).join("");
   box.html(chips);
 }
 
@@ -703,6 +766,8 @@ const AMI_LINK = {
   pt: "Saber mais sobre a AMI (inibição do quadricípite)",
   en: "Learn more about AMI (quadriceps inhibition)",
   ru: "Подробнее об AMI (торможение квадрицепса)",
+  de: "Mehr über AMI erfahren (Quadrizepshemmung)",
+  fr: "En savoir plus sur l'AMI (inhibition du quadriceps)",
 };
 function injectAmiLink($x, locale) {
   const box = $x(".santi-box");
@@ -715,8 +780,8 @@ function injectAmiLink($x, locale) {
 
 // FAQs: não nomear o médico — substituir "Dr. Nuno Camelo" por termo impessoal.
 function depersonalizeFaqs($x, locale) {
-  const lc = locale === "en" ? "the specialist" : locale === "ru" ? "специалист" : "o especialista";
-  const cap = locale === "en" ? "The specialist" : locale === "ru" ? "Специалист" : "O especialista";
+  const lc = locale === "en" ? "the specialist" : locale === "ru" ? "специалист" : locale === "de" ? "der Facharzt" : locale === "fr" ? "le spécialiste" : "o especialista";
+  const cap = locale === "en" ? "The specialist" : locale === "ru" ? "Специалист" : locale === "de" ? "Der Facharzt" : locale === "fr" ? "Le spécialiste" : "O especialista";
   $x(".faq-a").each((i, el) => {
     const node = $x(el);
     let h = node.html();
@@ -991,6 +1056,79 @@ if (ruHeaderHtml) {
   await writeFile(`${COMP}/chrome-ru.ts`, `export const ruHeader = ${JSON.stringify(ruHeaderHtml)};\nexport const ruFooter = ${JSON.stringify(ruFooterHtml)};\n`, "utf8");
 }
 console.log(`RU: ${ruCount} páginas geradas (${[...ruSlugs].map((s)=>s||"home").join(", ")})`);
+
+// ── DE/FR (i18n): mesma lógica do EN/RU, factorizada por locale ──
+function makeRewriteLinksLang(locale, slugSet) {
+  return (html) => {
+    let out = rewriteLinks(html);
+    out = out.replace(/href="\/([a-zA-Z0-9-]+)"/g, (m, slug) => (slugSet.has(slug) ? `href="/${locale}/${slug}"` : m));
+    if (slugSet.has("")) out = out.replace(/href="\/"/g, `href="/${locale}"`);
+    return out;
+  };
+}
+async function portLocale(locale, rawMap, slugSet) {
+  const rewriteLinksLang = makeRewriteLinksLang(locale, slugSet);
+  let headerHtml = "", footerHtml = "", count = 0;
+  for (const [file, seg] of Object.entries(ROUTES)) {
+    const raw = rawMap[seg];
+    if (!raw) continue;
+    const $x = cheerio.load(raw, { decodeEntities: false });
+    const meta = buildMetadata($x);
+    applyMetaDesc(meta, seg, locale);
+    meta.alternates = { ...(meta.alternates || {}), canonical: seg ? `${BASE}/${locale}/${seg}` : `${BASE}/${locale}`, languages: langAlternates(seg) };
+    const jsonld = $x('script[type="application/ld+json"]').first().html() || "";
+    if (seg === "") {
+      const h = $x("body > header").first();
+      const f = $x("body > footer").first();
+      headerHtml = h.length ? injectVideosLink(injectSwitcher(rewriteLinksLang($x.html(h)), locale), locale) : "";
+      footerHtml = f.length ? trimFooter(rewriteLinksLang($x.html(f))) : "";
+      $x("section.hero").first().remove();
+      $x("section.locais").remove();
+      injectToolsGraphic($x);
+      simplifyTools($x);
+      makePatologiasCollapsible($x);
+      $x("section.doctor, .trust, section.cta-final, section.patologias .section-header").remove();
+    }
+    const css = $x("style").toArray().map((el) => $x(el).html()).join("\n\n");
+    $x("body > header, body > footer, body > nav").remove();
+    const inlineScript = fixWww($x("body script").not('[type="application/ld+json"]').not("[src]").toArray().map((el) => $x(el).html()).filter(Boolean).join("\n"));
+    $x("body script, body style").remove();
+    injectHeroImage($x, seg);
+    makeTablesResponsive($x);
+    injectProseSport($x, locale);
+    handleAnatomyCard($x, seg, locale);
+    depersonalizeFaqs($x, locale);
+    removeAnatomySvg($x);
+    injectAmiLink($x, locale);
+    setCredChips($x, seg, locale);
+    if (MEDICAL_SEGS.has(seg)) { addFaqs($x, seg, locale); injectReferences($x, seg, locale); injectAuthorBox($x, locale); }
+    const body = rewriteLinksLang($x("body").html() || "");
+    const jsonldOut = MEDICAL_SEGS.has(seg)
+      ? buildPageJsonLd(jsonld, {
+          name: meta.title,
+          url: meta.alternates?.canonical || `${BASE}/${locale}/${seg}`,
+          faqNode: buildFaqSchema($x),
+          breadcrumbNode: breadcrumbNodeFor(seg, (meta.title || "").split("|")[0].trim(), locale),
+          citations: citationsFor(seg),
+          about: conditionFor(seg, locale),
+        })
+      : jsonld;
+    const dir = seg ? `${APP}/${locale}/${seg}` : `${APP}/${locale}`;
+    await mkdir(dir, { recursive: true });
+    const id = `${locale}-` + (seg || "home").replace(/[^a-z0-9]/g, "-");
+    const content = seg === ""
+      ? homepageTemplate(meta, jsonldOut, body, inlineScript, id, locale)
+      : pageTemplate(meta, css, jsonldOut, body, inlineScript, id, seg, locale);
+    await writeFile(`${dir}/page.tsx`, content, "utf8");
+    count++;
+  }
+  if (headerHtml) {
+    await writeFile(`${COMP}/chrome-${locale}.ts`, `export const ${locale}Header = ${JSON.stringify(headerHtml)};\nexport const ${locale}Footer = ${JSON.stringify(footerHtml)};\n`, "utf8");
+  }
+  console.log(`${locale.toUpperCase()}: ${count} páginas geradas (${[...slugSet].map((s) => s || "home").join(", ")})`);
+}
+await portLocale("de", deRaw, deSlugs);
+await portLocale("fr", frRaw, frSlugs);
 
 console.log("=== Páginas geradas ===");
 console.log(report.join("\n"));

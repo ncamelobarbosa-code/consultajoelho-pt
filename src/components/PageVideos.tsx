@@ -4,12 +4,16 @@ import { PAGE_VIDEOS, VIDEOS, SECTION_HEADINGS, type Lang } from "@/lib/videos";
 
 const FONT = "'Space Grotesk', sans-serif";
 
-export default function PageVideos({ slug, lang = "pt" }: { slug: string; lang?: Lang }) {
+type SiteLang = "pt" | "en" | "ru" | "de" | "fr";
+
+export default function PageVideos({ slug, lang = "pt" }: { slug: string; lang?: SiteLang }) {
+  // Os vídeos (legendas/títulos) existem em pt/en/ru; de/fr recorrem ao inglês.
+  const vlang: Lang = lang === "de" || lang === "fr" ? "en" : lang;
   const conf = PAGE_VIDEOS[slug];
   if (!conf) return null;
   const vids = conf.videos.map((k) => VIDEOS[k]).filter(Boolean);
   if (!vids.length) return null;
-  const heading = SECTION_HEADINGS[conf.heading][lang];
+  const heading = SECTION_HEADINGS[conf.heading][vlang];
 
   return (
     <section aria-label={heading} style={{ background: "var(--bg)", padding: "3.5rem 1.5rem", borderTop: "1px solid var(--border)" }}>
@@ -30,10 +34,10 @@ export default function PageVideos({ slug, lang = "pt" }: { slug: string; lang?:
                   <source src={v.src} type="video/mp4" />
                 </video>
               ) : (
-                <YouTubeEmbed id={v.id!} short={v.short} title={v.title[lang]} />
+                <YouTubeEmbed id={v.id!} short={v.short} title={v.title[vlang]} />
               )}
               <figcaption style={{ fontFamily: FONT, fontSize: "0.9rem", color: "var(--muted)", textAlign: "center", marginTop: "0.65rem" }}>
-                {v.title[lang]}
+                {v.title[vlang]}
               </figcaption>
             </figure>
           ))}

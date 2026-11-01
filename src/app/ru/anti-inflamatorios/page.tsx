@@ -10,7 +10,9 @@ export const metadata: Metadata = {
       "pt-PT": "https://www.consultajoelho.pt/anti-inflamatorios",
       "x-default": "https://www.consultajoelho.pt/anti-inflamatorios",
       "en-GB": "https://www.consultajoelho.pt/en/anti-inflamatorios",
-      "ru-RU": "https://www.consultajoelho.pt/ru/anti-inflamatorios"
+      "ru-RU": "https://www.consultajoelho.pt/ru/anti-inflamatorios",
+      "de-DE": "https://www.consultajoelho.pt/de/anti-inflamatorios",
+      "fr-FR": "https://www.consultajoelho.pt/fr/anti-inflamatorios"
     }
   },
   "openGraph": {

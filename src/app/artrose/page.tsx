@@ -11,7 +11,9 @@ export const metadata: Metadata = {
       "pt-PT": "https://www.consultajoelho.pt/artrose",
       "x-default": "https://www.consultajoelho.pt/artrose",
       "en-GB": "https://www.consultajoelho.pt/en/artrose",
-      "ru-RU": "https://www.consultajoelho.pt/ru/artrose"
+      "ru-RU": "https://www.consultajoelho.pt/ru/artrose",
+      "de-DE": "https://www.consultajoelho.pt/de/artrose",
+      "fr-FR": "https://www.consultajoelho.pt/fr/artrose"
     }
   },
   "openGraph": {

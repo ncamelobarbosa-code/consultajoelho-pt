@@ -7,7 +7,7 @@ import { useEffect, useRef } from "react";
 
 const PLAYBACK_RATE = 1.0; // velocidade normal
 
-type Lang = "pt" | "en" | "ru";
+type Lang = "pt" | "en" | "ru" | "de" | "fr";
 
 const COPY: Record<Lang, {
   eyebrow: string; titleA: string; titleB: string; tagline: string; sub: string;
@@ -30,6 +30,18 @@ const COPY: Record<Lang, {
     tagline: "", sub: "",
     cta1: "", cta1href: "/ru/avaliar",
     cta2: "Записаться", cta2href: "/ru/marcar-consulta",
+  },
+  de: {
+    eyebrow: "", titleA: "Knie-", titleB: "Sprechstunde",
+    tagline: "", sub: "",
+    cta1: "", cta1href: "/de/avaliar",
+    cta2: "Termin", cta2href: "/de/marcar-consulta",
+  },
+  fr: {
+    eyebrow: "", titleA: "Consultation du", titleB: "Genou",
+    tagline: "", sub: "",
+    cta1: "", cta1href: "/fr/avaliar",
+    cta2: "Rendez-vous", cta2href: "/fr/marcar-consulta",
   },
 };
 

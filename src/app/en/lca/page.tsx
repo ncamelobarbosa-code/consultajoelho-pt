@@ -11,7 +11,9 @@ export const metadata: Metadata = {
       "pt-PT": "https://www.consultajoelho.pt/lca",
       "x-default": "https://www.consultajoelho.pt/lca",
       "en-GB": "https://www.consultajoelho.pt/en/lca",
-      "ru-RU": "https://www.consultajoelho.pt/ru/lca"
+      "ru-RU": "https://www.consultajoelho.pt/ru/lca",
+      "de-DE": "https://www.consultajoelho.pt/de/lca",
+      "fr-FR": "https://www.consultajoelho.pt/fr/lca"
     }
   },
   "openGraph": {

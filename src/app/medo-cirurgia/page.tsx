@@ -10,7 +10,9 @@ export const metadata: Metadata = {
       "pt-PT": "https://www.consultajoelho.pt/medo-cirurgia",
       "x-default": "https://www.consultajoelho.pt/medo-cirurgia",
       "en-GB": "https://www.consultajoelho.pt/en/medo-cirurgia",
-      "ru-RU": "https://www.consultajoelho.pt/ru/medo-cirurgia"
+      "ru-RU": "https://www.consultajoelho.pt/ru/medo-cirurgia",
+      "de-DE": "https://www.consultajoelho.pt/de/medo-cirurgia",
+      "fr-FR": "https://www.consultajoelho.pt/fr/medo-cirurgia"
     }
   },
   "openGraph": {

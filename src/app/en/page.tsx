@@ -14,7 +14,9 @@ export const metadata: Metadata = {
       "pt-PT": "https://www.consultajoelho.pt",
       "x-default": "https://www.consultajoelho.pt",
       "en-GB": "https://www.consultajoelho.pt/en",
-      "ru-RU": "https://www.consultajoelho.pt/ru"
+      "ru-RU": "https://www.consultajoelho.pt/ru",
+      "de-DE": "https://www.consultajoelho.pt/de",
+      "fr-FR": "https://www.consultajoelho.pt/fr"
     }
   },
   "openGraph": {

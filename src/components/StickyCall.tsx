@@ -4,17 +4,21 @@
 // O clique em tel: já é registado globalmente pelo LeadTracking.
 import { usePathname } from "next/navigation";
 
-type Lang = "pt" | "en" | "ru";
+type Lang = "pt" | "en" | "ru" | "de" | "fr";
 
 const STR: Record<Lang, { call: string; book: string }> = {
   pt: { call: "Ligar", book: "Marcar consulta" },
   en: { call: "Call", book: "Book" },
   ru: { call: "Позвонить", book: "Записаться" },
+  de: { call: "Anrufen", book: "Termin" },
+  fr: { call: "Appeler", book: "Rendez-vous" },
 };
 
 function localeOf(p: string): Lang {
   if (p === "/en" || p.startsWith("/en/")) return "en";
   if (p === "/ru" || p.startsWith("/ru/")) return "ru";
+  if (p === "/de" || p.startsWith("/de/")) return "de";
+  if (p === "/fr" || p.startsWith("/fr/")) return "fr";
   return "pt";
 }
 

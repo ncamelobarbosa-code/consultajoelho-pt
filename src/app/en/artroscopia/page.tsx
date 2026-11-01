@@ -10,7 +10,9 @@ export const metadata: Metadata = {
       "pt-PT": "https://www.consultajoelho.pt/artroscopia",
       "x-default": "https://www.consultajoelho.pt/artroscopia",
       "en-GB": "https://www.consultajoelho.pt/en/artroscopia",
-      "ru-RU": "https://www.consultajoelho.pt/ru/artroscopia"
+      "ru-RU": "https://www.consultajoelho.pt/ru/artroscopia",
+      "de-DE": "https://www.consultajoelho.pt/de/artroscopia",
+      "fr-FR": "https://www.consultajoelho.pt/fr/artroscopia"
     }
   },
   "openGraph": {
