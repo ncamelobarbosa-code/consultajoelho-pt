@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Script from "next/script";
+import Evidencia from "@/components/Evidencia";
 
 export const metadata: Metadata = {
   "title": "Síndrome da Banda Iliotibial (SBI) — Dor Lateral do Joelho em Corredores | Dr. Nuno Camelo",
@@ -31,8 +32,8 @@ export default function Page() {
   return (
     <>
       <style dangerouslySetInnerHTML={{ __html: css }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd }} />
       <div dangerouslySetInnerHTML={{ __html: html }} />
+      <Evidencia slug="sindrome-banda-iliotibial" pageUrl="https://www.consultajoelho.pt/sindrome-banda-iliotibial" baseJsonLd={jsonLd} />
       <Script id="sindrome-banda-iliotibial-js" strategy="afterInteractive" dangerouslySetInnerHTML={{ __html: pageScript }} />
     </>
   );

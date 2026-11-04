@@ -1,0 +1,57 @@
+{
+  "slug": "sindrome-banda-iliotibial",
+  "atualizado": "2026-11-01",
+  "revistoPor": "Dr. Nuno Camelo",
+  "referencias": [
+    {
+      "id": "ferrero2026revisaotratamentos",
+      "autores": "Ferrero A, Moro A, Minelli M, Marcolin MG, Conte P, Patrucco F, D'Arrigo D, Kon E, Anzillotti G.",
+      "titulo": "Extreme Diagnostic and Therapeutic Heterogeneity Limits Treatment Conclusions in Iliotibial Band Syndrome: A Systematic Review with Level-of-Evidence Stratification.",
+      "revista": "Orthopedic Research and Reviews",
+      "ano": 2026,
+      "tipo": "Revisão sistemática",
+      "pmid": "42841071",
+      "doi": "10.2147/ORR.S629195",
+      "resumoPt": "Vinte e quatro estudos e 1012 doentes, com os tratamentos organizados por nível de evidência. Houve melhoria da dor e da função em todas as categorias, mas a heterogeneidade dos estudos — incluindo nos critérios de diagnóstico — não permite dizer que um tratamento seja superior a outro. A reabilitação estruturada mantém-se como primeira abordagem razoável. Nos casos refractários há um ensaio com placebo a favor do plasma rico em plaquetas ecoguiado, mas é único e sem replicação independente. A cirurgia tem apenas evidência de nível baixo."
+    },
+    {
+      "id": "naderi2026rolostretching",
+      "autores": "Naderi A, Azizi S.",
+      "titulo": "Evaluating treatment efficacy for Iliotibial Band Syndrome: A comparison of combined foam rolling and stretching with strengthening exercises versus strengthening alone in athletes.",
+      "revista": "PLoS One",
+      "ano": 2026,
+      "tipo": "Ensaio clínico aleatorizado",
+      "pmid": "42945197",
+      "doi": "10.1371/journal.pone.0360760",
+      "resumoPt": "Vinte atletas com síndrome da banda iliotibial foram sorteados para oito semanas de fortalecimento isolado ou de fortalecimento com rolo de espuma e alongamentos. O grupo que juntou o rolo e os alongamentos melhorou mais na dor, na função do membro inferior, na flexibilidade da banda iliotibial (59,4% contra 1,7%) e na qualidade de vida; a força dos abdutores da coxa não diferiu entre grupos. Com apenas 20 participantes, os próprios autores dizem que são necessários estudos maiores antes de conclusões definitivas."
+    },
+    {
+      "id": "ming2025liberacaomiofascial",
+      "autores": "Ming Z, Dong G, Luo L, Yuan L, Li Y.",
+      "titulo": "The combined effect of myofascial release and hip strength training on iliotibial band syndrome: A preliminary randomized controlled trial.",
+      "revista": "Complementary Therapies in Medicine",
+      "ano": 2025,
+      "tipo": "Ensaio clínico aleatorizado",
+      "pmid": "41167567",
+      "doi": "10.1016/j.ctim.2025.103274",
+      "resumoPt": "Ensaio preliminar, em dupla ocultação, com 16 doentes. Acrescentar libertação miofascial ao fortalecimento da coxa associou-se a menos dor às duas semanas e a uma banda iliotibial mais fina na ecografia às quatro semanas, mas a pontuação de função do joelho foi igual nos dois grupos em todos os momentos de avaliação. São 16 doentes e um seguimento de oito semanas — serve para gerar hipóteses, não para mudar protocolos."
+    }
+  ],
+  "faq": [
+    {
+      "pergunta": "O rolo de espuma serve mesmo para alguma coisa?",
+      "resposta": "Esta é uma questão que continua em discussão, e vale a pena explicar porquê em vez de dar uma resposta falsamente arrumada. De um lado está um argumento anatómico que se mantém: a banda iliotibial é tecido muito denso e não \"alonga\" como um músculo, pelo que passar o rolo por cima dela não corrige a causa do problema. Do outro, um ensaio aleatorizado publicado em 2026 comparou oito semanas de fortalecimento isolado com fortalecimento acompanhado de rolo e alongamentos, e o segundo grupo melhorou mais na dor, na função do membro inferior e sobretudo na flexibilidade medida. Eram 20 atletas — e os próprios autores escrevem que são necessários estudos maiores antes de conclusões definitivas. Como fica então? Em aberto, e é essa a resposta correcta hoje: o rolo pode ter lugar como complemento, mas nenhum estudo mostra que substitua o trabalho de força da coxa e da bacia, que continua a ser a base do tratamento com mais apoio na literatura. Quem lhe disser que esta questão já está resolvida — num sentido ou no outro — está a ir além do que a evidência permite hoje.",
+      "refs": ["naderi2026rolostretching"]
+    },
+    {
+      "pergunta": "A massagem e a libertação miofascial fazem diferença na dor lateral do joelho?",
+      "resposta": "Há um sinal de alívio precoce da dor, mas sem tradução clara na função. Um ensaio preliminar em dupla ocultação, publicado em 2025 com 16 doentes, acrescentou libertação miofascial ao fortalecimento da coxa: às duas semanas a dor estava mais baixa no grupo que recebeu a técnica e às quatro semanas a banda iliotibial aparecia mais fina na ecografia. Em contrapartida, a pontuação de função do joelho foi igual nos dois grupos em todas as avaliações. Dezesseis doentes e oito semanas de seguimento são muito pouco para afirmar que a técnica altera o percurso da recuperação. Pode ser útil para passar a fase mais dolorosa e permitir treinar a força com menos incómodo — e é assim que faz sentido pensá-la, como apoio e não como tratamento principal.",
+      "refs": ["ming2025liberacaomiofascial"]
+    },
+    {
+      "pergunta": "Qual é o tratamento com mais evidência científica para esta síndrome?",
+      "resposta": "Em 2026 foi publicada a revisão sistemática mais completa até hoje sobre o tema: 24 estudos e 1012 doentes, com cada tratamento classificado por nível de evidência. A conclusão principal é desconfortável mas útil — a dor e a função melhoraram com praticamente todos os tratamentos estudados, e os estudos são tão diferentes entre si, incluindo nos critérios usados para fazer o diagnóstico, que não é possível dizer que um tratamento seja superior aos outros. Daí os autores retirarem uma orientação prática: a reabilitação estruturada continua a ser a primeira abordagem razoável em quem acabou de ser diagnosticado. Nos casos que não respondem, a revisão assinala um ensaio controlado com placebo a favor do plasma rico em plaquetas guiado por ecografia — e aqui as reservas são importantes: é um único estudo, nenhuma equipa independente o reproduziu, e os próprios autores da revisão pedem essa confirmação antes de o tratamento ser incorporado na prática. A cirurgia tem apenas evidência de nível baixo e fica reservada a situações seleccionadas. Qual destes caminhos faz sentido no seu caso é uma decisão a tomar em consulta, depois de avaliar há quanto tempo tem dor e o que já tentou.",
+      "refs": ["ferrero2026revisaotratamentos"]
+    }
+  ]
+}

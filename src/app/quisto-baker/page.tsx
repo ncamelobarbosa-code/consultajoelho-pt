@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Script from "next/script";
+import Evidencia from "@/components/Evidencia";
 
 export const metadata: Metadata = {
   "title": "Quisto de Baker (Cisto Poplíteo) — Causas e Tratamento | Dr. Nuno Camelo Porto",
@@ -31,8 +32,8 @@ export default function Page() {
   return (
     <>
       <style dangerouslySetInnerHTML={{ __html: css }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd }} />
       <div dangerouslySetInnerHTML={{ __html: html }} />
+      <Evidencia slug="quisto-baker" pageUrl="https://www.consultajoelho.pt/quisto-baker" baseJsonLd={jsonLd} />
       <Script id="quisto-baker-js" strategy="afterInteractive" dangerouslySetInnerHTML={{ __html: pageScript }} />
     </>
   );

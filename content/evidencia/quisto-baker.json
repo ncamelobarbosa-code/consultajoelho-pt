@@ -1,0 +1,41 @@
+{
+  "slug": "quisto-baker",
+  "atualizado": "2026-11-01",
+  "revistoPor": "Dr. Nuno Camelo",
+  "referencias": [
+    {
+      "id": "li2026portalduplo",
+      "autores": "Li F, Fu X, Yu J, Chen J, Xu L, Xiao J.",
+      "titulo": "Double posteromedial portal arthroscopy vs. other arthroscopic techniques for Baker's cyst: a systematic review and meta-analysis.",
+      "revista": "Frontiers in Surgery",
+      "ano": 2026,
+      "tipo": "Meta-análise",
+      "pmid": "41971059",
+      "doi": "10.3389/fsurg.2026.1772431",
+      "resumoPt": "Quatro estudos comparativos, 232 doentes operados a quisto de Baker, a comparar diferentes vias artroscópicas entre si. Nenhuma técnica se mostrou globalmente superior: a via com dois portais posteromediais teve menos quistos residuais, mas em troca de tempo operatório mais longo e de mais complicações no total. Os próprios autores avisam que os estudos são pequenos, todos do mesmo país e com poucos eventos, pelo que a comparação continua em aberto."
+    },
+    {
+      "id": "akarsu2026prpintraquistico",
+      "autores": "Akarsu O, Aşkin A, Bayram KB, Mert D, Şengül İ.",
+      "titulo": "Ultrasound-Guided Aspiration of Baker's Cyst Combined With Intracystic Platelet-Rich Plasma Injection in Knee Osteoarthritis: A Randomized Controlled Trial.",
+      "revista": "American Journal of Physical Medicine & Rehabilitation",
+      "ano": 2026,
+      "tipo": "Ensaio clínico aleatorizado",
+      "pmid": "42296465",
+      "doi": "10.1097/PHM.0000000000003065",
+      "resumoPt": "Trinta e seis doentes com artrose do joelho e quisto de Baker foram sorteados para drenagem ecoguiada isolada ou para drenagem seguida de injecção de plasma rico em plaquetas dentro do quisto. Às 12 semanas, o grupo com plasma referia menos dor e melhores pontuações de função, mas a redução do tamanho do quisto foi semelhante nos dois grupos. As reservas são várias e pesadas: 36 doentes, apenas três meses de seguimento, um único centro, nenhuma replicação independente, e já foi publicada uma carta ao editor a contestar a leitura dos resultados. Não permite recomendar a técnica."
+    }
+  ],
+  "faq": [
+    {
+      "pergunta": "Há mais do que uma forma de operar o quisto? Alguma é melhor?",
+      "resposta": "Há várias vias artroscópicas descritas para tratar um quisto poplíteo, e a resposta curta é que nenhuma se mostrou melhor do que as outras. Uma meta-análise de 2026 juntou quatro estudos comparativos, com 232 doentes operados, e o balanço ficou equilibrado: a via com dois portais posteromediais deixou menos quisto residual, mas custou mais tempo de cirurgia e teve mais complicações no total. Os autores sublinham que os estudos são pequenos, vêm todos do mesmo país e tiveram muito poucos eventos — ou seja, a comparação entre técnicas continua em discussão e não há, hoje, uma escolha que a evidência imponha. Vale a pena guardar isto em perspectiva: a questão da técnica só se põe depois de decidido que vale a pena operar o quisto, e essa decisão depende sobretudo da causa — artrose, menisco ou artrite — e não do quisto em si. É uma conversa para a avaliação individual em consulta.",
+      "refs": ["li2026portalduplo"]
+    },
+    {
+      "pergunta": "Depois de drenarem o quisto, vale a pena injectar plasma rico em plaquetas lá dentro?",
+      "resposta": "Por agora, a resposta honesta é que não se sabe — e há um único estudo a sugerir que talvez. Num ensaio aleatorizado de 2026 com 36 doentes que tinham artrose do joelho e quisto de Baker, metade fez apenas drenagem ecoguiada e a outra metade fez drenagem seguida de injecção de plasma rico em plaquetas dentro do quisto. Às 12 semanas, o grupo que recebeu plasma referia menos dor e melhor função. As reservas são, no entanto, substanciais e convém lê-las com atenção: o quisto não encolheu mais com o plasma do que sem ele, o seguimento foi de apenas três meses, foram 36 doentes num só centro, nenhuma outra equipa reproduziu o resultado, e foi publicada uma carta ao editor a contestar a interpretação dos dados. Um único estudo pequeno e contestado não sustenta uma recomendação. É uma via em investigação, não um tratamento estabelecido — e se lhe for proposta, faz sentido perguntar exactamente em que evidência se baseia.",
+      "refs": ["akarsu2026prpintraquistico"]
+    }
+  ]
+}

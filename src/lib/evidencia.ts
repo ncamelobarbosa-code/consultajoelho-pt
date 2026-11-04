@@ -15,6 +15,8 @@ import artrose from "../../content/evidencia/artrose.json";
 import cartilagem from "../../content/evidencia/cartilagem.json";
 import protese from "../../content/evidencia/protese.json";
 import infiltracoes from "../../content/evidencia/infiltracoes.json";
+import quistoBaker from "../../content/evidencia/quisto-baker.json";
+import sindromeBandaIliotibial from "../../content/evidencia/sindrome-banda-iliotibial.json";
 
 export type NivelEvidencia =
   | "Meta-análise"
@@ -60,6 +62,8 @@ const registo: Record<string, Evidencia> = {
   cartilagem: cartilagem as Evidencia,
   protese: protese as Evidencia,
   infiltracoes: infiltracoes as Evidencia,
+  "quisto-baker": quistoBaker as Evidencia,
+  "sindrome-banda-iliotibial": sindromeBandaIliotibial as Evidencia,
 };
 
 export function getEvidencia(slug: string): Evidencia | null {

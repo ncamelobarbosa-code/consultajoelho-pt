@@ -1,6 +1,6 @@
 {
   "slug": "protese",
-  "atualizado": "2026-09-01",
+  "atualizado": "2026-11-01",
   "revistoPor": "Dr. Nuno Camelo",
   "referencias": [
     {
@@ -35,6 +35,17 @@
       "pmid": "41525304",
       "doi": "10.1177/1357633X251408308",
       "resumoPt": "Quinze ensaios aleatorizados, 1966 doentes operados à anca ou ao joelho, todos com baixo risco de enviesamento. A reabilitação apoiada por tecnologia — realidade virtual, aplicações e telereabilitação — deu uma melhoria pequena mas real na função relatada pelo doente, com certeza moderada. A realidade virtual teve o maior efeito estimado, sem chegar a diferenciar-se claramente das restantes."
+    },
+    {
+      "id": "cristal2022aspirinaenoxaparina",
+      "autores": "Sidhu VS, Kelly TL, Pratt N, Graves SE, Buchbinder R, Adie S, et al.; CRISTAL Study Group.",
+      "titulo": "Effect of Aspirin vs Enoxaparin on Symptomatic Venous Thromboembolism in Patients Undergoing Hip or Knee Arthroplasty: The CRISTAL Randomized Trial.",
+      "revista": "JAMA",
+      "ano": 2022,
+      "tipo": "Ensaio clínico aleatorizado",
+      "pmid": "35997730",
+      "doi": "10.1001/jama.2022.13416",
+      "resumoPt": "Ensaio aleatorizado por centros em 31 hospitais australianos, com 9711 doentes operados a prótese do joelho ou da anca. A aspirina não foi equivalente à enoxaparina na prevenção de tromboembolismo venoso sintomático aos 90 dias: 3,45% com aspirina contra 1,82% com enoxaparina, uma diferença de cerca de 2 pontos percentuais a favor da injecção. O ensaio foi interrompido mais cedo por esta diferença. A maioria dos eventos foram tromboses abaixo do joelho e nenhum dos seis desfechos secundários, incluindo hemorragia grave e morte, foi melhor com a enoxaparina."
     }
   ],
   "faq": [
@@ -52,6 +63,11 @@
       "pergunta": "Posso fazer parte da reabilitação em casa, com aplicações ou realidade virtual?",
       "resposta": "É uma opção defensável, com ganhos modestos. Uma meta-análise de 2026 juntou 15 ensaios aleatorizados e quase 2000 doentes operados à anca ou ao joelho, todos com baixo risco de enviesamento, e encontrou uma melhoria pequena mas real da função relatada pelo doente quando a reabilitação era apoiada por tecnologia — telereabilitação, aplicações ou realidade virtual — comparada com o acompanhamento habitual. A certeza da evidência foi classificada como moderada, e a realidade virtual teve o maior efeito estimado, sem se destacar claramente. O que isto sugere não é substituir o fisioterapeuta, mas que estas ferramentas ajudam a manter o programa quando o acesso presencial é limitado.",
       "refs": ["cao2026telereabilitacao"]
+    },
+    {
+      "pergunta": "Depois da prótese, a aspirina chega para prevenir tromboses ou tenho de levar injecções?",
+      "resposta": "O estudo que melhor responde a esta pergunta é um ensaio aleatorizado publicado em 2022 na JAMA, com 9711 doentes operados a prótese do joelho ou da anca em 31 hospitais. Metade recebeu aspirina em comprimido, a outra metade enoxaparina injectável. Aos 90 dias, as tromboses sintomáticas foram cerca de 3,45% com aspirina e 1,82% com enoxaparina — uma diferença de aproximadamente dois casos em cada cem doentes, a favor da injecção. O ensaio foi inclusivamente interrompido antes do previsto por causa desta diferença. Há duas nuances que importam: a maior parte dos eventos foram tromboses abaixo do joelho, cujo peso clínico é discutido, e a enoxaparina não trouxe mais hemorragias graves nem mais mortes neste estudo. Na prática, isto explica porque é que a profilaxia injectável continua a ser a escolha habitual depois de uma prótese. Dito isto, a decisão é individual: o seu risco de trombose, o seu risco de hemorragia, a medicação que já faz e a duração da profilaxia entram todos na conta, e é isso que se define em consulta antes da cirurgia.",
+      "refs": ["cristal2022aspirinaenoxaparina"]
     }
   ]
 }
