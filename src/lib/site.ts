@@ -1,6 +1,8 @@
 // Fonte única de verdade do site consultajoelho.pt.
 // Usado por Nav, Footer, RelatedPages, sitemap e schema markup.
 
+import { slugRedirects } from "./slug-redirects";
+
 export const site = {
   name: "ConsultaJoelho.pt",
   domain: "consultajoelho.pt",
@@ -176,8 +178,10 @@ export type PageSlug = keyof typeof pages;
 
 export const allSlugs = Object.keys(pages) as PageSlug[];
 
+// Devolve o URL final (já sem 301): slugs antigos do Wix são resolvidos para o slug actual,
+// para que links internos não passem por redirecionamentos (Search Console: "Página com redirecionamento").
 export function href(slug: PageSlug): string {
-  return `/${slug}`;
+  return `/${slugRedirects[slug] ?? slug}`;
 }
 
 export function page(slug: PageSlug): PageMeta {
