@@ -1,4 +1,5 @@
 import type { NextConfig } from "next";
+import { slugRedirects } from "./src/lib/slug-redirects";
 
 const securityHeaders = [
   { key: "X-Content-Type-Options", value: "nosniff" },
@@ -14,44 +15,6 @@ const securityHeaders = [
   },
 ];
 
-// Slugs antigos (scraped) -> novos (design portado). 301 permanentes para preservar SEO.
-const slugRedirects: Record<string, string> = {
-  ligamentocruzadoanterior: "lca",
-  "ligamentocruzadoanteriorjoelho-drnunocamelo": "lca",
-  ligamentocruzadoanteriorjoelho: "lca",
-  ligamentocruzadoanteriordrnunocamelo: "lca",
-  cartilagemjoelhodrnunocamelo: "cartilagem",
-  cartilagemjoelho: "cartilagem",
-  meniscosnojoelho: "menisco",
-  protesejoelhodesportodrnunocamelo: "protese",
-  protesejoelhodesporto: "protese",
-  quistobakerjoelhodrnunocamelo: "quisto-baker",
-  quistobakerjoelho: "quisto-baker",
-  quistosparameniscaisjoelho: "quistos-parameniscais",
-  // Gémeos Wix mortos -> páginas vivas (que ficam no slug antigo, mas rankeiam bem)
-  liquidojoelho: "liquidojoelho-artrocentese-drnunocamelo",
-  "liquidojoelho-artrocentese": "liquidojoelho-artrocentese-drnunocamelo",
-  "tendao-rotuliano-tendinite": "tendao-rotuliano-tendinite-drnunocamelo",
-  entorsejoelho: "entorsejoelho-drnunocamelo",
-  sindromebandailiotibialjoelho: "sindrome-banda-iliotibial",
-  luxacaorotulajoelho: "luxacao-rotula",
-  quadricepsjoelho: "quadriceps",
-  medocirurgiajoelho: "medo-cirurgia",
-  recuperarcirurgiajoelho: "recuperar-cirurgia",
-  cirurgiadojoelhoeagora: "preparar-cirurgia",
-  prepararcirurgiajoelho: "preparar-cirurgia",
-  rupturameniscosjoelho: "menisco",
-  dornojoelho: "joelhodrnunocamelo",
-  avaliarjoelho: "avaliar",
-  infiltracaojoelho: "infiltracoes",
-  agendamentonunocameloespecialistajoelho: "marcar-consulta",
-  // Página única de marcação (booking + contacto/2ª opinião) substitui o /contacto e o /agendar.
-  contacto: "marcar-consulta",
-  agendar: "marcar-consulta",
-  "nuno-camelo-cirurgia-joelho": "nuno-camelo-especialista-cirurgia-joelho",
-  // Slug inicial do Velys -> slug definitivo da cirurgia robótica
-  velys: "roboticajoelho",
-};
 
 const nextConfig: NextConfig = {
   images: {
