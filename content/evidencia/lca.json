@@ -145,7 +145,7 @@
     },
     {
       "pergunta": "Sou novo e faço desporto — tenho mesmo de ser operado ao LCA?",
-      "resposta": "Não obrigatoriamente. Durante muito tempo a reconstrução foi a regra para quem era jovem e ativo, mas os ensaios aleatorizados mais recentes mudaram essa ideia. No ensaio KANON, adultos jovens e ativos tratados primeiro com reabilitação estruturada — e operados só se o joelho continuasse instável — tinham, 11 anos depois, resultados semelhantes aos que foram operados de imediato; cerca de metade nunca precisou de cirurgia. O ensaio COMPARE e uma meta-análise de 2025 apontam no mesmo sentido, também no regresso ao desporto, embora com evidência de certeza limitada. Isto não quer dizer que a cirurgia não faça falta: em quem tem falseios repetidos, lesões do menisco a tratar ou pratica desportos com muita rotação, a reconstrução continua muitas vezes a ser a melhor opção. A decisão é individual e deve ser tomada em consulta.",
+      "resposta": "Não obrigatoriamente. Durante muito tempo a reconstrução foi a regra para quem era jovem e ativo, mas os ensaios aleatorizados mais recentes mudaram essa ideia. No ensaio KANON, adultos jovens e ativos tratados primeiro com reabilitação estruturada — e operados só se o joelho continuasse instável — tinham, 11 anos depois, resultados semelhantes aos que foram operados de imediato; cerca de metade nunca precisou de cirurgia. O ensaio COMPARE e uma meta-análise de 2025 apontam no mesmo sentido, também no regresso ao desporto, embora com evidência de certeza limitada. Isto não quer dizer que a cirurgia não faça falta: em quem tem episódios repetidos de instabilidade, lesões do menisco a tratar ou pratica desportos com muita rotação, a reconstrução continua muitas vezes a ser a melhor opção. A decisão é individual e deve ser tomada em consulta.",
       "refs": [
         "lohmander2023kanon11",
         "reijman2021compare",
@@ -162,7 +162,7 @@
     },
     {
       "pergunta": "Se não for operado, vou ter mais artrose?",
-      "resposta": "A resposta é menos simples do que se pensava. A reconstrução do LCA não impede, por si só, a artrose: no ensaio KANON, 11 anos depois, perto de metade dos joelhos (44%) tinha sinais de artrose na radiografia, e as alterações não foram maiores no grupo tratado primeiro com reabilitação. Uma meta-análise de 2026 encontrou a mesma frequência de artrose ligeira com e sem cirurgia, mas um pouco mais de artrose moderada a grave nos joelhos que ficaram muitos anos sem LCA. O fator que mais pesou foi a perda do menisco — e é por isso que proteger o menisco, evitando falseios repetidos, é um dos principais objetivos de qualquer tratamento.",
+      "resposta": "A resposta é menos simples do que se pensava. A reconstrução do LCA não impede, por si só, a artrose: no ensaio KANON, 11 anos depois, perto de metade dos joelhos (44%) tinha sinais de artrose na radiografia, e as alterações não foram maiores no grupo tratado primeiro com reabilitação. Uma meta-análise de 2026 encontrou a mesma frequência de artrose ligeira com e sem cirurgia, mas um pouco mais de artrose moderada a grave nos joelhos que ficaram muitos anos sem LCA. O fator que mais pesou foi a perda do menisco — e é por isso que proteger o menisco, evitando episódios repetidos de instabilidade, é um dos principais objetivos de qualquer tratamento.",
       "refs": [
         "lohmander2023kanon11",
         "shah2026artrose"
