@@ -1,6 +1,6 @@
 {
   "slug": "lca",
-  "atualizado": "2026-08-14",
+  "atualizado": "2026-11-12",
   "revistoPor": "Dr. Nuno Camelo",
   "referencias": [
     {
@@ -46,28 +46,127 @@
       "pmid": "42310826",
       "doi": "10.1177/03635465261455046",
       "resumoPt": "Ensaio aleatorizado com ressonância seriada aos 3, 6 e 9 meses. Preservar a inserção tibial do enxerto acelerou a maturação: sinal de enxerto maduro já aos 3 meses, contra 6 meses no enxerto livre. Confirma que a ligamentização é um processo de muitos meses — e é por isso que o regresso ao desporto não se decide pelo calendário."
+    },
+    {
+      "id": "lohmander2023kanon11",
+      "autores": "Lohmander LS, Roemer FW, Frobell RB, Roos EM.",
+      "titulo": "Treatment for Acute Anterior Cruciate Ligament Tear in Young Active Adults.",
+      "revista": "NEJM Evidence",
+      "ano": 2023,
+      "tipo": "Ensaio clínico aleatorizado",
+      "pmid": "38320141",
+      "doi": "10.1056/EVIDoa2200287",
+      "resumoPt": "Ensaio KANON: 121 adultos jovens e ativos (idade média 26 anos) com rotura aguda do LCA, seguidos durante 11 anos. Reconstrução precoce e reabilitação com reconstrução apenas se necessário deram resultados semelhantes; no grupo da reabilitação, cerca de metade nunca chegou a ser operada. É um único ensaio, com um número limitado de doentes."
+    },
+    {
+      "id": "reijman2021compare",
+      "autores": "Reijman M, Eggerding V, van Es E, et al.",
+      "titulo": "Early surgical reconstruction versus rehabilitation with elective delayed reconstruction for patients with anterior cruciate ligament rupture: COMPARE randomised controlled trial.",
+      "revista": "BMJ",
+      "ano": 2021,
+      "tipo": "Ensaio clínico aleatorizado",
+      "pmid": "33687926",
+      "doi": "10.1136/bmj.n375",
+      "resumoPt": "Ensaio COMPARE: 167 doentes (idade média 31 anos). Aos 2 anos, a reconstrução precoce teve uma pontuação funcional ligeiramente melhor, mas a diferença não foi considerada clinicamente relevante; metade dos doentes do grupo da reabilitação não precisou de cirurgia."
+    },
+    {
+      "id": "filbay2025regresso",
+      "autores": "Filbay SR, Bullock G, Russell S, Brown F, Hui W, Egerton T.",
+      "titulo": "No Difference in Return-to-Sport Rate or Activity Level in People with Anterior Cruciate Ligament (ACL) Injury Managed with ACL Reconstruction or Rehabilitation Alone: A Systematic Review and Meta-Analysis.",
+      "revista": "Sports Medicine",
+      "ano": 2025,
+      "tipo": "Meta-análise",
+      "pmid": "40603829",
+      "doi": "10.1007/s40279-025-02268-5",
+      "resumoPt": "Quinze estudos. A reconstrução não se associou a uma taxa maior de regresso ao desporto do que a reabilitação isolada. A certeza da evidência é baixa a muito baixa: há só dois ensaios aleatorizados e muitos estudos com risco de enviesamento."
+    },
+    {
+      "id": "filbay2025continuidade",
+      "autores": "Filbay SR, Roemer F, Roos EM, Turkiewicz A, Frobell R, Lohmander LS, Englund M.",
+      "titulo": "Association Between ACL Continuity on Magnetic Resonance Imaging at 5 Years After an Acute ACL Rupture and 11-Year Outcomes: A Secondary Analysis From the KANON Trial.",
+      "revista": "The American Journal of Sports Medicine",
+      "ano": 2025,
+      "tipo": "Ensaio clínico aleatorizado",
+      "pmid": "40387842",
+      "doi": "10.1177/03635465251339061",
+      "resumoPt": "Análise secundária do ensaio KANON. Dos doentes tratados sem cirurgia, 58% tinham o LCA em continuidade na ressonância aos 5 anos — mas, aos 11 anos, isso não se traduziu em melhores resultados reportados pelos doentes do que a reconstrução. Ver o ligamento «cicatrizado» na imagem não chega para decidir."
+    },
+    {
+      "id": "dayal2026laxidade",
+      "autores": "Dayal D, Rahaman C, Berta C, et al.",
+      "titulo": "A High Percentage of Patients With Anterior Cruciate Ligament Tears Treated Nonoperatively Show Persistent Laxity on Arthrometer Assessment Despite Magnetic Resonance Imaging Evidence of Fiber Continuity: A Systematic Review.",
+      "revista": "Arthroscopy",
+      "ano": 2026,
+      "tipo": "Revisão sistemática",
+      "pmid": "41856547",
+      "doi": "10.1002/arj.70093",
+      "resumoPt": "Sete estudos, 351 doentes tratados sem cirurgia. A ressonância mostrou continuidade das fibras em cerca de 86%, mas só cerca de 55% tinham o joelho estável na medição objetiva; 22% acabaram por ser operados. Os estudos incluídos são de qualidade variável."
+    },
+    {
+      "id": "shah2026artrose",
+      "autores": "Shah A, Gumarathas K, Marks P, Marx RG, Kiss A, Wasserstein D.",
+      "titulo": "The Long-term Radiographic Fate of the Chronically ACL-Deficient Knee: A Systematic Review and Meta-analysis of Matched Cohort Studies.",
+      "revista": "The American Journal of Sports Medicine",
+      "ano": 2026,
+      "tipo": "Meta-análise",
+      "pmid": "41572905",
+      "doi": "10.1177/03635465251405438",
+      "resumoPt": "Dezanove estudos, 1432 doentes seguidos em média 11 anos. Artrose ligeira foi igualmente frequente com e sem reconstrução; artrose moderada a grave foi mais frequente no joelho sem LCA (18% contra 13%). A remoção do menisco foi o fator que mais agravou a artrose. Baseia-se em estudos de coorte, não em ensaios."
     }
   ],
   "faq": [
     {
       "pergunta": "A tenodese lateral compensa em atletas jovens?",
       "resposta": "A evidência mais recente aponta nesse sentido. Numa revisão sistemática de 2026 com quase 600 doentes abaixo dos 21 anos, acrescentar um procedimento lateral extra-articular à reconstrução do LCA associou-se a menos re-roturas do enxerto — na ordem dos 0 a 6%, contra 5 a 12% na reconstrução isolada — sem penalizar a função nem o regresso ao desporto. As plastias anterolaterais têm ganho importância crescente na reconstrução do LCA — pesam sobretudo em joelhos hiperlaxos, em desportos de pivô e rotação e em cirurgias de revisão, mas fica em aberto se o seu benefício não se estenderá a um leque mais amplo de doentes. A evidência mais forte é ainda nos mais jovens e os estudos são heterogéneos, pelo que a decisão continua a ser individual.",
-      "refs": ["kienberger2026leap"]
+      "refs": [
+        "kienberger2026leap"
+      ]
     },
     {
       "pergunta": "Que tendão é usado como enxerto — e o peroneal é uma boa alternativa?",
       "resposta": "Os isquiotibiais continuam a ser o enxerto mais usado, mas nem sempre têm calibre suficiente, e em cirurgias de revisão podem já ter sido gastos. Uma meta-análise de quatro ensaios aleatorizados publicada em 2026 comparou o tendão do peroneal longo com os isquiotibiais em 407 doentes: estabilidade e resultados funcionais equivalentes, enxerto de maior diâmetro e menos queixas na zona de colheita, sem perda mensurável de função do tornozelo. Na prática, existem vários enxertos possíveis — isquiotibiais, tendão rotuliano, quadricípite/recto femoral e peroneal longo — e cada um é sobretudo um meio de atingir um fim: um enxerto forte, bem posicionado e bem integrado. O peroneal é mais uma alternativa credível, sobretudo quando os isquiotibiais são finos ou já foram usados.",
-      "refs": ["desouza2026peroneal"]
+      "refs": [
+        "desouza2026peroneal"
+      ]
     },
     {
       "pergunta": "Vou ficar com uma zona dormente à volta da cicatriz?",
       "resposta": "É uma queixa comum e quase sempre benigna: durante a colheita dos isquiotibiais pode ser lesado um pequeno ramo sensitivo do nervo safeno, deixando uma área de pele com menos sensibilidade abaixo e ao lado da cicatriz. Não afecta a força nem o funcionamento do joelho e tende a diminuir com o tempo. A orientação da incisão conta: uma meta-análise de oito ensaios aleatorizados, publicada em 2026, mostrou que a incisão oblíqua reduz cerca de um terço a probabilidade desta perda de sensibilidade e diminui a área afectada, quando comparada com a incisão vertical.",
-      "refs": ["yuwarungsikul2026incisao"]
+      "refs": [
+        "yuwarungsikul2026incisao"
+      ]
     },
     {
       "pergunta": "Quanto tempo demora o novo ligamento a ficar mesmo forte?",
       "resposta": "O enxerto não fica ligamento de um dia para o outro. Passa por um processo chamado ligamentização, em que o tendão transplantado é progressivamente revascularizado e remodelado — e isso mede-se em meses, não em semanas. Um ensaio aleatorizado de 2026 com ressonância seriada mostrou sinais de maturação do enxerto a partir dos 3 meses nas técnicas que preservam a inserção tibial, e por volta dos 6 meses no enxerto livre. É esta biologia, e não o calendário, que explica por que motivo o regresso a desportos de pivô se decide por critérios de força, estabilidade e testes funcionais, tipicamente entre os 9 e os 12 meses.",
-      "refs": ["sinha2026ligamentizacao"]
+      "refs": [
+        "sinha2026ligamentizacao"
+      ]
+    },
+    {
+      "pergunta": "Sou novo e faço desporto — tenho mesmo de ser operado ao LCA?",
+      "resposta": "Não obrigatoriamente. Durante muito tempo a reconstrução foi a regra para quem era jovem e ativo, mas os ensaios aleatorizados mais recentes mudaram essa ideia. No ensaio KANON, adultos jovens e ativos tratados primeiro com reabilitação estruturada — e operados só se o joelho continuasse instável — tinham, 11 anos depois, resultados semelhantes aos que foram operados de imediato; cerca de metade nunca precisou de cirurgia. O ensaio COMPARE e uma meta-análise de 2025 apontam no mesmo sentido, também no regresso ao desporto, embora com evidência de certeza limitada. Isto não quer dizer que a cirurgia não faça falta: em quem tem episódios repetidos de instabilidade, lesões do menisco a tratar ou pratica desportos com muita rotação, a reconstrução continua muitas vezes a ser a melhor opção. A decisão é individual e deve ser tomada em consulta.",
+      "refs": [
+        "lohmander2023kanon11",
+        "reijman2021compare",
+        "filbay2025regresso"
+      ]
+    },
+    {
+      "pergunta": "O LCA pode cicatrizar sozinho?",
+      "resposta": "Em parte dos doentes, sim — pelo menos na imagem. Estudos com ressonância mostram que, depois de uma rotura tratada sem cirurgia, as fibras do LCA voltam muitas vezes a ter continuidade. Mas continuidade na ressonância não é o mesmo que um ligamento que funciona: numa revisão sistemática de 2026, cerca de 86% dos joelhos pareciam «cicatrizados» na imagem, mas só cerca de metade estavam estáveis na medição objetiva, e uma parte acabou por ser operada. No ensaio KANON, ter o ligamento em continuidade aos 5 anos não garantiu melhores resultados aos 11 anos. Por isso, o que orienta a decisão é a estabilidade do joelho no exame clínico e a forma como responde à reabilitação, e não só o aspeto na ressonância.",
+      "refs": [
+        "dayal2026laxidade",
+        "filbay2025continuidade"
+      ]
+    },
+    {
+      "pergunta": "Se não for operado, vou ter mais artrose?",
+      "resposta": "A resposta é menos simples do que se pensava. A reconstrução do LCA não impede, por si só, a artrose: no ensaio KANON, 11 anos depois, perto de metade dos joelhos (44%) tinha sinais de artrose na radiografia, e as alterações não foram maiores no grupo tratado primeiro com reabilitação. Uma meta-análise de 2026 encontrou a mesma frequência de artrose ligeira com e sem cirurgia, mas um pouco mais de artrose moderada a grave nos joelhos que ficaram muitos anos sem LCA. O fator que mais pesou foi a perda do menisco — e é por isso que proteger o menisco, evitando episódios repetidos de instabilidade, é um dos principais objetivos de qualquer tratamento.",
+      "refs": [
+        "lohmander2023kanon11",
+        "shah2026artrose"
+      ]
     }
   ]
 }
