@@ -1,0 +1,39 @@
+{
+  "slug": "artroscopia",
+  "atualizado": "2026-11-13",
+  "revistoPor": "Dr. Nuno Camelo",
+  "referencias": [
+    {
+      "id": "papalia2011quantidade",
+      "autores": "Papalia R, Del Buono A, Osti L, Denaro V, Maffulli N.",
+      "titulo": "Meniscectomy as a risk factor for knee osteoarthritis: a systematic review.",
+      "revista": "British Medical Bulletin",
+      "ano": 2011,
+      "tipo": "Revisão sistemática",
+      "pmid": "21247936",
+      "doi": "10.1093/bmb/ldq043",
+      "resumoPt": "Trinta e dois estudos. A quantidade de menisco retirada foi o fator que mais se associou ao aparecimento de artrose depois da meniscectomia. Os estudos são heterogéneos, mas a mensagem é clara: retirar o mínimo possível."
+    },
+    {
+      "id": "bogasdroy2024longoprazo",
+      "autores": "Bogas Droy H, Dardenne T, Djebara A, Pujol N.",
+      "titulo": "Long-term clinical and radiological outcomes after arthroscopic partial meniscectomy on stable knees are better for traumatic tears when compared to degenerative lesions: A systematic review.",
+      "revista": "Knee Surgery, Sports Traumatology, Arthroscopy",
+      "ano": 2024,
+      "tipo": "Revisão sistemática",
+      "pmid": "39031666",
+      "doi": "10.1002/ksa.12329",
+      "resumoPt": "Trinta e dois estudos com 6 a 22 anos de seguimento. Em roturas traumáticas em joelhos estáveis (idade média 31 anos), a função do joelho cerca de 11 anos depois da meniscectomia parcial era boa (Lysholm médio de 90 em 100), embora parte dos joelhos tivesse sinais de artrose na radiografia. Os resultados foram piores nas roturas degenerativas. Os estudos incluídos não são ensaios aleatorizados."
+    }
+  ],
+  "faq": [
+    {
+      "pergunta": "Se fizer uma artroscopia ao menisco, fico sem menisco?",
+      "resposta": "Não. Quando é preciso retirar menisco, a meniscectomia é parcial: retira-se apenas o fragmento rasgado e instável e preserva-se o menisco saudável, que continua a funcionar. O que mais pesa no risco de artrose a longo prazo é a quantidade de menisco retirada, por isso o objetivo é retirar o mínimo possível — e, sempre que a rotura o permite, suturar em vez de retirar. Em doentes jovens com roturas traumáticas em joelhos estáveis, a função do joelho mais de 10 anos depois é, em média, muito boa. Explicamos tudo em detalhe na página do menisco.",
+      "refs": [
+        "papalia2011quantidade",
+        "bogasdroy2024longoprazo"
+      ]
+    }
+  ]
+}

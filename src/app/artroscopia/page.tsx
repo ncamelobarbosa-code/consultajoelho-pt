@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Script from "next/script";
+import Evidencia from "@/components/Evidencia";
 
 export const metadata: Metadata = {
   "title": "Artroscopia do Joelho — O que é, Vantagens e Recuperação | Dr. Nuno Camelo",
@@ -31,8 +32,8 @@ export default function Page() {
   return (
     <>
       <style dangerouslySetInnerHTML={{ __html: css }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd }} />
       <div dangerouslySetInnerHTML={{ __html: html }} />
+      <Evidencia slug="artroscopia" pageUrl="https://www.consultajoelho.pt/artroscopia" baseJsonLd={jsonLd} />
       <Script id="artroscopia-js" strategy="afterInteractive" dangerouslySetInnerHTML={{ __html: pageScript }} />
     </>
   );
