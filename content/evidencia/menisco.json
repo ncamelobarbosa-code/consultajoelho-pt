@@ -101,6 +101,39 @@
       "pmid": "32052121",
       "doi": "10.1007/s00167-020-05847-3",
       "resumoPt": "Consenso da sociedade europeia (ESSKA) sobre roturas traumáticas: preservar o menisco é a primeira linha, porque os resultados a longo prazo são piores depois de meniscectomia parcial do que depois de reparação. Muitas roturas antes consideradas irreparáveis devem ser reparadas."
+    },
+    {
+      "id": "gerritsen2022zonas",
+      "autores": "Gerritsen LM, van der Lelij TJN, van Schie P, Fiocco M, van Arkel ERA, Zuurmond RG, et al.",
+      "titulo": "Higher healing rate after meniscal repair with concomitant ACL reconstruction for tears located in vascular zone 1 compared to zone 2: a systematic review and meta-analysis.",
+      "revista": "Knee Surgery, Sports Traumatology, Arthroscopy",
+      "ano": 2022,
+      "tipo": "Meta-análise",
+      "pmid": "35072757",
+      "doi": "10.1007/s00167-022-06862-2",
+      "resumoPt": "Dez estudos, 758 suturas de menisco avaliadas por nova artroscopia. As roturas na zona mais periférica e vascularizada cicatrizaram em 83% dos casos, contra 69% na zona intermédia — cerca de 2,5 vezes mais probabilidade de cicatrizar. Nenhum estudo avaliou a zona central, sem vasos. São estudos observacionais."
+    },
+    {
+      "id": "schweizer2023falencia",
+      "autores": "Schweizer C, Hanreich C, Tscholl PM, Blatter S, Windhager R, Waldstein W.",
+      "titulo": "Meniscal Repair Outcome in 3829 Patients With a Minimum Follow-up From 2 Years Up to 5 Years: A Meta-analysis on the Overall Failure Rate and Factors Influencing Failure.",
+      "revista": "The American Journal of Sports Medicine",
+      "ano": 2023,
+      "tipo": "Meta-análise",
+      "pmid": "37022676",
+      "doi": "10.1177/03635465231158385",
+      "resumoPt": "Cinquenta e um estudos, quase 4000 meniscos suturados. Falharam cerca de 15% em 2 a 5 anos, sobretudo nos primeiros 2 anos. A sutura falhou menos quando foi feita em simultâneo com a reconstrução do LCA e no menisco externo do que no interno."
+    },
+    {
+      "id": "farinelli2024medial",
+      "autores": "Farinelli L, Meena A, Montini D, Patralekh MK, Piritore G, Grassi M, et al.",
+      "titulo": "Failure rate of isolated medial meniscus repair in the stable knee: Systematic review and meta-analysis.",
+      "revista": "Knee Surgery, Sports Traumatology, Arthroscopy",
+      "ano": 2024,
+      "tipo": "Meta-análise",
+      "pmid": "39189111",
+      "doi": "10.1002/ksa.12441",
+      "resumoPt": "Dez estudos, 595 doentes com sutura isolada do menisco interno em joelhos estáveis. Cerca de 1 em cada 4 suturas falhou, em média ao fim de 2 anos e pouco, embora a função do joelho no final fosse boa. Os autores recomendam que o doente seja informado deste risco antes da cirurgia."
     }
   ],
   "faq": [
@@ -148,6 +181,16 @@
         "bogasdroy2024longoprazo",
         "petty2010artrose",
         "migliorini2023reparacao"
+      ]
+    },
+    {
+      "pergunta": "Porque é que nem sempre se sutura o menisco?",
+      "resposta": "Não é uma questão de técnica: hoje é possível suturar quase qualquer rotura. A questão é biológica — para a sutura resultar, o menisco tem de cicatrizar, e para isso precisa de sangue. Só a parte mais periférica do menisco é bem vascularizada; para o centro a irrigação vai diminuindo até desaparecer. O tipo de rotura, o tempo que passou desde a lesão e a qualidade do tecido também contam: um menisco degenerado ou desfeito em vários fragmentos tem pouca capacidade de cicatrizar. Os números mostram isso: as roturas na zona periférica cicatrizaram em 83% dos casos, contra 69% na zona intermédia; em média, cerca de 15% das suturas falham nos primeiros anos, e a sutura isolada do menisco interno num joelho estável falha em cerca de 1 em cada 4. Suturar um tecido que não vai cicatrizar significa uma recuperação mais longa e protegida e, muitas vezes, uma segunda cirurgia. Por isso a decisão é tomada durante a artroscopia, olhando para a rotura e para o tecido: sempre que a biologia o permite, sutura-se; quando não, retira-se apenas a parte que não tem condições de cicatrizar.",
+      "refs": [
+        "gerritsen2022zonas",
+        "schweizer2023falencia",
+        "farinelli2024medial",
+        "kopf2020esska"
       ]
     }
   ]
