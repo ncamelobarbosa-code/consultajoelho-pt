@@ -11,6 +11,7 @@
 
 import lca from "../../content/evidencia/lca.json";
 import menisco from "../../content/evidencia/menisco.json";
+import artroscopia from "../../content/evidencia/artroscopia.json";
 import artrose from "../../content/evidencia/artrose.json";
 import cartilagem from "../../content/evidencia/cartilagem.json";
 import protese from "../../content/evidencia/protese.json";
@@ -58,6 +59,7 @@ export type Evidencia = {
 const registo: Record<string, Evidencia> = {
   lca: lca as Evidencia,
   menisco: menisco as Evidencia,
+  artroscopia: artroscopia as Evidencia,
   artrose: artrose as Evidencia,
   cartilagem: cartilagem as Evidencia,
   protese: protese as Evidencia,
